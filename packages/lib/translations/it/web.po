@@ -858,8 +858,8 @@ msgstr "Azioni"
 msgid "Active"
 msgstr "Attivo"
 
-#: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
+#: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
 msgid "Active sessions"
 msgstr "Sessioni attive"
 
@@ -1475,8 +1475,8 @@ msgstr "Qualsiasi fonte"
 msgid "Any Status"
 msgstr "Qualsiasi stato"
 
-#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
 #: apps/remix/app/components/general/settings-nav-mobile.tsx
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 msgid "API Tokens"
@@ -1485,11 +1485,6 @@ msgstr "Token API"
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "App Version"
 msgstr "Versione dell'app"
-
-#: packages/lib/constants/recipient-roles.ts
-msgctxt "Recipient role action verb"
-msgid "Approve"
-msgstr ""
 
 #: apps/remix/app/components/tables/inbox-table.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
@@ -1500,19 +1495,24 @@ msgstr ""
 msgid "Approve"
 msgstr "Approvare"
 
+#: packages/lib/constants/recipient-roles.ts
+msgctxt "Recipient role action verb"
+msgid "Approve"
+msgstr ""
+
 #: apps/remix/app/components/general/document-signing/document-signing-page-view.tsx
 #: packages/email/template-components/template-document-invite.tsx
 msgid "Approve Document"
 msgstr "Approva Documento"
 
+#: apps/remix/app/components/general/document/document-page-view-recipients.tsx
+msgid "Approved"
+msgstr "Approvato"
+
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role actioned"
 msgid "Approved"
 msgstr ""
-
-#: apps/remix/app/components/general/document/document-page-view-recipients.tsx
-msgid "Approved"
-msgstr "Approvato"
 
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role name"
@@ -1615,14 +1615,14 @@ msgstr ""
 msgid "Assistants and Copy roles are currently not compatible with the multi-sign experience."
 msgstr "I ruoli Assistenti e Copia non sono attualmente compatibili con l'esperienza multi-firma."
 
+#: apps/remix/app/components/general/document/document-page-view-recipients.tsx
+msgid "Assisted"
+msgstr "Assistenza"
+
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role actioned"
 msgid "Assisted"
 msgstr ""
-
-#: apps/remix/app/components/general/document/document-page-view-recipients.tsx
-msgid "Assisted"
-msgstr "Assistenza"
 
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role progressive verb"
@@ -1707,8 +1707,8 @@ msgstr "Banner Aggiornato"
 msgid "Before you get started, please confirm your email address by clicking the button below:"
 msgstr "Prima di iniziare, conferma il tuo indirizzo email facendo clic sul pulsante qui sotto:"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
 #: apps/remix/app/components/general/settings-nav-mobile.tsx
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 msgid "Billing"
@@ -2703,8 +2703,8 @@ msgstr "Fuso Orario Predefinito"
 msgid "delete"
 msgstr "elimina"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.groups.$id.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.groups.$id.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.webhooks._index.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
 #: apps/remix/app/components/tables/templates-table-action-dropdown.tsx
@@ -3042,15 +3042,15 @@ msgstr "Documento Approvato"
 msgid "Document Cancelled"
 msgstr "Documento Annullato"
 
+#: apps/remix/app/components/general/document/document-status.tsx
+msgid "Document completed"
+msgstr "Documento completato"
+
 #: packages/lib/utils/document-audit-logs.ts
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "Document completed"
 msgstr ""
-
-#: apps/remix/app/components/general/document/document-status.tsx
-msgid "Document completed"
-msgstr "Documento completato"
 
 #: packages/ui/components/document/document-email-checkboxes.tsx
 #: packages/ui/components/document/document-email-checkboxes.tsx
@@ -3061,14 +3061,14 @@ msgstr "Email documento completato"
 msgid "Document Completed!"
 msgstr "Documento completato!"
 
+#: apps/remix/app/components/dialogs/template-use-dialog.tsx
+msgid "Document created"
+msgstr "Documento creato"
+
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "Document created"
 msgstr ""
-
-#: apps/remix/app/components/dialogs/template-use-dialog.tsx
-msgid "Document created"
-msgstr "Documento creato"
 
 #: apps/remix/app/routes/embed+/v1+/authoring_.completed.create.tsx
 msgid "Document Created"
@@ -3092,16 +3092,16 @@ msgstr "Documento creato usando un <0>link diretto</0>"
 msgid "Document Creation"
 msgstr "Creazione del documento"
 
-#: packages/lib/utils/document-audit-logs.ts
-msgctxt "Audit log format"
-msgid "Document deleted"
-msgstr ""
-
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
 #: apps/remix/app/components/dialogs/document-delete-dialog.tsx
 #: apps/remix/app/components/dialogs/admin-document-delete-dialog.tsx
 msgid "Document deleted"
 msgstr "Documento eliminato"
+
+#: packages/lib/utils/document-audit-logs.ts
+msgctxt "Audit log format"
+msgid "Document deleted"
+msgstr ""
 
 #: packages/ui/components/document/document-email-checkboxes.tsx
 msgid "Document deleted email"
@@ -3213,14 +3213,14 @@ msgstr "Documento Rifiutato"
 msgid "Document resealed"
 msgstr "Documento risigillato"
 
+#: apps/remix/app/components/general/document/document-edit-form.tsx
+msgid "Document sent"
+msgstr "Documento inviato"
+
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
 msgid "Document sent"
 msgstr ""
-
-#: apps/remix/app/components/general/document/document-edit-form.tsx
-msgid "Document sent"
-msgstr "Documento inviato"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "Document Signed"
@@ -3290,8 +3290,8 @@ msgstr ""
 
 #: apps/remix/app/routes/_profile+/p.$url.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents._index.tsx
-#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id.edit.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id.edit.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/_layout.tsx
 #: apps/remix/app/components/tables/admin-dashboard-users-table.tsx
 #: apps/remix/app/components/general/user-profile-timur.tsx
@@ -3397,14 +3397,14 @@ msgstr "Trascina e rilascia o fai clic per caricare"
 msgid "Drag and drop your PDF file here"
 msgstr "Trascina qui il tuo file PDF"
 
+#: packages/ui/primitives/signature-pad/signature-pad.tsx
+msgid "Draw"
+msgstr "Disegno"
+
 #: packages/lib/constants/document.ts
 msgctxt "Draw signatute type"
 msgid "Draw"
 msgstr ""
-
-#: packages/ui/primitives/signature-pad/signature-pad.tsx
-msgid "Draw"
-msgstr "Disegno"
 
 #: apps/remix/app/components/embed/authoring/configure-document-upload.tsx
 msgid "Drop your document here"
@@ -3462,8 +3462,8 @@ msgstr "Divulgazione della firma elettronica"
 
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains.$id.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains.$id.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/users.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
@@ -3537,9 +3537,9 @@ msgstr "Dominio email non trovato"
 msgid "Email Domain Settings"
 msgstr "Impostazioni Dominio Email"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
 msgid "Email Domains"
 msgstr "Domini Email"
 
@@ -3712,15 +3712,15 @@ msgstr "Inserisci il tuo testo qui"
 msgid "Enterprise"
 msgstr "Impresa"
 
-#: apps/remix/app/routes/embed+/v1+/authoring+/template.edit.$id.tsx
-#: apps/remix/app/routes/embed+/v1+/authoring+/template.edit.$id.tsx
-#: apps/remix/app/routes/embed+/v1+/authoring+/document.edit.$id.tsx
-#: apps/remix/app/routes/embed+/v1+/authoring+/document.edit.$id.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/users.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
+#: apps/remix/app/routes/embed+/v1+/authoring+/template.edit.$id.tsx
+#: apps/remix/app/routes/embed+/v1+/authoring+/template.edit.$id.tsx
+#: apps/remix/app/routes/embed+/v1+/authoring+/document.edit.$id.tsx
+#: apps/remix/app/routes/embed+/v1+/authoring+/document.edit.$id.tsx
 #: apps/remix/app/components/general/verify-email-banner.tsx
 #: apps/remix/app/components/general/template/template-edit-form.tsx
 #: apps/remix/app/components/general/template/template-edit-form.tsx
@@ -4058,8 +4058,8 @@ msgstr "Firma gratuita"
 msgid "Full Name"
 msgstr "Nome completo"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.general.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.general.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
 #: apps/remix/app/components/general/template/template-edit-form.tsx
 #: apps/remix/app/components/general/document/document-edit-form.tsx
@@ -4105,8 +4105,8 @@ msgstr "Torna indietro"
 msgid "Go back home"
 msgstr "Torna alla home"
 
-#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
+#: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 msgid "Go Back Home"
 msgstr "Torna alla home"
 
@@ -4630,8 +4630,8 @@ msgstr "Collega modello"
 msgid "Link your Documenso account"
 msgstr ""
 
-#: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
+#: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 msgid "Linked Accounts"
 msgstr ""
 
@@ -4871,9 +4871,9 @@ msgstr "Conteggio membri"
 msgid "Member Since"
 msgstr "Membro dal"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.groups.$id.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.groups.$id.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
 #: apps/remix/app/components/tables/team-groups-table.tsx
 #: apps/remix/app/components/tables/organisation-groups-table.tsx
@@ -5470,8 +5470,8 @@ msgstr "Nome della passkey"
 msgid "Passkey Re-Authentication"
 msgstr "Ri-autenticazione con chiave di accesso"
 
-#: apps/remix/app/routes/_authenticated+/settings+/security.passkeys.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
+#: apps/remix/app/routes/_authenticated+/settings+/security.passkeys.tsx
 msgid "Passkeys"
 msgstr "Passkey"
 
@@ -5822,8 +5822,8 @@ msgstr ""
 msgid "Public"
 msgstr "Pubblico"
 
-#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.public-profile.tsx
 #: apps/remix/app/components/general/settings-nav-mobile.tsx
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 msgid "Public Profile"
@@ -6599,11 +6599,6 @@ msgstr "Mostra impostazioni avanzate"
 msgid "Show templates in your public profile for your audience to sign and get started quickly"
 msgstr "Mostra modelli nel tuo profilo pubblico per il tuo pubblico da firmare e iniziare rapidamente"
 
-#: packages/lib/constants/recipient-roles.ts
-msgctxt "Recipient role action verb"
-msgid "Sign"
-msgstr ""
-
 #: apps/remix/app/routes/_profile+/p.$url.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
@@ -6619,6 +6614,11 @@ msgstr ""
 #: apps/remix/app/components/general/document/document-page-view-button.tsx
 msgid "Sign"
 msgstr "Firma"
+
+#: packages/lib/constants/recipient-roles.ts
+msgctxt "Recipient role action verb"
+msgid "Sign"
+msgstr ""
 
 #. placeholder {0}: recipient.name
 #. placeholder {1}: recipient.email
@@ -6732,16 +6732,16 @@ msgstr "Firme raccolte"
 msgid "Signatures will appear once the document has been completed"
 msgstr "Le firme appariranno una volta completato il documento"
 
-#: packages/lib/constants/recipient-roles.ts
-msgctxt "Recipient role actioned"
-msgid "Signed"
-msgstr ""
-
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
 #: packages/ui/components/document/document-read-only-fields.tsx
 msgid "Signed"
 msgstr "Firmato"
+
+#: packages/lib/constants/recipient-roles.ts
+msgctxt "Recipient role actioned"
+msgid "Signed"
+msgstr ""
 
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role name"
@@ -6816,8 +6816,8 @@ msgstr "Dal {0}"
 msgid "Site Banner"
 msgstr "Banner del sito"
 
-#: apps/remix/app/routes/_authenticated+/admin+/site-settings.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/_layout.tsx
+#: apps/remix/app/routes/_authenticated+/admin+/site-settings.tsx
 msgid "Site Settings"
 msgstr "Impostazioni del sito"
 
@@ -7015,14 +7015,14 @@ msgstr "Rivendicazioni di abbonamento"
 msgid "Subscription invalid"
 msgstr "Abbonamento non valido"
 
-#: apps/remix/app/routes/embed+/v1+/authoring+/template.edit.$id.tsx
-#: apps/remix/app/routes/embed+/v1+/authoring+/document.edit.$id.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.groups.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
+#: apps/remix/app/routes/embed+/v1+/authoring+/template.edit.$id.tsx
+#: apps/remix/app/routes/embed+/v1+/authoring+/document.edit.$id.tsx
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
 #: apps/remix/app/components/tables/organisation-member-invites-table.tsx
@@ -7233,8 +7233,8 @@ msgstr "URL del team"
 msgid "Team URL"
 msgstr "URL del team"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.teams.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.teams.tsx
 #: apps/remix/app/routes/_authenticated+/dashboard.tsx
 #: apps/remix/app/components/general/org-menu-switcher.tsx
 msgid "Teams"
@@ -7248,8 +7248,8 @@ msgstr "I team ti aiutano a organizzare il tuo lavoro e collaborare con altri. C
 msgid "Teams that this organisation group is currently assigned to"
 msgstr "Team a cui è attualmente assegnato questo gruppo di organizzazione"
 
-#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates.$id.edit.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates.$id._index.tsx
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/templates.$id.edit.tsx
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
@@ -8133,16 +8133,16 @@ msgstr "L'autenticazione a due fattori è stata disattivata per il tuo account. 
 msgid "Two-Factor Re-Authentication"
 msgstr "Ri-autenticazione a due fattori"
 
-#: packages/lib/constants/document.ts
-msgctxt "Type signatute type"
-msgid "Type"
-msgstr ""
-
 #: apps/remix/app/components/tables/templates-table.tsx
 #: apps/remix/app/components/tables/admin-document-recipient-item-table.tsx
 #: packages/ui/primitives/signature-pad/signature-pad.tsx
 msgid "Type"
 msgstr "Tipo"
+
+#: packages/lib/constants/document.ts
+msgctxt "Type signatute type"
+msgid "Type"
+msgstr ""
 
 #: apps/remix/app/components/general/app-command-menu.tsx
 msgid "Type a command or search..."
@@ -8235,8 +8235,8 @@ msgid "Unable to sign in"
 msgstr "Impossibile accedere"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
-#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.tokens.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-password.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
 msgid "Unauthorized"
@@ -8423,14 +8423,14 @@ msgstr "Aggiorna <0>{0}</0> al {planName}"
 msgid "Upgrade your plan to upload more documents"
 msgstr "Aggiorna il tuo piano per caricare più documenti"
 
+#: packages/ui/primitives/signature-pad/signature-pad.tsx
+msgid "Upload"
+msgstr "Carica"
+
 #: packages/lib/constants/document.ts
 msgctxt "Upload signatute type"
 msgid "Upload"
 msgstr ""
-
-#: packages/ui/primitives/signature-pad/signature-pad.tsx
-msgid "Upload"
-msgstr "Carica"
 
 #: apps/remix/app/components/dialogs/template-bulk-send-dialog.tsx
 msgid "Upload a CSV file to create multiple documents from this template. Each row represents one document with its recipient details."
@@ -8622,11 +8622,6 @@ msgstr "Verifica il tuo indirizzo email del team"
 msgid "Vertical"
 msgstr "Verticale"
 
-#: packages/lib/constants/recipient-roles.ts
-msgctxt "Recipient role action verb"
-msgid "View"
-msgstr ""
-
 #: apps/remix/app/components/tables/organisation-billing-invoices-table.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
@@ -8638,6 +8633,11 @@ msgstr ""
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "View"
 msgstr "Visualizza"
+
+#: packages/lib/constants/recipient-roles.ts
+msgctxt "Recipient role action verb"
+msgid "View"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 msgid "View activity"
@@ -8663,13 +8663,13 @@ msgstr "Visualizza tutti i documenti correlati"
 msgid "View all security activity related to your account."
 msgstr "Visualizza tutte le attività di sicurezza relative al tuo account."
 
-#: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
+#: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
 msgid "View and manage all active sessions for your account."
 msgstr "Visualizza e gestisci tutte le sessioni attive per il tuo account."
 
-#: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
+#: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 msgid "View and manage all login methods linked to your account."
 msgstr ""
 
@@ -8735,16 +8735,16 @@ msgstr "Visualizza squadre"
 msgid "View the DNS records for this email domain"
 msgstr "Visualizza i record DNS per questo dominio email"
 
-#: packages/lib/constants/recipient-roles.ts
-msgctxt "Recipient role actioned"
-msgid "Viewed"
-msgstr ""
-
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: apps/remix/app/components/general/document/document-page-view-recipients.tsx
 #: apps/remix/app/components/embed/multisign/multi-sign-document-list.tsx
 msgid "Viewed"
 msgstr "Visualizzato"
+
+#: packages/lib/constants/recipient-roles.ts
+msgctxt "Recipient role actioned"
+msgid "Viewed"
+msgstr ""
 
 #: packages/lib/constants/recipient-roles.ts
 msgctxt "Recipient role name"
@@ -9119,8 +9119,8 @@ msgstr "Webhook aggiornato"
 msgid "Webhook URL"
 msgstr "URL del webhook"
 
-#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.webhooks._index.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
+#: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.webhooks._index.tsx
 #: apps/remix/app/components/general/settings-nav-mobile.tsx
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 msgid "Webhooks"
@@ -9143,8 +9143,8 @@ msgid "Welcome to {organisationName}"
 msgstr ""
 
 #: packages/email/template-components/template-confirmation-email.tsx
-msgid "Welcome to Documenso!"
-msgstr "Benvenuto su Documenso!"
+msgid "Welcome to iRadarSign!"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Well-known URL is required"
