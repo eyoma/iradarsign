@@ -3,7 +3,9 @@ import { createElement } from 'react';
 import { msg } from '@lingui/core/macro';
 
 import { mailer } from '@documenso/email/mailer';
+import { render } from '@documenso/email/render';
 import { ConfirmEmailTemplate } from '@documenso/email/templates/confirm-email';
+import { ConfirmEmailFallbackTemplate } from '@documenso/email/templates/confirm-email-fallback';
 import { prisma } from '@documenso/prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
@@ -50,12 +52,39 @@ export const sendConfirmationEmail = async ({ userId }: SendConfirmationEmailPro
     confirmationLink,
   });
 
-  const [html, text] = await Promise.all([
-    renderEmailWithI18N(confirmationTemplate),
-    renderEmailWithI18N(confirmationTemplate, { plainText: true }),
-  ]);
+  let html: string;
+  let text: string;
+  let subject: string;
 
-  const i18n = await getI18nInstance();
+  try {
+    const [renderedHtml, renderedText] = await Promise.all([
+      renderEmailWithI18N(confirmationTemplate),
+      renderEmailWithI18N(confirmationTemplate, { plainText: true }),
+    ]);
+
+    html = renderedHtml;
+    text = renderedText;
+
+    const i18n = await getI18nInstance();
+    subject = i18n._(msg`Please confirm your email`);
+  } catch (err) {
+    console.error('Failed to render email with i18n, using fallback template:', err);
+
+    // Use fallback template without i18n
+    const fallbackTemplate = createElement(ConfirmEmailFallbackTemplate, {
+      assetBaseUrl,
+      confirmationLink,
+    });
+
+    const [renderedHtml, renderedText] = await Promise.all([
+      render(fallbackTemplate),
+      render(fallbackTemplate, { plainText: true }),
+    ]);
+
+    html = renderedHtml;
+    text = renderedText;
+    subject = 'Please confirm your email';
+  }
 
   return mailer.sendMail({
     to: {
@@ -63,7 +92,7 @@ export const sendConfirmationEmail = async ({ userId }: SendConfirmationEmailPro
       name: user.name || '',
     },
     from: DOCUMENSO_INTERNAL_EMAIL,
-    subject: i18n._(msg`Please confirm your email`),
+    subject,
     html,
     text,
   });

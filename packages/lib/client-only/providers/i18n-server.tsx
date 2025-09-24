@@ -6,7 +6,6 @@ import {
   SUPPORTED_LANGUAGE_CODES,
   isValidLanguageCode,
 } from '../../constants/i18n';
-import { env } from '../../utils/env';
 import { remember } from '../../utils/remember';
 
 type SupportedLanguages = (typeof SUPPORTED_LANGUAGE_CODES)[number];
@@ -14,13 +13,21 @@ type SupportedLanguages = (typeof SUPPORTED_LANGUAGE_CODES)[number];
 export async function loadCatalog(lang: SupportedLanguages): Promise<{
   [k: string]: Messages;
 }> {
-  const extension = env('NODE_ENV') === 'development' ? 'po' : 'mjs';
+  // Always use .mjs files as they are JavaScript modules
+  const extension = 'mjs';
 
-  const { messages } = await import(`../../translations/${lang}/web.${extension}`);
-
-  return {
-    [lang]: messages,
-  };
+  try {
+    const { messages } = await import(`../../translations/${lang}/web.${extension}`);
+    return {
+      [lang]: messages,
+    };
+  } catch (err) {
+    console.error(`Failed to load catalog for language ${lang}:`, err);
+    // Return empty messages as fallback
+    return {
+      [lang]: {},
+    };
+  }
 }
 
 const catalogs = Promise.all(SUPPORTED_LANGUAGE_CODES.map(loadCatalog));
@@ -58,11 +65,21 @@ export const allI18nInstances = remember('i18n.allI18nInstances', async () => {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const getI18nInstance = async (lang?: SupportedLanguages | (string & {})) => {
-  const instances = await allI18nInstances;
+  try {
+    const instances = await allI18nInstances;
 
-  if (!isValidLanguageCode(lang)) {
-    return instances[APP_I18N_OPTIONS.sourceLang];
+    if (!isValidLanguageCode(lang)) {
+      return instances[APP_I18N_OPTIONS.sourceLang];
+    }
+
+    return instances[lang] ?? instances[APP_I18N_OPTIONS.sourceLang];
+  } catch (err) {
+    console.error('Failed to get i18n instance:', err);
+    // Return a minimal i18n instance as fallback
+    const { setupI18n } = await import('@lingui/core');
+    return setupI18n({
+      locale: APP_I18N_OPTIONS.sourceLang,
+      messages: { [APP_I18N_OPTIONS.sourceLang]: {} },
+    });
   }
-
-  return instances[lang] ?? instances[APP_I18N_OPTIONS.sourceLang];
 };
