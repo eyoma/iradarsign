@@ -30,6 +30,15 @@ async function main() {
 
   await dynamicActivate(locale);
 
+  // Check if i18n is disabled and provide minimal i18n setup
+  const i18nDisabled = process.env.NEXT_PUBLIC_DISABLE_I18N === 'true';
+
+  if (i18nDisabled) {
+    console.log('i18n is disabled via NEXT_PUBLIC_DISABLE_I18N, using minimal i18n setup');
+    // Set up minimal i18n instance for client-side components
+    i18n.loadAndActivate({ locale: 'en', messages: {} });
+  }
+
   startTransition(() => {
     hydrateRoot(
       document,

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { msg } from '@lingui/core/macro';
-import { Trans, useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import { MailsIcon } from 'lucide-react';
 import { Link, redirect, useSearchParams } from 'react-router';
 
@@ -96,7 +96,13 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
 
   const { organisationName, orgUrl } = loaderData;
 
-  const { t } = useLingui();
+  // Use fallback for i18n when disabled
+  const t = (str: string | { id?: string; default?: string }) => {
+    if (typeof str === 'string') return str;
+    if (str && str.id) return str.id;
+    if (str && str.default) return str.default;
+    return 'Translation not available';
+  };
   const { toast } = useToast();
 
   const [isSubmitting, setIsSubmitting] = useState(false);

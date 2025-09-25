@@ -1,11 +1,11 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
-import { useBranding } from '../providers/branding';
 import type { TemplateDocumentPendingProps } from '../template-components/template-document-pending';
 import { TemplateDocumentPending } from '../template-components/template-document-pending';
 import { TemplateFooter } from '../template-components/template-footer';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type DocumentPendingEmailTemplateProps = Partial<TemplateDocumentPendingProps>;
 
@@ -13,10 +13,10 @@ export const DocumentPendingEmailTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentPendingEmailTemplateProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
-  const previewText = msg`Pending Document`;
+  const _previewText = msg`Pending Document`;
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -25,7 +25,7 @@ export const DocumentPendingEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>Document is pending your signature</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">

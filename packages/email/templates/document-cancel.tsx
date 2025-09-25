@@ -1,11 +1,11 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 
 import { Body, Container, Head, Hr, Html, Img, Preview, Section } from '../components';
-import { useBranding } from '../providers/branding';
 import type { TemplateDocumentCancelProps } from '../template-components/template-document-cancel';
 import { TemplateDocumentCancel } from '../template-components/template-document-cancel';
 import { TemplateFooter } from '../template-components/template-footer';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type DocumentCancelEmailTemplateProps = Partial<TemplateDocumentCancelProps>;
 
@@ -16,10 +16,10 @@ export const DocumentCancelTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
   cancellationReason,
 }: DocumentCancelEmailTemplateProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
-  const previewText = msg`${inviterName} has cancelled the document ${documentName}, you don't need to sign it anymore.`;
+  const _previewText = msg`${inviterName} has cancelled the document ${documentName}, you don't need to sign it anymore.`;
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -28,7 +28,7 @@ export const DocumentCancelTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>Document has been cancelled</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>

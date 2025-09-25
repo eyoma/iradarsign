@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
 import { authClient } from '@documenso/auth/client';
+import { useSafeLingui } from '@documenso/email/utils/safe-i18n';
 import { useSession } from '@documenso/lib/client-only/providers/session';
 import { trpc } from '@documenso/trpc/react';
 import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
@@ -29,7 +29,7 @@ export type AccountDeleteDialogProps = {
 export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => {
   const { user } = useSession();
 
-  const { _ } = useLingui();
+  const { _ } = useSafeLingui();
   const { toast } = useToast();
 
   const hasTwoFactorAuthentication = user.twoFactorEnabled;
@@ -109,10 +109,9 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
 
                 <DialogDescription>
                   <Trans>
-                    Documenso will delete{' '}
-                    <span className="font-semibold">all of your documents</span>, along with all of
-                    your completed documents, signatures, and all other resources belonging to your
-                    Account.
+                    iRadar will delete <span className="font-semibold">all of your documents</span>,
+                    along with all of your completed documents, signatures, and all other resources
+                    belonging to your Account.
                   </Trans>
                 </DialogDescription>
               </DialogHeader>

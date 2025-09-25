@@ -1,11 +1,11 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
-import { useBranding } from '../providers/branding';
 import { TemplateFooter } from '../template-components/template-footer';
 import type { TemplateForgotPasswordProps } from '../template-components/template-forgot-password';
 import { TemplateForgotPassword } from '../template-components/template-forgot-password';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type ForgotPasswordTemplateProps = Partial<TemplateForgotPasswordProps>;
 
@@ -13,10 +13,10 @@ export const ForgotPasswordTemplate = ({
   resetPasswordLink = 'https://documenso.com',
   assetBaseUrl = 'http://localhost:3002',
 }: ForgotPasswordTemplateProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
-  const previewText = msg`Password Reset Requested`;
+  const _previewText = msg`Password Reset Requested`;
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -25,7 +25,7 @@ export const ForgotPasswordTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>Reset your password</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>

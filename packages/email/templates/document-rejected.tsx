@@ -1,10 +1,10 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
-import { useBranding } from '../providers/branding';
 import { TemplateDocumentRejected } from '../template-components/template-document-rejected';
 import { TemplateFooter } from '../template-components/template-footer';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 type DocumentRejectedEmailProps = {
   recipientName: string;
@@ -21,8 +21,8 @@ export function DocumentRejectedEmail({
   rejectionReason,
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentRejectedEmailProps) {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
   const previewText = _(msg`${recipientName} has rejected the document '${documentName}'`);
 

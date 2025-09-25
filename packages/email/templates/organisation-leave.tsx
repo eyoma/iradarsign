@@ -1,11 +1,10 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 
 import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
 import { TemplateFooter } from '../template-components/template-footer';
 import TemplateImage from '../template-components/template-image';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type OrganisationLeaveEmailProps = {
   assetBaseUrl: string;
@@ -18,21 +17,21 @@ export type OrganisationLeaveEmailProps = {
 
 export const OrganisationLeaveEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  baseUrl = 'https://documenso.com',
+  baseUrl: _baseUrl = 'https://documenso.com',
   memberName = 'John Doe',
   memberEmail = 'johndoe@documenso.com',
   organisationName = 'Organisation Name',
-  organisationUrl = 'demo',
+  organisationUrl: _organisationUrl = 'demo',
 }: OrganisationLeaveEmailProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
-  const previewText = msg`A member has left your organisation on Documenso`;
+  const _previewText = msg`A member has left your organisation on Documenso`;
 
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>A member has left your organisation on Documenso</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white text-slate-500">
@@ -57,7 +56,7 @@ export const OrganisationLeaveEmailTemplate = ({
 
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
-                <Trans>A member has left your organisation {organisationName}</Trans>
+                A member has left your organisation {organisationName}
               </Text>
 
               <div className="mx-auto my-2 w-fit rounded-lg bg-gray-50 px-4 py-2 text-base font-medium text-slate-600">

@@ -1,25 +1,21 @@
-import { Trans } from '@lingui/react/macro';
-
 import { Link, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
+import { useSafeBranding } from '../utils/safe-branding';
 
 export type TemplateFooterProps = {
   isDocument?: boolean;
 };
 
 export const TemplateFooter = ({ isDocument = true }: TemplateFooterProps) => {
-  const branding = useBranding();
+  const branding = useSafeBranding();
 
   return (
     <Section>
       {isDocument && !branding.brandingHidePoweredBy && (
         <Text className="my-4 text-base text-slate-400">
-          <Trans>
-            This document was sent using{' '}
-            <Link className="text-[#7AC455]" href="https://documen.so/mail-footer">
-              iRadar.
-            </Link>
-          </Trans>
+          This document was sent using{' '}
+          <Link className="text-[#7AC455]" href="https://documen.so/mail-footer">
+            iRadar.
+          </Link>
         </Text>
       )}
 

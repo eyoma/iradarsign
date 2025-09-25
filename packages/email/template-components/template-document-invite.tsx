@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
 
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationType, RecipientRole } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
 import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
 
 import { Button, Section, Text } from '../components';
+import { useSafeLingui } from '../utils/safe-i18n';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentInviteProps {
@@ -34,7 +33,7 @@ export const TemplateDocumentInvite = ({
   includeSenderDetails,
   organisationType,
 }: TemplateDocumentInviteProps) => {
-  const { _ } = useLingui();
+  const { _ } = useSafeLingui();
 
   const { actionVerb } = RECIPIENT_ROLES_DESCRIPTION[role];
 
@@ -51,49 +50,42 @@ export const TemplateDocumentInvite = ({
       <Section>
         <Text className="text-primary mx-auto mb-0 max-w-[80%] text-center text-lg font-semibold">
           {match({ selfSigner, organisationType, includeSenderDetails, teamName })
-            .with({ selfSigner: true }, () => (
-              <Trans>
-                Please {_(actionVerb).toLowerCase()} your document
-                <br />"{documentName}"
-              </Trans>
-            ))
+            .with(
+              { selfSigner: true },
+              () =>
+                `Please ${_(actionVerb).toLowerCase()} your document
+                <br />"${documentName}"`,
+            )
             .with(
               {
                 organisationType: OrganisationType.ORGANISATION,
                 includeSenderDetails: true,
                 teamName: P.string,
               },
-              () => (
-                <Trans>
-                  {inviterName} on behalf of "{teamName}" has invited you to{' '}
-                  {_(actionVerb).toLowerCase()}
-                  <br />"{documentName}"
-                </Trans>
-              ),
+              () =>
+                `${inviterName} on behalf of "${teamName}" has invited you to ${_(actionVerb).toLowerCase()}
+                  <br />"${documentName}"`,
             )
-            .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
-              <Trans>
-                {teamName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
-              </Trans>
-            ))
-            .otherwise(() => (
-              <Trans>
-                {inviterName} has invited you to {_(actionVerb).toLowerCase()}
-                <br />"{documentName}"
-              </Trans>
-            ))}
+            .with(
+              { organisationType: OrganisationType.ORGANISATION, teamName: P.string },
+              () =>
+                `${teamName} has invited you to ${_(actionVerb).toLowerCase()}
+                <br />"${documentName}"`,
+            )
+            .otherwise(
+              () =>
+                `${inviterName} has invited you to ${_(actionVerb).toLowerCase()}
+                <br />"${documentName}"`,
+            )}
         </Text>
 
         <Text className="my-1 text-center text-base text-slate-400">
           {match(role)
-            .with(RecipientRole.SIGNER, () => <Trans>Continue by signing the document.</Trans>)
-            .with(RecipientRole.VIEWER, () => <Trans>Continue by viewing the document.</Trans>)
-            .with(RecipientRole.APPROVER, () => <Trans>Continue by approving the document.</Trans>)
+            .with(RecipientRole.SIGNER, () => 'Continue by signing the document.')
+            .with(RecipientRole.VIEWER, () => 'Continue by viewing the document.')
+            .with(RecipientRole.APPROVER, () => 'Continue by approving the document.')
             .with(RecipientRole.CC, () => '')
-            .with(RecipientRole.ASSISTANT, () => (
-              <Trans>Continue by assisting with the document.</Trans>
-            ))
+            .with(RecipientRole.ASSISTANT, () => 'Continue by assisting with the document.')
             .exhaustive()}
         </Text>
 
@@ -102,7 +94,7 @@ export const TemplateDocumentInvite = ({
             className="mr-4 inline-flex items-center justify-center rounded-lg bg-red-500 px-6 py-3 text-center text-sm font-medium text-black no-underline"
             href={rejectDocumentLink}
           >
-            <Trans>Reject Document</Trans>
+            Reject Document
           </Button>
 
           <Button
@@ -110,11 +102,11 @@ export const TemplateDocumentInvite = ({
             href={signDocumentLink}
           >
             {match(role)
-              .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)
-              .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
-              .with(RecipientRole.APPROVER, () => <Trans>Approve Document</Trans>)
+              .with(RecipientRole.SIGNER, () => 'Sign Document')
+              .with(RecipientRole.VIEWER, () => 'View Document')
+              .with(RecipientRole.APPROVER, () => 'Approve Document')
               .with(RecipientRole.CC, () => '')
-              .with(RecipientRole.ASSISTANT, () => <Trans>Assist Document</Trans>)
+              .with(RecipientRole.ASSISTANT, () => 'Assist Document')
               .exhaustive()}
           </Button>
         </Section>

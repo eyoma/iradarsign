@@ -4,10 +4,10 @@ import type { MacroMessageDescriptor } from '@lingui/core/macro';
 
 import type { I18nLocaleData, SupportedLanguageCodes } from '../constants/i18n';
 import { APP_I18N_OPTIONS } from '../constants/i18n';
-import { env } from './env';
 
 export async function getTranslations(locale: string) {
-  const extension = env('NODE_ENV') === 'development' ? 'po' : 'mjs';
+  // Always use .mjs files as they are JavaScript modules
+  const extension = 'mjs';
 
   const { messages } = await import(`../translations/${locale}/web.${extension}`);
 
@@ -15,6 +15,14 @@ export async function getTranslations(locale: string) {
 }
 
 export async function dynamicActivate(locale: string) {
+  // Check if i18n is disabled via environment variable
+  const i18nDisabled = process.env.NEXT_PUBLIC_DISABLE_I18N === 'true';
+
+  if (i18nDisabled) {
+    console.log('i18n is disabled via NEXT_PUBLIC_DISABLE_I18N, skipping dynamic activation');
+    return;
+  }
+
   const messages = await getTranslations(locale);
 
   i18n.loadAndActivate({ locale, messages });

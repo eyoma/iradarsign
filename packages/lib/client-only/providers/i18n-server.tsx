@@ -48,31 +48,79 @@ type AllI18nInstances = { [K in SupportedLanguages]: I18n };
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 export const allI18nInstances = remember('i18n.allI18nInstances', async () => {
-  const loadedMessages = await allMessages();
+  // Check if i18n is disabled via environment variable
+  const i18nDisabled = process.env.NEXT_PUBLIC_DISABLE_I18N === 'true';
 
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  return SUPPORTED_LANGUAGE_CODES.reduce((acc, lang) => {
-    const messages = loadedMessages[lang] ?? {};
+  if (i18nDisabled) {
+    console.log('i18n is disabled via NEXT_PUBLIC_DISABLE_I18N, returning minimal i18n instances');
+    // Return minimal instances when i18n is disabled
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    return SUPPORTED_LANGUAGE_CODES.reduce((acc, lang) => {
+      const i18n = setupI18n({
+        locale: lang,
+        messages: { [lang]: {} },
+      });
+      return { ...acc, [lang]: i18n };
+    }, {}) as AllI18nInstances;
+  }
 
-    const i18n = setupI18n({
-      locale: lang,
-      messages: { [lang]: messages },
-    });
+  try {
+    const loadedMessages = await allMessages();
 
-    return { ...acc, [lang]: i18n };
-  }, {}) as AllI18nInstances;
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    return SUPPORTED_LANGUAGE_CODES.reduce((acc, lang) => {
+      const messages = loadedMessages[lang] ?? {};
+
+      const i18n = setupI18n({
+        locale: lang,
+        messages: { [lang]: messages },
+      });
+
+      return { ...acc, [lang]: i18n };
+    }, {}) as AllI18nInstances;
+  } catch (err) {
+    console.error('Failed to create all i18n instances:', err);
+    // Return minimal instances as fallback
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    return SUPPORTED_LANGUAGE_CODES.reduce((acc, lang) => {
+      const i18n = setupI18n({
+        locale: lang,
+        messages: { [lang]: {} },
+      });
+      return { ...acc, [lang]: i18n };
+    }, {}) as AllI18nInstances;
+  }
 });
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const getI18nInstance = async (lang?: SupportedLanguages | (string & {})) => {
+  // Check if i18n is disabled via environment variable
+  const i18nDisabled = process.env.NEXT_PUBLIC_DISABLE_I18N === 'true';
+
+  if (i18nDisabled) {
+    console.log('i18n is disabled via NEXT_PUBLIC_DISABLE_I18N, returning minimal i18n instance');
+    const { setupI18n } = await import('@lingui/core');
+    return setupI18n({
+      locale: APP_I18N_OPTIONS.sourceLang,
+      messages: { [APP_I18N_OPTIONS.sourceLang]: {} },
+    });
+  }
+
   try {
+    console.log(`Getting i18n instance for language: ${lang}`);
     const instances = await allI18nInstances;
+    console.log(`Available instances:`, Object.keys(instances));
 
     if (!isValidLanguageCode(lang)) {
+      console.log(
+        `Invalid language code ${lang}, using source language: ${APP_I18N_OPTIONS.sourceLang}`,
+      );
       return instances[APP_I18N_OPTIONS.sourceLang];
     }
 
-    return instances[lang] ?? instances[APP_I18N_OPTIONS.sourceLang];
+    const instance = instances[lang] ?? instances[APP_I18N_OPTIONS.sourceLang];
+    console.log(`Using i18n instance for language: ${lang}`);
+    return instance;
   } catch (err) {
     console.error('Failed to get i18n instance:', err);
     // Return a minimal i18n instance as fallback

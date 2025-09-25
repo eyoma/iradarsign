@@ -1,7 +1,7 @@
 import { Trans } from '@lingui/react/macro';
 import { File } from 'lucide-react';
 
-import timurImage from '@documenso/assets/images/timur.png';
+import logoImage from '@documenso/assets/logo.png';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
 import { VerifiedIcon } from '@documenso/ui/icons/verified';
 import { cn } from '@documenso/ui/lib/utils';
@@ -23,26 +23,22 @@ export const UserProfileTimur = ({ className, rows = 2 }: UserProfileTimurProps)
       )}
     >
       <div className="border-border bg-background text-muted-foreground inline-block max-w-full truncate rounded-md border px-2.5 py-1.5 text-sm">
-        {baseUrl.host}/u/timur
+        {baseUrl.host}/u/iradar
       </div>
 
       <div className="mt-4">
-        <img
-          src={timurImage}
-          className="h-20 w-20 rounded-full"
-          alt="image of timur ercan founder of documenso"
-        />
+        <img src={logoImage} className="h-20 w-20 rounded-full" alt="iRadar Logo" />
       </div>
 
       <div className="mt-6">
         <div className="flex items-center justify-center gap-x-2">
-          <h2 className="text-2xl font-semibold">Timur Ercan</h2>
+          <h2 className="text-2xl font-semibold">iRadar</h2>
 
           <VerifiedIcon className="text-primary h-8 w-8" />
         </div>
 
         <p className="text-muted-foreground mt-4 max-w-[40ch] text-center text-sm">
-          <Trans>Hey I’m Timur</Trans>
+          <Trans>Welcome to iRadar</Trans>
         </p>
 
         <p className="text-muted-foreground mt-1 max-w-[40ch] text-center text-sm">

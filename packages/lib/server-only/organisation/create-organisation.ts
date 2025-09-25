@@ -34,6 +34,7 @@ export const createOrganisation = async ({
 }: CreateOrganisationOptions) => {
   let customerIdToUse = customerId;
 
+  // Move customer creation outside transaction to avoid timeout
   if (!customerId && IS_BILLING_ENABLED()) {
     const user = await prisma.user.findUnique({
       where: {

@@ -1,12 +1,12 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 
 import { formatTeamUrl } from '@documenso/lib/utils/teams';
 
 import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
 import { TemplateFooter } from '../template-components/template-footer';
 import TemplateImage from '../template-components/template-image';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type TeamDeleteEmailProps = {
   assetBaseUrl: string;
@@ -19,10 +19,10 @@ export const TeamDeleteEmailTemplate = ({
   baseUrl = 'https://documenso.com',
   teamUrl = 'demo',
 }: TeamDeleteEmailProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
-  const previewText = msg`A team you were a part of has been deleted`;
+  const _previewText = msg`A team you were a part of has been deleted`;
 
   const title = msg`A team you were a part of has been deleted`;
 
@@ -31,7 +31,7 @@ export const TeamDeleteEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>Your team has been deleted</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white text-slate-500">

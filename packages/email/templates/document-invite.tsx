@@ -1,16 +1,15 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { RecipientRole } from '@prisma/client';
 import { OrganisationType } from '@prisma/client';
 
 import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
 
 import { Body, Container, Head, Hr, Html, Img, Link, Preview, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
 import type { TemplateDocumentInviteProps } from '../template-components/template-document-invite';
 import { TemplateDocumentInvite } from '../template-components/template-document-invite';
 import { TemplateFooter } from '../template-components/template-footer';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInviteProps> & {
   customBody?: string;
@@ -35,8 +34,8 @@ export const DocumentInviteEmailTemplate = ({
   includeSenderDetails,
   organisationType,
 }: DocumentInviteEmailTemplateProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
   const action = _(RECIPIENT_ROLES_DESCRIPTION[role].actionVerb).toLowerCase();
 
@@ -59,7 +58,7 @@ export const DocumentInviteEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>You have been invited to sign a document</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>
@@ -90,12 +89,10 @@ export const DocumentInviteEmailTemplate = ({
             <Section>
               {organisationType === OrganisationType.PERSONAL && (
                 <Text className="my-4 text-base font-semibold">
-                  <Trans>
-                    {inviterName}{' '}
-                    <Link className="font-normal text-slate-400" href="mailto:{inviterEmail}">
-                      ({inviterEmail})
-                    </Link>
-                  </Trans>
+                  {inviterName}{' '}
+                  <Link className="font-normal text-slate-400" href={`mailto:${inviterEmail}`}>
+                    ({inviterEmail})
+                  </Link>
                 </Text>
               )}
 
@@ -103,9 +100,7 @@ export const DocumentInviteEmailTemplate = ({
                 {customBody ? (
                   <pre className="font-sans text-base text-slate-400">{customBody}</pre>
                 ) : (
-                  <Trans>
-                    {inviterName} has invited you to {action} the document "{documentName}".
-                  </Trans>
+                  `${inviterName} has invited you to ${action} the document "${documentName}".`
                 )}
               </Text>
             </Section>

@@ -30,6 +30,15 @@ export default async function handleRequest(
 
   await dynamicActivate(language);
 
+  // Check if i18n is disabled and provide minimal i18n setup
+  const i18nDisabled = process.env.NEXT_PUBLIC_DISABLE_I18N === 'true';
+
+  if (i18nDisabled) {
+    console.log('i18n is disabled via NEXT_PUBLIC_DISABLE_I18N, using minimal i18n setup');
+    // Set up minimal i18n instance for server-side rendering
+    i18n.loadAndActivate({ locale: 'en', messages: {} });
+  }
+
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     const userAgent = request.headers.get('user-agent');

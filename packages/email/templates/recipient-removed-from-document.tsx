@@ -1,12 +1,11 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 
 import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
 import type { TemplateDocumentCancelProps } from '../template-components/template-document-cancel';
 import TemplateDocumentImage from '../template-components/template-document-image';
 import { TemplateFooter } from '../template-components/template-footer';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type DocumentCancelEmailTemplateProps = Partial<TemplateDocumentCancelProps>;
 
@@ -15,10 +14,10 @@ export const RecipientRemovedFromDocumentTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentCancelEmailTemplateProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
-  const previewText = msg`${inviterName} has removed you from the document ${documentName}.`;
+  const _previewText = msg`${inviterName} has removed you from the document ${documentName}.`;
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -27,7 +26,7 @@ export const RecipientRemovedFromDocumentTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>You have been removed from a document</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>
@@ -43,10 +42,8 @@ export const RecipientRemovedFromDocumentTemplate = ({
 
               <Section>
                 <Text className="text-primary mx-auto mb-0 max-w-[80%] text-center text-lg font-semibold">
-                  <Trans>
-                    {inviterName} has removed you from the document
-                    <br />"{documentName}"
-                  </Trans>
+                  {inviterName} has removed you from the document
+                  <br />"{documentName}"
                 </Text>
               </Section>
             </Section>

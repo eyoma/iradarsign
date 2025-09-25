@@ -1,12 +1,11 @@
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 
 import { Body, Container, Head, Hr, Html, Img, Link, Preview, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
 import { TemplateFooter } from '../template-components/template-footer';
 import type { TemplateResetPasswordProps } from '../template-components/template-reset-password';
 import { TemplateResetPassword } from '../template-components/template-reset-password';
+import { useSafeBranding } from '../utils/safe-branding';
+import { useSafeLingui } from '../utils/safe-i18n';
 
 export type ResetPasswordTemplateProps = Partial<TemplateResetPasswordProps>;
 
@@ -15,10 +14,10 @@ export const ResetPasswordTemplate = ({
   userEmail = 'lucas@documenso.com',
   assetBaseUrl = 'http://localhost:3002',
 }: ResetPasswordTemplateProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  const { _ } = useSafeLingui();
+  const branding = useSafeBranding();
 
-  const previewText = msg`Password Reset Successful`;
+  const _previewText = msg`Password Reset Successful`;
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -27,7 +26,7 @@ export const ResetPasswordTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>Reset your password</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>
@@ -50,28 +49,21 @@ export const ResetPasswordTemplate = ({
           <Container className="mx-auto mt-12 max-w-xl">
             <Section>
               <Text className="my-4 text-base font-semibold">
-                <Trans>
-                  Hi, {userName}{' '}
-                  <Link className="font-normal text-slate-400" href={`mailto:${userEmail}`}>
-                    ({userEmail})
-                  </Link>
-                </Trans>
+                Hi, {userName}{' '}
+                <Link className="font-normal text-slate-400" href={`mailto:${userEmail}`}>
+                  ({userEmail})
+                </Link>
               </Text>
 
               <Text className="mt-2 text-base text-slate-400">
-                <Trans>
-                  We've changed your password as you asked. You can now sign in with your new
-                  password.
-                </Trans>
+                We've changed your password as you asked. You can now sign in with your new
+                password.
               </Text>
               <Text className="mt-2 text-base text-slate-400">
-                <Trans>
-                  Didn't request a password change? We are here to help you secure your account,
-                  just{' '}
-                  <Link className="text-documenso-700 font-normal" href="mailto:hi@documenso.com">
-                    contact us.
-                  </Link>
-                </Trans>
+                Didn't request a password change? We are here to help you secure your account, just{' '}
+                <Link className="text-documenso-700 font-normal" href="mailto:hi@documenso.com">
+                  contact us.
+                </Link>
               </Text>
             </Section>
           </Container>

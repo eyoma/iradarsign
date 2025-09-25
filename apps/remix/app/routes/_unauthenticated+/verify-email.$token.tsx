@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { AlertTriangle, CheckCircle2, Loader, XCircle } from 'lucide-react';
 import { Link, redirect, useNavigate } from 'react-router';
@@ -31,7 +30,13 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
   const { token } = loaderData;
 
   const { refreshSession } = useOptionalSession();
-  const { _ } = useLingui();
+  // Use fallback for i18n when disabled
+  const _ = (str: string | { id?: string; default?: string }) => {
+    if (typeof str === 'string') return str;
+    if (str && str.id) return str.id;
+    if (str && str.default) return str.default;
+    return 'Translation not available';
+  };
   const { toast } = useToast();
   const navigate = useNavigate();
 
