@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 
 import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
@@ -25,12 +22,11 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentCompletedEmailTemplateProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const action = _(RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned).toLowerCase();
+  const action = RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned.toLowerCase();
 
-  const previewText = msg`Document created from direct template`;
+  const previewText = 'Document created from direct template';
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -39,7 +35,7 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">
@@ -59,9 +55,7 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 
               <Section>
                 <Text className="text-primary mb-0 text-center text-lg font-semibold">
-                  <Trans>
-                    {recipientName} {action} a document by using one of your direct links
-                  </Trans>
+                  {recipientName} {action} a document by using one of your direct links
                 </Text>
 
                 <div className="mx-auto my-2 w-fit rounded-lg bg-gray-50 px-4 py-2 text-sm text-slate-600">
@@ -73,7 +67,7 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
                     className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-black no-underline"
                     href={documentLink}
                   >
-                    <Trans>View document</Trans>
+                    View document
                   </Button>
                 </Section>
               </Section>

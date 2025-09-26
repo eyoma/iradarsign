@@ -27,6 +27,8 @@ import { renderCustomEmailTemplate } from '../../../utils/render-custom-email-te
 import { renderEmailWithI18N } from '../../../utils/render-email-with-i18n';
 import type { JobRunIO } from '../../client/_internal/job';
 import type { TSendSigningEmailJobDefinition } from './send-signing-email';
+import { renderEmailWithoutI18N } from '../../../utils/render-email-without-i18n';
+import { render } from '@documenso/email/render';
 
 export const run = async ({
   payload,
@@ -170,14 +172,15 @@ export const run = async ({
   });
 
   await io.runTask('send-signing-email', async () => {
-    const [html, text] = await Promise.all([
-      renderEmailWithI18N(template, { lang: emailLanguage, branding }),
-      renderEmailWithI18N(template, {
-        lang: emailLanguage,
-        branding,
-        plainText: true,
-      }),
-    ]);
+    // const [html, text] = await Promise.all([
+    //   render(template, { branding }),
+    //   render(template, {
+    //     branding,
+    //     plainText: true,
+    //   }),
+    // ]);
+
+    const html = render(template, { branding });
 
     await mailer.sendMail({
       to: {
@@ -191,7 +194,7 @@ export const run = async ({
         customEmailTemplate,
       ),
       html,
-      text,
+      // text:`HELLLLOOOOOO HTML`,
     });
   });
 

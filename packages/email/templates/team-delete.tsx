@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { formatTeamUrl } from '@documenso/lib/utils/teams';
 
 import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
@@ -19,19 +16,19 @@ export const TeamDeleteEmailTemplate = ({
   baseUrl = 'https://documenso.com',
   teamUrl = 'demo',
 }: TeamDeleteEmailProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`A team you were a part of has been deleted`;
+  const previewText = 'A team you were a part of has been deleted';
 
-  const title = msg`A team you were a part of has been deleted`;
+  const title = 'A team you were a part of has been deleted';
 
-  const description = msg`The following team has been deleted. You will no longer be able to access this team and its documents`;
+  const description =
+    'The following team has been deleted. You will no longer be able to access this team and its documents';
 
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white text-slate-500">
@@ -55,9 +52,9 @@ export const TeamDeleteEmailTemplate = ({
             </Section>
 
             <Section className="p-2 text-slate-500">
-              <Text className="text-center text-lg font-medium text-black">{_(title)}</Text>
+              <Text className="text-center text-lg font-medium text-black">{title}</Text>
 
-              <Text className="my-1 text-center text-base">{_(description)}</Text>
+              <Text className="my-1 text-center text-base">{description}</Text>
 
               <div className="mx-auto my-2 w-fit rounded-lg bg-gray-50 px-4 py-2 text-base font-medium text-slate-600">
                 {formatTeamUrl(teamUrl, baseUrl)}

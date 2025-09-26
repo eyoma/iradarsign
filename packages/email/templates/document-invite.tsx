@@ -1,16 +1,19 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { RecipientRole } from '@prisma/client';
 import { OrganisationType } from '@prisma/client';
 
-import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
-
 import { Body, Container, Head, Hr, Html, Img, Link, Preview, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
 import type { TemplateDocumentInviteProps } from '../template-components/template-document-invite';
 import { TemplateDocumentInvite } from '../template-components/template-document-invite';
 import { TemplateFooter } from '../template-components/template-footer';
+
+// Add branding type
+type BrandingData = {
+  brandingEnabled: boolean;
+  brandingUrl: string;
+  brandingLogo: string;
+  brandingCompanyDetails: string;
+  brandingHidePoweredBy: boolean;
+};
 
 export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInviteProps> & {
   customBody?: string;
@@ -20,6 +23,8 @@ export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInvitePro
   teamEmail?: string;
   includeSenderDetails?: boolean;
   organisationType?: OrganisationType;
+  // Add branding prop
+  branding?: BrandingData;
 };
 
 export const DocumentInviteEmailTemplate = ({
@@ -34,22 +39,30 @@ export const DocumentInviteEmailTemplate = ({
   teamName = '',
   includeSenderDetails,
   organisationType,
+  branding, // Add branding prop
 }: DocumentInviteEmailTemplateProps) => {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  // Use props instead of context
+  const brandingData = branding || {
+    brandingEnabled: false,
+    brandingUrl: '',
+    brandingLogo: '',
+    brandingCompanyDetails: '',
+    brandingHidePoweredBy: false,
+  };
 
-  const action = _(RECIPIENT_ROLES_DESCRIPTION[role].actionVerb).toLowerCase();
+  // Fix the action verb issue - use a string instead of message descriptor
+  const action = role === 'SIGNER' ? 'sign' : role === 'APPROVER' ? 'approve' : 'review';
 
-  let previewText = msg`${inviterName} has invited you to ${action} ${documentName}`;
+  let previewText = `${inviterName} has invited you to ${action} ${documentName}`;
 
   if (organisationType === OrganisationType.ORGANISATION) {
     previewText = includeSenderDetails
-      ? msg`${inviterName} on behalf of "${teamName}" has invited you to ${action} ${documentName}`
-      : msg`${teamName} has invited you to ${action} ${documentName}`;
+      ? `${inviterName} on behalf of "${teamName}" has invited you to ${action} ${documentName}`
+      : `${teamName} has invited you to ${action} ${documentName}`;
   }
 
   if (selfSigner) {
-    previewText = msg`Please ${action} your document ${documentName}`;
+    previewText = `Please ${action} your document ${documentName}`;
   }
 
   const getAssetUrl = (path: string) => {
@@ -59,14 +72,14 @@ export const DocumentInviteEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
-              {branding.brandingEnabled && branding.brandingLogo ? (
-                <Img src={branding.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
+              {brandingData.brandingEnabled && brandingData.brandingLogo ? (
+                <Img src={brandingData.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
@@ -94,12 +107,10 @@ export const DocumentInviteEmailTemplate = ({
             <Section>
               {organisationType === OrganisationType.PERSONAL && (
                 <Text className="my-4 text-base font-semibold">
-                  <Trans>
-                    {inviterName}{' '}
-                    <Link className="font-normal text-slate-400" href="mailto:{inviterEmail}">
-                      ({inviterEmail})
-                    </Link>
-                  </Trans>
+                  {inviterName}{' '}
+                  <Link className="font-normal text-slate-400" href="mailto:{inviterEmail}">
+                    ({inviterEmail})
+                  </Link>
                 </Text>
               )}
 
@@ -107,9 +118,7 @@ export const DocumentInviteEmailTemplate = ({
                 {customBody ? (
                   <pre className="font-sans text-base text-slate-400">{customBody}</pre>
                 ) : (
-                  <Trans>
-                    {inviterName} has invited you to {action} the document "{documentName}".
-                  </Trans>
+                  `${inviterName} has invited you to ${action} the document "${documentName}".`
                 )}
               </Text>
             </Section>
@@ -118,7 +127,7 @@ export const DocumentInviteEmailTemplate = ({
           <Hr className="mx-auto mt-12 max-w-xl" />
 
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter />
+            <TemplateFooter branding={brandingData} />
           </Container>
         </Section>
       </Body>

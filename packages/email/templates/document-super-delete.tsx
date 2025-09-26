@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Hr, Html, Img, Preview, Section } from '../components';
 import { useBranding } from '../providers/branding';
 import {
@@ -16,10 +13,9 @@ export const DocumentSuperDeleteEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
   reason = 'Unknown',
 }: DocumentDeleteEmailTemplateProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`An admin has deleted your document "${documentName}".`;
+  const previewText = 'An admin has deleted your document "${documentName}".';
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -28,7 +24,7 @@ export const DocumentSuperDeleteEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>
