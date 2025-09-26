@@ -1,13 +1,19 @@
 import type { RecipientRole } from '@prisma/client';
 import { OrganisationType } from '@prisma/client';
 
-import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
-
 import { Body, Container, Head, Hr, Html, Img, Link, Preview, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
 import type { TemplateDocumentInviteProps } from '../template-components/template-document-invite';
 import { TemplateDocumentInvite } from '../template-components/template-document-invite';
 import { TemplateFooter } from '../template-components/template-footer';
+
+// Add branding type
+type BrandingData = {
+  brandingEnabled: boolean;
+  brandingUrl: string;
+  brandingLogo: string;
+  brandingCompanyDetails: string;
+  brandingHidePoweredBy: boolean;
+};
 
 export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInviteProps> & {
   customBody?: string;
@@ -17,6 +23,8 @@ export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInvitePro
   teamEmail?: string;
   includeSenderDetails?: boolean;
   organisationType?: OrganisationType;
+  // Add branding prop
+  branding?: BrandingData;
 };
 
 export const DocumentInviteEmailTemplate = ({
@@ -31,10 +39,19 @@ export const DocumentInviteEmailTemplate = ({
   teamName = '',
   includeSenderDetails,
   organisationType,
+  branding, // Add branding prop
 }: DocumentInviteEmailTemplateProps) => {
-  const branding = useBranding();
+  // Use props instead of context
+  const brandingData = branding || {
+    brandingEnabled: false,
+    brandingUrl: '',
+    brandingLogo: '',
+    brandingCompanyDetails: '',
+    brandingHidePoweredBy: false,
+  };
 
-  const action = RECIPIENT_ROLES_DESCRIPTION[role].actionVerb.toLowerCase();
+  // Fix the action verb issue - use a string instead of message descriptor
+  const action = role === 'SIGNER' ? 'sign' : role === 'APPROVER' ? 'approve' : 'review';
 
   let previewText = `${inviterName} has invited you to ${action} ${documentName}`;
 
@@ -61,8 +78,8 @@ export const DocumentInviteEmailTemplate = ({
         <Section>
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
-              {branding.brandingEnabled && branding.brandingLogo ? (
-                <Img src={branding.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
+              {brandingData.brandingEnabled && brandingData.brandingLogo ? (
+                <Img src={brandingData.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
@@ -110,7 +127,7 @@ export const DocumentInviteEmailTemplate = ({
           <Hr className="mx-auto mt-12 max-w-xl" />
 
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter />
+            <TemplateFooter branding={brandingData} />
           </Container>
         </Section>
       </Body>

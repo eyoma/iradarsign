@@ -1,18 +1,35 @@
 import { Trans } from '@lingui/react/macro';
 
 import { Link, Section, Text } from '../components';
-import { useBranding } from '../providers/branding';
+
+// Add branding type
+type BrandingData = {
+  brandingEnabled: boolean;
+  brandingUrl: string;
+  brandingLogo: string;
+  brandingCompanyDetails: string;
+  brandingHidePoweredBy: boolean;
+};
 
 export type TemplateFooterProps = {
   isDocument?: boolean;
+  // Add branding prop
+  branding?: BrandingData;
 };
 
-export const TemplateFooter = ({ isDocument = true }: TemplateFooterProps) => {
-  const branding = useBranding();
+export const TemplateFooter = ({ isDocument = true, branding }: TemplateFooterProps) => {
+  // Use props instead of context
+  const brandingData = branding || {
+    brandingEnabled: false,
+    brandingUrl: '',
+    brandingLogo: '',
+    brandingCompanyDetails: '',
+    brandingHidePoweredBy: false,
+  };
 
   return (
     <Section>
-      {isDocument && !branding.brandingHidePoweredBy && (
+      {isDocument && !brandingData.brandingHidePoweredBy && (
         <Text className="my-4 text-base text-slate-400">
           <Trans>
             This document was sent using{' '}
@@ -23,9 +40,9 @@ export const TemplateFooter = ({ isDocument = true }: TemplateFooterProps) => {
         </Text>
       )}
 
-      {branding.brandingCompanyDetails ? (
+      {brandingData.brandingCompanyDetails ? (
         <Text className="my-8 text-sm text-slate-400">
-          {branding.brandingCompanyDetails.split('\n').map((line, idx) => {
+          {brandingData.brandingCompanyDetails.split('\n').map((line, idx) => {
             return (
               <>
                 {idx > 0 && <br />}
