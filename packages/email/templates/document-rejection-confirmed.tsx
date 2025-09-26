@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
 import { useBranding } from '../providers/branding';
 import { TemplateDocumentRejectionConfirmed } from '../template-components/template-document-rejection-confirmed';
@@ -21,10 +18,9 @@ export function DocumentRejectionConfirmedEmail({
   reason,
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentRejectionConfirmedEmailProps) {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = _(msg`You have rejected the document '${documentName}'`);
+  const previewText = "You have rejected the document '${documentName}'";
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();

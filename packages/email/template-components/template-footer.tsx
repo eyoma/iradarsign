@@ -1,5 +1,3 @@
-import { Trans } from '@lingui/react/macro';
-
 import { Link, Section, Text } from '../components';
 
 // Add branding type
@@ -31,12 +29,10 @@ export const TemplateFooter = ({ isDocument = true, branding }: TemplateFooterPr
     <Section>
       {isDocument && !brandingData.brandingHidePoweredBy && (
         <Text className="my-4 text-base text-slate-400">
-          <Trans>
-            This document was sent using{' '}
-            <Link className="text-[#7AC455]" href="https://documen.so/mail-footer">
-              Documenso.
-            </Link>
-          </Trans>
+          This document was sent using{' '}
+          <Link className="text-[#7AC455]" href="https://iradarsign.com">
+            iRadarSign.
+          </Link>
         </Text>
       )}
 
@@ -53,9 +49,9 @@ export const TemplateFooter = ({ isDocument = true, branding }: TemplateFooterPr
         </Text>
       ) : (
         <Text className="my-8 text-sm text-slate-400">
-          Documenso, Inc.
+          iRadarData, Inc.
           <br />
-          2261 Market Street, #5211, San Francisco, CA 94114, USA
+          1505 Laperriere Ave Ottawa, ON Canada K1Z 7S9
         </Text>
       )}
     </Section>

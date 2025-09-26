@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
 import type { TemplateDocumentSelfSignedProps } from '../template-components/template-document-self-signed';
 import { TemplateDocumentSelfSigned } from '../template-components/template-document-self-signed';
@@ -25,8 +22,6 @@ export const DocumentSelfSignedEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
   branding, // Add branding prop
 }: DocumentSelfSignedTemplateProps) => {
-  const { _ } = useLingui();
-
   // Use props instead of context
   const brandingData = branding || {
     brandingEnabled: false,
@@ -36,7 +31,7 @@ export const DocumentSelfSignedEmailTemplate = ({
     brandingHidePoweredBy: false,
   };
 
-  const previewText = msg`Completed Document`;
+  const previewText = 'Completed Document';
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -45,7 +40,7 @@ export const DocumentSelfSignedEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">

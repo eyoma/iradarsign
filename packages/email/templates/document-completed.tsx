@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
 import type { TemplateDocumentCompletedProps } from '../template-components/template-document-completed';
 import { TemplateDocumentCompleted } from '../template-components/template-document-completed';
@@ -28,8 +25,6 @@ export const DocumentCompletedEmailTemplate = ({
   customBody,
   branding, // Add branding prop
 }: DocumentCompletedEmailTemplateProps) => {
-  const { _ } = useLingui();
-
   // Use props instead of context
   const brandingData = branding || {
     brandingEnabled: false,
@@ -39,7 +34,7 @@ export const DocumentCompletedEmailTemplate = ({
     brandingHidePoweredBy: false,
   };
 
-  const previewText = msg`Completed Document`;
+  const previewText = 'Completed Document';
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -48,7 +43,7 @@ export const DocumentCompletedEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">

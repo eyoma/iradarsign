@@ -1,10 +1,15 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
-import { useBranding } from '../providers/branding';
 import { TemplateDocumentRejected } from '../template-components/template-document-rejected';
 import { TemplateFooter } from '../template-components/template-footer';
+
+// Add branding type
+type BrandingData = {
+  brandingEnabled: boolean;
+  brandingUrl: string;
+  brandingLogo: string;
+  brandingCompanyDetails: string;
+  brandingHidePoweredBy: boolean;
+};
 
 type DocumentRejectedEmailProps = {
   recipientName: string;
@@ -12,6 +17,8 @@ type DocumentRejectedEmailProps = {
   documentUrl: string;
   rejectionReason: string;
   assetBaseUrl?: string;
+  // Add branding prop
+  branding?: BrandingData;
 };
 
 export function DocumentRejectedEmail({
@@ -20,11 +27,18 @@ export function DocumentRejectedEmail({
   documentUrl,
   rejectionReason,
   assetBaseUrl = 'http://localhost:3002',
+  branding, // Add branding prop
 }: DocumentRejectedEmailProps) {
-  const { _ } = useLingui();
-  const branding = useBranding();
+  // Use props instead of context
+  const brandingData = branding || {
+    brandingEnabled: false,
+    brandingUrl: '',
+    brandingLogo: '',
+    brandingCompanyDetails: '',
+    brandingHidePoweredBy: false,
+  };
 
-  const previewText = _(msg`${recipientName} has rejected the document '${documentName}'`);
+  const previewText = `${recipientName} has rejected the document '${documentName}'`;
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -39,8 +53,8 @@ export function DocumentRejectedEmail({
         <Section>
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
-              {branding.brandingEnabled && branding.brandingLogo ? (
-                <Img src={branding.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
+              {brandingData.brandingEnabled && brandingData.brandingLogo ? (
+                <Img src={brandingData.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
@@ -59,7 +73,7 @@ export function DocumentRejectedEmail({
           </Container>
 
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter />
+            <TemplateFooter branding={brandingData} />
           </Container>
         </Section>
       </Body>

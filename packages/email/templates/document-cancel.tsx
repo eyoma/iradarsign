@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Hr, Html, Img, Preview, Section } from '../components';
 import { useBranding } from '../providers/branding';
 import type { TemplateDocumentCancelProps } from '../template-components/template-document-cancel';
@@ -16,10 +13,10 @@ export const DocumentCancelTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
   cancellationReason,
 }: DocumentCancelEmailTemplateProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`${inviterName} has cancelled the document ${documentName}, you don't need to sign it anymore.`;
+  const previewText =
+    "${inviterName} has cancelled the document ${documentName}, you don't need to sign it anymore.";
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -28,7 +25,7 @@ export const DocumentCancelTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>

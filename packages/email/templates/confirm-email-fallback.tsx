@@ -9,7 +9,7 @@ export const ConfirmEmailFallbackTemplate = ({
   confirmationLink,
   assetBaseUrl = 'http://localhost:3002',
 }: ConfirmEmailFallbackProps) => {
-  const getAssetUrl = (path: string) => {
+  const _getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
   };
 

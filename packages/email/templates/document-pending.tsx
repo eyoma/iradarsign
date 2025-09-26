@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
 import type { TemplateDocumentPendingProps } from '../template-components/template-document-pending';
 import { TemplateDocumentPending } from '../template-components/template-document-pending';
@@ -25,8 +22,6 @@ export const DocumentPendingEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
   branding, // Add branding prop
 }: DocumentPendingEmailTemplateProps) => {
-  const { _ } = useLingui();
-
   // Use props instead of context
   const brandingData = branding || {
     brandingEnabled: false,
@@ -36,7 +31,7 @@ export const DocumentPendingEmailTemplate = ({
     brandingHidePoweredBy: false,
   };
 
-  const previewText = msg`Pending Document`;
+  const previewText = 'Pending Document';
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -45,7 +40,7 @@ export const DocumentPendingEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">

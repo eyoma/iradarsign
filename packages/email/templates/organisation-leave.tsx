@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
 import { useBranding } from '../providers/branding';
 import { TemplateFooter } from '../template-components/template-footer';
@@ -18,21 +14,20 @@ export type OrganisationLeaveEmailProps = {
 
 export const OrganisationLeaveEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  baseUrl = 'https://documenso.com',
+  _baseUrl = 'https://documenso.com',
   memberName = 'John Doe',
   memberEmail = 'johndoe@documenso.com',
   organisationName = 'Organisation Name',
-  organisationUrl = 'demo',
+  _organisationUrl = 'demo',
 }: OrganisationLeaveEmailProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`A member has left your organisation on iRadar`;
+  const previewText = 'A member has left your organisation on iRadar';
 
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white text-slate-500">
@@ -57,7 +52,7 @@ export const OrganisationLeaveEmailTemplate = ({
 
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
-                <Trans>A member has left your organisation {organisationName}</Trans>
+                A member has left your organisation {organisationName}
               </Text>
 
               <div className="mx-auto my-2 w-fit rounded-lg bg-gray-50 px-4 py-2 text-base font-medium text-slate-600">
