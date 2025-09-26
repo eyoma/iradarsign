@@ -29,6 +29,6 @@ export const renderEmailWithI18N = async (
     return render(<I18nProvider i18n={i18n}>{component}</I18nProvider>, otherOptions);
   } catch (err) {
     console.error('Failed to render email with i18n:', err);
-    throw new Error('Failed to render email');
+    throw new Error('Failed2 to render email');
   }
 };

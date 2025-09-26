@@ -13,9 +13,16 @@ export type RenderOptions = ReactEmail.Options & {
 const colors = (config.theme?.extend?.colors || {}) as Record<string, string>;
 
 export const render = (element: React.ReactNode, options?: RenderOptions) => {
+  console.log('[Email Render] render() function called');
+  console.log('[Email Render] Element:', element);
+  console.log('[Email Render] Options:', options);
+  
   const { branding, ...otherOptions } = options ?? {};
+  
+  console.log('[Email Render] Branding options:', branding);
+  console.log('[Email Render] Other options:', otherOptions);
 
-  return ReactEmail.render(
+  const wrappedElement = (
     <Tailwind
       config={{
         theme: {
@@ -26,15 +33,25 @@ export const render = (element: React.ReactNode, options?: RenderOptions) => {
       }}
     >
       <BrandingProvider branding={branding}>{element}</BrandingProvider>
-    </Tailwind>,
-    otherOptions,
+    </Tailwind>
   );
+
+  console.log('[Email Render] Wrapped element with BrandingProvider');
+  
+  return ReactEmail.render(wrappedElement, otherOptions);
 };
 
 export const renderAsync = async (element: React.ReactNode, options?: RenderOptions) => {
+  console.log('[Email Render] renderAsync() function called');
+  console.log('[Email Render] Element:', element);
+  console.log('[Email Render] Options:', options);
+  
   const { branding, ...otherOptions } = options ?? {};
+  
+  console.log('[Email Render] Branding options:', branding);
+  console.log('[Email Render] Other options:', otherOptions);
 
-  return await ReactEmail.renderAsync(
+  const wrappedElement = (
     <Tailwind
       config={{
         theme: {
@@ -45,7 +62,10 @@ export const renderAsync = async (element: React.ReactNode, options?: RenderOpti
       }}
     >
       <BrandingProvider branding={branding}>{element}</BrandingProvider>
-    </Tailwind>,
-    otherOptions,
+    </Tailwind>
   );
+
+  console.log('[Email Render] Wrapped element with BrandingProvider (async)');
+  
+  return await ReactEmail.renderAsync(wrappedElement, otherOptions);
 };

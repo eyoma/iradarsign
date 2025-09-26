@@ -19,11 +19,32 @@ const defaultBrandingContextValue: BrandingContextValue = {
 };
 
 export const BrandingProvider = (props: {
-  branding?: BrandingContextValue;
+  branding?: BrandingContextValue | any; // Allow any branding object
   children: React.ReactNode;
 }) => {
+  console.log('[BrandingProvider] Provider initialized');
+  console.log('[BrandingProvider] Props branding:', props.branding);
+  
+  // Extract only the branding fields we need, regardless of the input structure
+  const contextValue: BrandingContextValue = {
+    brandingEnabled: props.branding?.brandingEnabled ?? defaultBrandingContextValue.brandingEnabled,
+    brandingUrl: props.branding?.brandingUrl ?? defaultBrandingContextValue.brandingUrl,
+    brandingLogo: props.branding?.brandingLogo ?? defaultBrandingContextValue.brandingLogo,
+    brandingCompanyDetails: props.branding?.brandingCompanyDetails ?? defaultBrandingContextValue.brandingCompanyDetails,
+    brandingHidePoweredBy: props.branding?.brandingHidePoweredBy ?? defaultBrandingContextValue.brandingHidePoweredBy,
+  };
+  
+  console.log('[BrandingProvider] Extracted context value:', contextValue);
+  console.log('[BrandingProvider] Context value being provided:', {
+    brandingEnabled: contextValue.brandingEnabled,
+    brandingUrl: contextValue.brandingUrl,
+    brandingLogo: contextValue.brandingLogo,
+    brandingCompanyDetails: contextValue.brandingCompanyDetails,
+    brandingHidePoweredBy: contextValue.brandingHidePoweredBy,
+  });
+
   return (
-    <BrandingContext.Provider value={props.branding ?? defaultBrandingContextValue}>
+    <BrandingContext.Provider value={contextValue}>
       {props.children}
     </BrandingContext.Provider>
   );
@@ -32,10 +53,43 @@ export const BrandingProvider = (props: {
 export const useBranding = () => {
   const ctx = useContext(BrandingContext);
 
+  // Add comprehensive logging to debug context issues
+  console.log('[useBranding] Hook called');
+  console.log('[useBranding] Context value:', ctx);
+  console.log('[useBranding] Context type:', typeof ctx);
+  console.log('[useBranding] Context is undefined:', ctx === undefined);
+  console.log('[useBranding] Context is null:', ctx === null);
+  
+  // Log the React component tree context
+  console.log('[useBranding] React context debug info:', {
+    hasContext: ctx !== undefined,
+    contextKeys: ctx ? Object.keys(ctx) : 'N/A',
+    brandingEnabled: ctx?.brandingEnabled,
+    brandingUrl: ctx?.brandingUrl,
+    brandingLogo: ctx?.brandingLogo,
+  });
+
   if (!ctx) {
-    throw new Error('Branding context not found');
+    console.error('[useBranding] ERROR: Branding context not found');
+    console.error('[useBranding] This usually means the component is not wrapped in a BrandingProvider');
+    console.error('[useBranding] Check that the email template is being rendered through the render() function');
+    console.error('[useBranding] Current React context tree may not include BrandingProvider');
+    console.error('[useBranding] This might be a React Email rendering timing issue');
+    
+    // For debugging: try to get context again after a microtask
+    console.log('[useBranding] Attempting to retry context access...');
+    const retryCtx = useContext(BrandingContext);
+    console.log('[useBranding] Retry context value:', retryCtx);
+    
+    if (retryCtx) {
+      console.log('[useBranding] Context found on retry, using it');
+      return retryCtx;
+    }
+    
+    throw new Error('Branding context not found - ensure the component is wrapped in BrandingProvider');
   }
 
+  console.log('[useBranding] Successfully retrieved branding context');
   return ctx;
 };
 
