@@ -220,29 +220,34 @@ export const updateDocument = async ({
     return document;
   }
 
-  return await prisma.$transaction(async (tx) => {
-    const authOptions = createDocumentAuthOptions({
-      globalAccessAuth: newGlobalAccessAuth,
-      globalActionAuth: newGlobalActionAuth,
-    });
+  return await prisma.$transaction(
+    async (tx) => {
+      const authOptions = createDocumentAuthOptions({
+        globalAccessAuth: newGlobalAccessAuth,
+        globalActionAuth: newGlobalActionAuth,
+      });
 
-    const updatedDocument = await tx.document.update({
-      where: {
-        id: documentId,
-      },
-      data: {
-        title: data.title,
-        externalId: data.externalId,
-        visibility: data.visibility as DocumentVisibility,
-        useLegacyFieldInsertion: data.useLegacyFieldInsertion,
-        authOptions,
-      },
-    });
+      const updatedDocument = await tx.document.update({
+        where: {
+          id: documentId,
+        },
+        data: {
+          title: data.title,
+          externalId: data.externalId,
+          visibility: data.visibility as DocumentVisibility,
+          useLegacyFieldInsertion: data.useLegacyFieldInsertion,
+          authOptions,
+        },
+      });
 
-    await tx.documentAuditLog.createMany({
-      data: auditLogs,
-    });
+      await tx.documentAuditLog.createMany({
+        data: auditLogs,
+      });
 
-    return updatedDocument;
-  });
+      return updatedDocument;
+    },
+    {
+      timeout: 15000, // 15 seconds
+    },
+  );
 };

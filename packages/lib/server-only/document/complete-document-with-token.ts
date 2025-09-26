@@ -130,41 +130,46 @@ export const completeDocumentWithToken = async ({
   //   throw new AppError(AppErrorCode.UNAUTHORIZED, 'Invalid authentication values');
   // }
 
-  await prisma.$transaction(async (tx) => {
-    await tx.recipient.update({
-      where: {
-        id: recipient.id,
-      },
-      data: {
-        signingStatus: SigningStatus.SIGNED,
-        signedAt: new Date(),
-      },
-    });
-
-    const authOptions = extractDocumentAuthMethods({
-      documentAuth: document.authOptions,
-      recipientAuth: recipient.authOptions,
-    });
-
-    await tx.documentAuditLog.create({
-      data: createDocumentAuditLogData({
-        type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_RECIPIENT_COMPLETED,
-        documentId: document.id,
-        user: {
-          name: recipient.name,
-          email: recipient.email,
+  await prisma.$transaction(
+    async (tx) => {
+      await tx.recipient.update({
+        where: {
+          id: recipient.id,
         },
-        requestMetadata,
         data: {
-          recipientEmail: recipient.email,
-          recipientName: recipient.name,
-          recipientId: recipient.id,
-          recipientRole: recipient.role,
-          actionAuth: authOptions.derivedRecipientActionAuth,
+          signingStatus: SigningStatus.SIGNED,
+          signedAt: new Date(),
         },
-      }),
-    });
-  });
+      });
+
+      const authOptions = extractDocumentAuthMethods({
+        documentAuth: document.authOptions,
+        recipientAuth: recipient.authOptions,
+      });
+
+      await tx.documentAuditLog.create({
+        data: createDocumentAuditLogData({
+          type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_RECIPIENT_COMPLETED,
+          documentId: document.id,
+          user: {
+            name: recipient.name,
+            email: recipient.email,
+          },
+          requestMetadata,
+          data: {
+            recipientEmail: recipient.email,
+            recipientName: recipient.name,
+            recipientId: recipient.id,
+            recipientRole: recipient.role,
+            actionAuth: authOptions.derivedRecipientActionAuth,
+          },
+        }),
+      });
+    },
+    {
+      timeout: 15000, // 15 seconds
+    },
+  );
 
   await jobs.triggerJob({
     name: 'send.recipient.signed.email',
@@ -202,62 +207,67 @@ export const completeDocumentWithToken = async ({
     if (document.documentMeta?.signingOrder === DocumentSigningOrder.SEQUENTIAL) {
       const [nextRecipient] = pendingRecipients;
 
-      await prisma.$transaction(async (tx) => {
-        if (nextSigner && document.documentMeta?.allowDictateNextSigner) {
-          await tx.documentAuditLog.create({
-            data: createDocumentAuditLogData({
-              type: DOCUMENT_AUDIT_LOG_TYPE.RECIPIENT_UPDATED,
-              documentId: document.id,
-              user: {
-                name: recipient.name,
-                email: recipient.email,
-              },
-              requestMetadata,
-              data: {
-                recipientEmail: nextRecipient.email,
-                recipientName: nextRecipient.name,
-                recipientId: nextRecipient.id,
-                recipientRole: nextRecipient.role,
-                changes: [
-                  {
-                    type: RECIPIENT_DIFF_TYPE.NAME,
-                    from: nextRecipient.name,
-                    to: nextSigner.name,
-                  },
-                  {
-                    type: RECIPIENT_DIFF_TYPE.EMAIL,
-                    from: nextRecipient.email,
-                    to: nextSigner.email,
-                  },
-                ],
-              },
-            }),
+      await prisma.$transaction(
+        async (tx) => {
+          if (nextSigner && document.documentMeta?.allowDictateNextSigner) {
+            await tx.documentAuditLog.create({
+              data: createDocumentAuditLogData({
+                type: DOCUMENT_AUDIT_LOG_TYPE.RECIPIENT_UPDATED,
+                documentId: document.id,
+                user: {
+                  name: recipient.name,
+                  email: recipient.email,
+                },
+                requestMetadata,
+                data: {
+                  recipientEmail: nextRecipient.email,
+                  recipientName: nextRecipient.name,
+                  recipientId: nextRecipient.id,
+                  recipientRole: nextRecipient.role,
+                  changes: [
+                    {
+                      type: RECIPIENT_DIFF_TYPE.NAME,
+                      from: nextRecipient.name,
+                      to: nextSigner.name,
+                    },
+                    {
+                      type: RECIPIENT_DIFF_TYPE.EMAIL,
+                      from: nextRecipient.email,
+                      to: nextSigner.email,
+                    },
+                  ],
+                },
+              }),
+            });
+          }
+
+          await tx.recipient.update({
+            where: { id: nextRecipient.id },
+            data: {
+              sendStatus: SendStatus.SENT,
+              ...(nextSigner && document.documentMeta?.allowDictateNextSigner
+                ? {
+                    name: nextSigner.name,
+                    email: nextSigner.email,
+                  }
+                : {}),
+            },
           });
-        }
 
-        await tx.recipient.update({
-          where: { id: nextRecipient.id },
-          data: {
-            sendStatus: SendStatus.SENT,
-            ...(nextSigner && document.documentMeta?.allowDictateNextSigner
-              ? {
-                  name: nextSigner.name,
-                  email: nextSigner.email,
-                }
-              : {}),
-          },
-        });
-
-        await jobs.triggerJob({
-          name: 'send.signing.requested.email',
-          payload: {
-            userId: document.userId,
-            documentId: document.id,
-            recipientId: nextRecipient.id,
-            requestMetadata,
-          },
-        });
-      });
+          await jobs.triggerJob({
+            name: 'send.signing.requested.email',
+            payload: {
+              userId: document.userId,
+              documentId: document.id,
+              recipientId: nextRecipient.id,
+              requestMetadata,
+            },
+          });
+        },
+        {
+          timeout: 15000, // 15 seconds
+        },
+      );
     }
   }
 

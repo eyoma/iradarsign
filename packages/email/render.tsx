@@ -38,10 +38,12 @@ const addBrandingToElement = (
       return child;
     });
 
-    return cloneElement(clonedElement, {
+    const newProps = {
       ...(clonedElement.props || {}),
       children: processedChildren,
-    } as React.ReactElement);
+    };
+
+    return cloneElement(clonedElement, newProps);
   }
 
   return clonedElement;
