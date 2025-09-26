@@ -10,7 +10,7 @@ export interface TemplateDocumentCompletedProps {
 
 export const TemplateDocumentCompleted = ({
   downloadLink,
-  _documentName,
+  documentName,
   assetBaseUrl,
   customBody,
 }: TemplateDocumentCompletedProps) => {
@@ -36,7 +36,7 @@ export const TemplateDocumentCompleted = ({
         </Section>
 
         <Text className="text-primary mb-0 text-center text-lg font-semibold">
-          {customBody || '"{documentName}" was signed by all signers'}
+          {customBody || `"${documentName}" was signed by all signers`}
         </Text>
 
         <Text className="my-1 text-center text-base text-slate-400">

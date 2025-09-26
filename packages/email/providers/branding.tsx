@@ -27,13 +27,18 @@ export const BrandingProvider = (props: {
 
   // Extract only the branding fields we need, regardless of the input structure
   const contextValue: BrandingContextValue = {
-    brandingEnabled: props.branding?.brandingEnabled ?? defaultBrandingContextValue.brandingEnabled,
-    brandingUrl: props.branding?.brandingUrl ?? defaultBrandingContextValue.brandingUrl,
-    brandingLogo: props.branding?.brandingLogo ?? defaultBrandingContextValue.brandingLogo,
+    brandingEnabled:
+      Boolean(props.branding?.brandingEnabled) ?? defaultBrandingContextValue.brandingEnabled,
+    brandingUrl:
+      String(props.branding?.brandingUrl || '') || defaultBrandingContextValue.brandingUrl,
+    brandingLogo:
+      String(props.branding?.brandingLogo || '') || defaultBrandingContextValue.brandingLogo,
     brandingCompanyDetails:
-      props.branding?.brandingCompanyDetails ?? defaultBrandingContextValue.brandingCompanyDetails,
+      String(props.branding?.brandingCompanyDetails || '') ||
+      defaultBrandingContextValue.brandingCompanyDetails,
     brandingHidePoweredBy:
-      props.branding?.brandingHidePoweredBy ?? defaultBrandingContextValue.brandingHidePoweredBy,
+      Boolean(props.branding?.brandingHidePoweredBy) ??
+      defaultBrandingContextValue.brandingHidePoweredBy,
   };
 
   console.log('[BrandingProvider] Extracted context value:', contextValue);

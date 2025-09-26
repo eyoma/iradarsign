@@ -24,7 +24,7 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 }: DocumentCompletedEmailTemplateProps) => {
   const branding = useBranding();
 
-  const action = RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned.toLowerCase();
+  const action = String(RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned).toLowerCase();
 
   const previewText = 'Document created from direct template';
 

@@ -39,9 +39,9 @@ const addBrandingToElement = (
     });
 
     return cloneElement(clonedElement, {
-      ...clonedElement.props,
+      ...(clonedElement.props || {}),
       children: processedChildren,
-    });
+    } as React.ReactElement);
   }
 
   return clonedElement;

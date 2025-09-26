@@ -108,64 +108,67 @@ export const createDocument = async ({
   // for uploads from the frontend
   const timezoneToUse = timezone || settings.documentTimezone || userTimezone;
 
-  return await prisma.$transaction(async (tx) => {
-    const document = await tx.document.create({
-      data: {
-        title,
-        qrToken: prefixedId('qr'),
-        externalId,
-        documentDataId,
-        userId,
-        teamId,
-        folderId,
-        visibility:
-          folderVisibility ??
-          determineDocumentVisibility(settings.documentVisibility, team.currentTeamRole),
-        formValues,
-        source: DocumentSource.DOCUMENT,
-        documentMeta: {
-          create: extractDerivedDocumentMeta(settings, {
-            timezone: timezoneToUse,
-          }),
-        },
-      },
-    });
-
-    await tx.documentAuditLog.create({
-      data: createDocumentAuditLogData({
-        type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_CREATED,
-        documentId: document.id,
-        metadata: requestMetadata,
+  return await prisma.$transaction(
+    async (tx) => {
+      const document = await tx.document.create({
         data: {
           title,
-          source: {
-            type: DocumentSource.DOCUMENT,
+          qrToken: prefixedId('qr'),
+          externalId,
+          documentDataId,
+          userId,
+          teamId,
+          folderId,
+          visibility:
+            folderVisibility ??
+            determineDocumentVisibility(settings.documentVisibility, team.currentTeamRole),
+          formValues,
+          source: DocumentSource.DOCUMENT,
+          documentMeta: {
+            create: extractDerivedDocumentMeta(settings, {
+              timezone: timezoneToUse,
+            }),
           },
         },
-      }),
-    });
+      });
 
-    const createdDocument = await tx.document.findFirst({
-      where: {
-        id: document.id,
-      },
-      include: {
-        documentMeta: true,
-        recipients: true,
-      },
-    });
+      await tx.documentAuditLog.create({
+        data: createDocumentAuditLogData({
+          type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_CREATED,
+          documentId: document.id,
+          metadata: requestMetadata,
+          data: {
+            title,
+            source: {
+              type: DocumentSource.DOCUMENT,
+            },
+          },
+        }),
+      });
 
-    if (!createdDocument) {
-      throw new Error('Document not found');
-    }
+      const createdDocument = await tx.document.findFirst({
+        where: {
+          id: document.id,
+        },
+        include: {
+          documentMeta: true,
+          recipients: true,
+        },
+      });
 
-    await triggerWebhook({
-      event: WebhookTriggerEvents.DOCUMENT_CREATED,
-      data: ZWebhookDocumentSchema.parse(mapDocumentToWebhookDocumentPayload(createdDocument)),
-      userId,
-      teamId,
-    });
+      if (!createdDocument) {
+        throw new Error('Document not found');
+      }
 
-    return createdDocument;
-  });
+      await triggerWebhook({
+        event: WebhookTriggerEvents.DOCUMENT_CREATED,
+        data: ZWebhookDocumentSchema.parse(mapDocumentToWebhookDocumentPayload(createdDocument)),
+        userId,
+        teamId,
+      });
+
+      return createdDocument;
+    },
+    { timeout: 15000 },
+  );
 };

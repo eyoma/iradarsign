@@ -174,31 +174,34 @@ export const sendDocument = async ({
     });
   }
 
-  const updatedDocument = await prisma.$transaction(async (tx) => {
-    if (document.status === DocumentStatus.DRAFT) {
-      await tx.documentAuditLog.create({
-        data: createDocumentAuditLogData({
-          type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_SENT,
-          documentId: document.id,
-          metadata: requestMetadata,
-          data: {},
-        }),
-      });
-    }
+  const updatedDocument = await prisma.$transaction(
+    async (tx) => {
+      if (document.status === DocumentStatus.DRAFT) {
+        await tx.documentAuditLog.create({
+          data: createDocumentAuditLogData({
+            type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_SENT,
+            documentId: document.id,
+            metadata: requestMetadata,
+            data: {},
+          }),
+        });
+      }
 
-    return await tx.document.update({
-      where: {
-        id: documentId,
-      },
-      data: {
-        status: DocumentStatus.PENDING,
-      },
-      include: {
-        documentMeta: true,
-        recipients: true,
-      },
-    });
-  });
+      return await tx.document.update({
+        where: {
+          id: documentId,
+        },
+        data: {
+          status: DocumentStatus.PENDING,
+        },
+        include: {
+          documentMeta: true,
+          recipients: true,
+        },
+      });
+    },
+    { timeout: 15000 },
+  );
 
   const isRecipientSigningRequestEmailEnabled = extractDerivedDocumentEmailSettings(
     document.documentMeta,

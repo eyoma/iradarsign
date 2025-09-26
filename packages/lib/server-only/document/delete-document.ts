@@ -161,53 +161,59 @@ const handleDocumentOwnerDelete = async ({
 
   // Soft delete completed documents.
   if (isDocumentCompleted(document.status)) {
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(
+      async (tx) => {
+        await tx.documentAuditLog.create({
+          data: createDocumentAuditLogData({
+            documentId: document.id,
+            type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_DELETED,
+            metadata: requestMetadata,
+            data: {
+              type: 'SOFT',
+            },
+          }),
+        });
+
+        return await tx.document.update({
+          where: {
+            id: document.id,
+          },
+          data: {
+            deletedAt: new Date().toISOString(),
+          },
+        });
+      },
+      { timeout: 15000 },
+    );
+  }
+
+  // Hard delete draft and pending documents.
+  const deletedDocument = await prisma.$transaction(
+    async (tx) => {
+      // Currently redundant since deleting a document will delete the audit logs.
+      // However may be useful if we disassociate audit logs and documents if required.
       await tx.documentAuditLog.create({
         data: createDocumentAuditLogData({
           documentId: document.id,
           type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_DELETED,
           metadata: requestMetadata,
           data: {
-            type: 'SOFT',
+            type: 'HARD',
           },
         }),
       });
 
-      return await tx.document.update({
+      return await tx.document.delete({
         where: {
           id: document.id,
-        },
-        data: {
-          deletedAt: new Date().toISOString(),
+          status: {
+            not: DocumentStatus.COMPLETED,
+          },
         },
       });
-    });
-  }
-
-  // Hard delete draft and pending documents.
-  const deletedDocument = await prisma.$transaction(async (tx) => {
-    // Currently redundant since deleting a document will delete the audit logs.
-    // However may be useful if we disassociate audit logs and documents if required.
-    await tx.documentAuditLog.create({
-      data: createDocumentAuditLogData({
-        documentId: document.id,
-        type: DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_DELETED,
-        metadata: requestMetadata,
-        data: {
-          type: 'HARD',
-        },
-      }),
-    });
-
-    return await tx.document.delete({
-      where: {
-        id: document.id,
-        status: {
-          not: DocumentStatus.COMPLETED,
-        },
-      },
-    });
-  });
+    },
+    { timeout: 15000 },
+  );
 
   const isDocumentDeleteEmailEnabled = extractDerivedDocumentEmailSettings(
     document.documentMeta,
