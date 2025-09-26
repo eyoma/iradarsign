@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { DocumentStatus } from '@prisma/client';
 import { DownloadIcon } from 'lucide-react';
 
@@ -22,8 +19,6 @@ export const DocumentCertificateDownloadButton = ({
   documentStatus,
 }: DocumentCertificateDownloadButtonProps) => {
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const { mutateAsync: downloadCertificate, isPending } =
     trpc.document.downloadCertificate.useMutation();
 
@@ -63,10 +58,10 @@ export const DocumentCertificateDownloadButton = ({
       console.error(error);
 
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(
-          msg`Sorry, we were unable to download the certificate. Please try again later.`,
-        ),
+        title: "Something went wrong",
+        description: 
+          "Sorry, we were unable to download the certificate. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -81,7 +76,7 @@ export const DocumentCertificateDownloadButton = ({
       onClick={() => void onDownloadCertificatesClick()}
     >
       {!isPending && <DownloadIcon className="mr-1.5 h-4 w-4" />}
-      <Trans>Download Certificate</Trans>
+      Download Certificate
     </Button>
   );
 };

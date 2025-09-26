@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { DocumentStatus, OrganisationType, RecipientRole, SigningStatus } from '@prisma/client';
 
 import { mailer } from '@documenso/email/mailer';
@@ -119,28 +118,28 @@ export const resendDocument = async ({
       const selfSigner = email === user.email;
 
       const recipientActionVerb = i18n
-        ._(RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb)
+        .RECIPIENT_ROLES_DESCRIPTION[recipient.role].actionVerb
         .toLowerCase();
 
       let emailMessage = customEmail?.message || '';
-      let emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} this document`);
+      let emailSubject = i18n."Reminder: Please ${recipientActionVerb} this documen";
 
       if (selfSigner) {
-        emailMessage = i18n._(
-          msg`You have initiated the document ${`"${document.title}"`} that requires you to ${recipientActionVerb} it.`,
-        );
-        emailSubject = i18n._(msg`Reminder: Please ${recipientActionVerb} your document`);
+        emailMessage = i18n.
+          msg"You have initiated the document ${""${document.title}"`} that requires you to ${recipientActionVerb} it.`,
+        ;
+        emailSubject = i18n."Reminder: Please ${recipientActionVerb} your documen";
       }
 
       if (organisationType === OrganisationType.ORGANISATION) {
-        emailSubject = i18n._(
-          msg`Reminder: ${document.team.name} invited you to ${recipientActionVerb} a document`,
-        );
+        emailSubject = i18n.
+          msg"Reminder: ${document.team.name} invited you to ${recipientActionVerb} a documen",
+        ;
         emailMessage =
           customEmail?.message ||
-          i18n._(
-            msg`${user.name || user.email} on behalf of "${document.team.name}" has invited you to ${recipientActionVerb} the document "${document.title}".`,
-          );
+          i18n.
+            msg"${user.name || user.email} on behalf of "${document.team.name}" has invited you to ${recipientActionVerb} the document "${document.title}".",
+          ;
       }
 
       const customEmailTemplate = {
@@ -191,7 +190,7 @@ export const resendDocument = async ({
             replyTo: replyToEmail,
             subject: customEmail?.subject
               ? renderCustomEmailTemplate(
-                  i18n._(msg`Reminder: ${customEmail.subject}`),
+                  i18n."Reminder: ${customEmail.subject}",
                   customEmailTemplate,
                 )
               : emailSubject,

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import type { Field } from '@prisma/client';
 import { type Recipient } from '@prisma/client';
 import { useNavigate, useSearchParams } from 'react-router';
@@ -46,7 +44,6 @@ export const DirectTemplatePageView = ({
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { email, fullName, setEmail } = useRequiredDocumentSigningContext();
@@ -55,19 +52,19 @@ export const DirectTemplatePageView = ({
   const [step, setStep] = useState<DirectTemplateStep>('configure');
   const [isDocumentPdfLoaded, setIsDocumentPdfLoaded] = useState(false);
 
-  const recipientActionVerb = _(
+  const recipientActionVerb = 
     RECIPIENT_ROLES_DESCRIPTION[directTemplateRecipient.role].actionVerb,
-  );
+  ;
 
   const directTemplateFlow: Record<DirectTemplateStep, DocumentFlowStep> = {
     configure: {
-      title: msg`General`,
-      description: msg`Preview and configure template.`,
+      title: "General",
+      description: "Preview and configure template.",
       stepIndex: 1,
     },
     sign: {
-      title: msg`${recipientActionVerb} document`,
-      description: msg`${recipientActionVerb} the document to complete the process.`,
+      title: "${recipientActionVerb} documen",
+      description: msg"${recipientActionVerb} the document to complete the process.",
       stepIndex: 2,
     },
   };
@@ -127,10 +124,10 @@ export const DirectTemplatePageView = ({
       }
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(
-          msg`We were unable to submit this document at this time. Please try again later.`,
-        ),
+        title: "Something went wrong",
+        description: 
+          "We were unable to submit this document at this time. Please try again later.",
+        ,
         variant: 'destructive',
       });
 

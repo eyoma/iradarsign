@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
 import type { Document, Recipient } from '@prisma/client';
 import {
@@ -37,7 +34,6 @@ export const DocumentPageViewRecipients = ({
   document,
   documentRootPath,
 }: DocumentPageViewRecipientsProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const recipients = document.recipients;
@@ -46,13 +42,13 @@ export const DocumentPageViewRecipients = ({
     <section className="dark:bg-background border-border bg-widget flex flex-col rounded-xl border">
       <div className="flex flex-row items-center justify-between px-4 py-3">
         <h1 className="text-foreground font-medium">
-          <Trans>Recipients</Trans>
+          Recipients
         </h1>
 
         {!isDocumentCompleted(document.status) && (
           <Link
             to={`${documentRootPath}/${document.id}/edit?step=signers`}
-            title={_(msg`Modify recipients`)}
+            title={"Modify recipients"}
             className="flex flex-row items-center justify-between"
           >
             {recipients.length === 0 ? (
@@ -67,7 +63,7 @@ export const DocumentPageViewRecipients = ({
       <ul className="text-muted-foreground divide-y border-t">
         {recipients.length === 0 && (
           <li className="flex flex-col items-center justify-center py-6 text-sm">
-            <Trans>No recipients</Trans>
+            No recipients
           </li>
         )}
 
@@ -78,7 +74,7 @@ export const DocumentPageViewRecipients = ({
               primaryText={<p className="text-muted-foreground text-sm">{recipient.email}</p>}
               secondaryText={
                 <p className="text-muted-foreground/70 text-xs">
-                  {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
+                  {RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}
                 </p>
               }
             />
@@ -91,19 +87,19 @@ export const DocumentPageViewRecipients = ({
                       .with(RecipientRole.APPROVER, () => (
                         <>
                           <CheckIcon className="mr-1 h-3 w-3" />
-                          <Trans>Approved</Trans>
+                          Approved
                         </>
                       ))
                       .with(RecipientRole.CC, () =>
                         document.status === DocumentStatus.COMPLETED ? (
                           <>
                             <MailIcon className="mr-1 h-3 w-3" />
-                            <Trans>Sent</Trans>
+                            Sent
                           </>
                         ) : (
                           <>
                             <CheckIcon className="mr-1 h-3 w-3" />
-                            <Trans>Ready</Trans>
+                            Ready
                           </>
                         ),
                       )
@@ -111,19 +107,19 @@ export const DocumentPageViewRecipients = ({
                       .with(RecipientRole.SIGNER, () => (
                         <>
                           <SignatureIcon className="mr-1 h-3 w-3" />
-                          <Trans>Signed</Trans>
+                          Signed
                         </>
                       ))
                       .with(RecipientRole.VIEWER, () => (
                         <>
                           <MailOpenIcon className="mr-1 h-3 w-3" />
-                          <Trans>Viewed</Trans>
+                          Viewed
                         </>
                       ))
                       .with(RecipientRole.ASSISTANT, () => (
                         <>
                           <UserIcon className="mr-1 h-3 w-3" />
-                          <Trans>Assisted</Trans>
+                          Assisted
                         </>
                       ))
                       .exhaustive()}
@@ -134,7 +130,7 @@ export const DocumentPageViewRecipients = ({
                 recipient.signingStatus === SigningStatus.NOT_SIGNED && (
                   <Badge variant="secondary">
                     <Clock className="mr-1 h-3 w-3" />
-                    <Trans>Pending</Trans>
+                    Pending
                   </Badge>
                 )}
 
@@ -144,12 +140,12 @@ export const DocumentPageViewRecipients = ({
                     trigger={
                       <Badge variant="destructive">
                         <AlertTriangle className="mr-1 h-3 w-3" />
-                        <Trans>Rejected</Trans>
+                        Rejected
                       </Badge>
                     }
                   >
                     <p className="text-sm">
-                      <Trans>Reason for rejection: </Trans>
+                      Reason for rejection: 
                     </p>
 
                     <p className="text-muted-foreground mt-1 text-sm">
@@ -165,8 +161,8 @@ export const DocumentPageViewRecipients = ({
                     value={formatSigningLink(recipient.token)}
                     onCopySuccess={() => {
                       toast({
-                        title: _(msg`Copied to clipboard`),
-                        description: _(msg`The signing link has been copied to your clipboard.`),
+                        title: "Copied to clipboard",
+                        description: "The signing link has been copied to your clipboard.",
                       });
                     }}
                   />

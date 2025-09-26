@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import type { FieldType } from '@prisma/client';
 import { ChevronLeftIcon } from 'lucide-react';
 import { P, match } from 'ts-pattern';
@@ -107,15 +106,15 @@ export const DocumentSigningAuthDialog = ({
                 >
                   <ChevronLeftIcon className="h-4 w-4" />
                 </Button>
-                <span>{title || <Trans>Sign field</Trans>}</span>
+                <span>{title || Sign field}</span>
               </div>
             )}
             {(!selectedAuthType || validAuthTypes.length === 1) &&
-              (title || <Trans>Sign field</Trans>)}
+              (title || Sign field)}
           </DialogTitle>
 
           <DialogDescription>
-            {description || <Trans>Reauthentication is required to sign this field</Trans>}
+            {description || Reauthentication is required to sign this field}
           </DialogDescription>
         </DialogHeader>
 
@@ -123,7 +122,7 @@ export const DocumentSigningAuthDialog = ({
         {!selectedAuthType && validAuthTypes.length > 1 && (
           <div className="space-y-4">
             <p className="text-muted-foreground text-sm">
-              <Trans>Choose your preferred authentication method:</Trans>
+              Choose your preferred authentication method:
             </p>
             <div className="grid gap-2">
               {validAuthTypes.map((authType) => (
@@ -137,23 +136,23 @@ export const DocumentSigningAuthDialog = ({
                   <div className="text-left">
                     <div className="font-medium">
                       {match(authType)
-                        .with(DocumentAuth.ACCOUNT, () => <Trans>Account</Trans>)
-                        .with(DocumentAuth.PASSKEY, () => <Trans>Passkey</Trans>)
-                        .with(DocumentAuth.TWO_FACTOR_AUTH, () => <Trans>2FA</Trans>)
-                        .with(DocumentAuth.PASSWORD, () => <Trans>Password</Trans>)
+                        .with(DocumentAuth.ACCOUNT, () => Account)
+                        .with(DocumentAuth.PASSKEY, () => Passkey)
+                        .with(DocumentAuth.TWO_FACTOR_AUTH, () => 2FA)
+                        .with(DocumentAuth.PASSWORD, () => Password)
                         .exhaustive()}
                     </div>
 
                     <div className="text-muted-foreground text-sm">
                       {match(authType)
-                        .with(DocumentAuth.ACCOUNT, () => <Trans>Sign in to your account</Trans>)
+                        .with(DocumentAuth.ACCOUNT, () => Sign in to your account)
                         .with(DocumentAuth.PASSKEY, () => (
-                          <Trans>Use your passkey for authentication</Trans>
+                          Use your passkey for authentication
                         ))
                         .with(DocumentAuth.TWO_FACTOR_AUTH, () => (
-                          <Trans>Enter your 2FA code</Trans>
+                          Enter your 2FA code
                         ))
-                        .with(DocumentAuth.PASSWORD, () => <Trans>Enter your password</Trans>)
+                        .with(DocumentAuth.PASSWORD, () => Enter your password)
                         .exhaustive()}
                     </div>
                   </div>

@@ -1,8 +1,5 @@
 import { type ReactNode, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { ErrorCode, type FileRejection, useDropzone } from 'react-dropzone';
 import { useNavigate, useParams } from 'react-router';
@@ -24,7 +21,6 @@ export interface TemplateDropZoneWrapperProps {
 }
 
 export const TemplateDropZoneWrapper = ({ children, className }: TemplateDropZoneWrapperProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { folderId } = useParams();
 
@@ -49,18 +45,18 @@ export const TemplateDropZoneWrapper = ({ children, className }: TemplateDropZon
       });
 
       toast({
-        title: _(msg`Template uploaded`),
-        description: _(
-          msg`Your template has been uploaded successfully. You will be redirected to the template page.`,
-        ),
+        title: "Template uploaded",
+        description: 
+          "Your template has been uploaded successfully. You will be redirected to the template page.",
+        ,
         duration: 5000,
       });
 
-      await navigate(`${formatTemplatesPath(team.url)}/${id}/edit`);
+      await navigate(`${formatTemplatesPath(team.url)}/${id}/edi");
     } catch {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`Please try again later.`),
+        title: msg"Something went wrong`,
+        description: "Please try again later.",
         variant: 'destructive',
       });
     } finally {
@@ -84,15 +80,15 @@ export const TemplateDropZoneWrapper = ({ children, className }: TemplateDropZon
       <span key={index} className="block">
         {match(error.code)
           .with(ErrorCode.FileTooLarge, () => (
-            <Trans>File is larger than {APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB</Trans>
+            File is larger than {APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB
           ))
-          .with(ErrorCode.FileInvalidType, () => <Trans>Only PDF files are allowed</Trans>)
-          .with(ErrorCode.FileTooSmall, () => <Trans>File is too small</Trans>)
+          .with(ErrorCode.FileInvalidType, () => Only PDF files are allowed)
+          .with(ErrorCode.FileTooSmall, () => File is too small)
           .with(ErrorCode.TooManyFiles, () => (
-            <Trans>Only one file can be uploaded at a time</Trans>
+            Only one file can be uploaded at a time
           ))
           .otherwise(() => (
-            <Trans>Unknown error</Trans>
+            Unknown error
           ))}
       </span>
     ));
@@ -100,14 +96,14 @@ export const TemplateDropZoneWrapper = ({ children, className }: TemplateDropZon
     const description = (
       <>
         <span className="font-medium">
-          {file.name} <Trans>couldn't be uploaded:</Trans>
+          {file.name} couldn't be uploaded:
         </span>
         {errorNodes}
       </>
     );
 
     toast({
-      title: _(msg`Upload failed`),
+      title: "Upload failed",
       description,
       duration: 5000,
       variant: 'destructive',
@@ -142,11 +138,11 @@ export const TemplateDropZoneWrapper = ({ children, className }: TemplateDropZon
         <div className="bg-muted/60 fixed left-0 top-0 z-[9999] h-full w-full backdrop-blur-[4px]">
           <div className="pointer-events-none flex h-full w-full flex-col items-center justify-center">
             <h2 className="text-foreground text-2xl font-semibold">
-              <Trans>Upload Template</Trans>
+              Upload Template
             </h2>
 
             <p className="text-muted-foreground text-md mt-4">
-              <Trans>Drag and drop your PDF file here</Trans>
+              Drag and drop your PDF file here
             </p>
           </div>
         </div>
@@ -157,7 +153,7 @@ export const TemplateDropZoneWrapper = ({ children, className }: TemplateDropZon
           <div className="pointer-events-none flex h-1/2 w-full flex-col items-center justify-center">
             <Loader className="text-primary h-12 w-12 animate-spin" />
             <p className="text-foreground mt-8 font-medium">
-              <Trans>Uploading template...</Trans>
+              Uploading template...
             </p>
           </div>
         </div>

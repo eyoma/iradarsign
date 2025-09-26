@@ -1,8 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { DocumentMeta, Recipient, Signature, TemplateMeta } from '@prisma/client';
 import { type DocumentData, type Field, FieldType } from '@prisma/client';
 import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
@@ -63,7 +60,6 @@ export const EmbedDirectTemplateClientPage = ({
   hidePoweredBy = false,
   allowWhiteLabelling = false,
 }: EmbedDirectTemplateClientPageProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [searchParams] = useSearchParams();
@@ -246,10 +242,10 @@ export const EmbedDirectTemplateClientPage = ({
       }
 
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(
-          msg`We were unable to submit this document at this time. Please try again later.`,
-        ),
+        title: "Something went wrong",
+        description: 
+          "We were unable to submit this document at this time. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -344,7 +340,7 @@ export const EmbedDirectTemplateClientPage = ({
             <div>
               <div className="flex items-center justify-between gap-x-2">
                 <h3 className="text-foreground text-xl font-semibold md:text-2xl">
-                  <Trans>Sign document</Trans>
+                  Sign document
                 </h3>
 
                 {isExpanded ? (
@@ -372,7 +368,7 @@ export const EmbedDirectTemplateClientPage = ({
                     loading={isSubmitting}
                     onClick={() => throttledOnCompleteClick()}
                   >
-                    <Trans>Complete</Trans>
+                    Complete
                   </Button>
                 )}
               </div>
@@ -380,7 +376,7 @@ export const EmbedDirectTemplateClientPage = ({
 
             <div className="hidden group-data-[expanded]/document-widget:block md:block">
               <p className="text-muted-foreground mt-2 text-sm">
-                <Trans>Sign the document to complete the process.</Trans>
+                Sign the document to complete the process.
               </p>
 
               <hr className="border-border mb-8 mt-4" />
@@ -391,7 +387,7 @@ export const EmbedDirectTemplateClientPage = ({
               <div className="flex flex-1 flex-col gap-y-4">
                 <div>
                   <Label htmlFor="full-name">
-                    <Trans>Full Name</Trans>
+                    Full Name
                   </Label>
 
                   <Input
@@ -406,7 +402,7 @@ export const EmbedDirectTemplateClientPage = ({
 
                 <div>
                   <Label htmlFor="email">
-                    <Trans>Email</Trans>
+                    Email
                   </Label>
 
                   <Input
@@ -422,7 +418,7 @@ export const EmbedDirectTemplateClientPage = ({
                 {hasSignatureField && (
                   <div>
                     <Label htmlFor="Signature">
-                      <Trans>Signature</Trans>
+                      Signature
                     </Label>
 
                     <SignaturePadDialog
@@ -445,7 +441,7 @@ export const EmbedDirectTemplateClientPage = ({
             <div className="mt-4 hidden w-full grid-cols-2 items-center group-data-[expanded]/document-widget:grid md:grid">
               {pendingFields.length > 0 ? (
                 <Button className="col-start-2" onClick={() => onNextFieldClick()}>
-                  <Trans>Next</Trans>
+                  Next
                 </Button>
               ) : (
                 <Button
@@ -454,7 +450,7 @@ export const EmbedDirectTemplateClientPage = ({
                   loading={isSubmitting}
                   onClick={() => throttledOnCompleteClick()}
                 >
-                  <Trans>Complete</Trans>
+                  Complete
                 </Button>
               )}
             </div>
@@ -466,7 +462,7 @@ export const EmbedDirectTemplateClientPage = ({
         >
           {showPendingFieldTooltip && pendingFields.length > 0 && (
             <FieldToolTip key={pendingFields[0].id} field={pendingFields[0]} color="warning">
-              <Trans>Click to insert field</Trans>
+              Click to insert field
             </FieldToolTip>
           )}
         </ElementVisible>

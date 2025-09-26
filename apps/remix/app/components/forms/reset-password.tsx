@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
@@ -43,7 +40,6 @@ export type ResetPasswordFormProps = {
 export const ResetPasswordForm = ({ className, token }: ResetPasswordFormProps) => {
   const navigate = useNavigate();
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const form = useForm<TResetPasswordFormSchema>({
@@ -68,28 +64,28 @@ export const ResetPasswordForm = ({ className, token }: ResetPasswordFormProps) 
       form.reset();
 
       toast({
-        title: _(msg`Password updated`),
-        description: _(msg`Your password has been updated successfully.`),
+        title: "Password updated",
+        description: "Your password has been updated successfully.",
         duration: 5000,
       });
     } catch (err) {
       const error = AppError.parseError(err);
 
       const errorMessage = match(error.code)
-        .with(AppErrorCode.EXPIRED_CODE, () => msg`Token has expired. Please try again.`)
-        .with('INVALID_TOKEN', () => msg`Invalid token provided. Please try again.`)
+        .with(AppErrorCode.EXPIRED_CODE, () => "Token has expired. Please try again.")
+        .with('INVALID_TOKEN', () => "Invalid token provided. Please try again.")
         .with(
           'SAME_PASSWORD',
-          () => msg`Your new password cannot be the same as your old password.`,
+          () => "Your new password cannot be the same as your old password.",
         )
         .otherwise(
           () =>
-            msg`We encountered an unknown error while attempting to reset your password. Please try again later.`,
+            "We encountered an unknown error while attempting to reset your password. Please try again later.",
         );
 
       toast({
-        title: _(msg`An error occurred`),
-        description: _(errorMessage),
+        title: "An error occurred",
+        description: errorMessage,
         variant: 'destructive',
       });
     }
@@ -108,7 +104,7 @@ export const ResetPasswordForm = ({ className, token }: ResetPasswordFormProps) 
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Password</Trans>
+                  Password
                 </FormLabel>
                 <FormControl>
                   <PasswordInput {...field} />
@@ -124,7 +120,7 @@ export const ResetPasswordForm = ({ className, token }: ResetPasswordFormProps) 
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Repeat Password</Trans>
+                  Repeat Password
                 </FormLabel>
                 <FormControl>
                   <PasswordInput {...field} />
@@ -136,7 +132,7 @@ export const ResetPasswordForm = ({ className, token }: ResetPasswordFormProps) 
         </fieldset>
 
         <Button type="submit" size="lg" loading={isSubmitting}>
-          {isSubmitting ? <Trans>Resetting Password...</Trans> : <Trans>Reset Password</Trans>}
+          {isSubmitting ? Resetting Password... : Reset Password}
         </Button>
       </form>
     </Form>

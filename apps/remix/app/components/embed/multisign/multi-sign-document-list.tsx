@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { ReadStatus, RecipientRole, SigningStatus } from '@prisma/client';
 import { ArrowRight, EyeIcon, XCircle } from 'lucide-react';
 import { match } from 'ts-pattern';
@@ -64,24 +63,24 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
         </div>
 
         <h2 className="mt-12 text-xl font-bold md:text-2xl">
-          <Trans>It looks like we ran into an issue!</Trans>
+          It looks like we ran into an issue!
         </h2>
 
         <p className="text-muted-foreground mt-6">
-          <Trans>
+          
             One of the documents in the current bundle has a signing role that is not compatible
             with the current signing experience.
-          </Trans>
+          
         </p>
 
         <p className="text-muted-foreground mt-2">
-          <Trans>
+          
             Assistants and Copy roles are currently not compatible with the multi-sign experience.
-          </Trans>
+          
         </p>
 
         <p className="text-muted-foreground mt-2">
-          <Trans>Please contact the site owner for further assistance.</Trans>
+          Please contact the site owner for further assistance.
         </p>
       </div>
     );
@@ -90,21 +89,21 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
   return (
     <div className="bg-background mx-auto w-full max-w-lg md:my-12 md:rounded-2xl md:border md:p-8 md:shadow-lg">
       <h2 className="text-foreground mb-1 text-lg font-semibold">
-        <Trans>Sign Documents</Trans>
+        Sign Documents
       </h2>
 
       <p className="text-muted-foreground text-sm">
-        <Trans>
+        
           You have been requested to sign the following documents. Review each document carefully
           and complete the signing process.
-        </Trans>
+        
       </p>
 
       {/* Progress Section */}
       <div className="mt-6">
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground font-medium">
-            <Trans>Progress</Trans>
+            Progress
           </span>
           <span className="text-muted-foreground">
             {completedDocuments.length} of {totalDocuments} completed
@@ -129,17 +128,17 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
             {match(envelope.recipient)
               .with({ signingStatus: SigningStatus.SIGNED }, () => (
                 <Badge size="small" variant="default">
-                  <Trans>Completed</Trans>
+                  Completed
                 </Badge>
               ))
               .with({ signingStatus: SigningStatus.REJECTED }, () => (
                 <Badge size="small" variant="destructive">
-                  <Trans>Rejected</Trans>
+                  Rejected
                 </Badge>
               ))
               .with({ readStatus: ReadStatus.OPENED }, () => (
                 <Badge size="small" variant="neutral">
-                  <Trans>Viewed</Trans>
+                  Viewed
                 </Badge>
               ))
               .otherwise(() => null)}
@@ -151,7 +150,7 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
               onClick={() => handleView(envelope.document)}
             >
               <EyeIcon className="mr-1 h-4 w-4" />
-              <Trans>View</Trans>
+              View
             </Button>
           </div>
         ))}
@@ -161,7 +160,7 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
       {!allDocumentsCompleted && nextDocumentToSign && (
         <div className="mt-6">
           <Button onClick={handleNextDocument} className="w-full" size="lg">
-            <Trans>View next document</Trans>
+            View next document
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
@@ -170,10 +169,10 @@ export function MultiSignDocumentList({ envelopes, onDocumentSelect }: MultiSign
       {allDocumentsCompleted && (
         <Alert className="mt-6 text-center">
           <AlertTitle>
-            <Trans>All documents have been completed!</Trans>
+            All documents have been completed!
           </AlertTitle>
           <AlertDescription>
-            <Trans>Thank you for completing the signing process.</Trans>
+            Thank you for completing the signing process.
           </AlertDescription>
         </Alert>
       )}

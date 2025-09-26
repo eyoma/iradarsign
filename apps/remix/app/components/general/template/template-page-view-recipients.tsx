@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Recipient, Template } from '@prisma/client';
 import { PenIcon, PlusIcon } from 'lucide-react';
 import { Link } from 'react-router';
@@ -21,20 +18,18 @@ export const TemplatePageViewRecipients = ({
   template,
   templateRootPath,
 }: TemplatePageViewRecipientsProps) => {
-  const { _ } = useLingui();
-
   const recipients = template.recipients;
 
   return (
     <section className="dark:bg-background border-border bg-widget flex flex-col rounded-xl border">
       <div className="flex flex-row items-center justify-between px-4 py-3">
         <h1 className="text-foreground font-medium">
-          <Trans>Recipients</Trans>
+          Recipients
         </h1>
 
         <Link
           to={`${templateRootPath}/${template.id}/edit?step=signers`}
-          title={_(msg`Modify recipients`)}
+          title={"Modify recipients"}
           className="flex flex-row items-center justify-between"
         >
           {recipients.length === 0 ? (
@@ -48,7 +43,7 @@ export const TemplatePageViewRecipients = ({
       <ul className="text-muted-foreground divide-y border-t">
         {recipients.length === 0 && (
           <li className="flex flex-col items-center justify-center py-6 text-sm">
-            <Trans>No recipients</Trans>
+            No recipients
           </li>
         )}
 
@@ -69,7 +64,7 @@ export const TemplatePageViewRecipients = ({
               }
               secondaryText={
                 <p className="text-muted-foreground/70 text-xs">
-                  {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
+                  {RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}
                 </p>
               }
             />

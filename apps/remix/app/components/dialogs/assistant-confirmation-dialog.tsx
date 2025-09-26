@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -98,14 +97,14 @@ export function AssistantConfirmationDialog({
             <fieldset disabled={isSubmitting} className="border-none p-0">
               <DialogHeader>
                 <DialogTitle>
-                  <Trans>Complete Document</Trans>
+                  Complete Document
                 </DialogTitle>
                 <DialogDescription>
-                  <Trans>
+                  
                     Are you sure you want to complete the document? This action cannot be undone.
                     Please ensure that you have completed prefilling all relevant fields before
                     proceeding.
-                  </Trans>
+                  
                 </DialogDescription>
               </DialogHeader>
 
@@ -127,7 +126,7 @@ export function AssistantConfirmationDialog({
                           size="sm"
                           onClick={() => setIsEditingNextSigner((prev) => !prev)}
                         >
-                          <Trans>Update Recipient</Trans>
+                          Update Recipient
                         </Button>
                       </div>
                     )}
@@ -140,7 +139,7 @@ export function AssistantConfirmationDialog({
                           render={({ field }) => (
                             <FormItem className="flex-1">
                               <FormLabel>
-                                <Trans>Name</Trans>
+                                Name
                               </FormLabel>
                               <FormControl>
                                 <Input
@@ -161,7 +160,7 @@ export function AssistantConfirmationDialog({
                           render={({ field }) => (
                             <FormItem className="flex-1">
                               <FormLabel>
-                                <Trans>Email</Trans>
+                                Email
                               </FormLabel>
                               <FormControl>
                                 <Input
@@ -185,7 +184,7 @@ export function AssistantConfirmationDialog({
 
               <DialogFooter className="mt-4">
                 <Button type="button" variant="secondary" onClick={onClose} disabled={isSubmitting}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
                 <Button
                   type="button"
@@ -194,7 +193,7 @@ export function AssistantConfirmationDialog({
                   onClick={handleSubmit}
                   loading={isSubmitting}
                 >
-                  {hasUninsertedFields ? <Trans>Proceed</Trans> : <Trans>Continue</Trans>}
+                  {hasUninsertedFields ? Proceed : Continue}
                 </Button>
               </DialogFooter>
             </fieldset>

@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
@@ -36,7 +33,7 @@ export const ZClaimAccountFormSchema = z
     name: z
       .string()
       .trim()
-      .min(1, { message: msg`Please enter a valid name.`.id }),
+      .min(1, { message: "Please enter a valid name.".id }),
     email: z.string().email().min(1),
     password: ZPasswordSchema,
   })
@@ -46,7 +43,7 @@ export const ZClaimAccountFormSchema = z
       return !password.includes(name) && !password.includes(email.split('@')[0]);
     },
     {
-      message: msg`Password should not be common or based on personal information`.id,
+      message: "Password should not be common or based on personal information".id,
       path: ['password'],
     },
   );
@@ -54,7 +51,6 @@ export const ZClaimAccountFormSchema = z
 export type TClaimAccountFormSchema = z.infer<typeof ZClaimAccountFormSchema>;
 
 export const ClaimAccount = ({ defaultName, defaultEmail }: ClaimAccountProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const analytics = useAnalytics();
@@ -73,13 +69,13 @@ export const ClaimAccount = ({ defaultName, defaultEmail }: ClaimAccountProps) =
     try {
       await authClient.emailPassword.signUp({ name, email, password });
 
-      await navigate(`/unverified-account`);
+      await navigate(`/unverified-accoun");
 
       toast({
-        title: _(msg`Registration Successful`),
-        description: _(
-          msg`You have successfully registered. Please verify your account by clicking on the link you received in the email.`,
-        ),
+        title: msg"Registration Successful`,
+        description: 
+          "You have successfully registered. Please verify your account by clicking on the link you received in the email.",
+        ,
         duration: 5000,
       });
 
@@ -93,8 +89,8 @@ export const ClaimAccount = ({ defaultName, defaultEmail }: ClaimAccountProps) =
       const errorMessage = signupErrorMessages[error.code] ?? signupErrorMessages.INVALID_REQUEST;
 
       toast({
-        title: _(msg`An error occurred`),
-        description: _(errorMessage),
+        title: "An error occurred",
+        description: errorMessage,
         variant: 'destructive',
       });
     }
@@ -111,10 +107,10 @@ export const ClaimAccount = ({ defaultName, defaultEmail }: ClaimAccountProps) =
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    <Trans>Name</Trans>
+                    Name
                   </FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder={_(msg`Enter your name`)} />
+                    <Input {...field} placeholder={"Enter your name"} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -126,10 +122,10 @@ export const ClaimAccount = ({ defaultName, defaultEmail }: ClaimAccountProps) =
               render={({ field }) => (
                 <FormItem className="mt-4">
                   <FormLabel>
-                    <Trans>Email address</Trans>
+                    Email address
                   </FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder={_(msg`Enter your email`)} />
+                    <Input {...field} placeholder={"Enter your email"} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,10 +137,10 @@ export const ClaimAccount = ({ defaultName, defaultEmail }: ClaimAccountProps) =
               render={({ field }) => (
                 <FormItem className="mt-4">
                   <FormLabel>
-                    <Trans>Set a password</Trans>
+                    Set a password
                   </FormLabel>
                   <FormControl>
-                    <PasswordInput {...field} placeholder={_(msg`Pick a password`)} />
+                    <PasswordInput {...field} placeholder={"Pick a password"} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -152,7 +148,7 @@ export const ClaimAccount = ({ defaultName, defaultEmail }: ClaimAccountProps) =
             />
 
             <Button type="submit" className="mt-6 w-full" loading={form.formState.isSubmitting}>
-              <Trans>Claim account</Trans>
+              Claim account
             </Button>
           </fieldset>
         </form>

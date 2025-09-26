@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import crypto from 'crypto';
 import { DateTime } from 'luxon';
 
@@ -111,8 +110,8 @@ export const sendOrganisationAccountLinkConfirmationEmail = async ({
     from: DOCUMENSO_INTERNAL_EMAIL,
     subject:
       type === 'create'
-        ? i18n._(msg`Account creation request`)
-        : i18n._(msg`Account linking request`),
+        ? i18n."Account creation reques"
+        : i18n.msg"Account linking request",
     html,
     text,
   });

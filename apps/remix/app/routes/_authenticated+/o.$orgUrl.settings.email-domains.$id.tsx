@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { EditIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -34,8 +31,6 @@ import { SettingsHeader } from '~/components/general/settings-header';
 import type { Route } from './+types/o.$orgUrl.settings.groups.$id';
 
 export default function OrganisationEmailDomainSettingsPage({ params }: Route.ComponentProps) {
-  const { t } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const emailDomainId = params.id;
@@ -53,15 +48,15 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
   const emailColumns = useMemo(() => {
     return [
       {
-        header: t`Name`,
+        header: "Name",
         accessorKey: 'emailName',
       },
       {
-        header: t`Email`,
+        header: "Email",
         accessorKey: 'email',
       },
       {
-        header: t`Actions`,
+        header: "Actions",
         cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -70,7 +65,7 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
               <DropdownMenuLabel>
-                <Trans>Actions</Trans>
+                Actions
               </DropdownMenuLabel>
 
               <OrganisationEmailUpdateDialog
@@ -78,7 +73,7 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
                 trigger={
                   <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <EditIcon className="mr-2 h-4 w-4" />
-                    <Trans>Update</Trans>
+                    Update
                   </DropdownMenuItem>
                 }
               />
@@ -89,7 +84,7 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
                 trigger={
                   <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <Trash2Icon className="mr-2 h-4 w-4" />
-                    <Trans>Remove</Trans>
+                    Remove
                   </DropdownMenuItem>
                 }
               />
@@ -115,16 +110,16 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
         errorCode={404}
         errorCodeMap={{
           404: {
-            heading: msg`Email domain not found`,
-            subHeading: msg`404 Email domain not found`,
-            message: msg`The email domain you are looking for may have been removed, renamed or may have never
-                    existed.`,
+            heading: "Email domain not found",
+            subHeading: "404 Email domain not found",
+            message: "The email domain you are looking for may have been removed, renamed or may have never
+                    existed.",
           },
         }}
         primaryButton={
           <Button asChild>
             <Link to={`/o/${organisation.url}/settings/email-domains`}>
-              <Trans>Go back</Trans>
+              Go back
             </Link>
           </Button>
         }
@@ -138,15 +133,15 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
   return (
     <div>
       <SettingsHeader
-        title={t`Email Domain Settings`}
-        subtitle={t`Manage your email domain settings.`}
+        title={"Email Domain Settings"}
+        subtitle={"Manage your email domain settings."}
       >
         <OrganisationEmailCreateDialog emailDomain={emailDomain} />
       </SettingsHeader>
 
       <div className="mt-4">
         <label className="text-sm font-medium leading-none">
-          <Trans>Emails</Trans>
+          Emails
         </label>
 
         <div className="my-2">
@@ -160,11 +155,11 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
       >
         <div className="mb-4 sm:mb-0">
           <AlertTitle>
-            <Trans>DNS Records</Trans>
+            DNS Records
           </AlertTitle>
 
           <AlertDescription className="mr-2">
-            <Trans>View the DNS records for this email domain</Trans>
+            View the DNS records for this email domain
           </AlertDescription>
         </div>
 
@@ -172,7 +167,7 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
           records={records}
           trigger={
             <Button variant="outline">
-              <Trans>View DNS Records</Trans>
+              View DNS Records
             </Button>
           }
         />
@@ -184,11 +179,11 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
       >
         <div className="mb-4 sm:mb-0">
           <AlertTitle>
-            <Trans>Delete email domain</Trans>
+            Delete email domain
           </AlertTitle>
 
           <AlertDescription className="mr-2">
-            <Trans>This will remove all emails associated with this email domain</Trans>
+            This will remove all emails associated with this email domain
           </AlertDescription>
         </div>
 
@@ -196,8 +191,8 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
           emailDomainId={emailDomainId}
           emailDomain={emailDomain.domain}
           trigger={
-            <Button variant="destructive" title={t`Remove email domain`}>
-              <Trans>Delete Email Domain</Trans>
+            <Button variant="destructive" title={"Remove email domain"}>
+              Delete Email Domain
             </Button>
           }
         />

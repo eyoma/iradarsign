@@ -1,9 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { trpc } from '@documenso/trpc/react';
 import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
 import { AvatarWithText } from '@documenso/ui/primitives/avatar';
@@ -40,15 +36,14 @@ export const TeamMemberDeleteDialog = ({
 }: TeamMemberDeleteDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { mutateAsync: deleteTeamMember, isPending: isDeletingTeamMember } =
     trpc.team.member.delete.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`You have successfully removed this user from the team.`),
+          title: "Success",
+          description: "You have successfully removed this user from the team.",
           duration: 5000,
         });
 
@@ -56,10 +51,10 @@ export const TeamMemberDeleteDialog = ({
       },
       onError: () => {
         toast({
-          title: _(msg`An unknown error occurred`),
-          description: _(
-            msg`We encountered an unknown error while attempting to remove this user. Please try again later.`,
-          ),
+          title: "An unknown error occurred",
+          description: 
+            "We encountered an unknown error while attempting to remove this user. Please try again later.",
+          ,
           variant: 'destructive',
           duration: 10000,
         });
@@ -71,7 +66,7 @@ export const TeamMemberDeleteDialog = ({
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="secondary">
-            <Trans>Remove team member</Trans>
+            Remove team member
           </Button>
         )}
       </DialogTrigger>
@@ -79,23 +74,23 @@ export const TeamMemberDeleteDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to remove the following user from{' '}
               <span className="font-semibold">{teamName}</span>.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
         {isInheritMemberEnabled ? (
           <Alert variant="neutral">
             <AlertDescription>
-              <Trans>
+              
                 You cannot remove members from this team if the inherit member feature is enabled.
-              </Trans>
+              
             </AlertDescription>
           </Alert>
         ) : (
@@ -112,7 +107,7 @@ export const TeamMemberDeleteDialog = ({
         <fieldset disabled={isDeletingTeamMember}>
           <DialogFooter>
             <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-              <Trans>Close</Trans>
+              Close
             </Button>
 
             {!isInheritMemberEnabled && (
@@ -123,7 +118,7 @@ export const TeamMemberDeleteDialog = ({
                 loading={isDeletingTeamMember}
                 onClick={async () => deleteTeamMember({ teamId, memberId })}
               >
-                <Trans>Remove</Trans>
+                Remove
               </Button>
             )}
           </DialogFooter>

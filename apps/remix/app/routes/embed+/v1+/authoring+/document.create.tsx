@@ -1,6 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { useLingui } from '@lingui/react';
 import { useNavigate } from 'react-router';
 
 import { DocumentSignatureType } from '@documenso/lib/constants/document';
@@ -20,8 +19,6 @@ import {
 } from '~/types/embed-authoring-base-schema';
 
 export default function EmbeddingAuthoringDocumentCreatePage() {
-  const { _ } = useLingui();
-
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -51,8 +48,8 @@ export default function EmbeddingAuthoringDocumentCreatePage() {
       if (!configuration || !configuration.documentData) {
         toast({
           variant: 'destructive',
-          title: _('Error'),
-          description: _('Please configure the document first'),
+          title: "Error",
+          description: "Please configure the document first",
         });
 
         return;
@@ -103,8 +100,8 @@ export default function EmbeddingAuthoringDocumentCreatePage() {
       });
 
       toast({
-        title: _('Success'),
-        description: _('Document created successfully'),
+        title: "Success",
+        description: "Document created successfully",
       });
 
       // Send a message to the parent window with the document details
@@ -130,8 +127,8 @@ export default function EmbeddingAuthoringDocumentCreatePage() {
 
       toast({
         variant: 'destructive',
-        title: _('Error'),
-        description: _('Failed to create document'),
+        title: "Error",
+        description: "Failed to create document",
       });
     }
   };

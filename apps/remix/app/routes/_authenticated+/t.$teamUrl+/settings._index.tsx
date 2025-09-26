@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { CheckCircle2, Clock } from 'lucide-react';
 import { P, match } from 'ts-pattern';
 
@@ -50,14 +49,14 @@ export default function TeamsSettingsPage({ loaderData }: Route.ComponentProps) 
         {(team.teamEmail || team.emailVerification) && (
           <Alert className="p-6" variant="neutral">
             <AlertTitle>
-              <Trans>Team email</Trans>
+              Team email
             </AlertTitle>
 
             <AlertDescription className="mr-2">
-              <Trans>
+              
                 You can view documents associated with this email and use this identity when sending
                 documents.
-              </Trans>
+              
             </AlertDescription>
 
             <hr className="border-border/50 mt-2" />
@@ -90,7 +89,7 @@ export default function TeamsSettingsPage({ loaderData }: Route.ComponentProps) 
                     .with({ teamEmail: P.not(null) }, () => (
                       <>
                         <CheckCircle2 className="mr-1.5 text-green-500 dark:text-green-300" />
-                        <Trans>Active</Trans>
+                        Active
                       </>
                     ))
                     .with(
@@ -103,14 +102,14 @@ export default function TeamsSettingsPage({ loaderData }: Route.ComponentProps) 
                       () => (
                         <>
                           <Clock className="mr-1.5 text-yellow-500 dark:text-yellow-200" />
-                          <Trans>Expired</Trans>
+                          Expired
                         </>
                       ),
                     )
                     .with({ emailVerification: P.not(null) }, () => (
                       <>
                         <Clock className="mr-1.5 text-blue-600 dark:text-blue-300" />
-                        <Trans>Awaiting email confirmation</Trans>
+                        Awaiting email confirmation
                       </>
                     ))
                     .otherwise(() => null)}
@@ -129,7 +128,7 @@ export default function TeamsSettingsPage({ loaderData }: Route.ComponentProps) 
           >
             <div className="mb-4 sm:mb-0">
               <AlertTitle>
-                <Trans>Team email</Trans>
+                Team email
               </AlertTitle>
 
               <AlertDescription className="mr-2">
@@ -139,7 +138,7 @@ export default function TeamsSettingsPage({ loaderData }: Route.ComponentProps) 
                   {/* <li>View documents associated with this email</li> */}
 
                   <span>
-                    <Trans>View documents associated with this email</Trans>
+                    View documents associated with this email
                   </span>
                 </ul>
               </AlertDescription>
@@ -156,14 +155,14 @@ export default function TeamsSettingsPage({ loaderData }: Route.ComponentProps) 
           >
             <div className="mb-4 sm:mb-0">
               <AlertTitle>
-                <Trans>Delete team</Trans>
+                Delete team
               </AlertTitle>
 
               <AlertDescription className="mr-2">
-                <Trans>
+                
                   This team, and any associated data excluding billing invoices will be permanently
                   deleted.
-                </Trans>
+                
               </AlertDescription>
             </div>
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import type { DocumentData } from '@prisma/client';
 import { DateTime } from 'luxon';
 
@@ -59,21 +58,21 @@ export const DocumentCertificateQRView = ({
           <DialogContent>
             <DialogHeader>
               <DialogTitle>
-                <Trans>Document found in your account</Trans>
+                Document found in your account
               </DialogTitle>
 
               <DialogDescription>
-                <Trans>
+                
                   This document is available in your iRadar account. You can view more details,
                   recipients, and audit logs there.
-                </Trans>
+                
               </DialogDescription>
             </DialogHeader>
 
             <DialogFooter className="flex flex-row justify-end gap-2">
               <Button asChild>
                 <a href={documentUrl} target="_blank" rel="noopener noreferrer">
-                  <Trans>Go to document</Trans>
+                  Go to document
                 </a>
               </Button>
             </DialogFooter>
@@ -86,11 +85,11 @@ export const DocumentCertificateQRView = ({
           <h1 className="text-xl font-medium">{title}</h1>
           <div className="text-muted-foreground flex flex-col gap-0.5 text-sm">
             <p>
-              <Trans>{recipientCount} recipients</Trans>
+              {recipientCount} recipients
             </p>
 
             <p>
-              <Trans>Completed on {formattedDate}</Trans>
+              Completed on {formattedDate}
             </p>
           </div>
         </div>

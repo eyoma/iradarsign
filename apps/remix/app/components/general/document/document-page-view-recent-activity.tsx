@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { AlertTriangle, CheckCheckIcon, CheckIcon, Loader, MailOpen } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { match } from 'ts-pattern';
@@ -22,8 +19,6 @@ export const DocumentPageViewRecentActivity = ({
   documentId,
   userId,
 }: DocumentPageViewRecentActivityProps) => {
-  const { _ } = useLingui();
-
   const {
     data,
     isLoading,
@@ -51,7 +46,7 @@ export const DocumentPageViewRecentActivity = ({
     <section className="dark:bg-background border-border bg-widget flex flex-col rounded-xl border">
       <div className="flex flex-row items-center justify-between border-b px-4 py-3">
         <h1 className="text-foreground font-medium">
-          <Trans>Recent activity</Trans>
+          Recent activity
         </h1>
 
         {/* Can add dropdown menu here for additional options. */}
@@ -66,13 +61,13 @@ export const DocumentPageViewRecentActivity = ({
       {isLoadingError && (
         <div className="flex h-full flex-col items-center justify-center py-16">
           <p className="text-foreground/80 text-sm">
-            <Trans>Unable to load document history</Trans>
+            Unable to load document history
           </p>
           <button
             onClick={async () => refetch()}
             className="text-foreground/70 hover:text-muted-foreground mt-2 text-sm"
           >
-            <Trans>Click here to retry</Trans>
+            Click here to retry
           </button>
         </div>
       )}
@@ -94,7 +89,7 @@ export const DocumentPageViewRecentActivity = ({
                   onClick={async () => fetchNextPage()}
                   className="text-foreground/70 hover:text-muted-foreground text-xs"
                 >
-                  {isFetchingNextPage ? _(msg`Loading...`) : _(msg`Load older activity`)}
+                  {isFetchingNextPage ? "Loading..." : "Load older activity"}
                 </button>
               </li>
             )}
@@ -102,7 +97,7 @@ export const DocumentPageViewRecentActivity = ({
             {documentAuditLogs.length === 0 && (
               <div className="flex items-center justify-center py-4">
                 <p className="text-muted-foreground/70 text-sm">
-                  <Trans>No recent activity</Trans>
+                  No recent activity
                 </p>
               </div>
             )}

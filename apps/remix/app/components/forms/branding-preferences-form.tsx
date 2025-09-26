@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type { TeamGlobalSettings } from '@prisma/client';
 import { Loader } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -66,8 +64,6 @@ export function BrandingPreferencesForm({
   onFormSubmit,
   context,
 }: BrandingPreferencesFormProps) {
-  const { t } = useLingui();
-
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [hasLoadedPreview, setHasLoadedPreview] = useState(false);
 
@@ -121,7 +117,7 @@ export function BrandingPreferencesForm({
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>
-                  <Trans>Enable Custom Branding</Trans>
+                  Enable Custom Branding
                 </FormLabel>
 
                 <FormControl>
@@ -141,16 +137,16 @@ export function BrandingPreferencesForm({
 
                     <SelectContent className="z-[9999]">
                       <SelectItem value="true">
-                        <Trans>Yes</Trans>
+                        Yes
                       </SelectItem>
 
                       <SelectItem value="false">
-                        <Trans>No</Trans>
+                        No
                       </SelectItem>
 
                       {canInherit && (
                         <SelectItem value={'-1'}>
-                          <Trans>Inherit from organisation</Trans>
+                          Inherit from organisation
                         </SelectItem>
                       )}
                     </SelectContent>
@@ -159,9 +155,9 @@ export function BrandingPreferencesForm({
 
                 <FormDescription>
                   {context === 'Team' ? (
-                    <Trans>Enable custom branding for all documents in this team</Trans>
+                    Enable custom branding for all documents in this team
                   ) : (
-                    <Trans>Enable custom branding for all documents in this organisation</Trans>
+                    Enable custom branding for all documents in this organisation
                   )}
                 </FormDescription>
               </FormItem>
@@ -177,7 +173,7 @@ export function BrandingPreferencesForm({
               render={({ field: { value: _value, onChange, ...field } }) => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    <Trans>Branding Logo</Trans>
+                    Branding Logo
                   </FormLabel>
 
                   <div className="flex flex-col gap-4">
@@ -190,7 +186,7 @@ export function BrandingPreferencesForm({
                         />
                       ) : (
                         <div className="bg-muted/20 dark:bg-muted text-muted-foreground relative flex h-full w-full items-center justify-center text-sm">
-                          <Trans>Please upload a logo</Trans>
+                          Please upload a logo
 
                           {!hasLoadedPreview && (
                             <div className="bg-muted dark:bg-muted absolute inset-0 z-[999] flex items-center justify-center">
@@ -245,18 +241,18 @@ export function BrandingPreferencesForm({
                             onChange(null);
                           }}
                         >
-                          <Trans>Remove</Trans>
+                          Remove
                         </Button>
                       </div>
                     </div>
 
                     <FormDescription>
-                      <Trans>Upload your brand logo (max 5MB, JPG, PNG, or WebP)</Trans>
+                      Upload your brand logo (max 5MB, JPG, PNG, or WebP)
 
                       {canInherit && (
                         <span>
                           {'. '}
-                          <Trans>Leave blank to inherit from the organisation.</Trans>
+                          Leave blank to inherit from the organisation.
                         </span>
                       )}
                     </FormDescription>
@@ -271,7 +267,7 @@ export function BrandingPreferencesForm({
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    <Trans>Brand Website</Trans>
+                    Brand Website
                   </FormLabel>
 
                   <FormControl>
@@ -284,12 +280,12 @@ export function BrandingPreferencesForm({
                   </FormControl>
 
                   <FormDescription>
-                    <Trans>Your brand website URL</Trans>
+                    Your brand website URL
 
                     {canInherit && (
                       <span>
                         {'. '}
-                        <Trans>Leave blank to inherit from the organisation.</Trans>
+                        Leave blank to inherit from the organisation.
                       </span>
                     )}
                   </FormDescription>
@@ -303,12 +299,12 @@ export function BrandingPreferencesForm({
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    <Trans>Brand Details</Trans>
+                    Brand Details
                   </FormLabel>
 
                   <FormControl>
                     <Textarea
-                      placeholder={t`Enter your brand details`}
+                      placeholder={"Enter your brand details"}
                       className="min-h-[100px] resize-y"
                       disabled={!isBrandingEnabled}
                       {...field}
@@ -316,12 +312,12 @@ export function BrandingPreferencesForm({
                   </FormControl>
 
                   <FormDescription>
-                    <Trans>Additional brand information to display at the bottom of emails</Trans>
+                    Additional brand information to display at the bottom of emails
 
                     {canInherit && (
                       <span>
                         {'. '}
-                        <Trans>Leave blank to inherit from the organisation.</Trans>
+                        Leave blank to inherit from the organisation.
                       </span>
                     )}
                   </FormDescription>
@@ -332,7 +328,7 @@ export function BrandingPreferencesForm({
 
           <div className="flex flex-row justify-end space-x-4">
             <Button type="submit" loading={form.formState.isSubmitting}>
-              <Trans>Update</Trans>
+              Update
             </Button>
           </div>
         </fieldset>

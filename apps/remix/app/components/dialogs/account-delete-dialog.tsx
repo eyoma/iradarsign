@@ -1,9 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { authClient } from '@documenso/auth/client';
 import { useSession } from '@documenso/lib/client-only/providers/session';
 import { trpc } from '@documenso/trpc/react';
@@ -29,7 +25,6 @@ export type AccountDeleteDialogProps = {
 export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => {
   const { user } = useSession();
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const hasTwoFactorAuthentication = user.twoFactorEnabled;
@@ -44,19 +39,19 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
       await deleteAccount();
 
       toast({
-        title: _(msg`Account deleted`),
-        description: _(msg`Your account has been deleted successfully.`),
+        title: "Account deleted",
+        description: "Your account has been deleted successfully.",
         duration: 5000,
       });
 
       return await authClient.signOut();
     } catch (err) {
       toast({
-        title: _(msg`An unknown error occurred`),
+        title: "An unknown error occurred",
         variant: 'destructive',
-        description: _(
-          msg`We encountered an unknown error while attempting to delete your account. Please try again later.`,
-        ),
+        description: 
+          "We encountered an unknown error while attempting to delete your account. Please try again later.",
+        ,
       });
     }
   };
@@ -69,13 +64,13 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
       >
         <div>
           <AlertTitle>
-            <Trans>Delete Account</Trans>
+            Delete Account
           </AlertTitle>
           <AlertDescription className="mr-2">
-            <Trans>
+            
               Delete your account and all its contents, including completed documents. This action
               is irreversible and will cancel your subscription, so proceed with caution.
-            </Trans>
+            
           </AlertDescription>
         </div>
 
@@ -83,47 +78,47 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
           <Dialog onOpenChange={() => setEnteredEmail('')}>
             <DialogTrigger asChild>
               <Button variant="destructive">
-                <Trans>Delete Account</Trans>
+                Delete Account
               </Button>
             </DialogTrigger>
 
             <DialogContent>
               <DialogHeader className="space-y-4">
                 <DialogTitle>
-                  <Trans>Delete Account</Trans>
+                  Delete Account
                 </DialogTitle>
 
                 <Alert variant="destructive">
                   <AlertDescription className="selection:bg-red-100">
-                    <Trans>This action is not reversible. Please be certain.</Trans>
+                    This action is not reversible. Please be certain.
                   </AlertDescription>
                 </Alert>
 
                 {hasTwoFactorAuthentication && (
                   <Alert variant="destructive">
                     <AlertDescription className="selection:bg-red-100">
-                      <Trans>Disable Two Factor Authentication before deleting your account.</Trans>
+                      Disable Two Factor Authentication before deleting your account.
                     </AlertDescription>
                   </Alert>
                 )}
 
                 <DialogDescription>
-                  <Trans>
+                  
                     iRadar will delete <span className="font-semibold">all of your documents</span>,
                     along with all of your completed documents, signatures, and all other resources
                     belonging to your Account.
-                  </Trans>
+                  
                 </DialogDescription>
               </DialogHeader>
 
               {!hasTwoFactorAuthentication && (
                 <div>
                   <Label>
-                    <Trans>
+                    
                       Please type{' '}
                       <span className="text-muted-foreground font-semibold">{user.email}</span> to
                       confirm.
-                    </Trans>
+                    
                   </Label>
 
                   <Input
@@ -142,7 +137,7 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
                   variant="destructive"
                   disabled={hasTwoFactorAuthentication || enteredEmail !== user.email}
                 >
-                  {isDeletingAccount ? _(msg`Deleting account...`) : _(msg`Confirm Deletion`)}
+                  {isDeletingAccount ? "Deleting account..." : "Confirm Deletion"}
                 </Button>
               </DialogFooter>
             </DialogContent>

@@ -1,6 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { useLingui } from '@lingui/react';
 import { useNavigate } from 'react-router';
 
 import { putPdfFile } from '@documenso/lib/universal/upload/put-file';
@@ -19,7 +18,6 @@ import {
 } from '~/types/embed-authoring-base-schema';
 
 export default function EmbeddingAuthoringTemplateCreatePage() {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -49,8 +47,8 @@ export default function EmbeddingAuthoringTemplateCreatePage() {
       if (!configuration || !configuration.documentData) {
         toast({
           variant: 'destructive',
-          title: _('Error'),
-          description: _('Please configure the template first'),
+          title: "Error",
+          description: "Please configure the template first",
         });
 
         return;
@@ -93,8 +91,8 @@ export default function EmbeddingAuthoringTemplateCreatePage() {
       });
 
       toast({
-        title: _('Success'),
-        description: _('Template created successfully'),
+        title: "Success",
+        description: "Template created successfully",
       });
 
       // Send a message to the parent window with the template details
@@ -120,8 +118,8 @@ export default function EmbeddingAuthoringTemplateCreatePage() {
 
       toast({
         variant: 'destructive',
-        title: _('Error'),
-        description: _('Failed to create template'),
+        title: "Error",
+        description: "Failed to create template",
       });
     }
   };

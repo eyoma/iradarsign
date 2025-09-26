@@ -53,8 +53,8 @@ test.describe('Unauthorized Access - Document API V2', () => {
   test('should block unauthorized access to document list endpoint', async ({ request }) => {
     await seedCompletedDocument(userA, teamA.id, ['test@example.com']);
 
-    const res = await request.get(`${WEBAPP_BASE_URL}/api/v2-beta/document`, {
-      headers: { Authorization: `Bearer ${tokenB}` },
+    const res = await request.get(`${WEBAPP_BASE_URL}/api/v2-beta/documen", {
+      headers: { Authorization: "Bearer ${tokenB}` },
     });
 
     expect(res.ok()).toBeTruthy();

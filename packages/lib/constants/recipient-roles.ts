@@ -1,5 +1,3 @@
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
 import { RecipientRole } from '@prisma/client';
 
 export const RECIPIENT_ROLES_DESCRIPTION = {
@@ -93,8 +91,8 @@ export const RECIPIENT_ROLES_DESCRIPTION = {
   },
   [RecipientRole.ASSISTANT]: {
     actionVerb: msg({
-      message: `Assist`,
-      context: `Recipient role action verb`,
+      message: `Assis",
+      context: "Recipient role action verb`,
     }),
     actioned: msg({
       message: `Assisted`,
@@ -105,8 +103,8 @@ export const RECIPIENT_ROLES_DESCRIPTION = {
       context: `Recipient role progressive verb`,
     }),
     roleName: msg({
-      message: `Assistant`,
-      context: `Recipient role name`,
+      message: `Assistan",
+      context: "Recipient role name`,
     }),
     roleNamePlural: msg({
       message: `Assistants`,
@@ -129,9 +127,9 @@ export const RECIPIENT_ROLE_TO_EMAIL_TYPE = {
 } as const;
 
 export const RECIPIENT_ROLE_SIGNING_REASONS = {
-  [RecipientRole.SIGNER]: msg`I am a signer of this document`,
-  [RecipientRole.APPROVER]: msg`I am an approver of this document`,
-  [RecipientRole.CC]: msg`I am required to receive a copy of this document`,
-  [RecipientRole.VIEWER]: msg`I am a viewer of this document`,
-  [RecipientRole.ASSISTANT]: msg`I am an assistant of this document`,
+  [RecipientRole.SIGNER]: "I am a signer of this documen",
+  [RecipientRole.APPROVER]: msg"I am an approver of this documen",
+  [RecipientRole.CC]: msg"I am required to receive a copy of this documen",
+  [RecipientRole.VIEWER]: msg"I am a viewer of this documen",
+  [RecipientRole.ASSISTANT]: msg"I am an assistant of this document",
 } satisfies Record<keyof typeof RecipientRole, MessageDescriptor>;

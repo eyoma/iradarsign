@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useRevalidator } from 'react-router';
 import { match } from 'ts-pattern';
 
@@ -32,7 +29,6 @@ export const AdminUserResetTwoFactorDialog = ({
   className,
   user,
 }: AdminUserResetTwoFactorDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
   const [email, setEmail] = useState('');
@@ -48,8 +44,8 @@ export const AdminUserResetTwoFactorDialog = ({
       });
 
       toast({
-        title: _(msg`2FA Reset`),
-        description: _(msg`The user's two factor authentication has been reset successfully.`),
+        title: "2FA Rese",
+        description: msg"The user's two factor authentication has been reset successfully.",
         duration: 5000,
       });
 
@@ -59,18 +55,18 @@ export const AdminUserResetTwoFactorDialog = ({
       const error = AppError.parseError(err);
 
       const errorMessage = match(error.code)
-        .with(AppErrorCode.NOT_FOUND, () => msg`User not found.`)
+        .with(AppErrorCode.NOT_FOUND, () => "User not found.")
         .with(
           AppErrorCode.UNAUTHORIZED,
-          () => msg`You are not authorized to reset two factor authentcation for this user.`,
+          () => "You are not authorized to reset two factor authentcation for this user.",
         )
         .otherwise(
-          () => msg`An error occurred while resetting two factor authentication for the user.`,
+          () => "An error occurred while resetting two factor authentication for the user.",
         );
 
       toast({
-        title: _(msg`Error`),
-        description: _(errorMessage),
+        title: "Error",
+        description: errorMessage,
         variant: 'destructive',
         duration: 7500,
       });
@@ -94,10 +90,10 @@ export const AdminUserResetTwoFactorDialog = ({
         <div>
           <AlertTitle>Reset Two Factor Authentication</AlertTitle>
           <AlertDescription className="mr-2">
-            <Trans>
+            
               Reset the users two factor authentication. This action is irreversible and will
               disable two factor authentication for the user.
-            </Trans>
+            
           </AlertDescription>
         </div>
 
@@ -105,31 +101,31 @@ export const AdminUserResetTwoFactorDialog = ({
           <Dialog open={open} onOpenChange={handleOpenChange}>
             <DialogTrigger asChild>
               <Button variant="destructive">
-                <Trans>Reset 2FA</Trans>
+                Reset 2FA
               </Button>
             </DialogTrigger>
 
             <DialogContent>
               <DialogHeader className="space-y-4">
                 <DialogTitle>
-                  <Trans>Reset Two Factor Authentication</Trans>
+                  Reset Two Factor Authentication
                 </DialogTitle>
               </DialogHeader>
 
               <Alert variant="destructive">
                 <AlertDescription className="selection:bg-red-100">
-                  <Trans>
+                  
                     This action is irreversible. Please ensure you have informed the user before
                     proceeding.
-                  </Trans>
+                  
                 </AlertDescription>
               </Alert>
 
               <div>
                 <DialogDescription>
-                  <Trans>
+                  
                     To confirm, please enter the accounts email address <br />({user.email}).
-                  </Trans>
+                  
                 </DialogDescription>
 
                 <Input
@@ -147,7 +143,7 @@ export const AdminUserResetTwoFactorDialog = ({
                   onClick={onResetTwoFactor}
                   loading={isResettingTwoFactor}
                 >
-                  <Trans>Reset 2FA</Trans>
+                  Reset 2FA
                 </Button>
               </DialogFooter>
             </DialogContent>

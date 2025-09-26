@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useSearchParams } from 'react-router';
 import { Link } from 'react-router';
 
@@ -23,8 +20,6 @@ import { TableCell } from '@documenso/ui/primitives/table';
 import { TeamDeleteDialog } from '../dialogs/team-delete-dialog';
 
 export const OrganisationTeamsTable = () => {
-  const { _, i18n } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
   const organisation = useCurrentOrganisation();
@@ -55,7 +50,7 @@ export const OrganisationTeamsTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Team`),
+        header: "Team",
         accessorKey: 'name',
         cell: ({ row }) => (
           <Link to={`/t/${row.original.url}`} preventScrollReset={true}>
@@ -72,7 +67,7 @@ export const OrganisationTeamsTable = () => {
         ),
       },
       {
-        header: _(msg`Created`),
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt),
       },
@@ -82,7 +77,7 @@ export const OrganisationTeamsTable = () => {
           <div className="flex justify-end space-x-2">
             <Button variant="outline" asChild>
               <Link to={`/t/${row.original.url}/settings`}>
-                <Trans>Manage</Trans>
+                Manage
               </Link>
             </Button>
 
@@ -91,7 +86,7 @@ export const OrganisationTeamsTable = () => {
               teamName={row.original.name}
               trigger={
                 <Button variant="destructive" onSelect={(e) => e.preventDefault()}>
-                  <Trans>Delete</Trans>
+                  Delete
                 </Button>
               }
             />

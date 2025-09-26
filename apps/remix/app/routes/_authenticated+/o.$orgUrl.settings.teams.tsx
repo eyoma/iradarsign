@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
 import { useSearchParams } from 'react-router';
 import { useLocation } from 'react-router';
 
@@ -12,8 +11,6 @@ import { SettingsHeader } from '~/components/general/settings-header';
 import { OrganisationTeamsTable } from '~/components/tables/organisation-teams-table';
 
 export default function OrganisationSettingsTeamsPage() {
-  const { t } = useLingui();
-
   const [searchParams, setSearchParams] = useSearchParams();
   const { pathname } = useLocation();
 
@@ -38,14 +35,14 @@ export default function OrganisationSettingsTeamsPage() {
 
   return (
     <div>
-      <SettingsHeader title={t`Teams`} subtitle={t`Manage the teams in this organisation.`}>
+      <SettingsHeader title={"Teams"} subtitle={"Manage the teams in this organisation."}>
         <TeamCreateDialog />
       </SettingsHeader>
 
       <Input
         defaultValue={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder={t`Search`}
+        placeholder={"Search"}
         className="mb-4"
       />
 

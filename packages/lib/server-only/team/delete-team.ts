@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { OrganisationGroupType, type Team } from '@prisma/client';
 import { uniqueBy } from 'remeda';
 
@@ -147,7 +146,7 @@ export const sendTeamDeleteEmail = async ({
   await mailer.sendMail({
     to: email,
     from: senderEmail,
-    subject: i18n._(msg`Team "${team.name}" has been deleted on Documenso`),
+    subject: i18n."Team "${team.name}" has been deleted on Documenso",
     html,
     text,
   });

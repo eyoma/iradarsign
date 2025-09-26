@@ -1,4 +1,3 @@
-import { Trans, useLingui } from '@lingui/react/macro';
 import { OrganisationGroupType, OrganisationMemberRole, TeamMemberRole } from '@prisma/client';
 
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
@@ -23,19 +22,17 @@ export const TeamMemberInheritEnableDialog = () => {
   const team = useCurrentTeam();
 
   const { toast } = useToast();
-  const { t } = useLingui();
-
   const { mutateAsync: createTeamGroups, isPending } = trpc.team.group.createMany.useMutation({
     onSuccess: () => {
       toast({
-        title: t`Access enabled`,
+        title: "Access enabled",
         duration: 5000,
       });
     },
     onError: () => {
       toast({
-        title: t`Something went wrong`,
-        description: t`We encountered an unknown error while attempting to enable access.`,
+        title: "Something went wrong",
+        description: "We encountered an unknown error while attempting to enable access.",
         variant: 'destructive',
         duration: 5000,
       });
@@ -69,28 +66,28 @@ export const TeamMemberInheritEnableDialog = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <Trans>Enable access</Trans>
+          Enable access
         </Button>
       </DialogTrigger>
 
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to give all organisation members access to this team under their
               organisation role.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
           </DialogClose>
 
@@ -100,7 +97,7 @@ export const TeamMemberInheritEnableDialog = () => {
             loading={isPending}
             onClick={enableAccessGroup}
           >
-            <Trans>Enable</Trans>
+            Enable
           </Button>
         </DialogFooter>
       </DialogContent>

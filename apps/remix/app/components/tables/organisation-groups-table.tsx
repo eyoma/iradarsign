@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationGroupType } from '@prisma/client';
 import { Link, useSearchParams } from 'react-router';
 
@@ -21,8 +18,6 @@ import { TableCell } from '@documenso/ui/primitives/table';
 import { OrganisationGroupDeleteDialog } from '../dialogs/organisation-group-delete-dialog';
 
 export const OrganisationGroupsDataTable = () => {
-  const { _ } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
   const organisation = useCurrentOrganisation();
@@ -59,26 +54,26 @@ export const OrganisationGroupsDataTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Group`),
+        header: "Group",
         accessorKey: 'name',
       },
       {
-        header: _(msg`Role`),
+        header: "Role",
         accessorKey: 'organisationRole',
-        cell: ({ row }) => _(EXTENDED_ORGANISATION_MEMBER_ROLE_MAP[row.original.organisationRole]),
+        cell: ({ row }) => EXTENDED_ORGANISATION_MEMBER_ROLE_MAP[row.original.organisationRole],
       },
       {
-        header: _(msg`Members`),
+        header: "Members",
         accessorKey: 'members',
         cell: ({ row }) => row.original.members.length,
       },
       {
-        header: _(msg`Assigned Teams`),
+        header: "Assigned Teams",
         accessorKey: 'teams',
         cell: ({ row }) => row.original.teams.length,
       },
       {
-        header: _(msg`Actions`),
+        header: "Actions",
         cell: ({ row }) => (
           <div className="flex justify-end space-x-2">
             <Button asChild variant="outline">
@@ -89,8 +84,8 @@ export const OrganisationGroupsDataTable = () => {
               organisationGroupId={row.original.id}
               organisationGroupName={row.original.name ?? ''}
               trigger={
-                <Button variant="destructive" title={_(msg`Remove organisation group`)}>
-                  <Trans>Delete</Trans>
+                <Button variant="destructive" title={"Remove organisation group"}>
+                  Delete
                 </Button>
               }
             />

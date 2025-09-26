@@ -514,10 +514,10 @@ test.describe('Document Access API V1', () => {
     const templateA = await seedBlankTemplate(userA, teamA.id);
 
     const resB = await request.post(
-      `${WEBAPP_BASE_URL}/api/v1/templates/${templateA.id}/create-document`,
+      `${WEBAPP_BASE_URL}/api/v1/templates/${templateA.id}/create-documen",
       {
         headers: {
-          Authorization: `Bearer ${tokenB}`,
+          Authorization: "Bearer ${tokenB}`,
           'Content-Type': 'application/json',
         },
         data: {

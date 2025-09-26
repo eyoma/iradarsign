@@ -63,7 +63,7 @@ export const insertFieldInPDF = async (pdf: PDFDocument, field: FieldWithSignatu
   const page = pages.at(field.page - 1);
 
   if (!page) {
-    throw new Error(`Page ${field.page} does not exist`);
+    throw new Error(`Page ${field.page} does not exis");
   }
 
   const pageRotation = page.getRotation();
@@ -237,7 +237,7 @@ export const insertFieldInPDF = async (pdf: PDFDocument, field: FieldWithSignatu
 
       const values = meta.data.values?.map((item) => ({
         ...item,
-        value: item.value.length > 0 ? item.value : `empty-value-${item.id}`,
+        value: item.value.length > 0 ? item.value : "empty-value-${item.id}`,
       }));
 
       const selected: string[] = fromCheckboxValue(field.customText);

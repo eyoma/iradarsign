@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
 import { isTokenExpired } from '@documenso/lib/utils/token-verification';
@@ -95,19 +94,19 @@ export default function VerifyTeamEmailPage({ loaderData }: Route.ComponentProps
       <div className="w-screen max-w-lg px-4">
         <div className="w-full">
           <h1 className="text-4xl font-semibold">
-            <Trans>Invalid link</Trans>
+            Invalid link
           </h1>
 
           <p className="text-muted-foreground mb-4 mt-2 text-sm">
-            <Trans>
+            
               This link is invalid or has expired. Please contact your team to resend a
               verification.
-            </Trans>
+            
           </p>
 
           <Button asChild>
             <Link to="/">
-              <Trans>Return</Trans>
+              Return
             </Link>
           </Button>
         </div>
@@ -119,18 +118,16 @@ export default function VerifyTeamEmailPage({ loaderData }: Route.ComponentProps
     return (
       <div>
         <h1 className="text-4xl font-semibold">
-          <Trans>Team email already verified!</Trans>
+          Team email already verified!
         </h1>
 
         <p className="text-muted-foreground mb-4 mt-2 text-sm">
-          <Trans>
-            You have already verified your email address for <strong>{data.teamName}</strong>.
-          </Trans>
+          You have already verified your email address for <strong>{data.teamName}</strong>.
         </p>
 
         <Button asChild>
           <Link to="/">
-            <Trans>Continue</Trans>
+            Continue
           </Link>
         </Button>
       </div>
@@ -141,14 +138,12 @@ export default function VerifyTeamEmailPage({ loaderData }: Route.ComponentProps
     return (
       <div>
         <h1 className="text-4xl font-semibold">
-          <Trans>Team email verification</Trans>
+          Team email verification
         </h1>
 
         <p className="text-muted-foreground mt-2 text-sm">
-          <Trans>
-            Something went wrong while attempting to verify your email address for{' '}
-            <strong>{data.teamName}</strong>. Please try again later.
-          </Trans>
+          Something went wrong while attempting to verify your email address for{' '}
+          <strong>{data.teamName}</strong>. Please try again later.
         </p>
       </div>
     );
@@ -157,18 +152,16 @@ export default function VerifyTeamEmailPage({ loaderData }: Route.ComponentProps
   return (
     <div>
       <h1 className="text-4xl font-semibold">
-        <Trans>Team email verified!</Trans>
+        Team email verified!
       </h1>
 
       <p className="text-muted-foreground mb-4 mt-2 text-sm">
-        <Trans>
-          You have verified your email address for <strong>{data.teamName}</strong>.
-        </Trans>
+        You have verified your email address for <strong>{data.teamName}</strong>.
       </p>
 
       <Button asChild>
         <Link to="/">
-          <Trans>Continue</Trans>
+          Continue
         </Link>
       </Button>
     </div>

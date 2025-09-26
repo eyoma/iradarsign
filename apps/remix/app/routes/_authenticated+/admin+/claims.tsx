@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
 import { useLocation, useSearchParams } from 'react-router';
 
 import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
@@ -11,8 +10,6 @@ import { SettingsHeader } from '~/components/general/settings-header';
 import { AdminClaimsTable } from '~/components/tables/admin-claims-table';
 
 export default function Claims() {
-  const { t } = useLingui();
-
   const [searchParams, setSearchParams] = useSearchParams();
   const { pathname } = useLocation();
 
@@ -43,8 +40,8 @@ export default function Claims() {
   return (
     <div>
       <SettingsHeader
-        title={t`Subscription Claims`}
-        subtitle={t`Manage all subscription claims`}
+        title={"Subscription Claims"}
+        subtitle={"Manage all subscription claims"}
         hideDivider
       >
         <ClaimCreateDialog />
@@ -54,7 +51,7 @@ export default function Claims() {
         <Input
           defaultValue={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder={t`Search by claim ID or name`}
+          placeholder={"Search by claim ID or name"}
           className="mb-4"
         />
 

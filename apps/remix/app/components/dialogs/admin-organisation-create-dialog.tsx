@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -49,7 +47,6 @@ export const AdminOrganisationCreateDialog = ({
   ownerUserId,
   ...props
 }: OrganisationCreateDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -79,8 +76,8 @@ export const AdminOrganisationCreateDialog = ({
       setOpen(false);
 
       toast({
-        title: t`Success`,
-        description: t`Organisation created`,
+        title: "Success",
+        description: "Organisation created",
         duration: 5000,
       });
     } catch (err) {
@@ -89,8 +86,8 @@ export const AdminOrganisationCreateDialog = ({
       console.error(error);
 
       toast({
-        title: t`An unknown error occurred`,
-        description: t`We encountered an unknown error while attempting to create a organisation. Please try again later.`,
+        title: "An unknown error occurred",
+        description: "We encountered an unknown error while attempting to create a organisation. Please try again later.",
         variant: 'destructive',
       });
     }
@@ -109,7 +106,7 @@ export const AdminOrganisationCreateDialog = ({
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
         {trigger ?? (
           <Button className="flex-shrink-0" variant="secondary">
-            <Trans>Create organisation</Trans>
+            Create organisation
           </Button>
         )}
       </DialogTrigger>
@@ -117,11 +114,11 @@ export const AdminOrganisationCreateDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Create organisation</Trans>
+            Create organisation
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>Create an organisation for this user</Trans>
+            Create an organisation for this user
           </DialogDescription>
         </DialogHeader>
 
@@ -137,7 +134,7 @@ export const AdminOrganisationCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Organisation Name</Trans>
+                      Organisation Name
                     </FormLabel>
                     <FormControl>
                       <Input {...field} />
@@ -149,10 +146,10 @@ export const AdminOrganisationCreateDialog = ({
 
               <Alert variant="neutral">
                 <AlertDescription className="mt-0">
-                  <Trans>
+                  
                     You will need to configure any claims or subscription after creating this
                     organisation
-                  </Trans>
+                  
                 </AlertDescription>
               </Alert>
 
@@ -162,13 +159,13 @@ export const AdminOrganisationCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Default claim ID</Trans>
+                      Default claim ID
                     </FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      <Trans>Leave blank to use the default free claim</Trans>
+                      Leave blank to use the default free claim
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -177,7 +174,7 @@ export const AdminOrganisationCreateDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button
@@ -185,7 +182,7 @@ export const AdminOrganisationCreateDialog = ({
                   data-testid="dialog-create-organisation-button"
                   loading={form.formState.isSubmitting}
                 >
-                  <Trans>Create</Trans>
+                  Create
                 </Button>
               </DialogFooter>
             </fieldset>

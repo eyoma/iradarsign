@@ -1,5 +1,3 @@
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
 import { FieldType } from '@prisma/client';
 import { z } from 'zod';
 
@@ -42,17 +40,17 @@ export const ZDocumentFlowFormSchema = z.object({
 export type TDocumentFlowFormSchema = z.infer<typeof ZDocumentFlowFormSchema>;
 
 export const FRIENDLY_FIELD_TYPE: Record<FieldType, MessageDescriptor> = {
-  [FieldType.SIGNATURE]: msg`Signature`,
-  [FieldType.FREE_SIGNATURE]: msg`Free Signature`,
-  [FieldType.INITIALS]: msg`Initials`,
-  [FieldType.TEXT]: msg`Text`,
-  [FieldType.DATE]: msg`Date`,
-  [FieldType.EMAIL]: msg`Email`,
-  [FieldType.NAME]: msg`Name`,
-  [FieldType.NUMBER]: msg`Number`,
-  [FieldType.RADIO]: msg`Radio`,
-  [FieldType.CHECKBOX]: msg`Checkbox`,
-  [FieldType.DROPDOWN]: msg`Select`,
+  [FieldType.SIGNATURE]: "Signature",
+  [FieldType.FREE_SIGNATURE]: "Free Signature",
+  [FieldType.INITIALS]: "Initials",
+  [FieldType.TEXT]: "Tex",
+  [FieldType.DATE]: msg"Date",
+  [FieldType.EMAIL]: "Email",
+  [FieldType.NAME]: "Name",
+  [FieldType.NUMBER]: "Number",
+  [FieldType.RADIO]: "Radio",
+  [FieldType.CHECKBOX]: "Checkbox",
+  [FieldType.DROPDOWN]: "Select",
 };
 
 export interface DocumentFlowStep {

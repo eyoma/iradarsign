@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
 import { canExecuteOrganisationAction } from '@documenso/lib/utils/organisations';
 import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
@@ -17,15 +13,13 @@ export function meta() {
 }
 
 export default function OrganisationSettingsGeneral() {
-  const { _ } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   return (
     <div className="max-w-2xl">
       <SettingsHeader
-        title={_(msg`General`)}
-        subtitle={_(msg`Here you can edit your organisation details.`)}
+        title={"General"}
+        subtitle={"Here you can edit your organisation details."}
       />
 
       <div className="space-y-8">
@@ -46,13 +40,13 @@ export default function OrganisationSettingsGeneral() {
           >
             <div className="mb-4 sm:mb-0">
               <AlertTitle>
-                <Trans>Delete organisation</Trans>
+                Delete organisation
               </AlertTitle>
 
               <AlertDescription className="mr-2">
-                <Trans>
+                
                   This organisation, and any associated data will be permanently deleted.
-                </Trans>
+                
               </AlertDescription>
             </div>
 

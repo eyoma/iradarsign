@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { Trans, useLingui } from '@lingui/react/macro';
 import { MailsIcon } from 'lucide-react';
 import { Link, redirect, useSearchParams } from 'react-router';
 
@@ -28,15 +26,15 @@ export function ErrorBoundary() {
       errorCode={404}
       errorCodeMap={{
         404: {
-          heading: msg`Authentication Portal Not Found`,
-          subHeading: msg`404 Not Found`,
-          message: msg`The organisation authentication portal does not exist, or is not configured`,
+          heading: "Authentication Portal Not Found",
+          subHeading: "404 Not Found",
+          message: "The organisation authentication portal does not exist, or is not configured",
         },
       }}
       primaryButton={
         <Button asChild>
           <Link to={`/`}>
-            <Trans>Go back</Trans>
+            Go back
           </Link>
         </Button>
       }
@@ -96,7 +94,6 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
 
   const { organisationName, orgUrl } = loaderData;
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -113,8 +110,8 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
       });
     } catch (err) {
       toast({
-        title: t`An unknown error occurred`,
-        description: t`We encountered an unknown error while attempting to sign you In. Please try again later.`,
+        title: "An unknown error occurred",
+        description: "We encountered an unknown error while attempting to sign you In. Please try again later.",
         variant: 'destructive',
       });
     }
@@ -131,20 +128,20 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
           </div>
           <div className="">
             <h2 className="text-2xl font-bold md:text-4xl">
-              <Trans>Confirmation email sent</Trans>
+              Confirmation email sent
             </h2>
 
             <p className="text-muted-foreground mt-4">
-              <Trans>
+              
                 To gain access to your account, please confirm your email address by clicking on the
                 confirmation link from your inbox.
-              </Trans>
+              
             </p>
 
             <div className="mt-4 flex items-center gap-x-2">
               <Button asChild>
                 <Link to={`/o/${orgUrl}/signin`} replace>
-                  <Trans>Return</Trans>
+                  Return
                 </Link>
               </Button>
             </div>
@@ -158,11 +155,11 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
     <div className="w-screen max-w-lg px-4">
       <div className="border-border dark:bg-background z-10 rounded-xl border bg-neutral-100 p-6">
         <h1 className="text-2xl font-semibold">
-          <Trans>Welcome to {organisationName}</Trans>
+          Welcome to {organisationName}
         </h1>
 
         <p className="text-muted-foreground mt-2 text-sm">
-          <Trans>Sign in to your account</Trans>
+          Sign in to your account
         </p>
 
         <hr className="-mx-6 my-4" />
@@ -180,10 +177,10 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
             className="text-muted-foreground ml-2 flex flex-row items-center text-sm"
             htmlFor={`flag-3rd-party-service`}
           >
-            <Trans>
+            
               I understand that I am providing my credentials to a 3rd party service configured by
               this organisation
-            </Trans>
+            
           </label>
         </div>
 
@@ -196,20 +193,20 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
           disabled={!isConfirmationChecked}
           onClick={onSignInWithOIDCClick}
         >
-          <Trans>Sign In</Trans>
+          Sign In
         </Button>
 
         <div className="relative mt-2 flex items-center justify-center gap-x-4 py-2 text-xs uppercase">
           <div className="bg-border h-px flex-1" />
           <span className="text-muted-foreground bg-transparent">
-            <Trans>OR</Trans>
+            OR
           </span>
           <div className="bg-border h-px flex-1" />
         </div>
 
         <div className="text-muted-foreground mt-1 flex items-center justify-center text-xs">
           <Link to="/signin">
-            <Trans>Return to iRadar sign in page here</Trans>
+            Return to iRadar sign in page here
           </Link>
         </div>
       </div>

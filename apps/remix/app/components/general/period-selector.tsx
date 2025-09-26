@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import type { PeriodSelectorValue } from '@documenso/lib/server-only/document/find-documents';
@@ -53,16 +52,16 @@ export const PeriodSelector = () => {
 
       <SelectContent position="popper">
         <SelectItem value="all">
-          <Trans>All Time</Trans>
+          All Time
         </SelectItem>
         <SelectItem value="7d">
-          <Trans>Last 7 days</Trans>
+          Last 7 days
         </SelectItem>
         <SelectItem value="14d">
-          <Trans>Last 14 days</Trans>
+          Last 14 days
         </SelectItem>
         <SelectItem value="30d">
-          <Trans>Last 30 days</Trans>
+          Last 30 days
         </SelectItem>
       </SelectContent>
     </Select>

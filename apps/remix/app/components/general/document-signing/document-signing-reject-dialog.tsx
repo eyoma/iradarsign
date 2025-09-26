@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { Trans } from '@lingui/react/macro';
 import type { Document } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -31,7 +29,7 @@ import { Textarea } from '@documenso/ui/primitives/textarea';
 import { useToast } from '@documenso/ui/primitives/use-toast';
 
 const ZRejectDocumentFormSchema = z.object({
-  reason: z.string().max(500, msg`Reason must be less than 500 characters`),
+  reason: z.string().max(500, "Reason must be less than 500 characters"),
 });
 
 type TRejectDocumentFormSchema = z.infer<typeof ZRejectDocumentFormSchema>;
@@ -110,20 +108,20 @@ export function DocumentSigningRejectDialog({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <Trans>Reject Document</Trans>
+          Reject Document
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Reject Document</Trans>
+            Reject Document
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               Are you sure you want to reject this document? This action cannot be undone.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -154,7 +152,7 @@ export function DocumentSigningRejectDialog({
                 onClick={() => setIsOpen(false)}
                 disabled={form.formState.isSubmitting}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button
@@ -163,7 +161,7 @@ export function DocumentSigningRejectDialog({
                 loading={form.formState.isSubmitting}
                 disabled={!form.formState.isValid}
               >
-                <Trans>Reject Document</Trans>
+                Reject Document
               </Button>
             </DialogFooter>
           </form>

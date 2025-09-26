@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
 import { useBranding } from '../providers/branding';
 import type { TemplateDocumentSelfSignedProps } from '../template-components/template-document-self-signed';
@@ -13,10 +10,9 @@ export const DocumentSelfSignedEmailTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentSelfSignedTemplateProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`Completed Document`;
+  const previewText = "Completed Document";
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -25,7 +21,7 @@ export const DocumentSelfSignedEmailTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">
@@ -34,11 +30,7 @@ export const DocumentSelfSignedEmailTemplate = ({
               {branding.brandingEnabled && branding.brandingLogo ? (
                 <Img src={branding.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
               ) : (
-                <Img
-                  src={getAssetUrl('/static/logo.png')}
-                  alt="Documenso Logo"
-                  className="mb-4 h-6"
-                />
+                <Img src={getAssetUrl('/static/logo.png')} alt="iRadar Logo" className="mb-4 h-6" />
               )}
 
               <TemplateDocumentSelfSigned documentName={documentName} assetBaseUrl={assetBaseUrl} />

@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { SendStatus, SigningStatus } from '@prisma/client';
 
 import { mailer } from '@documenso/email/mailer';
@@ -105,7 +104,7 @@ export const run = async ({
       },
       from: senderEmail,
       replyTo: replyToEmail,
-      subject: i18n._(msg`Document "${document.title}" - Rejection Confirmed`),
+      subject: i18n."Document "${document.title}" - Rejection Confirmed",
       html,
       text,
     });
@@ -138,7 +137,7 @@ export const run = async ({
         address: documentOwner.email,
       },
       from: DOCUMENSO_INTERNAL_EMAIL, // Purposefully using internal email here.
-      subject: i18n._(msg`Document "${document.title}" - Rejected by ${recipient.name}`),
+      subject: i18n."Document "${document.title}" - Rejected by ${recipient.name}",
       html,
       text,
     });

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { DocumentDistributionMethod, DocumentStatus } from '@prisma/client';
 import { useNavigate, useSearchParams } from 'react-router';
 import { z } from 'zod';
@@ -48,8 +46,6 @@ export const DocumentEditForm = ({
   documentRootPath,
 }: DocumentEditFormProps) => {
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
@@ -121,23 +117,23 @@ export const DocumentEditForm = ({
 
   const documentFlow: Record<EditDocumentStep, DocumentFlowStep> = {
     settings: {
-      title: msg`General`,
-      description: msg`Configure general settings for the document.`,
+      title: "General",
+      description: "Configure general settings for the document.",
       stepIndex: 1,
     },
     signers: {
-      title: msg`Add Signers`,
-      description: msg`Add the people who will sign the document.`,
+      title: "Add Signers",
+      description: "Add the people who will sign the document.",
       stepIndex: 2,
     },
     fields: {
-      title: msg`Add Fields`,
-      description: msg`Add all relevant fields for each recipient.`,
+      title: "Add Fields",
+      description: "Add all relevant fields for each recipient.",
       stepIndex: 3,
     },
     subject: {
-      title: msg`Distribute Document`,
-      description: msg`Choose how the document will reach recipients`,
+      title: "Distribute Documen",
+      description: msg"Choose how the document will reach recipients",
       stepIndex: 4,
     },
   };
@@ -195,8 +191,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while updating the document settings.`),
+        title: "Error",
+        description: "An error occurred while updating the document settings.",
         variant: 'destructive',
       });
     }
@@ -209,8 +205,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while auto-saving the document settings.`),
+        title: "Error",
+        description: "An error occurred while auto-saving the document settings.",
         variant: 'destructive',
       });
     }
@@ -264,8 +260,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while adding signers.`),
+        title: "Error",
+        description: "An error occurred while adding signers.",
         variant: 'destructive',
       });
 
@@ -282,8 +278,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while adding signers.`),
+        title: "Error",
+        description: "An error occurred while adding signers.",
         variant: 'destructive',
       });
     }
@@ -313,8 +309,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while adding the fields.`),
+        title: "Error",
+        description: "An error occurred while adding the fields.",
         variant: 'destructive',
       });
     }
@@ -328,8 +324,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while auto-saving the fields.`),
+        title: "Error",
+        description: "An error occurred while auto-saving the fields.",
         variant: 'destructive',
       });
     }
@@ -375,16 +371,16 @@ export const DocumentEditForm = ({
 
       if (data.meta.distributionMethod === DocumentDistributionMethod.EMAIL) {
         toast({
-          title: _(msg`Document sent`),
-          description: _(msg`Your document has been sent successfully.`),
+          title: "Document sen",
+          description: msg"Your document has been sent successfully.",
           duration: 5000,
         });
 
         await navigate(documentRootPath);
       } else if (document.status === DocumentStatus.DRAFT) {
         toast({
-          title: _(msg`Links Generated`),
-          description: _(msg`Signing links have been generated for this document.`),
+          title: "Links Generated",
+          description: "Signing links have been generated for this document.",
           duration: 5000,
         });
       } else {
@@ -394,8 +390,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while sending the document.`),
+        title: "Error",
+        description: "An error occurred while sending the document.",
         variant: 'destructive',
       });
     }
@@ -409,8 +405,8 @@ export const DocumentEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while auto-saving the subject form.`),
+        title: "Error",
+        description: "An error occurred while auto-saving the subject form.",
         variant: 'destructive',
       });
     }

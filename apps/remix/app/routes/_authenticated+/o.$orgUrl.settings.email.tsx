@@ -1,5 +1,3 @@
-import { useLingui } from '@lingui/react/macro';
-
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
 import { trpc } from '@documenso/trpc/react';
 import { SpinnerBox } from '@documenso/ui/primitives/spinner';
@@ -17,7 +15,6 @@ export function meta() {
 }
 
 export default function OrganisationSettingsGeneral() {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const organisation = useCurrentOrganisation();
@@ -45,13 +42,13 @@ export default function OrganisationSettingsGeneral() {
       });
 
       toast({
-        title: t`Email preferences updated`,
-        description: t`Your email preferences have been updated`,
+        title: "Email preferences updated",
+        description: "Your email preferences have been updated",
       });
     } catch (err) {
       toast({
-        title: t`Something went wrong!`,
-        description: t`We were unable to update your email preferences at this time, please try again later`,
+        title: "Something went wrong!",
+        description: "We were unable to update your email preferences at this time, please try again later",
         variant: 'destructive',
       });
     }
@@ -64,8 +61,8 @@ export default function OrganisationSettingsGeneral() {
   return (
     <div className="max-w-2xl">
       <SettingsHeader
-        title={t`Email Preferences`}
-        subtitle={t`You can manage your email preferences here`}
+        title={"Email Preferences"}
+        subtitle={"You can manage your email preferences here"}
       />
 
       <section>

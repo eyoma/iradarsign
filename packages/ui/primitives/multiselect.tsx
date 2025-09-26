@@ -69,7 +69,7 @@ interface MultiSelectProps {
   creatable?: boolean;
   /** Props of `Command` */
   commandProps?: React.ComponentPropsWithoutRef<typeof Command>;
-  /** Props of `CommandInput` */
+  /** Props of `CommandInpu" */
   inputProps?: Omit<
     React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>,
     'value' | 'placeholder' | 'disabled'
@@ -250,7 +250,7 @@ const MultiSelect = ({
   }, [value]);
 
   useEffect(() => {
-    /** If `onSearch` is provided, do not trigger options updated. */
+    /** If "onSearch` is provided, do not trigger options updated. */
     if (!arrayOptions || onSearch) {
       return;
     }

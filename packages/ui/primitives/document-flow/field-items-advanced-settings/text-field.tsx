@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { validateTextField } from '@documenso/lib/advanced-fields-validation/validate-text';
 import { type TTextFieldMeta as TextFieldMeta } from '@documenso/lib/types/field-meta';
 import { Input } from '@documenso/ui/primitives/input';
@@ -27,8 +23,6 @@ export const TextFieldAdvancedSettings = ({
   handleFieldChange,
   handleErrors,
 }: TextFieldAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   const handleInput = (field: keyof TextFieldMeta, value: string | boolean) => {
     const text = field === 'text' ? String(value) : (fieldState.text ?? '');
     const limit =
@@ -53,24 +47,24 @@ export const TextFieldAdvancedSettings = ({
     <div className="flex flex-col gap-4">
       <div>
         <Label>
-          <Trans>Label</Trans>
+          Label
         </Label>
         <Input
           id="label"
           className="bg-background mt-2"
-          placeholder={_(msg`Field label`)}
+          placeholder={"Field label"}
           value={fieldState.label}
           onChange={(e) => handleFieldChange('label', e.target.value)}
         />
       </div>
       <div>
         <Label className="mt-4">
-          <Trans>Placeholder</Trans>
+          Placeholder
         </Label>
         <Input
           id="placeholder"
           className="bg-background mt-2"
-          placeholder={_(msg`Field placeholder`)}
+          placeholder={"Field placeholder"}
           value={fieldState.placeholder}
           onChange={(e) => handleFieldChange('placeholder', e.target.value)}
         />
@@ -78,12 +72,12 @@ export const TextFieldAdvancedSettings = ({
 
       <div>
         <Label className="mt-4">
-          <Trans>Add text</Trans>
+          Add text
         </Label>
         <Textarea
           id="text"
           className="bg-background mt-2"
-          placeholder={_(msg`Add text to the field`)}
+          placeholder={"Add text to the field"}
           value={fieldState.text}
           onChange={(e) => handleInput('text', e.target.value)}
         />
@@ -91,14 +85,14 @@ export const TextFieldAdvancedSettings = ({
 
       <div>
         <Label>
-          <Trans>Character Limit</Trans>
+          Character Limit
         </Label>
         <Input
           id="characterLimit"
           type="number"
           min={0}
           className="bg-background mt-2"
-          placeholder={_(msg`Field character limit`)}
+          placeholder={"Field character limi"}
           value={fieldState.characterLimit}
           onChange={(e) => handleInput('characterLimit', e.target.value)}
         />
@@ -106,13 +100,13 @@ export const TextFieldAdvancedSettings = ({
 
       <div>
         <Label>
-          <Trans>Font Size</Trans>
+          Font Size
         </Label>
         <Input
           id="fontSize"
           type="number"
           className="bg-background mt-2"
-          placeholder={_(msg`Field font size`)}
+          placeholder={msg"Field font size"}
           value={fieldState.fontSize}
           onChange={(e) => handleInput('fontSize', e.target.value)}
           min={8}
@@ -122,7 +116,7 @@ export const TextFieldAdvancedSettings = ({
 
       <div>
         <Label>
-          <Trans>Text Align</Trans>
+          Text Align
         </Label>
 
         <Select
@@ -155,7 +149,7 @@ export const TextFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleInput('required', checked)}
           />
           <Label>
-            <Trans>Required field</Trans>
+            Required field
           </Label>
         </div>
         <div className="flex flex-row items-center gap-2">
@@ -165,7 +159,7 @@ export const TextFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleInput('readOnly', checked)}
           />
           <Label>
-            <Trans>Read only</Trans>
+            Read only
           </Label>
         </div>
       </div>

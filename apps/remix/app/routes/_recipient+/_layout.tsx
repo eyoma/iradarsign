@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { ChevronLeft } from 'lucide-react';
 import { Link, Outlet, isRouteErrorResponse } from 'react-router';
 
@@ -41,7 +40,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         <Button asChild className="w-32">
           <Link to="/">
             <ChevronLeft className="mr-2 h-4 w-4" />
-            <Trans>Go Back</Trans>
+            Go Back
           </Link>
         </Button>
       }

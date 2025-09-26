@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Plural, Trans } from '@lingui/react/macro';
 import { useRevalidator } from 'react-router';
 
 import { validateTextField } from '@documenso/lib/advanced-fields-validation/validate-text';
@@ -53,7 +50,6 @@ export const DocumentSigningTextField = ({
   onSignField,
   onUnsignField,
 }: DocumentSigningTextFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -179,10 +175,10 @@ export const DocumentSigningTextField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
+        title: "Error",
         description: isAssistantMode
-          ? _(msg`An error occurred while signing as assistant.`)
-          : _(msg`An error occurred while signing the document.`),
+          ? "An error occurred while signing as assistant."
+          : "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -209,8 +205,8 @@ export const DocumentSigningTextField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the field.`),
+        title: "Error",
+        description: "An error occurred while removing the field.",
         variant: 'destructive',
       });
     }
@@ -245,7 +241,7 @@ export const DocumentSigningTextField = ({
 
       {!field.inserted && (
         <DocumentSigningFieldsUninserted>
-          {fieldDisplayName || <Trans>Text</Trans>}
+          {fieldDisplayName || Text}
         </DocumentSigningFieldsUninserted>
       )}
 
@@ -258,13 +254,13 @@ export const DocumentSigningTextField = ({
       <Dialog open={showCustomTextModal} onOpenChange={setShowCustomTextModal}>
         <DialogContent>
           <DialogTitle>
-            {parsedFieldMeta?.label ? parsedFieldMeta?.label : <Trans>Text</Trans>}
+            {parsedFieldMeta?.label ? parsedFieldMeta?.label : Text}
           </DialogTitle>
 
           <div>
             <Textarea
               id="custom-text"
-              placeholder={parsedFieldMeta?.placeholder ?? _(msg`Enter your text here`)}
+              placeholder={parsedFieldMeta?.placeholder ?? "Enter your text here"}
               className={cn('mt-2 w-full rounded-md', {
                 'border-2 border-red-300 text-left ring-2 ring-red-200 ring-offset-2 ring-offset-red-200 focus-visible:border-red-400 focus-visible:ring-4 focus-visible:ring-red-200 focus-visible:ring-offset-2 focus-visible:ring-offset-red-200':
                   userInputHasErrors,
@@ -321,7 +317,7 @@ export const DocumentSigningTextField = ({
                   setLocalCustomText('');
                 }}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button
@@ -330,7 +326,7 @@ export const DocumentSigningTextField = ({
                 disabled={!localText || userInputHasErrors}
                 onClick={() => onDialogSignClick()}
               >
-                <Trans>Save</Trans>
+                Save
               </Button>
             </div>
           </DialogFooter>

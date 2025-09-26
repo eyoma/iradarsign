@@ -1,9 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
 import { Search } from 'lucide-react';
@@ -25,7 +22,6 @@ export const AppNavDesktop = ({
   setIsCommandMenuOpen,
   ...props
 }: AppNavDesktopProps) => {
-  const { _ } = useLingui();
   const { organisations } = useSession();
 
   const { pathname } = useLocation();
@@ -55,11 +51,11 @@ export const AppNavDesktop = ({
     return [
       {
         href: `/t/${teamUrl}/documents`,
-        label: msg`Documents`,
+        label: "Documents",
       },
       {
         href: `/t/${teamUrl}/templates`,
-        label: msg`Templates`,
+        label: "Templates",
       },
     ];
   }, [currentTeam, organisations]);
@@ -92,7 +88,7 @@ export const AppNavDesktop = ({
                     },
                   )}
                 >
-                  {_(label)}
+                  {label}
                 </Link>
               ))}
             </motion.div>
@@ -107,7 +103,7 @@ export const AppNavDesktop = ({
       >
         <div className="flex items-center">
           <Search className="mr-2 h-5 w-5" />
-          <Trans>Search</Trans>
+          Search
         </div>
 
         <div>

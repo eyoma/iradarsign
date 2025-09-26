@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { DocumentData, FieldType } from '@prisma/client';
 import { ReadStatus, type Recipient, SendStatus, SigningStatus } from '@prisma/client';
 import { ChevronsUpDown } from 'lucide-react';
@@ -53,7 +51,6 @@ export const ConfigureFieldsView = ({
   onBack,
   onSubmit,
 }: ConfigureFieldsViewProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { isWithinPageBounds, getFieldPosition, getPage } = useDocumentElement();
 
@@ -461,11 +458,11 @@ export const ConfigureFieldsView = ({
           <div className="order-2 col-span-12 md:order-1 md:col-span-4">
             <div className="bg-widget border-border sticky top-4 max-h-[calc(100vh-2rem)] rounded-lg border p-4 pb-6">
               <h2 className="mb-1 text-lg font-medium">
-                <Trans>Configure Fields</Trans>
+                Configure Fields
               </h2>
 
               <p className="text-muted-foreground mb-6 text-sm">
-                <Trans>Configure the fields you want to place on the document.</Trans>
+                Configure the fields you want to place on the document.
               </p>
 
               <RecipientSelector
@@ -494,7 +491,7 @@ export const ConfigureFieldsView = ({
                   loading={form.formState.isSubmitting}
                   onClick={() => onBack(form.getValues())}
                 >
-                  <Trans>Back</Trans>
+                  Back
                 </Button>
 
                 <Button
@@ -504,7 +501,7 @@ export const ConfigureFieldsView = ({
                   disabled={!form.formState.isValid}
                   onClick={async () => onFormSubmit()}
                 >
-                  <Trans>Save</Trans>
+                  Save
                 </Button>
               </div>
             </div>
@@ -532,7 +529,7 @@ export const ConfigureFieldsView = ({
                 }}
               >
                 <span className="text-[clamp(0.425rem,25cqw,0.825rem)]">
-                  {_(FRIENDLY_FIELD_TYPE[selectedField])}
+                  {FRIENDLY_FIELD_TYPE[selectedField]}
                 </span>
               </div>
             )}
@@ -591,7 +588,7 @@ export const ConfigureFieldsView = ({
           <SheetTrigger asChild>
             <div className="bg-widget border-border fixed bottom-6 left-6 right-6 z-50 flex items-center justify-between gap-2 rounded-lg border p-4">
               <span className="text-lg font-medium">
-                <Trans>Configure Fields</Trans>
+                Configure Fields
               </span>
 
               <button
@@ -609,11 +606,11 @@ export const ConfigureFieldsView = ({
             className="bg-widget h-fit max-h-[80vh] overflow-y-auto rounded-t-xl p-4"
           >
             <h2 className="mb-1 text-lg font-medium">
-              <Trans>Configure Fields</Trans>
+              Configure Fields
             </h2>
 
             <p className="text-muted-foreground mb-6 text-sm">
-              <Trans>Configure the fields you want to place on the document.</Trans>
+              Configure the fields you want to place on the document.
             </p>
 
             <RecipientSelector
@@ -647,7 +644,7 @@ export const ConfigureFieldsView = ({
                 loading={form.formState.isSubmitting}
                 onClick={() => onBack(form.getValues())}
               >
-                <Trans>Back</Trans>
+                Back
               </Button>
 
               <Button
@@ -657,7 +654,7 @@ export const ConfigureFieldsView = ({
                 disabled={!form.formState.isValid}
                 onClick={async () => onFormSubmit()}
               >
-                <Trans>Save</Trans>
+                Save
               </Button>
             </div>
           </SheetContent>

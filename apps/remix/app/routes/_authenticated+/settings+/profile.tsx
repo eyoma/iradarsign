@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { AnimatePresence } from 'framer-motion';
 
 import { useSession } from '@documenso/lib/client-only/providers/session';
@@ -19,7 +17,6 @@ export function meta() {
 }
 
 export default function SettingsProfile() {
-  const { _ } = useLingui();
   const { organisations, user } = useSession();
 
   const { data: teamEmail } = trpc.team.email.get.useQuery();
@@ -29,8 +26,8 @@ export default function SettingsProfile() {
   return (
     <div>
       <SettingsHeader
-        title={_(msg`Profile`)}
-        subtitle={_(msg`Here you can edit your personal details.`)}
+        title={"Profile"}
+        subtitle={"Here you can edit your personal details."}
       />
 
       <AvatarImageForm className="mb-8 max-w-xl" />

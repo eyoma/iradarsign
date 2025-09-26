@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Plural, Trans } from '@lingui/react/macro';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { AnimatePresence } from 'framer-motion';
 import { BellIcon } from 'lucide-react';
@@ -54,14 +51,14 @@ export const OrganisationInvitations = ({ className }: { className?: string }) =
               <Dialog>
                 <DialogTrigger asChild>
                   <button className="ml-auto text-sm font-medium text-blue-700 hover:text-blue-600">
-                    <Trans>View invites</Trans>
+                    View invites
                   </button>
                 </DialogTrigger>
 
                 <DialogContent position="center">
                   <DialogHeader>
                     <DialogTitle>
-                      <Trans>Pending invitations</Trans>
+                      Pending invitations
                     </DialogTitle>
 
                     <DialogDescription className="mt-4">
@@ -117,7 +114,6 @@ export const OrganisationInvitations = ({ className }: { className?: string }) =
 };
 
 const AcceptOrganisationInvitationButton = ({ token }: { token: string }) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { refreshSession } = useSession();
 
@@ -130,15 +126,15 @@ const AcceptOrganisationInvitationButton = ({ token }: { token: string }) => {
       await refreshSession();
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Invitation accepted`),
+        title: "Success",
+        description: "Invitation accepted",
         duration: 5000,
       });
     },
     onError: () => {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`Unable to join this organisation at this time.`),
+        title: "Something went wrong",
+        description: "Unable to join this organisation at this time.",
         variant: 'destructive',
         duration: 10000,
       });
@@ -151,13 +147,12 @@ const AcceptOrganisationInvitationButton = ({ token }: { token: string }) => {
       loading={isPending}
       disabled={isPending || isSuccess}
     >
-      <Trans>Accept</Trans>
+      Accept
     </Button>
   );
 };
 
 const DeclineOrganisationInvitationButton = ({ token }: { token: string }) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { refreshSession } = useSession();
 
@@ -170,15 +165,15 @@ const DeclineOrganisationInvitationButton = ({ token }: { token: string }) => {
       await refreshSession();
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Invitation declined`),
+        title: "Success",
+        description: "Invitation declined",
         duration: 5000,
       });
     },
     onError: () => {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`Unable to decline this invitation at this time.`),
+        title: "Something went wrong",
+        description: "Unable to decline this invitation at this time.",
         variant: 'destructive',
         duration: 10000,
       });
@@ -192,7 +187,7 @@ const DeclineOrganisationInvitationButton = ({ token }: { token: string }) => {
       disabled={isPending || isSuccess}
       variant="ghost"
     >
-      <Trans>Decline</Trans>
+      Decline
     </Button>
   );
 };

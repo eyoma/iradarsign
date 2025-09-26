@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans } from '@lingui/react/macro';
 import type { TeamGlobalSettings } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -90,7 +89,7 @@ export const EmailPreferencesForm = ({
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    <Trans>Default Email</Trans>
+                    Default Email
                   </FormLabel>
 
                   <FormControl>
@@ -111,14 +110,14 @@ export const EmailPreferencesForm = ({
                         ))}
 
                         <SelectItem value={'-1'}>
-                          {canInherit ? <Trans>Inherit from organisation</Trans> : FROM_ADDRESS}
+                          {canInherit ? Inherit from organisation : FROM_ADDRESS}
                         </SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>
 
                   <FormDescription>
-                    <Trans>The default email to use when sending emails to recipients</Trans>
+                    The default email to use when sending emails to recipients
                   </FormDescription>
                 </FormItem>
               )}
@@ -131,7 +130,7 @@ export const EmailPreferencesForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Reply to email</Trans>
+                  Reply to email
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -144,14 +143,13 @@ export const EmailPreferencesForm = ({
                 </FormControl>
                 <FormMessage />
                 <FormDescription>
-                  <Trans>
+                  
                     The email address which will show up in the "Reply To" field in emails
-                  </Trans>
 
                   {canInherit && (
                     <span>
                       {'. '}
-                      <Trans>Leave blank to inherit from the organisation.</Trans>
+                      Leave blank to inherit from the organisation.
                     </span>
                   )}
                 </FormDescription>
@@ -165,7 +163,7 @@ export const EmailPreferencesForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Reply to name</Trans>
+                  Reply to name
                 </FormLabel>
                 <FormControl>
                   <Input {...field} value={field.value ?? ''} />
@@ -181,7 +179,7 @@ export const EmailPreferencesForm = ({
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>
-                  <Trans>Default Email Settings</Trans>
+                  Default Email Settings
                 </FormLabel>
                 {canInherit && (
                   <Select
@@ -198,11 +196,11 @@ export const EmailPreferencesForm = ({
 
                     <SelectContent>
                       <SelectItem value={'INHERIT'}>
-                        <Trans>Inherit from organisation</Trans>
+                        Inherit from organisation
                       </SelectItem>
 
                       <SelectItem value={'CONTROLLED'}>
-                        <Trans>Override organisation settings</Trans>
+                        Override organisation settings
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -218,9 +216,9 @@ export const EmailPreferencesForm = ({
                 )}
 
                 <FormDescription>
-                  <Trans>
+                  
                     Controls the default email settings when new documents or templates are created
-                  </Trans>
+                  
                 </FormDescription>
               </FormItem>
             )}
@@ -228,7 +226,7 @@ export const EmailPreferencesForm = ({
 
           <div className="flex flex-row justify-end space-x-4">
             <Button type="submit" loading={form.formState.isSubmitting}>
-              <Trans>Update</Trans>
+              Update
             </Button>
           </div>
         </fieldset>

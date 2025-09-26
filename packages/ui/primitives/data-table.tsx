@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import type {
   ColumnDef,
   PaginationState,
@@ -133,7 +132,7 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 {error.component ?? (
                   <TableCell colSpan={columns.length} className="h-32 text-center">
-                    <Trans>Something went wrong.</Trans>
+                    Something went wrong.
                   </TableCell>
                 )}
               </TableRow>
@@ -147,7 +146,7 @@ export function DataTable<TData, TValue>({
                   {emptyState ?? (
                     <>
                       <p>
-                        <Trans>No results found</Trans>
+                        No results found
                       </p>
 
                       {hasFilters && onClearFilters !== undefined && (
@@ -155,7 +154,7 @@ export function DataTable<TData, TValue>({
                           onClick={() => onClearFilters()}
                           className="text-foreground mt-1 text-sm"
                         >
-                          <Trans>Clear filters</Trans>
+                          Clear filters
                         </button>
                       )}
                     </>

@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
-
 import { mailer } from '@documenso/email/mailer';
 import { render } from '@documenso/email/render';
 import { ConfirmEmailTemplate } from '@documenso/email/templates/confirm-email';
@@ -66,7 +64,7 @@ export const sendConfirmationEmail = async ({ userId }: SendConfirmationEmailPro
     text = renderedText;
 
     const i18n = await getI18nInstance();
-    subject = i18n._(msg`Please confirm your email`);
+    subject = i18n."Please confirm your email";
   } catch (err) {
     console.error('Failed to render email with i18n, using fallback template:', err);
 

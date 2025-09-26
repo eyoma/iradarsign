@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import type { TeamGroup } from '@prisma/client';
 
 import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
@@ -18,17 +17,17 @@ export const TeamInheritMemberAlert = ({ memberAccessTeamGroup }: TeamInheritMem
     >
       <div className="mb-4 sm:mb-0">
         <AlertTitle>
-          <Trans>Inherit organisation members</Trans>
+          Inherit organisation members
         </AlertTitle>
 
         <AlertDescription className="mr-2">
           {memberAccessTeamGroup ? (
-            <Trans>Currently all organisation members can access this team</Trans>
+            Currently all organisation members can access this team
           ) : (
-            <Trans>
+            
               You can enable access to allow all organisation members to access this team by
               default.
-            </Trans>
+            
           )}
         </AlertDescription>
       </div>

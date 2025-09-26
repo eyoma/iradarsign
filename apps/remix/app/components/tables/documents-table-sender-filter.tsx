@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { Trans } from '@lingui/react/macro';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { useIsMounted } from '@documenso/lib/client-only/hooks/use-is-mounted';
@@ -50,13 +48,13 @@ export const DocumentsTableSenderFilter = ({ teamId }: DocumentsTableSenderFilte
     <MultiSelectCombobox
       emptySelectionPlaceholder={
         <p className="text-muted-foreground font-normal">
-          <Trans>
+          
             <span className="text-muted-foreground/70">Sender:</span> All
-          </Trans>
+          
         </p>
       }
       enableClearAllButton={true}
-      inputPlaceholder={msg`Search`}
+      inputPlaceholder={"Search"}
       loading={!isMounted || isLoading}
       options={comboBoxOptions}
       selectedValues={senderIds}

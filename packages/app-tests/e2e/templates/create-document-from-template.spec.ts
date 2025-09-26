@@ -29,7 +29,7 @@ test('[TEMPLATE]: should create a document from a template', async ({ page }) =>
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: `/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set template title.
@@ -70,7 +70,7 @@ test('[TEMPLATE]: should create a document from a template', async ({ page }) =>
   await page.getByRole('button', { name: 'Save template' }).click();
 
   // Use template
-  await page.waitForURL(`/t/${team.url}/templates`);
+  await page.waitForURL("/t/${team.url}/templates`);
   await page.getByRole('button', { name: 'Use Template' }).click();
   await page.getByRole('button', { name: 'Create as draft' }).click();
 
@@ -132,7 +132,7 @@ test('[TEMPLATE]: should create a team document from a team template', async ({ 
   await apiSignin({
     page,
     email: owner.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: `/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set template title.
@@ -173,7 +173,7 @@ test('[TEMPLATE]: should create a team document from a team template', async ({ 
   await page.getByRole('button', { name: 'Save template' }).click();
 
   // Use template
-  await page.waitForURL(`/t/${team.url}/templates`);
+  await page.waitForURL("/t/${team.url}/templates`);
   await page.getByRole('button', { name: 'Use Template' }).click();
   await page.getByRole('button', { name: 'Create as draft' }).click();
 
@@ -240,7 +240,7 @@ test('[TEMPLATE]: should create a document from a template with custom document'
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: `/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set template title
@@ -259,7 +259,7 @@ test('[TEMPLATE]: should create a document from a template with custom document'
   await page.getByRole('button', { name: 'Save template' }).click();
 
   // Use template with custom document
-  await page.waitForURL(`/t/${team.url}/templates`);
+  await page.waitForURL("/t/${team.url}/templates`);
   await page.getByRole('button', { name: 'Use Template' }).click();
 
   // Enable custom document upload and upload file
@@ -333,7 +333,7 @@ test('[TEMPLATE]: should create a team document from a template with custom docu
   await apiSignin({
     page,
     email: owner.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: `/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set template title
@@ -352,7 +352,7 @@ test('[TEMPLATE]: should create a team document from a template with custom docu
   await page.getByRole('button', { name: 'Save template' }).click();
 
   // Use template with custom document
-  await page.waitForURL(`/t/${team.url}/templates`);
+  await page.waitForURL("/t/${team.url}/templates`);
   await page.getByRole('button', { name: 'Use Template' }).click();
 
   // Enable custom document upload and upload file
@@ -422,7 +422,7 @@ test('[TEMPLATE]: should create a document from a template using template docume
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: `/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set template title
@@ -441,7 +441,7 @@ test('[TEMPLATE]: should create a document from a template using template docume
   await page.getByRole('button', { name: 'Save template' }).click();
 
   // Use template without custom document
-  await page.waitForURL(`/t/${team.url}/templates`);
+  await page.waitForURL("/t/${team.url}/templates`);
   await page.getByRole('button', { name: 'Use Template' }).click();
 
   // Verify custom document upload is not checked by default
@@ -493,7 +493,7 @@ test('[TEMPLATE]: should persist document visibility when creating from template
   await apiSignin({
     page,
     email: owner.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: `/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set template title and visibility
@@ -525,7 +525,7 @@ test('[TEMPLATE]: should persist document visibility when creating from template
   await apiSignin({
     page,
     email: managerUser.email,
-    redirectPath: `/t/${team.url}/templates`,
+    redirectPath: "/t/${team.url}/templates`,
   });
 
   await page.getByRole('button', { name: 'Use Template' }).click();

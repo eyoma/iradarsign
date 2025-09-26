@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { CheckIcon } from 'lucide-react';
 
 import { SUPPORTED_LANGUAGES } from '@documenso/lib/constants/i18n';
@@ -19,8 +17,6 @@ type LanguageSwitcherDialogProps = {
 };
 
 export const LanguageSwitcherDialog = ({ open, setOpen }: LanguageSwitcherDialogProps) => {
-  const { i18n, _ } = useLingui();
-
   const setLanguage = async (lang: string) => {
     setOpen(false);
 
@@ -38,7 +34,7 @@ export const LanguageSwitcherDialog = ({ open, setOpen }: LanguageSwitcherDialog
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder={_(msg`Search languages...`)} />
+      <CommandInput placeholder={"Search languages..."} />
 
       <CommandList>
         <CommandGroup>

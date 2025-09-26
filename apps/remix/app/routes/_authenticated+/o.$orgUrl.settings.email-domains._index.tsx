@@ -1,4 +1,3 @@
-import { Trans, useLingui } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
@@ -18,7 +17,6 @@ export function meta() {
 }
 
 export default function OrganisationSettingsEmailDomains() {
-  const { t } = useLingui();
   const { organisations } = useSession();
 
   const organisation = useCurrentOrganisation();
@@ -34,8 +32,8 @@ export default function OrganisationSettingsEmailDomains() {
   return (
     <div>
       <SettingsHeader
-        title={t`Email Domains`}
-        subtitle={t`Here you can add email domains to your organisation.`}
+        title={"Email Domains"}
+        subtitle={"Here you can add email domains to your organisation."}
       >
         {isEmailDomainsEnabled && <OrganisationEmailDomainCreateDialog />}
       </SettingsHeader>
@@ -51,13 +49,13 @@ export default function OrganisationSettingsEmailDomains() {
         >
           <div className="mb-4 sm:mb-0">
             <AlertTitle>
-              <Trans>Email Domains</Trans>
+              Email Domains
             </AlertTitle>
 
             <AlertDescription className="mr-2">
-              <Trans>
+              
                 Currently email domains can only be configured for Platform and above plans.
-              </Trans>
+              
             </AlertDescription>
           </div>
 
@@ -70,7 +68,7 @@ export default function OrganisationSettingsEmailDomains() {
                     : `/o/${organisation.url}/settings/billing`
                 }
               >
-                <Trans>Update Billing</Trans>
+                Update Billing
               </Link>
             </Button>
           )}

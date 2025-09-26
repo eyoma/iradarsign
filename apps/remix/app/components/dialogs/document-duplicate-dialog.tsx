@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useNavigate } from 'react-router';
 
 import { formatDocumentsPath } from '@documenso/lib/utils/teams';
@@ -32,8 +29,6 @@ export const DocumentDuplicateDialog = ({
   const navigate = useNavigate();
 
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const team = useCurrentTeam();
 
   const { data: document, isLoading } = trpcReact.document.get.useQuery(
@@ -59,12 +54,12 @@ export const DocumentDuplicateDialog = ({
     trpcReact.document.duplicate.useMutation({
       onSuccess: async ({ documentId }) => {
         toast({
-          title: _(msg`Document Duplicated`),
-          description: _(msg`Your document has been successfully duplicated.`),
+          title: "Document Duplicated",
+          description: "Your document has been successfully duplicated.",
           duration: 5000,
         });
 
-        await navigate(`${documentsPath}/${documentId}/edit`);
+        await navigate(`${documentsPath}/${documentId}/edi");
         onOpenChange(false);
       },
     });
@@ -74,8 +69,8 @@ export const DocumentDuplicateDialog = ({
       await duplicateDocument({ documentId: id });
     } catch {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`This document could not be duplicated at this time. Please try again.`),
+        title: msg"Something went wrong`,
+        description: "This document could not be duplicated at this time. Please try again.",
         variant: 'destructive',
         duration: 7500,
       });
@@ -87,13 +82,13 @@ export const DocumentDuplicateDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Duplicate</Trans>
+            Duplicate
           </DialogTitle>
         </DialogHeader>
         {!documentData || isLoading ? (
           <div className="mx-auto -mt-4 flex w-full max-w-screen-xl flex-col px-4 md:px-8">
             <h1 className="mt-4 grow-0 truncate text-2xl font-semibold md:text-3xl">
-              <Trans>Loading Document...</Trans>
+              Loading Document...
             </h1>
           </div>
         ) : (
@@ -110,7 +105,7 @@ export const DocumentDuplicateDialog = ({
               onClick={() => onOpenChange(false)}
               className="flex-1"
             >
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
 
             <Button
@@ -120,7 +115,7 @@ export const DocumentDuplicateDialog = ({
               onClick={onDuplicate}
               className="flex-1"
             >
-              <Trans>Duplicate</Trans>
+              Duplicate
             </Button>
           </div>
         </DialogFooter>

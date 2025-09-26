@@ -1,94 +1,36 @@
-import type { I18n, MessageDescriptor } from '@lingui/core';
-import { i18n } from '@lingui/core';
-import type { MacroMessageDescriptor } from '@lingui/core/macro';
+/**
+ * Minimal i18n utilities for non-internationalized setup
+ * Provides basic message parsing without actual translation
+ */
 
-import type { I18nLocaleData, SupportedLanguageCodes } from '../constants/i18n';
-import { APP_I18N_OPTIONS } from '../constants/i18n';
-import { env } from './env';
+export type MessageDescriptor = string;
 
-export async function getTranslations(locale: string) {
-  const extension = env('NODE_ENV') === 'development' ? 'po' : 'mjs';
-
-  const { messages } = await import(`../translations/${locale}/web.${extension}`);
-
-  return messages;
-}
-
-export async function dynamicActivate(locale: string) {
-  const messages = await getTranslations(locale);
-
-  i18n.loadAndActivate({ locale, messages });
-}
-
-const parseLanguageFromLocale = (locale: string): SupportedLanguageCodes | null => {
-  const [language, _country] = locale.split('-');
-
-  const foundSupportedLanguage = APP_I18N_OPTIONS.supportedLangs.find(
-    (lang): lang is SupportedLanguageCodes => lang === language,
-  );
-
-  if (!foundSupportedLanguage) {
-    return null;
-  }
-
-  return foundSupportedLanguage;
+/**
+ * Parse a message descriptor (in this case, just return the string as-is)
+ * This is a no-op function for non-internationalized setup
+ */
+export const parseMessageDescriptor = (
+  _: any,
+  message: MessageDescriptor | string
+): string => {
+  return typeof message === 'string' ? message : String(message);
 };
 
 /**
- * Extracts the language from the `accept-language` header.
+ * Simple message function that returns the string as-is
+ * This replaces the msg"string" macro functionality
  */
-export const extractLocaleDataFromHeaders = (
-  headers: Headers,
-): { lang: SupportedLanguageCodes | null; locales: string[] } => {
-  const headerLocales = (headers.get('accept-language') ?? '').split(',');
-
-  const language = parseLanguageFromLocale(headerLocales[0]);
-
-  return {
-    lang: language,
-    locales: [headerLocales[0]],
-  };
-};
-
-type ExtractLocaleDataOptions = {
-  headers: Headers;
+export const msg = (template: TemplateStringsArray, ...values: any[]): string => {
+  return template.reduce((result, string, i) => {
+    return result + string + (values[i] || '');
+  }, '');
 };
 
 /**
- * Extract the supported language from the header.
- *
- * Will return the default fallback language if not found.
+ * Simple i18n function that returns the string as-is
+ * This replaces the i18n."string" macro functionality
  */
-export const extractLocaleData = ({ headers }: ExtractLocaleDataOptions): I18nLocaleData => {
-  const headerLocales = (headers.get('accept-language') ?? '').split(',');
-
-  const unknownLanguages = headerLocales
-    .map((locale) => parseLanguageFromLocale(locale))
-    .filter((value): value is SupportedLanguageCodes => value !== null);
-
-  // Filter out locales that are not valid.
-  const languages = (unknownLanguages ?? []).filter((language) => {
-    try {
-      new Intl.Locale(language);
-      return true;
-    } catch {
-      return false;
-    }
-  });
-
-  return {
-    lang: languages[0] || APP_I18N_OPTIONS.sourceLang,
-    locales: headerLocales,
-  };
-};
-
-export const parseMessageDescriptor = (_: I18n['_'], value: string | MessageDescriptor) => {
-  return typeof value === 'string' ? value : _(value);
-};
-
-export const parseMessageDescriptorMacro = (
-  t: (descriptor: MacroMessageDescriptor) => string,
-  value: string | MessageDescriptor,
-) => {
-  return typeof value === 'string' ? value : t(value);
+export const i18n = {
+  get: (key: string): string => key,
+  t: (key: string): string => key,
 };

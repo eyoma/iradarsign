@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { type Field, type Recipient, type Signature, SigningStatus } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
@@ -41,7 +38,6 @@ export type RecipientItemProps = {
 };
 
 export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -62,22 +58,22 @@ export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProp
         cell: ({ row }) => <div>{row.original.id}</div>,
       },
       {
-        header: _(msg`Type`),
+        header: "Type",
         accessorKey: 'type',
         cell: ({ row }) => <div>{row.original.type}</div>,
       },
       {
-        header: _(msg`Inserted`),
+        header: "Inserted",
         accessorKey: 'inserted',
         cell: ({ row }) => <div>{row.original.inserted ? 'True' : 'False'}</div>,
       },
       {
-        header: _(msg`Value`),
+        header: "Value",
         accessorKey: 'customText',
         cell: ({ row }) => <div>{row.original.customText}</div>,
       },
       {
-        header: _(msg`Signature`),
+        header: "Signature",
         accessorKey: 'signature',
         cell: ({ row }) => (
           <div>
@@ -107,14 +103,14 @@ export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProp
       });
 
       toast({
-        title: _(msg`Recipient updated`),
-        description: _(msg`The recipient has been updated successfully`),
+        title: "Recipient updated",
+        description: "The recipient has been updated successfully",
       });
 
       await revalidate();
     } catch (error) {
       toast({
-        title: _(msg`Failed to update recipient`),
+        title: "Failed to update recipient",
         description: error.message,
         variant: 'destructive',
       });
@@ -137,7 +133,7 @@ export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProp
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel required>
-                    <Trans>Name</Trans>
+                    Name
                   </FormLabel>
 
                   <FormControl>
@@ -155,7 +151,7 @@ export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProp
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel required>
-                    <Trans>Email</Trans>
+                    Email
                   </FormLabel>
 
                   <FormControl>
@@ -169,7 +165,7 @@ export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProp
 
             <div>
               <Button type="submit" loading={form.formState.isSubmitting}>
-                <Trans>Update Recipient</Trans>
+                Update Recipient
               </Button>
             </div>
           </fieldset>
@@ -179,7 +175,7 @@ export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProp
       <hr className="my-4" />
 
       <h2 className="mb-4 text-lg font-semibold">
-        <Trans>Fields</Trans>
+        Fields
       </h2>
 
       <DataTable columns={columns} data={recipient.fields} />

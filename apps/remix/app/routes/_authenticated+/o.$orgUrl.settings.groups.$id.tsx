@@ -1,9 +1,6 @@
 import { useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 import { Loader } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -47,8 +44,6 @@ import { SettingsHeader } from '~/components/general/settings-header';
 import type { Route } from './+types/o.$orgUrl.settings.groups.$id';
 
 export default function OrganisationGroupSettingsPage({ params }: Route.ComponentProps) {
-  const { t } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const groupId = params.id;
@@ -87,16 +82,16 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
         errorCode={404}
         errorCodeMap={{
           404: {
-            heading: msg`Organisation group not found`,
-            subHeading: msg`404 Organisation group not found`,
-            message: msg`The organisation group you are looking for may have been removed, renamed or may have never
-                    existed.`,
+            heading: "Organisation group not found",
+            subHeading: "404 Organisation group not found",
+            message: "The organisation group you are looking for may have been removed, renamed or may have never
+                    existed.",
           },
         }}
         primaryButton={
           <Button asChild>
             <Link to={`/o/${organisation.url}/settings/groups`}>
-              <Trans>Go back</Trans>
+              Go back
             </Link>
           </Button>
         }
@@ -108,15 +103,15 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
   return (
     <div>
       <SettingsHeader
-        title={t`Organisation Group Settings`}
-        subtitle={t`Manage your organisation group settings.`}
+        title={"Organisation Group Settings"}
+        subtitle={"Manage your organisation group settings."}
       >
         <OrganisationGroupDeleteDialog
           organisationGroupId={groupId}
           organisationGroupName={group.name || ''}
           trigger={
-            <Button variant="destructive" title={t`Remove organisation group`}>
-              <Trans>Delete</Trans>
+            <Button variant="destructive" title={"Remove organisation group"}>
+              Delete
             </Button>
           }
         />
@@ -128,7 +123,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
 }
 
 const ZUpdateOrganisationGroupFormSchema = z.object({
-  name: z.string().min(1, msg`Name is required`.id),
+  name: z.string().min(1, "Name is required".id),
   organisationRole: z.nativeEnum(OrganisationMemberRole),
   memberIds: z.array(z.string()),
 });
@@ -142,8 +137,6 @@ type OrganisationGroupFormOptions = {
 
 const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroupFormOptions) => {
   const { toast } = useToast();
-  const { t } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const { mutateAsync: updateOrganisationGroup } = trpc.organisation.group.update.useMutation();
@@ -167,8 +160,8 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
       });
 
       toast({
-        title: t`Success`,
-        description: t`Group has been updated successfully`,
+        title: "Success",
+        description: "Group has been updated successfully",
         duration: 5000,
       });
     } catch (err) {
@@ -176,8 +169,8 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
       console.error(error);
 
       toast({
-        title: t`An error occurred`,
-        description: t`We couldn't update the group. Please try again.`,
+        title: "An error occurred",
+        description: "We couldn't update the group. Please try again.",
         variant: 'destructive',
       });
     }
@@ -186,11 +179,11 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
   const teamGroupsColumns = useMemo(() => {
     return [
       {
-        header: t`Team`,
+        header: "Team",
         accessorKey: 'name',
       },
       {
-        header: t`Team Role`,
+        header: "Team Role",
         cell: ({ row }) => t(TEAM_MEMBER_ROLE_MAP[row.original.teamRole]),
       },
     ] satisfies DataTableColumnDef<OrganisationGroupFormOptions['group']['teams'][number]>[];
@@ -205,7 +198,7 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
           render={({ field }) => (
             <FormItem>
               <FormLabel required>
-                <Trans>Group Name</Trans>
+                Group Name
               </FormLabel>
               <FormControl>
                 <Input {...field} />
@@ -221,7 +214,7 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
           render={({ field }) => (
             <FormItem>
               <FormLabel required>
-                <Trans>Organisation Role</Trans>
+                Organisation Role
               </FormLabel>
               <FormControl>
                 <Select {...field} onValueChange={field.onChange}>
@@ -242,9 +235,9 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
               </FormControl>
               <FormMessage />
               <FormDescription>
-                <Trans>
+                
                   The organisation role that will be applied to all members in this group.
-                </Trans>
+                
               </FormDescription>
             </FormItem>
           )}
@@ -256,7 +249,7 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                <Trans>Members</Trans>
+                Members
               </FormLabel>
               <FormControl>
                 <MultiSelectCombobox
@@ -267,11 +260,11 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
                   selectedValues={field.value}
                   onChange={field.onChange}
                   className="w-full"
-                  emptySelectionPlaceholder={t`Select members`}
+                  emptySelectionPlaceholder={"Select members"}
                 />
               </FormControl>
               <FormDescription>
-                <Trans>Select the members to include in this group</Trans>
+                Select the members to include in this group
               </FormDescription>
             </FormItem>
           )}
@@ -279,7 +272,7 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
 
         <div>
           <FormLabel>
-            <Trans>Team Assignments</Trans>
+            Team Assignments
           </FormLabel>
 
           <div className="my-2">
@@ -287,13 +280,13 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
           </div>
 
           <FormDescription>
-            <Trans>Teams that this organisation group is currently assigned to</Trans>
+            Teams that this organisation group is currently assigned to
           </FormDescription>
         </div>
 
         <div className="flex justify-end">
           <Button type="submit" loading={form.formState.isSubmitting}>
-            <Trans>Update</Trans>
+            Update
           </Button>
         </div>
       </form>

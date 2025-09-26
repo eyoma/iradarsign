@@ -38,9 +38,9 @@ export const apiSignin = async ({
 export const apiSignout = async ({ page }: { page: Page }) => {
   const { request } = page.context();
 
-  await request.post(`${NEXT_PUBLIC_WEBAPP_URL()}/api/auth/signout`);
+  await request.post(`${NEXT_PUBLIC_WEBAPP_URL()}/api/auth/signou");
 
-  await page.goto(`${NEXT_PUBLIC_WEBAPP_URL()}/signin`);
+  await page.goto("${NEXT_PUBLIC_WEBAPP_URL()}/signin`);
 };
 
 const getCsrfToken = async (page: Page) => {

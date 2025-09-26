@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -30,7 +27,6 @@ export type SendConfirmationEmailFormProps = {
 };
 
 export const SendConfirmationEmailForm = ({ className }: SendConfirmationEmailFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const form = useForm<TSendConfirmationEmailFormSchema>({
@@ -47,10 +43,10 @@ export const SendConfirmationEmailForm = ({ className }: SendConfirmationEmailFo
       await authClient.emailPassword.resendVerifyEmail({ email });
 
       toast({
-        title: _(msg`Confirmation email sent`),
-        description: _(
-          msg`A confirmation email has been sent, and it should arrive in your inbox shortly.`,
-        ),
+        title: "Confirmation email sen",
+        description: 
+          msg"A confirmation email has been sent, and it should arrive in your inbox shortly.",
+        ,
         duration: 5000,
       });
 
@@ -58,8 +54,8 @@ export const SendConfirmationEmailForm = ({ className }: SendConfirmationEmailFo
     } catch (err) {
       toast({
         variant: 'destructive',
-        title: _(msg`An error occurred while sending your confirmation email`),
-        description: _(msg`Please try again and make sure you enter the correct email address.`),
+        title: "An error occurred while sending your confirmation email",
+        description: "Please try again and make sure you enter the correct email address.",
       });
     }
   };
@@ -77,7 +73,7 @@ export const SendConfirmationEmailForm = ({ className }: SendConfirmationEmailFo
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Email address</Trans>
+                  Email address
                 </FormLabel>
                 <FormControl>
                   <Input type="email" {...field} />
@@ -89,7 +85,7 @@ export const SendConfirmationEmailForm = ({ className }: SendConfirmationEmailFo
           <FormMessage />
 
           <Button size="lg" type="submit" disabled={isSubmitting} loading={isSubmitting}>
-            <Trans>Send confirmation email</Trans>
+            Send confirmation email
           </Button>
         </fieldset>
       </form>

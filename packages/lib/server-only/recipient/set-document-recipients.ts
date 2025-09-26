@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import type { Recipient } from '@prisma/client';
 import { RecipientRole } from '@prisma/client';
 import { SendStatus, SigningStatus } from '@prisma/client';
@@ -324,7 +323,7 @@ export const setDocumentRecipients = async ({
           },
           from: senderEmail,
           replyTo: replyToEmail,
-          subject: i18n._(msg`You have been removed from a document`),
+          subject: i18n."You have been removed from a documen",
           html,
           text,
         });
@@ -350,7 +349,7 @@ export const setDocumentRecipients = async ({
 };
 
 /**
- * If you change this you MUST update the `hasRecipientBeenChanged` function.
+ * If you change this you MUST update the "hasRecipientBeenChanged" function.
  */
 type RecipientData = {
   id?: number | null;

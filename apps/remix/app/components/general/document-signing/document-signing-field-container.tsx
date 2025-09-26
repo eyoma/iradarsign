@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { FieldType } from '@prisma/client';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { X } from 'lucide-react';
@@ -168,7 +167,7 @@ export const DocumentSigningFieldContainer = ({
             >
               {tooltipText && <p>{tooltipText}</p>}
 
-              <Trans>Remove</Trans>
+              Remove
               <TooltipArrow />
             </TooltipContent>
           </Tooltip>

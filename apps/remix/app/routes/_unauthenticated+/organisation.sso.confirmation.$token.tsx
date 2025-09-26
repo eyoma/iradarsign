@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { Trans } from '@lingui/react/macro';
 import { AlertTriangle, Building2, Database, Eye, Settings, UserCircle2 } from 'lucide-react';
 import { data, isRouteErrorResponse } from 'react-router';
 import { useNavigate } from 'react-router';
@@ -39,9 +37,9 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   const errorMap = match(errorCode)
     .with('invalid-token', () => ({
-      subHeading: msg`400 Error`,
-      heading: msg`Invalid Token`,
-      message: msg`The token is invalid or has expired.`,
+      subHeading: "400 Error",
+      heading: "Invalid Token",
+      message: "The token is invalid or has expired.",
     }))
     .otherwise(() => defaultErrorCodeMap[500]);
 
@@ -170,20 +168,20 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
         <CardHeader>
           <CardTitle>
             {type === 'link' ? (
-              <Trans>Account Linking Request</Trans>
+              Account Linking Request
             ) : (
-              <Trans>Account Creation Request</Trans>
+              Account Creation Request
             )}
           </CardTitle>
           <CardDescription>
             {type === 'link' ? (
-              <Trans>
+              
                 An organisation wants to link your account. Please review the details below.
-              </Trans>
+              
             ) : (
-              <Trans>
+              
                 An organisation wants to create an account for you. Please review the details below.
-              </Trans>
+              
             )}
           </CardDescription>
         </CardHeader>
@@ -193,7 +191,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
           <div className="space-y-3">
             <h3 className="text-muted-foreground flex items-center gap-2 font-semibold">
               <UserCircle2 className="h-4 w-4" />
-              <Trans>Your Account</Trans>
+              Your Account
             </h3>
             <div className="bg-muted/50 flex items-center justify-between gap-3 rounded-lg p-3">
               <AvatarWithText
@@ -204,7 +202,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
               />
 
               <Badge variant="secondary">
-                <Trans>Account</Trans>
+                Account
               </Badge>
             </div>
           </div>
@@ -215,7 +213,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
           <div className="space-y-3">
             <h3 className="text-muted-foreground flex items-center gap-2 font-semibold">
               <Building2 className="h-4 w-4" />
-              <Trans>Requesting Organisation</Trans>
+              Requesting Organisation
             </h3>
             <div className="bg-muted/50 flex items-center justify-between gap-3 rounded-lg p-3">
               <AvatarWithText
@@ -226,7 +224,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
               />
 
               <Badge variant="secondary">
-                <Trans>Organisation</Trans>
+                Organisation
               </Badge>
             </div>
           </div>
@@ -237,56 +235,56 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
           <div className="space-y-3">
             <h3 className="text-muted-foreground flex items-center gap-2 font-semibold">
               <AlertTriangle className="h-4 w-4" />
-              <Trans>Important: What This Means</Trans>
+              Important: What This Means
             </h3>
             <div className="space-y-3 rounded-lg border p-4">
               <p className="text-sm font-medium">
-                <Trans>
+                
                   By accepting this request, you grant {organisation.name} the following
                   permissions:
-                </Trans>
+                
               </p>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2">
                   <Eye className="mt-0.5 h-4 w-4 flex-shrink-0" />
                   <span>
-                    <Trans>
+                    
                       <span className="text-muted-foreground font-semibold">
                         Full account access:
                       </span>{' '}
                       View all your profile information, settings, and activity
-                    </Trans>
+                    
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Settings className="mt-0.5 h-4 w-4 flex-shrink-0" />
                   <span>
-                    <Trans>
+                    
                       <span className="text-muted-foreground font-semibold">
                         Account management:
                       </span>{' '}
                       Modify your account settings, permissions, and preferences
-                    </Trans>
+                    
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Database className="mt-0.5 h-4 w-4 flex-shrink-0" />
                   <span>
-                    <Trans>
+                    
                       <span className="text-muted-foreground font-semibold">Data access:</span>{' '}
                       Access all data associated with your account
-                    </Trans>
+                    
                   </span>
                 </li>
               </ul>
 
               <Alert variant="warning" className="mt-3">
                 <AlertDescription>
-                  <Trans>
+                  
                     This organisation will have administrative control over your account. You can
                     revoke this access later, but they will retain access to any data they've
                     already collected.
-                  </Trans>
+                  
                 </AlertDescription>
               </Alert>
             </div>
@@ -305,7 +303,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
               className="text-muted-foreground ml-2 flex flex-row items-center text-sm"
               htmlFor={`accept-conditions`}
             >
-              <Trans>I agree to link my account with this organization</Trans>
+              I agree to link my account with this organization
             </label>
           </div>
         </CardContent>
@@ -316,7 +314,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
             disabled={isDeclining || isLinking}
             onClick={() => declineLinkOrganisationAccount({ token })}
           >
-            <Trans>Decline</Trans>
+            Decline
           </Button>
 
           <Button
@@ -324,7 +322,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
             loading={isLinking}
             onClick={() => linkOrganisationAccount({ token })}
           >
-            <Trans>Accept & Link Account</Trans>
+            Accept & Link Account
           </Button>
         </CardFooter>
       </Card>

@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { InfoIcon } from 'lucide-react';
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
@@ -13,43 +12,43 @@ export const DocumentSignatureSettingsTooltip = () => {
       <TooltipContent className="text-foreground max-w-md space-y-2 p-4">
         <h2>
           <strong>
-            <Trans>Signature types</Trans>
+            Signature types
           </strong>
         </h2>
 
         <p>
-          <Trans>
+          
             The types of signatures that recipients are allowed to use when signing the document.
-          </Trans>
+          
         </p>
 
         <ul className="ml-3.5 list-outside list-disc space-y-0.5 py-2">
           <li>
-            <Trans>
+            
               <strong>
-                <Trans>Drawn</Trans>
+                Drawn
               </strong>
               {' - '}
-              <Trans>A signature that is drawn using a mouse or stylus.</Trans>
-            </Trans>
+              A signature that is drawn using a mouse or stylus.
+            
           </li>
           <li>
-            <Trans>
+            
               <strong>
-                <Trans>Typed</Trans>
+                Typed
               </strong>
               {' - '}
-              <Trans>A signature that is typed using a keyboard.</Trans>
-            </Trans>
+              A signature that is typed using a keyboard.
+            
           </li>
           <li>
-            <Trans>
+            
               <strong>
-                <Trans>Uploaded</Trans>
+                Uploaded
               </strong>
               {' - '}
-              <Trans>A signature that is uploaded from a file.</Trans>
-            </Trans>
+              A signature that is uploaded from a file.
+            
           </li>
         </ul>
       </TooltipContent>

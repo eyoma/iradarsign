@@ -1,4 +1,3 @@
-import { Plural } from '@lingui/react/macro';
 import { UsersIcon } from 'lucide-react';
 import { redirect } from 'react-router';
 import { match } from 'ts-pattern';

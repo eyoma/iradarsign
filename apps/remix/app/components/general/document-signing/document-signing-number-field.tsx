@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useRevalidator } from 'react-router';
 
 import { validateNumberField } from '@documenso/lib/advanced-fields-validation/validate-number';
@@ -50,7 +47,6 @@ export const DocumentSigningNumberField = ({
   onSignField,
   onUnsignField,
 }: DocumentSigningNumberFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -153,10 +149,10 @@ export const DocumentSigningNumberField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
+        title: "Error",
         description: isAssistantMode
-          ? _(msg`An error occurred while signing as assistant.`)
-          : _(msg`An error occurred while signing the document.`),
+          ? "An error occurred while signing as assistant."
+          : "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -204,8 +200,8 @@ export const DocumentSigningNumberField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the field.`),
+        title: "Error",
+        description: "An error occurred while removing the field.",
         variant: 'destructive',
       });
     }
@@ -261,7 +257,7 @@ export const DocumentSigningNumberField = ({
       <Dialog open={showNumberModal} onOpenChange={setShowNumberModal}>
         <DialogContent>
           <DialogTitle>
-            {parsedFieldMeta?.label ? parsedFieldMeta?.label : <Trans>Number</Trans>}
+            {parsedFieldMeta?.label ? parsedFieldMeta?.label : Number}
           </DialogTitle>
 
           <div>
@@ -318,7 +314,7 @@ export const DocumentSigningNumberField = ({
                   setLocalNumber(parsedFieldMeta?.value ? String(parsedFieldMeta.value) : '');
                 }}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button
@@ -327,7 +323,7 @@ export const DocumentSigningNumberField = ({
                 disabled={!localNumber || userInputHasErrors}
                 onClick={() => onDialogSignClick()}
               >
-                <Trans>Save</Trans>
+                Save
               </Button>
             </div>
           </DialogFooter>

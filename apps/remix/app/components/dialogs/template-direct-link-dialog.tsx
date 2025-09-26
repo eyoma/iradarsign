@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import {
   type Recipient,
   RecipientRole,
@@ -64,7 +61,6 @@ export const TemplateDirectLinkDialog = ({
 }: TemplateDirectLinkDialogProps) => {
   const { toast } = useToast();
   const { quota, remaining } = useLimits();
-  const { _ } = useLingui();
   const { revalidate } = useRevalidator();
 
   const [, copy] = useCopyToClipboard();
@@ -103,8 +99,8 @@ export const TemplateDirectLinkDialog = ({
       setSelectedRecipientId(null);
 
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`Unable to create direct template access. Please try again later.`),
+        title: "Something went wrong",
+        description: "Unable to create direct template access. Please try again later.",
         variant: 'destructive',
       });
     },
@@ -115,21 +111,21 @@ export const TemplateDirectLinkDialog = ({
       onSuccess: async (data) => {
         await revalidate();
 
-        const enabledDescription = msg`Direct link signing has been enabled`;
-        const disabledDescription = msg`Direct link signing has been disabled`;
+        const enabledDescription = "Direct link signing has been enabled";
+        const disabledDescription = "Direct link signing has been disabled";
 
         toast({
-          title: _(msg`Success`),
-          description: _(data.enabled ? enabledDescription : disabledDescription),
+          title: "Success",
+          description: data.enabled ? enabledDescription : disabledDescription,
         });
       },
       onError: (_ctx, data) => {
-        const enabledDescription = msg`An error occurred while enabling direct link signing.`;
-        const disabledDescription = msg`An error occurred while disabling direct link signing.`;
+        const enabledDescription = "An error occurred while enabling direct link signing.";
+        const disabledDescription = "An error occurred while disabling direct link signing.";
 
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(data.enabled ? enabledDescription : disabledDescription),
+          title: "Something went wrong",
+          description: data.enabled ? enabledDescription : disabledDescription,
           variant: 'destructive',
         });
       },
@@ -144,8 +140,8 @@ export const TemplateDirectLinkDialog = ({
         setToken(null);
 
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Direct template link deleted`),
+          title: "Success",
+          description: "Direct template link deleted",
           duration: 5000,
         });
 
@@ -153,10 +149,10 @@ export const TemplateDirectLinkDialog = ({
       },
       onError: () => {
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(
-            msg`We encountered an error while removing the direct template link. Please try again later.`,
-          ),
+          title: "Something went wrong",
+          description: 
+            "We encountered an error while removing the direct template link. Please try again later.",
+          ,
           variant: 'destructive',
         });
       },
@@ -165,8 +161,8 @@ export const TemplateDirectLinkDialog = ({
   const onCopyClick = async (token: string) =>
     copy(formatDirectTemplatePath(token)).then(() => {
       toast({
-        title: _(msg`Copied to clipboard`),
-        description: _(msg`The direct link has been copied to your clipboard`),
+        title: "Copied to clipboard",
+        description: "The direct link has been copied to your clipboard",
       });
     });
 
@@ -203,11 +199,11 @@ export const TemplateDirectLinkDialog = ({
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>
-                    <Trans>Create Direct Signing Link</Trans>
+                    Create Direct Signing Link
                   </DialogTitle>
 
                   <DialogDescription>
-                    <Trans>Here's how it works:</Trans>
+                    Here's how it works:
                   </DialogDescription>
                 </DialogHeader>
 
@@ -220,8 +216,8 @@ export const TemplateDirectLinkDialog = ({
                         </div>
                       </div>
 
-                      <h3 className="font-semibold">{_(step.title)}</h3>
-                      <p className="text-muted-foreground mt-1 text-sm">{_(step.description)}</p>
+                      <h3 className="font-semibold">{step.title}</h3>
+                      <p className="text-muted-foreground mt-1 text-sm">{step.description}</p>
                     </li>
                   ))}
                 </ul>
@@ -229,13 +225,13 @@ export const TemplateDirectLinkDialog = ({
                 {remaining.directTemplates === 0 && (
                   <Alert variant="warning">
                     <AlertTitle>
-                      <Trans>
+                      
                         Direct template link usage exceeded ({quota.directTemplates}/
                         {quota.directTemplates})
-                      </Trans>
+                      
                     </AlertTitle>
                     <AlertDescription>
-                      <Trans>
+                      
                         You have reached the maximum limit of {quota.directTemplates} direct
                         templates.{' '}
                         <Link
@@ -244,7 +240,7 @@ export const TemplateDirectLinkDialog = ({
                         >
                           Upgrade your account to continue!
                         </Link>
-                      </Trans>
+                      
                     </AlertDescription>
                   </Alert>
                 )}
@@ -252,7 +248,7 @@ export const TemplateDirectLinkDialog = ({
                 {remaining.directTemplates !== 0 && (
                   <DialogFooter className="mx-auto mt-4">
                     <Button type="button" onClick={() => setCurrentStep('SELECT_RECIPIENT')}>
-                      <Trans> Enable direct link signing</Trans>
+                       Enable direct link signing
                     </Button>
                   </DialogFooter>
                 )}
@@ -268,11 +264,11 @@ export const TemplateDirectLinkDialog = ({
 
                 <DialogHeader>
                   <DialogTitle>
-                    <Trans>Choose Direct Link Recipient</Trans>
+                    Choose Direct Link Recipient
                   </DialogTitle>
 
                   <DialogDescription>
-                    <Trans>Choose an existing recipient from below to continue</Trans>
+                    Choose an existing recipient from below to continue
                   </DialogDescription>
                 </DialogHeader>
 
@@ -281,10 +277,10 @@ export const TemplateDirectLinkDialog = ({
                     <TableHeader>
                       <TableRow>
                         <TableHead>
-                          <Trans>Recipient</Trans>
+                          Recipient
                         </TableHead>
                         <TableHead>
-                          <Trans>Role</Trans>
+                          Role
                         </TableHead>
                         <TableHead></TableHead>
                       </TableRow>
@@ -294,7 +290,7 @@ export const TemplateDirectLinkDialog = ({
                         <TableRow>
                           <TableCell colSpan={3} className="h-16 text-center">
                             <p className="text-muted-foreground">
-                              <Trans>No valid recipients found</Trans>
+                              No valid recipients found
                             </p>
                           </TableCell>
                         </TableRow>
@@ -314,7 +310,7 @@ export const TemplateDirectLinkDialog = ({
                           </TableCell>
 
                           <TableCell className="text-muted-foreground text-sm">
-                            {_(RECIPIENT_ROLES_DESCRIPTION[row.role].roleName)}
+                            {RECIPIENT_ROLES_DESCRIPTION[row.role].roleName}
                           </TableCell>
 
                           <TableCell>
@@ -338,7 +334,7 @@ export const TemplateDirectLinkDialog = ({
                     <div className="flex flex-col items-center justify-center">
                       {validDirectTemplateRecipients.length !== 0 && (
                         <p className="text-muted-foreground text-sm">
-                          <Trans>Or</Trans>
+                          Or
                         </p>
                       )}
 
@@ -352,7 +348,7 @@ export const TemplateDirectLinkDialog = ({
                           })
                         }
                       >
-                        <Trans>Create one automatically</Trans>
+                        Create one automatically
                       </Button>
                     </div>
                   </DialogFooter>
@@ -363,27 +359,27 @@ export const TemplateDirectLinkDialog = ({
               <DialogContent className="relative">
                 <DialogHeader>
                   <DialogTitle>
-                    <Trans>Direct Link Signing</Trans>
+                    Direct Link Signing
                   </DialogTitle>
 
                   <DialogDescription>
-                    <Trans>Manage the direct link signing for this template</Trans>
+                    Manage the direct link signing for this template
                   </DialogDescription>
                 </DialogHeader>
 
                 <div>
                   <div className="flex flex-row items-center justify-between">
                     <Label className="flex flex-row">
-                      <Trans>Enable Direct Link Signing</Trans>
+                      Enable Direct Link Signing
                       <Tooltip>
                         <TooltipTrigger tabIndex={-1} className="ml-2">
                           <InfoIcon className="h-4 w-4" />
                         </TooltipTrigger>
                         <TooltipContent className="text-foreground z-9999 max-w-md p-4">
-                          <Trans>
+                          
                             Disabling direct link signing will prevent anyone from accessing the
                             link.
-                          </Trans>
+                          
                         </TooltipContent>
                       </Tooltip>
                     </Label>
@@ -397,7 +393,7 @@ export const TemplateDirectLinkDialog = ({
 
                   <div className="mt-2">
                     <Label htmlFor="copy-direct-link">
-                      <Trans>Copy Shareable Link</Trans>
+                      Copy Shareable Link
                     </Label>
 
                     <div className="relative mt-1">
@@ -431,7 +427,7 @@ export const TemplateDirectLinkDialog = ({
                     loading={isDeletingTemplateDirectLink}
                     onClick={() => setCurrentStep('CONFIRM_DELETE')}
                   >
-                    <Trans>Remove</Trans>
+                    Remove
                   </Button>
 
                   <Button
@@ -446,7 +442,7 @@ export const TemplateDirectLinkDialog = ({
                       onOpenChange(false);
                     }}
                   >
-                    <Trans>Save</Trans>
+                    Save
                   </Button>
                 </DialogFooter>
               </DialogContent>
@@ -455,14 +451,14 @@ export const TemplateDirectLinkDialog = ({
               <DialogContent className="relative">
                 <DialogHeader>
                   <DialogTitle>
-                    <Trans>Are you sure?</Trans>
+                    Are you sure?
                   </DialogTitle>
 
                   <DialogDescription>
-                    <Trans>
+                    
                       Please note that proceeding will remove direct linking recipient and turn it
                       into a placeholder.
-                    </Trans>
+                    
                   </DialogDescription>
                 </DialogHeader>
 
@@ -472,7 +468,7 @@ export const TemplateDirectLinkDialog = ({
                     variant="secondary"
                     onClick={() => setCurrentStep('MANAGE')}
                   >
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   <Button
@@ -481,7 +477,7 @@ export const TemplateDirectLinkDialog = ({
                     loading={isDeletingTemplateDirectLink}
                     onClick={() => void deleteTemplateDirectLink({ templateId: template.id })}
                   >
-                    <Trans>Confirm</Trans>
+                    Confirm
                   </Button>
                 </DialogFooter>
               </DialogContent>

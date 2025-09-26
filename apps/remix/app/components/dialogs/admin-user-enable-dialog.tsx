@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { match } from 'ts-pattern';
 
 import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
@@ -29,8 +26,6 @@ export type AdminUserEnableDialogProps = {
 
 export const AdminUserEnableDialog = ({ className, userToEnable }: AdminUserEnableDialogProps) => {
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const [email, setEmail] = useState('');
 
   const { mutateAsync: enableUser, isPending: isEnablingUser } =
@@ -43,21 +38,21 @@ export const AdminUserEnableDialog = ({ className, userToEnable }: AdminUserEnab
       });
 
       toast({
-        title: _(msg`Account enabled`),
-        description: _(msg`The account has been enabled successfully.`),
+        title: "Account enabled",
+        description: "The account has been enabled successfully.",
         duration: 5000,
       });
     } catch (err) {
       const error = AppError.parseError(err);
 
       const errorMessage = match(error.code)
-        .with(AppErrorCode.NOT_FOUND, () => msg`User not found.`)
-        .with(AppErrorCode.UNAUTHORIZED, () => msg`You are not authorized to enable this user.`)
-        .otherwise(() => msg`An error occurred while enabling the user.`);
+        .with(AppErrorCode.NOT_FOUND, () => "User not found.")
+        .with(AppErrorCode.UNAUTHORIZED, () => "You are not authorized to enable this user.")
+        .otherwise(() => "An error occurred while enabling the user.");
 
       toast({
-        title: _(msg`Error`),
-        description: _(errorMessage),
+        title: "Error",
+        description: errorMessage,
         variant: 'destructive',
         duration: 7500,
       });
@@ -73,10 +68,10 @@ export const AdminUserEnableDialog = ({ className, userToEnable }: AdminUserEnab
         <div>
           <AlertTitle>Enable Account</AlertTitle>
           <AlertDescription className="mr-2">
-            <Trans>
+            
               Enabling the account results in the user being able to use the account again, and all
               the related features such as webhooks, teams, and API keys for example.
-            </Trans>
+            
           </AlertDescription>
         </div>
 
@@ -84,23 +79,23 @@ export const AdminUserEnableDialog = ({ className, userToEnable }: AdminUserEnab
           <Dialog>
             <DialogTrigger asChild>
               <Button>
-                <Trans>Enable Account</Trans>
+                Enable Account
               </Button>
             </DialogTrigger>
 
             <DialogContent>
               <DialogHeader className="space-y-4">
                 <DialogTitle>
-                  <Trans>Enable Account</Trans>
+                  Enable Account
                 </DialogTitle>
               </DialogHeader>
 
               <div>
                 <DialogDescription>
-                  <Trans>
+                  
                     To confirm, please enter the accounts email address <br />({userToEnable.email}
                     ).
-                  </Trans>
+                  
                 </DialogDescription>
 
                 <Input
@@ -117,7 +112,7 @@ export const AdminUserEnableDialog = ({ className, userToEnable }: AdminUserEnab
                   loading={isEnablingUser}
                   disabled={email !== userToEnable.email}
                 >
-                  <Trans>Enable account</Trans>
+                  Enable account
                 </Button>
               </DialogFooter>
             </DialogContent>

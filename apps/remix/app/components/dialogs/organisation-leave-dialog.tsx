@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type { OrganisationMemberRole } from '@prisma/client';
 
 import { ORGANISATION_MEMBER_ROLE_MAP } from '@documenso/lib/constants/organisations-translations';
@@ -38,15 +36,14 @@ export const OrganisationLeaveDialog = ({
 }: OrganisationLeaveDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const { mutateAsync: leaveOrganisation, isPending: isLeavingOrganisation } =
     trpc.organisation.leave.useMutation({
       onSuccess: () => {
         toast({
-          title: t`Success`,
-          description: t`You have successfully left this organisation.`,
+          title: "Success",
+          description: "You have successfully left this organisation.",
           duration: 5000,
         });
 
@@ -54,8 +51,8 @@ export const OrganisationLeaveDialog = ({
       },
       onError: () => {
         toast({
-          title: t`An unknown error occurred`,
-          description: t`We encountered an unknown error while attempting to leave this organisation. Please try again later.`,
+          title: "An unknown error occurred",
+          description: "We encountered an unknown error while attempting to leave this organisation. Please try again later.",
           variant: 'destructive',
           duration: 10000,
         });
@@ -67,7 +64,7 @@ export const OrganisationLeaveDialog = ({
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="destructive">
-            <Trans>Leave organisation</Trans>
+            Leave organisation
           </Button>
         )}
       </DialogTrigger>
@@ -75,11 +72,11 @@ export const OrganisationLeaveDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>You are about to leave the following organisation.</Trans>
+            You are about to leave the following organisation.
           </DialogDescription>
         </DialogHeader>
 
@@ -96,7 +93,7 @@ export const OrganisationLeaveDialog = ({
         <fieldset disabled={isLeavingOrganisation}>
           <DialogFooter>
             <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
 
             <Button
@@ -105,7 +102,7 @@ export const OrganisationLeaveDialog = ({
               loading={isLeavingOrganisation}
               onClick={async () => leaveOrganisation({ organisationId })}
             >
-              <Trans>Leave</Trans>
+              Leave
             </Button>
           </DialogFooter>
         </fieldset>

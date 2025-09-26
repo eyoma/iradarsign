@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
-
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
 import { trpc } from '@documenso/trpc/react';
 import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
@@ -31,7 +28,6 @@ export const OrganisationEmailDeleteDialog = ({
 }: OrganisationEmailDeleteDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const organisation = useCurrentOrganisation();
@@ -40,8 +36,8 @@ export const OrganisationEmailDeleteDialog = ({
     trpc.enterprise.organisation.email.delete.useMutation({
       onSuccess: () => {
         toast({
-          title: t`Success`,
-          description: t`You have successfully removed this email from the organisation.`,
+          title: "Success",
+          description: "You have successfully removed this email from the organisation.",
           duration: 5000,
         });
 
@@ -49,8 +45,8 @@ export const OrganisationEmailDeleteDialog = ({
       },
       onError: () => {
         toast({
-          title: t`An unknown error occurred`,
-          description: t`We encountered an unknown error while attempting to remove this email. Please try again later.`,
+          title: "An unknown error occurred",
+          description: "We encountered an unknown error while attempting to remove this email. Please try again later.",
           variant: 'destructive',
           duration: 10000,
         });
@@ -62,7 +58,7 @@ export const OrganisationEmailDeleteDialog = ({
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="secondary">
-            <Trans>Delete email</Trans>
+            Delete email
           </Button>
         )}
       </DialogTrigger>
@@ -70,14 +66,14 @@ export const OrganisationEmailDeleteDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to remove the following email from{' '}
               <span className="font-semibold">{organisation.name}</span>.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -88,7 +84,7 @@ export const OrganisationEmailDeleteDialog = ({
         <fieldset disabled={isDeleting}>
           <DialogFooter>
             <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
 
             <Button
@@ -101,7 +97,7 @@ export const OrganisationEmailDeleteDialog = ({
                 })
               }
             >
-              <Trans>Delete</Trans>
+              Delete
             </Button>
           </DialogFooter>
         </fieldset>

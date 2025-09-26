@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import type { Field, Recipient, Signature } from '@prisma/client';
 import { FieldType } from '@prisma/client';
 import { DateTime } from 'luxon';
@@ -228,7 +227,7 @@ export const DirectTemplateSigningForm = ({
         >
           {validateUninsertedFields && uninsertedFields[0] && (
             <FieldToolTip key={uninsertedFields[0].id} field={uninsertedFields[0]} color="warning">
-              <Trans>Click to insert field</Trans>
+              Click to insert field
             </FieldToolTip>
           )}
 
@@ -372,7 +371,7 @@ export const DirectTemplateSigningForm = ({
           <div className="flex flex-1 flex-col gap-y-4">
             <div>
               <Label htmlFor="full-name">
-                <Trans>Full Name</Trans>
+                Full Name
               </Label>
 
               <Input
@@ -384,7 +383,7 @@ export const DirectTemplateSigningForm = ({
 
             <div>
               <Label htmlFor="Signature">
-                <Trans>Signature</Trans>
+                Signature
               </Label>
 
               <SignaturePadDialog
@@ -412,7 +411,7 @@ export const DirectTemplateSigningForm = ({
             disabled={isSubmitting}
             onClick={previousStep}
           >
-            <Trans>Back</Trans>
+            Back
           </Button>
 
           <DocumentSigningCompleteDialog

@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { File } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link } from 'react-router';
@@ -23,8 +20,6 @@ export const OrganisationBillingInvoicesTable = ({
   organisationId,
   subscriptionExists,
 }: OrganisationBillingInvoicesTableProps) => {
-  const { _ } = useLingui();
-
   const { data, isLoading, isLoadingError } = trpc.enterprise.billing.invoices.get.useQuery(
     {
       organisationId,
@@ -53,7 +48,7 @@ export const OrganisationBillingInvoicesTable = ({
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Invoice`),
+        header: "Invoice",
         accessorKey: 'created',
         cell: ({ row }) => (
           <div className="flex max-w-xs items-center gap-2">
@@ -66,7 +61,7 @@ export const OrganisationBillingInvoicesTable = ({
         ),
       },
       {
-        header: _(msg`Status`),
+        header: "Status",
         accessorKey: 'status',
         cell: ({ row }) => {
           const { status } = row.original;
@@ -79,7 +74,7 @@ export const OrganisationBillingInvoicesTable = ({
         },
       },
       {
-        header: _(msg`Amount`),
+        header: "Amount",
         accessorKey: 'total',
         cell: ({ row }) => formatCurrency(row.original.currency, row.original.total / 100),
       },
@@ -93,7 +88,7 @@ export const OrganisationBillingInvoicesTable = ({
               disabled={typeof row.original.hosted_invoice_url !== 'string'}
             >
               <Link to={row.original.hosted_invoice_url ?? ''} target="_blank">
-                <Trans>View</Trans>
+                View
               </Link>
             </Button>
 
@@ -103,7 +98,7 @@ export const OrganisationBillingInvoicesTable = ({
               disabled={typeof row.original.invoice_pdf !== 'string'}
             >
               <Link to={row.original.invoice_pdf ?? ''} target="_blank">
-                <Trans>Download</Trans>
+                Download
               </Link>
             </Button>
           </div>

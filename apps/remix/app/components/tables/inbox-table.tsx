@@ -1,8 +1,5 @@
 import { useMemo, useTransition } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentStatus as DocumentStatusEnum } from '@prisma/client';
 import { RecipientRole, SigningStatus } from '@prisma/client';
 import { CheckCircleIcon, DownloadIcon, EyeIcon, Loader, PencilIcon } from 'lucide-react';
@@ -39,8 +36,6 @@ export type DocumentsTableProps = {
 type DocumentsTableRow = TFindInboxResponse['data'][number];
 
 export const InboxTable = () => {
-  const { _, i18n } = useLingui();
-
   const team = useOptionalCurrentTeam();
   const [isPending, startTransition] = useTransition();
 
@@ -58,13 +53,13 @@ export const InboxTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Created`),
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) =>
           i18n.date(row.original.createdAt, { ...DateTime.DATETIME_SHORT, hourCycle: 'h12' }),
       },
       {
-        header: _(msg`Title`),
+        header: "Title",
         cell: ({ row }) => (
           <span className="block max-w-[10rem] truncate font-medium md:max-w-[20rem]">
             {row.original.title}
@@ -73,11 +68,11 @@ export const InboxTable = () => {
       },
       {
         id: 'sender',
-        header: _(msg`Sender`),
+        header: "Sender",
         cell: ({ row }) => row.original.user.name ?? row.original.user.email,
       },
       {
-        header: _(msg`Recipient`),
+        header: "Recipien",
         accessorKey: 'recipient',
         cell: ({ row }) => (
           <StackAvatarsWithTooltip
@@ -87,13 +82,13 @@ export const InboxTable = () => {
         ),
       },
       {
-        header: _(msg`Status`),
+        header: msg"Status",
         accessorKey: 'status',
         cell: ({ row }) => <DocumentStatus status={row.original.status} />,
         size: 140,
       },
       {
-        header: _(msg`Actions`),
+        header: "Actions",
         cell: ({ row }) => <InboxTableActionButton row={row.original} />,
       },
     ] satisfies DataTableColumnDef<DocumentsTableRow>[];
@@ -133,7 +128,7 @@ export const InboxTable = () => {
         emptyState={
           <div className="text-muted-foreground/60 flex h-60 flex-col items-center justify-center gap-y-4">
             <p>
-              <Trans>Documents that require your attention will appear here</Trans>
+              Documents that require your attention will appear here
             </p>
           </div>
         }
@@ -186,8 +181,6 @@ export type InboxTableActionButtonProps = {
 export const InboxTableActionButton = ({ row }: InboxTableActionButtonProps) => {
   const { user } = useSession();
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const recipient = row.recipients.find((recipient) => recipient.email === user.email);
 
   const isPending = row.status === DocumentStatusEnum.PENDING;
@@ -214,8 +207,8 @@ export const InboxTableActionButton = ({ row }: InboxTableActionButtonProps) => 
       await downloadPDF({ documentData, fileName: row.title });
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`An error occurred while downloading your document.`),
+        title: "Something went wrong",
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -238,19 +231,19 @@ export const InboxTableActionButton = ({ row }: InboxTableActionButtonProps) => 
             .with(RecipientRole.SIGNER, () => (
               <>
                 <PencilIcon className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>Sign</Trans>
+                Sign
               </>
             ))
             .with(RecipientRole.APPROVER, () => (
               <>
                 <CheckCircleIcon className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>Approve</Trans>
+                Approve
               </>
             ))
             .otherwise(() => (
               <>
                 <EyeIcon className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>View</Trans>
+                View
               </>
             ))}
         </Link>
@@ -259,13 +252,13 @@ export const InboxTableActionButton = ({ row }: InboxTableActionButtonProps) => 
     .with({ isPending: true, isSigned: true }, () => (
       <Button className="w-32" disabled={true}>
         <EyeIcon className="-ml-1 mr-2 h-4 w-4" />
-        <Trans>View</Trans>
+        View
       </Button>
     ))
     .with({ isComplete: true }, () => (
       <Button className="w-32" onClick={onDownloadClick}>
         <DownloadIcon className="-ml-1 mr-2 inline h-4 w-4" />
-        <Trans>Download</Trans>
+        Download
       </Button>
     ))
     .otherwise(() => <div></div>);

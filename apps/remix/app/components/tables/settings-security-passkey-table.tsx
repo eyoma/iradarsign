@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { DateTime } from 'luxon';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
@@ -17,8 +15,6 @@ import { TableCell } from '@documenso/ui/primitives/table';
 import { SettingsSecurityPasskeyTableActions } from './settings-security-passkey-table-actions';
 
 export const SettingsSecurityPasskeyTable = () => {
-  const { _ } = useLingui();
-
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -53,22 +49,22 @@ export const SettingsSecurityPasskeyTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Name`),
+        header: "Name",
         accessorKey: 'name',
       },
       {
-        header: _(msg`Created`),
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) => DateTime.fromJSDate(row.original.createdAt).toRelative(),
       },
 
       {
-        header: _(msg`Last used`),
+        header: "Last used",
         accessorKey: 'updatedAt',
         cell: ({ row }) =>
           row.original.lastUsedAt
             ? DateTime.fromJSDate(row.original.lastUsedAt).toRelative()
-            : _(msg`Never`),
+            : "Never",
       },
       {
         id: 'actions',

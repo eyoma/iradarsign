@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { Trans } from '@lingui/react/macro';
 import { PlusIcon } from 'lucide-react';
 import { ChevronLeft } from 'lucide-react';
 import { Link, Outlet, isRouteErrorResponse } from 'react-router';
@@ -67,10 +65,10 @@ export default function PublicProfileLayout() {
             <div className="flex flex-row items-center justify-center">
               <p className="text-muted-foreground mr-4">
                 <span className="text-sm sm:hidden">
-                  <Trans>Want your own public profile?</Trans>
+                  Want your own public profile?
                 </span>
                 <span className="hidden text-sm sm:block">
-                  <Trans>Like to have your own public profile with agreements?</Trans>
+                  Like to have your own public profile with agreements?
                 </span>
               </p>
 
@@ -78,11 +76,11 @@ export default function PublicProfileLayout() {
                 <Link to="/signup">
                   <div className="hidden flex-row items-center sm:flex">
                     <PlusIcon className="mr-1 h-5 w-5" />
-                    <Trans>Create now</Trans>
+                    Create now
                   </div>
 
                   <span className="sm:hidden">
-                    <Trans>Create</Trans>
+                    Create
                   </span>
                 </Link>
               </Button>
@@ -103,9 +101,9 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   const errorCodeMap = {
     404: {
-      subHeading: msg`404 Profile not found`,
-      heading: msg`Oops! Something went wrong.`,
-      message: msg`The profile you are looking for could not be found.`,
+      subHeading: "404 Profile not found",
+      heading: "Oops! Something went wrong.",
+      message: "The profile you are looking for could not be found.",
     },
   };
 
@@ -118,7 +116,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         <Button asChild className="w-32">
           <Link to="/">
             <ChevronLeft className="mr-2 h-4 w-4" />
-            <Trans>Go Back</Trans>
+            Go Back
           </Link>
         </Button>
       }

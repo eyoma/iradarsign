@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans, useLingui } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 
 import { authClient } from '@documenso/auth/client';
@@ -24,8 +23,6 @@ export const DocumentSigningAuthAccount = ({
 }: DocumentSigningAuthAccountProps) => {
   const { recipient } = useRequiredDocumentSigningAuthContext();
 
-  const { t } = useLingui();
-
   const { toast } = useToast();
 
   const [isSigningOut, setIsSigningOut] = useState(false);
@@ -41,8 +38,8 @@ export const DocumentSigningAuthAccount = ({
       setIsSigningOut(false);
 
       toast({
-        title: t`Something went wrong`,
-        description: t`We were unable to log you out at this time.`,
+        title: "Something went wrong",
+        description: "We were unable to log you out at this time.",
         duration: 10000,
         variant: 'destructive',
       });
@@ -55,10 +52,10 @@ export const DocumentSigningAuthAccount = ({
         <AlertDescription>
           {actionTarget === 'DOCUMENT' && recipient.role === RecipientRole.VIEWER ? (
             <span>
-              <Trans>
+              
                 To mark this document as viewed, you need to be logged in as{' '}
                 <strong>{recipient.email}</strong>
-              </Trans>
+              
             </span>
           ) : (
             <span>
@@ -72,11 +69,11 @@ export const DocumentSigningAuthAccount = ({
 
       <DialogFooter>
         <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-          <Trans>Cancel</Trans>
+          Cancel
         </Button>
 
         <Button onClick={async () => handleChangeAccount(recipient.email)} loading={isSigningOut}>
-          <Trans>Login</Trans>
+          Login
         </Button>
       </DialogFooter>
     </fieldset>

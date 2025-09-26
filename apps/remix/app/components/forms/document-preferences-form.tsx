@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type { TeamGlobalSettings } from '@prisma/client';
 import { DocumentVisibility } from '@prisma/client';
 import { useForm } from 'react-hook-form';
@@ -84,7 +81,6 @@ export const DocumentPreferencesForm = ({
   onFormSubmit,
   canInherit,
 }: DocumentPreferencesFormProps) => {
-  const { t } = useLingui();
   const { user, organisations } = useSession();
 
   const isPersonalLayoutMode = isPersonalLayout(organisations);
@@ -100,7 +96,7 @@ export const DocumentPreferencesForm = ({
     includeSigningCertificate: z.boolean().nullable(),
     includeAuditLog: z.boolean().nullable(),
     signatureTypes: z.array(z.nativeEnum(DocumentSignatureType)).min(canInherit ? 0 : 1, {
-      message: msg`At least one signature type must be enabled`.id,
+      message: "At least one signature type must be enabled".id,
     }),
   });
 
@@ -135,7 +131,7 @@ export const DocumentPreferencesForm = ({
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    <Trans>Default Document Visibility</Trans>
+                    Default Document Visibility
                   </FormLabel>
 
                   <FormControl>
@@ -153,18 +149,18 @@ export const DocumentPreferencesForm = ({
 
                       <SelectContent>
                         <SelectItem value={DocumentVisibility.EVERYONE}>
-                          <Trans>Everyone can access and view the document</Trans>
+                          Everyone can access and view the document
                         </SelectItem>
                         <SelectItem value={DocumentVisibility.MANAGER_AND_ABOVE}>
-                          <Trans>Only managers and above can access and view the document</Trans>
+                          Only managers and above can access and view the document
                         </SelectItem>
                         <SelectItem value={DocumentVisibility.ADMIN}>
-                          <Trans>Only admins can access and view the document</Trans>
+                          Only admins can access and view the document
                         </SelectItem>
 
                         {canInherit && (
                           <SelectItem value={'-1'}>
-                            <Trans>Inherit from organisation</Trans>
+                            Inherit from organisation
                           </SelectItem>
                         )}
                       </SelectContent>
@@ -172,7 +168,7 @@ export const DocumentPreferencesForm = ({
                   </FormControl>
 
                   <FormDescription>
-                    <Trans>Controls the default visibility of an uploaded document.</Trans>
+                    Controls the default visibility of an uploaded document.
                   </FormDescription>
                 </FormItem>
               )}
@@ -185,7 +181,7 @@ export const DocumentPreferencesForm = ({
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>
-                  <Trans>Default Document Language</Trans>
+                  Default Document Language
                 </FormLabel>
 
                 <FormControl>
@@ -209,17 +205,17 @@ export const DocumentPreferencesForm = ({
                       ))}
 
                       <SelectItem value={'-1'}>
-                        <Trans>Inherit from organisation</Trans>
+                        Inherit from organisation
                       </SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
 
                 <FormDescription>
-                  <Trans>
+                  
                     Controls the default language of an uploaded document. This will be used as the
                     language in email communications with the recipients.
-                  </Trans>
+                  
                 </FormDescription>
               </FormItem>
             )}
@@ -231,7 +227,7 @@ export const DocumentPreferencesForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Default Date Format</Trans>
+                  Default Date Format
                 </FormLabel>
 
                 <FormControl>
@@ -252,7 +248,7 @@ export const DocumentPreferencesForm = ({
 
                       {canInherit && (
                         <SelectItem value={'-1'}>
-                          <Trans>Inherit from organisation</Trans>
+                          Inherit from organisation
                         </SelectItem>
                       )}
                     </SelectContent>
@@ -270,15 +266,15 @@ export const DocumentPreferencesForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Default Time Zone</Trans>
+                  Default Time Zone
                 </FormLabel>
 
                 <FormControl>
                   <Combobox
                     triggerPlaceholder={
-                      canInherit ? t`Inherit from organisation` : t`Local timezone`
+                      canInherit ? "Inherit from organisation" : "Local timezone"
                     }
-                    placeholder={t`Select a time zone`}
+                    placeholder={"Select a time zone"}
                     options={TIME_ZONES}
                     value={field.value}
                     onChange={(value) => field.onChange(value)}
@@ -297,7 +293,7 @@ export const DocumentPreferencesForm = ({
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel className="flex flex-row items-center">
-                  <Trans>Default Signature Settings</Trans>
+                  Default Signature Settings
                   <DocumentSignatureSettingsTooltip />
                 </FormLabel>
 
@@ -312,7 +308,7 @@ export const DocumentPreferencesForm = ({
                     className="bg-background w-full"
                     enableSearch={false}
                     emptySelectionPlaceholder={
-                      canInherit ? t`Inherit from organisation` : t`Select signature types`
+                      canInherit ? "Inherit from organisation" : "Select signature types"
                     }
                     testId="signature-types-trigger"
                   />
@@ -322,9 +318,9 @@ export const DocumentPreferencesForm = ({
                   <FormMessage />
                 ) : (
                   <FormDescription>
-                    <Trans>
+                    
                       Controls which signatures are allowed to be used when signing a document.
-                    </Trans>
+                    
                   </FormDescription>
                 )}
               </FormItem>
@@ -338,7 +334,7 @@ export const DocumentPreferencesForm = ({
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>
-                    <Trans>Send on Behalf of Team</Trans>
+                    Send on Behalf of Team
                   </FormLabel>
 
                   <FormControl>
@@ -358,16 +354,16 @@ export const DocumentPreferencesForm = ({
 
                       <SelectContent>
                         <SelectItem value="true">
-                          <Trans>Yes</Trans>
+                          Yes
                         </SelectItem>
 
                         <SelectItem value="false">
-                          <Trans>No</Trans>
+                          No
                         </SelectItem>
 
                         {canInherit && (
                           <SelectItem value={'-1'}>
-                            <Trans>Inherit from organisation</Trans>
+                            Inherit from organisation
                           </SelectItem>
                         )}
                       </SelectContent>
@@ -376,27 +372,27 @@ export const DocumentPreferencesForm = ({
 
                   <div className="pt-2">
                     <div className="text-muted-foreground text-xs font-medium">
-                      <Trans>Preview</Trans>
+                      Preview
                     </div>
 
                     <Alert variant="neutral" className="mt-1 px-2.5 py-1.5 text-sm">
                       {field.value ? (
-                        <Trans>
+                        
                           "{placeholderEmail}" on behalf of "Team Name" has invited you to sign
                           "example document".
-                        </Trans>
+                        
                       ) : (
-                        <Trans>"Team Name" has invited you to sign "example document".</Trans>
+                        "Team Name" has invited you to sign "example document".
                       )}
                     </Alert>
                   </div>
 
                   <FormDescription>
-                    <Trans>
+                    
                       Controls the formatting of the message that will be sent when inviting a
                       recipient to sign a document. If a custom message has been provided while
                       configuring the document, it will be used instead.
-                    </Trans>
+                    
                   </FormDescription>
                 </FormItem>
               )}
@@ -409,7 +405,7 @@ export const DocumentPreferencesForm = ({
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>
-                  <Trans>Include the Signing Certificate in the Document</Trans>
+                  Include the Signing Certificate in the Document
                 </FormLabel>
 
                 <FormControl>
@@ -429,16 +425,16 @@ export const DocumentPreferencesForm = ({
 
                     <SelectContent>
                       <SelectItem value="true">
-                        <Trans>Yes</Trans>
+                        Yes
                       </SelectItem>
 
                       <SelectItem value="false">
-                        <Trans>No</Trans>
+                        No
                       </SelectItem>
 
                       {canInherit && (
                         <SelectItem value={'-1'}>
-                          <Trans>Inherit from organisation</Trans>
+                          Inherit from organisation
                         </SelectItem>
                       )}
                     </SelectContent>
@@ -446,11 +442,11 @@ export const DocumentPreferencesForm = ({
                 </FormControl>
 
                 <FormDescription>
-                  <Trans>
+                  
                     Controls whether the signing certificate will be included in the document when
                     it is downloaded. The signing certificate can still be downloaded from the logs
                     page separately.
-                  </Trans>
+                  
                 </FormDescription>
               </FormItem>
             )}
@@ -462,7 +458,7 @@ export const DocumentPreferencesForm = ({
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>
-                  <Trans>Include the Audit Logs in the Document</Trans>
+                  Include the Audit Logs in the Document
                 </FormLabel>
 
                 <FormControl>
@@ -479,16 +475,16 @@ export const DocumentPreferencesForm = ({
 
                     <SelectContent>
                       <SelectItem value="true">
-                        <Trans>Yes</Trans>
+                        Yes
                       </SelectItem>
 
                       <SelectItem value="false">
-                        <Trans>No</Trans>
+                        No
                       </SelectItem>
 
                       {canInherit && (
                         <SelectItem value={'-1'}>
-                          <Trans>Inherit from organisation</Trans>
+                          Inherit from organisation
                         </SelectItem>
                       )}
                     </SelectContent>
@@ -496,11 +492,11 @@ export const DocumentPreferencesForm = ({
                 </FormControl>
 
                 <FormDescription>
-                  <Trans>
+                  
                     Controls whether the audit logs will be included in the document when it is
                     downloaded. The audit logs can still be downloaded from the logs page
                     separately.
-                  </Trans>
+                  
                 </FormDescription>
               </FormItem>
             )}
@@ -508,7 +504,7 @@ export const DocumentPreferencesForm = ({
 
           <div className="flex flex-row justify-end space-x-4">
             <Button type="submit" loading={form.formState.isSubmitting}>
-              <Trans>Update</Trans>
+              Update
             </Button>
           </div>
         </fieldset>

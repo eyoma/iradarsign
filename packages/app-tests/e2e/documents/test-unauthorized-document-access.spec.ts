@@ -40,10 +40,10 @@ test.describe('Unauthorized Access to Documents', () => {
     await apiSignin({
       page,
       email: unauthorizedUser.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+      redirectPath: `/t/${team.url}/documents/${document.id}/edi",
     });
 
-    await page.goto(`${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/documents/${document.id}/edit`);
+    await page.goto("${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/documents/${document.id}/edi");
     await expect(page.getByRole('heading', { name: 'Oops! Something went wrong.' })).toBeVisible();
   });
 
@@ -57,7 +57,7 @@ test.describe('Unauthorized Access to Documents', () => {
     await apiSignin({
       page,
       email: unauthorizedUser.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}`,
+      redirectPath: "/t/${team.url}/documents/${document.id}`,
     });
 
     await page.goto(`${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/documents/${document.id}`);
@@ -74,10 +74,10 @@ test.describe('Unauthorized Access to Documents', () => {
     await apiSignin({
       page,
       email: unauthorizedUser.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+      redirectPath: `/t/${team.url}/documents/${document.id}/edi",
     });
 
-    await page.goto(`${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/documents/${document.id}/edit`);
+    await page.goto("${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/documents/${document.id}/edi");
     await expect(page.getByRole('heading', { name: 'Oops! Something went wrong.' })).toBeVisible();
   });
 
@@ -91,7 +91,7 @@ test.describe('Unauthorized Access to Documents', () => {
     await apiSignin({
       page,
       email: unauthorizedUser.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}`,
+      redirectPath: "/t/${team.url}/documents/${document.id}`,
     });
 
     await page.goto(`${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/documents/${document.id}`);

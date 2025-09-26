@@ -1,4 +1,3 @@
-import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
@@ -24,7 +23,6 @@ export default function OrganisationSettingsDocumentPage() {
 
   const organisation = useCurrentOrganisation();
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const isPersonalLayoutMode = isPersonalLayout(organisations);
@@ -78,13 +76,13 @@ export default function OrganisationSettingsDocumentPage() {
       });
 
       toast({
-        title: t`Document preferences updated`,
-        description: t`Your document preferences have been updated`,
+        title: "Document preferences updated",
+        description: "Your document preferences have been updated",
       });
     } catch (err) {
       toast({
-        title: t`Something went wrong!`,
-        description: t`We were unable to update your document preferences at this time, please try again later`,
+        title: "Something went wrong!",
+        description: "We were unable to update your document preferences at this time, please try again later",
         variant: 'destructive',
       });
     }
@@ -98,10 +96,10 @@ export default function OrganisationSettingsDocumentPage() {
     );
   }
 
-  const settingsHeaderText = t`Document Preferences`;
+  const settingsHeaderText = "Document Preferences";
   const settingsHeaderSubtitle = isPersonalLayoutMode
-    ? t`Here you can set your general document preferences`
-    : t`Here you can set document preferences for your organisation. Teams will inherit these settings by default.`;
+    ? "Here you can set your general document preferences"
+    : "Here you can set document preferences for your organisation. Teams will inherit these settings by default.";
 
   return (
     <div className="max-w-2xl">

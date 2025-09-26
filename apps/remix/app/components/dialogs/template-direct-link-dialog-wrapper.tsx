@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import type { Recipient, Template, TemplateDirectLink } from '@prisma/client';
 import { LinkIcon } from 'lucide-react';
 
@@ -30,9 +29,9 @@ export const TemplateDirectLinkDialogWrapper = ({
         <LinkIcon className="mr-1.5 h-3.5 w-3.5" />
 
         {template.directLink ? (
-          <Trans>Manage Direct Link</Trans>
+          Manage Direct Link
         ) : (
-          <Trans>Create Direct Link</Trans>
+          Create Direct Link
         )}
       </Button>
 

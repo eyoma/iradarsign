@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { InfoIcon } from 'lucide-react';
 
 import { DOCUMENT_AUTH_TYPES } from '@documenso/lib/constants/document-auth';
@@ -23,13 +20,11 @@ export const DocumentGlobalAuthActionSelect = ({
   disabled,
   placeholder,
 }: DocumentGlobalAuthActionSelectProps) => {
-  const { _ } = useLingui();
-
   // Convert auth types to MultiSelect options
   const authOptions: Option[] = [
     {
       value: '-1',
-      label: _(msg`No restrictions`),
+      label: "No restrictions",
     },
     ...Object.values(DocumentActionAuth)
       .filter((auth) => auth !== DocumentAuth.ACCOUNT)
@@ -63,7 +58,7 @@ export const DocumentGlobalAuthActionSelect = ({
       options={authOptions}
       onChange={handleChange}
       disabled={disabled}
-      placeholder={placeholder || _(msg`Select authentication methods`)}
+      placeholder={placeholder || "Select authentication methods"}
       className="bg-background text-muted-foreground"
       hideClearAllButton={false}
       data-testid="documentActionSelectValue"
@@ -81,47 +76,47 @@ export const DocumentGlobalAuthActionTooltip = () => (
 
     <TooltipContent className="text-foreground max-w-md space-y-2 p-4">
       <h2>
-        <Trans>Global recipient action authentication</Trans>
+        Global recipient action authentication
       </h2>
 
       <p>
-        <Trans>
+        
           The authentication methods required for recipients to sign the signature field.
-        </Trans>
+        
       </p>
 
       <p>
-        <Trans>
+        
           These can be overriden by setting the authentication requirements directly on each
           recipient in the next step. Multiple methods can be selected.
-        </Trans>
+        
       </p>
 
       <ul className="ml-3.5 list-outside list-disc space-y-0.5 py-2">
         <li>
-          <Trans>
+          
             <strong>Require passkey</strong> - The recipient must have an account and passkey
             configured via their settings
-          </Trans>
+          
         </li>
         <li>
-          <Trans>
+          
             <strong>Require 2FA</strong> - The recipient must have an account and 2FA enabled via
             their settings
-          </Trans>
+          
         </li>
 
         <li>
-          <Trans>
+          
             <strong>Require password</strong> - The recipient must have an account and password
             configured via their settings, the password will be verified during signing
-          </Trans>
+          
         </li>
 
         <li>
-          <Trans>
+          
             <strong>No restrictions</strong> - No authentication required
-          </Trans>
+          
         </li>
       </ul>
     </TooltipContent>

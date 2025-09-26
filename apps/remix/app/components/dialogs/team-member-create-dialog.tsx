@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans, useLingui } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { InfoIcon } from 'lucide-react';
@@ -65,7 +64,6 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<'SELECT' | 'MEMBERS'>('SELECT');
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const team = useCurrentTeam();
@@ -104,16 +102,16 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
       });
 
       toast({
-        title: t`Success`,
-        description: t`Team members have been added.`,
+        title: "Success",
+        description: "Team members have been added.",
         duration: 5000,
       });
 
       setOpen(false);
     } catch {
       toast({
-        title: t`An unknown error occurred`,
-        description: t`We encountered an unknown error while attempting to add team members. Please try again later.`,
+        title: "An unknown error occurred",
+        description: "We encountered an unknown error while attempting to add team members. Please try again later.",
         variant: 'destructive',
       });
     }
@@ -135,7 +133,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
     >
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
         <Button variant="secondary" onClick={() => setOpen(true)}>
-          <Trans>Add members</Trans>
+          Add members
         </Button>
       </DialogTrigger>
 
@@ -144,13 +142,13 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
           .with('SELECT', () => (
             <DialogHeader>
               <DialogTitle className="flex flex-row items-center">
-                <Trans>Add members</Trans>
+                Add members
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <InfoIcon className="mx-2 h-4 w-4" />
                   </TooltipTrigger>
                   <TooltipContent className="text-muted-foreground z-[99999] max-w-xs">
-                    <Trans>
+                    
                       To be able to add members to a team, you must first add them to the
                       organisation. For more information, please see the{' '}
                       <Link
@@ -162,24 +160,24 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                         documentation
                       </Link>
                       .
-                    </Trans>
+                    
                   </TooltipContent>
                 </Tooltip>
               </DialogTitle>
 
               <DialogDescription>
-                <Trans>Select members or groups of members to add to the team.</Trans>
+                Select members or groups of members to add to the team.
               </DialogDescription>
             </DialogHeader>
           ))
           .with('MEMBERS', () => (
             <DialogHeader>
               <DialogTitle>
-                <Trans>Add members roles</Trans>
+                Add members roles
               </DialogTitle>
 
               <DialogDescription>
-                <Trans>Configure the team roles for each member</Trans>
+                Configure the team roles for each member
               </DialogDescription>
             </DialogHeader>
           ))
@@ -196,7 +194,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          <Trans>Members</Trans>
+                          Members
                         </FormLabel>
 
                         <FormControl>
@@ -222,12 +220,12 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                               );
                             }}
                             className="bg-background w-full"
-                            emptySelectionPlaceholder={t`Select members`}
+                            emptySelectionPlaceholder={"Select members"}
                           />
                         </FormControl>
 
                         <FormDescription>
-                          <Trans>Select members to add to this team</Trans>
+                          Select members to add to this team
                         </FormDescription>
                       </FormItem>
                     )}
@@ -235,7 +233,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
 
                   <DialogFooter>
                     <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                      <Trans>Cancel</Trans>
+                      Cancel
                     </Button>
 
                     <Button
@@ -245,7 +243,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                         setStep('MEMBERS');
                       }}
                     >
-                      <Trans>Next</Trans>
+                      Next
                     </Button>
                   </DialogFooter>
                 </>
@@ -259,7 +257,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                         <div className="w-full space-y-2">
                           {index === 0 && (
                             <FormLabel>
-                              <Trans>Member</Trans>
+                              Member
                             </FormLabel>
                           )}
                           <Input
@@ -280,7 +278,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                             <FormItem className="w-full">
                               {index === 0 && (
                                 <FormLabel required>
-                                  <Trans>Team Role</Trans>
+                                  Team Role
                                 </FormLabel>
                               )}
                               <FormControl>
@@ -310,11 +308,11 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
 
                   <DialogFooter className="mt-4">
                     <Button type="button" variant="secondary" onClick={() => setStep('SELECT')}>
-                      <Trans>Back</Trans>
+                      Back
                     </Button>
 
                     <Button type="submit" loading={form.formState.isSubmitting}>
-                      <Trans>Add Members</Trans>
+                      Add Members
                     </Button>
                   </DialogFooter>
                 </>

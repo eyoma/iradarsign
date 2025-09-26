@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { ChevronLeft, Loader } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -9,11 +8,11 @@ export default function DocumentEditSkeleton() {
     <div className="mx-auto -mt-4 flex w-full max-w-screen-xl flex-col px-4 md:px-8">
       <Link to="/" className="flex grow-0 items-center text-[#7AC455] hover:opacity-80">
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
-        <Trans>Documents</Trans>
+        Documents
       </Link>
 
       <h1 className="mt-4 grow-0 truncate text-2xl font-semibold md:text-3xl">
-        <Trans>Loading Document...</Trans>
+        Loading Document...
       </h1>
 
       <div className="flex h-10 items-center">
@@ -26,7 +25,7 @@ export default function DocumentEditSkeleton() {
             <Loader className="text-documenso h-12 w-12 animate-spin" />
 
             <p className="text-muted-foreground mt-4">
-              <Trans>Loading document...</Trans>
+              Loading document...
             </p>
           </div>
         </div>

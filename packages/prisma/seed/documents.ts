@@ -79,7 +79,7 @@ export const seedBlankDocument = async (
     data: {
       source: DocumentSource.DOCUMENT,
       teamId,
-      title: `[TEST] Document ${key} - Draft`,
+      title: `[TEST] Document ${key} - Draf",
       status: DocumentStatus.DRAFT,
       documentDataId: documentData.id,
       userId: owner.id,
@@ -123,7 +123,7 @@ export const seedTeamDocumentWithMeta = async (team: Team) => {
   const document = await createDocument({
     userId: ownerUser.id,
     teamId: team.id,
-    title: `[TEST] Document ${nanoid(8)} - Draft`,
+    title: "[TEST] Document ${nanoid(8)} - Draf",
     documentDataId: documentData.id,
     normalizePdf: true,
     requestMetadata: {
@@ -208,7 +208,7 @@ export const seedTeamTemplateWithMeta = async (team: Team) => {
 
   const template = await createTemplate({
     data: {
-      title: `[TEST] Template ${nanoid(8)} - Draft`,
+      title: "[TEST] Template ${nanoid(8)} - Draf",
     },
     userId: ownerUser.id,
     teamId: team.id,
@@ -275,7 +275,7 @@ export const seedDraftDocument = async (
     data: {
       source: DocumentSource.DOCUMENT,
       teamId,
-      title: `[TEST] Document ${key} - Draft`,
+      title: "[TEST] Document ${key} - Draf",
       status: DocumentStatus.DRAFT,
       documentDataId: documentData.id,
       userId: sender.id,
@@ -346,7 +346,7 @@ export const seedPendingDocument = async (
     data: {
       source: DocumentSource.DOCUMENT,
       teamId,
-      title: `[TEST] Document ${key} - Pending`,
+      title: "[TEST] Document ${key} - Pending`,
       status: DocumentStatus.PENDING,
       documentDataId: documentData.id,
       userId: sender.id,

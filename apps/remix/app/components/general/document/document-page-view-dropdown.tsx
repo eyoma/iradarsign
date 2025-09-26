@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Document, Recipient, Team, User } from '@prisma/client';
 import { DocumentStatus } from '@prisma/client';
 import {
@@ -49,8 +46,6 @@ export type DocumentPageViewDropdownProps = {
 export const DocumentPageViewDropdown = ({ document }: DocumentPageViewDropdownProps) => {
   const { user } = useSession();
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const navigate = useNavigate();
   const team = useCurrentTeam();
 
@@ -91,8 +86,8 @@ export const DocumentPageViewDropdown = ({ document }: DocumentPageViewDropdownP
       await downloadPDF({ documentData, fileName: document.title });
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`An error occurred while downloading your document.`),
+        title: "Something went wrong",
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -120,8 +115,8 @@ export const DocumentPageViewDropdown = ({ document }: DocumentPageViewDropdownP
       await downloadPDF({ documentData, fileName: document.title, version: 'original' });
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`An error occurred while downloading your document.`),
+        title: "Something went wrong",
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -137,14 +132,14 @@ export const DocumentPageViewDropdown = ({ document }: DocumentPageViewDropdownP
 
       <DropdownMenuContent className="w-52" align="end" forceMount>
         <DropdownMenuLabel>
-          <Trans>Action</Trans>
+          Action
         </DropdownMenuLabel>
 
         {(isOwner || isCurrentTeamDocument) && !isComplete && (
           <DropdownMenuItem asChild>
-            <Link to={`${documentsPath}/${document.id}/edit`}>
+            <Link to={`${documentsPath}/${document.id}/edi"}>
               <Edit className="mr-2 h-4 w-4" />
-              <Trans>Edit</Trans>
+              Edit
             </Link>
           </DropdownMenuItem>
         )}
@@ -152,34 +147,34 @@ export const DocumentPageViewDropdown = ({ document }: DocumentPageViewDropdownP
         {isComplete && (
           <DropdownMenuItem onClick={onDownloadClick}>
             <Download className="mr-2 h-4 w-4" />
-            <Trans>Download</Trans>
+            Download
           </DropdownMenuItem>
         )}
 
         <DropdownMenuItem onClick={onDownloadOriginalClick}>
           <Download className="mr-2 h-4 w-4" />
-          <Trans>Download Original</Trans>
+          Download Original
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <Link to={`${documentsPath}/${document.id}/logs`}>
+          <Link to={"${documentsPath}/${document.id}/logs`}>
             <ScrollTextIcon className="mr-2 h-4 w-4" />
-            <Trans>Audit Logs</Trans>
+            Audit Logs
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => setDuplicateDialogOpen(true)}>
           <Copy className="mr-2 h-4 w-4" />
-          <Trans>Duplicate</Trans>
+          Duplicate
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => setDeleteDialogOpen(true)} disabled={isDeleted}>
           <Trash2 className="mr-2 h-4 w-4" />
-          <Trans>Delete</Trans>
+          Delete
         </DropdownMenuItem>
 
         <DropdownMenuLabel>
-          <Trans>Share</Trans>
+          Share
         </DropdownMenuLabel>
 
         {canManageDocument && (
@@ -191,7 +186,7 @@ export const DocumentPageViewDropdown = ({ document }: DocumentPageViewDropdownP
                 onSelect={(e) => e.preventDefault()}
               >
                 <Copy className="mr-2 h-4 w-4" />
-                <Trans>Signing Links</Trans>
+                Signing Links
               </DropdownMenuItem>
             }
           />
@@ -206,7 +201,7 @@ export const DocumentPageViewDropdown = ({ document }: DocumentPageViewDropdownP
             <DropdownMenuItem disabled={disabled || isDraft} onSelect={(e) => e.preventDefault()}>
               <div className="flex items-center">
                 {loading ? <Loader className="mr-2 h-4 w-4" /> : <Share className="mr-2 h-4 w-4" />}
-                <Trans>Share Signing Card</Trans>
+                Share Signing Card
               </div>
             </DropdownMenuItem>
           )}

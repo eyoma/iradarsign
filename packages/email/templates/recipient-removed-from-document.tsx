@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
 import { useBranding } from '../providers/branding';
 import type { TemplateDocumentCancelProps } from '../template-components/template-document-cancel';
@@ -15,10 +11,9 @@ export const RecipientRemovedFromDocumentTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentCancelEmailTemplateProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`${inviterName} has removed you from the document ${documentName}.`;
+  const previewText = "${inviterName} has removed you from the document ${documentName}.";
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -27,7 +22,7 @@ export const RecipientRemovedFromDocumentTemplate = ({
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
 
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>
@@ -36,21 +31,17 @@ export const RecipientRemovedFromDocumentTemplate = ({
               {branding.brandingEnabled && branding.brandingLogo ? (
                 <Img src={branding.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
               ) : (
-                <Img
-                  src={getAssetUrl('/static/logo.png')}
-                  alt="Documenso Logo"
-                  className="mb-4 h-6"
-                />
+                <Img src={getAssetUrl('/static/logo.png')} alt="iRadar Logo" className="mb-4 h-6" />
               )}
 
               <TemplateDocumentImage className="mt-6" assetBaseUrl={assetBaseUrl} />
 
               <Section>
                 <Text className="text-primary mx-auto mb-0 max-w-[80%] text-center text-lg font-semibold">
-                  <Trans>
+                  
                     {inviterName} has removed you from the document
                     <br />"{documentName}"
-                  </Trans>
+                  
                 </Text>
               </Section>
             </Section>

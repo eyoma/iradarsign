@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
-
 import { mailer } from '@documenso/email/mailer';
 import { DocumentRecipientSignedEmailTemplate } from '@documenso/email/templates/document-recipient-signed';
 import { prisma } from '@documenso/prisma';
@@ -112,7 +110,7 @@ export const run = async ({
         address: owner.email,
       },
       from: senderEmail,
-      subject: i18n._(msg`${recipientReference} has signed "${document.title}"`),
+      subject: i18n."${recipientReference} has signed "${document.title}"",
       html,
       text,
     });

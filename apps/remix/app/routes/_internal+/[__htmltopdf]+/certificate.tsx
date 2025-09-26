@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { FieldType, SigningStatus } from '@prisma/client';
 import { DateTime } from 'luxon';
 import { redirect } from 'react-router';
@@ -9,7 +7,7 @@ import { UAParser } from 'ua-parser-js';
 import { renderSVG } from 'uqr';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { APP_I18N_OPTIONS, ZSupportedLanguageCodeSchema } from '@documenso/lib/constants/i18n';
+import { ZSupportedLanguageCodeSchema } from '@documenso/lib/constants/i18n';
 import {
   RECIPIENT_ROLES_DESCRIPTION,
   RECIPIENT_ROLE_SIGNING_REASONS,
@@ -20,7 +18,6 @@ import { getDocumentCertificateAuditLogs } from '@documenso/lib/server-only/docu
 import { getOrganisationClaimByTeamId } from '@documenso/lib/server-only/organisation/get-organisation-claims';
 import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
 import { extractDocumentAuthMethods } from '@documenso/lib/utils/document-auth';
-import { getTranslations } from '@documenso/lib/utils/i18n';
 import { Card, CardContent } from '@documenso/ui/primitives/card';
 import {
   Table,
@@ -36,7 +33,7 @@ import { BrandingLogo } from '~/components/general/branding-logo';
 import type { Route } from './+types/certificate';
 
 const FRIENDLY_SIGNING_REASONS = {
-  ['__OWNER__']: msg`I am the owner of this document`,
+  ['__OWNER__']: "I am the owner of this documen",
   ...RECIPIENT_ROLE_SIGNING_REASONS,
 };
 
@@ -71,14 +68,11 @@ export async function loader({ request }: Route.LoaderArgs) {
     id: documentId,
   });
 
-  const messages = await getTranslations(documentLanguage);
-
   return {
     document,
     hidePoweredBy: organisationClaim.flags.hidePoweredBy,
     documentLanguage,
     auditLogs,
-    messages,
   };
 }
 
@@ -87,18 +81,13 @@ export async function loader({ request }: Route.LoaderArgs) {
  * DO NOT USE TRANS. YOU MUST USE _ FOR THIS FILE AND ALL CHILDREN COMPONENTS.
  *
  * Cannot use dynamicActivate by itself to translate this specific page and all
- * children components because `not-found.tsx` page runs and overrides the i18n.
+ * children components because "not-found.tsx" page runs and overrides the i18n.
  *
  * Update: Maybe <Trans> tags work now after RR7 migration.
  */
 export default function SigningCertificate({ loaderData }: Route.ComponentProps) {
-  const { document, documentLanguage, hidePoweredBy, auditLogs, messages } = loaderData;
-
-  const { i18n, _ } = useLingui();
-
-  i18n.loadAndActivate({ locale: documentLanguage, messages });
-
-  const isOwner = (email: string) => {
+  const { document, documentLanguage, hidePoweredBy, auditLogs } = loaderData;
+const isOwner = (email: string) => {
     return email.toLowerCase() === document.user.email.toLowerCase();
   };
 
@@ -138,11 +127,11 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
     const actionAuthMethod = insertedAuditLogsWithFieldAuth.at(0)?.data?.fieldSecurity?.type;
 
     let authLevel = match(actionAuthMethod)
-      .with('ACCOUNT', () => _(msg`Account Re-Authentication`))
-      .with('TWO_FACTOR_AUTH', () => _(msg`Two-Factor Re-Authentication`))
-      .with('PASSWORD', () => _(msg`Password Re-Authentication`))
-      .with('PASSKEY', () => _(msg`Passkey Re-Authentication`))
-      .with('EXPLICIT_NONE', () => _(msg`Email`))
+      .with('ACCOUNT', () => "Account Re-Authentication")
+      .with('TWO_FACTOR_AUTH', () => "Two-Factor Re-Authentication")
+      .with('PASSWORD', () => "Password Re-Authentication")
+      .with('PASSKEY', () => "Passkey Re-Authentication")
+      .with('EXPLICIT_NONE', () => "Email")
       .with(undefined, () => null)
       .exhaustive();
 
@@ -150,8 +139,8 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
       const accessAuthMethod = extractedAuthMethods.derivedRecipientAccessAuth.at(0);
 
       authLevel = match(accessAuthMethod)
-        .with('ACCOUNT', () => _(msg`Account Authentication`))
-        .with(undefined, () => _(msg`Email`))
+        .with('ACCOUNT', () => "Account Authentication")
+        .with(undefined, () => "Email")
         .exhaustive();
     }
 
@@ -199,7 +188,7 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
   return (
     <div className="print-provider pointer-events-none mx-auto max-w-screen-md">
       <div className="flex items-center">
-        <h1 className="my-8 text-2xl font-bold">{_(msg`Signing Certificate`)}</h1>
+        <h1 className="my-8 text-2xl font-bold">{"Signing Certificate"}</h1>
       </div>
 
       <Card>
@@ -207,9 +196,9 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
           <Table overflowHidden>
             <TableHeader>
               <TableRow>
-                <TableHead>{_(msg`Signer Events`)}</TableHead>
-                <TableHead>{_(msg`Signature`)}</TableHead>
-                <TableHead>{_(msg`Details`)}</TableHead>
+                <TableHead>{"Signer Events"}</TableHead>
+                <TableHead>{"Signature"}</TableHead>
+                <TableHead>{"Details"}</TableHead>
                 {/* <TableHead>Security</TableHead> */}
               </TableRow>
             </TableHeader>
@@ -225,11 +214,11 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
                       <div className="hyphens-auto break-words font-medium">{recipient.name}</div>
                       <div className="break-all">{recipient.email}</div>
                       <p className="text-muted-foreground mt-2 text-sm print:text-xs">
-                        {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
+                        {RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}
                       </p>
 
                       <p className="text-muted-foreground mt-2 text-sm print:text-xs">
-                        <span className="font-medium">{_(msg`Authentication Level`)}:</span>{' '}
+                        <span className="font-medium">{"Authentication Level"}:</span>{' '}
                         <span className="block">{getAuthenticationLevel(recipient.id)}</span>
                       </p>
                     </TableCell>
@@ -259,7 +248,7 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
                           </div>
 
                           <p className="text-muted-foreground mt-2 text-sm print:text-xs">
-                            <span className="font-medium">{_(msg`Signature ID`)}:</span>{' '}
+                            <span className="font-medium">{"Signature ID"}:</span>{' '}
                             <span className="block font-mono uppercase">
                               {signature.secondaryId}
                             </span>
@@ -270,14 +259,14 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
                       )}
 
                       <p className="text-muted-foreground mt-2 text-sm print:text-xs">
-                        <span className="font-medium">{_(msg`IP Address`)}:</span>{' '}
+                        <span className="font-medium">{"IP Address"}:</span>{' '}
                         <span className="inline-block">
-                          {logs.DOCUMENT_RECIPIENT_COMPLETED[0]?.ipAddress ?? _(msg`Unknown`)}
+                          {logs.DOCUMENT_RECIPIENT_COMPLETED[0]?.ipAddress ?? "Unknown"}
                         </span>
                       </p>
 
                       <p className="text-muted-foreground mt-1 text-sm print:text-xs">
-                        <span className="font-medium">{_(msg`Device`)}:</span>{' '}
+                        <span className="font-medium">{"Device"}:</span>{' '}
                         <span className="inline-block">
                           {getDevice(logs.DOCUMENT_RECIPIENT_COMPLETED[0]?.userAgent)}
                         </span>
@@ -287,41 +276,41 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
                     <TableCell truncate={false} className="w-[min-content] align-top">
                       <div className="space-y-1">
                         <p className="text-muted-foreground text-sm print:text-xs">
-                          <span className="font-medium">{_(msg`Sent`)}:</span>{' '}
+                          <span className="font-medium">{"Sen"}:</span>{' '}
                           <span className="inline-block">
                             {logs.EMAIL_SENT[0]
                               ? DateTime.fromJSDate(logs.EMAIL_SENT[0].createdAt)
                                   .setLocale(APP_I18N_OPTIONS.defaultLocale)
                                   .toFormat('yyyy-MM-dd hh:mm:ss a (ZZZZ)')
-                              : _(msg`Unknown`)}
+                              : msg"Unknown"}
                           </span>
                         </p>
 
                         <p className="text-muted-foreground text-sm print:text-xs">
-                          <span className="font-medium">{_(msg`Viewed`)}:</span>{' '}
+                          <span className="font-medium">{"Viewed"}:</span>{' '}
                           <span className="inline-block">
                             {logs.DOCUMENT_OPENED[0]
                               ? DateTime.fromJSDate(logs.DOCUMENT_OPENED[0].createdAt)
                                   .setLocale(APP_I18N_OPTIONS.defaultLocale)
                                   .toFormat('yyyy-MM-dd hh:mm:ss a (ZZZZ)')
-                              : _(msg`Unknown`)}
+                              : "Unknown"}
                           </span>
                         </p>
 
                         {logs.DOCUMENT_RECIPIENT_REJECTED[0] ? (
                           <p className="text-muted-foreground text-sm print:text-xs">
-                            <span className="font-medium">{_(msg`Rejected`)}:</span>{' '}
+                            <span className="font-medium">{"Rejected"}:</span>{' '}
                             <span className="inline-block">
                               {logs.DOCUMENT_RECIPIENT_REJECTED[0]
                                 ? DateTime.fromJSDate(logs.DOCUMENT_RECIPIENT_REJECTED[0].createdAt)
                                     .setLocale(APP_I18N_OPTIONS.defaultLocale)
                                     .toFormat('yyyy-MM-dd hh:mm:ss a (ZZZZ)')
-                                : _(msg`Unknown`)}
+                                : "Unknown"}
                             </span>
                           </p>
                         ) : (
                           <p className="text-muted-foreground text-sm print:text-xs">
-                            <span className="font-medium">{_(msg`Signed`)}:</span>{' '}
+                            <span className="font-medium">{"Signed"}:</span>{' '}
                             <span className="inline-block">
                               {logs.DOCUMENT_RECIPIENT_COMPLETED[0]
                                 ? DateTime.fromJSDate(
@@ -329,18 +318,18 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
                                   )
                                     .setLocale(APP_I18N_OPTIONS.defaultLocale)
                                     .toFormat('yyyy-MM-dd hh:mm:ss a (ZZZZ)')
-                                : _(msg`Unknown`)}
+                                : "Unknown"}
                             </span>
                           </p>
                         )}
 
                         <p className="text-muted-foreground text-sm print:text-xs">
-                          <span className="font-medium">{_(msg`Reason`)}:</span>{' '}
+                          <span className="font-medium">{"Reason"}:</span>{' '}
                           <span className="inline-block">
                             {recipient.signingStatus === SigningStatus.REJECTED
                               ? recipient.rejectionReason
-                              : _(
-                                  isOwner(recipient.email)
+                              : 
+                                  isOwner(recipient.email
                                     ? FRIENDLY_SIGNING_REASONS['__OWNER__']
                                     : FRIENDLY_SIGNING_REASONS[recipient.role],
                                 )}
@@ -371,7 +360,7 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
 
           <div className="flex items-end justify-end gap-x-4">
             <p className="flex-shrink-0 text-sm font-medium print:text-xs">
-              {_(msg`Signing certificate provided by`)}:
+              {"Signing certificate provided by"}:
             </p>
             <BrandingLogo className="max-h-6 print:max-h-4" />
           </div>

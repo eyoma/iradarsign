@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp, Trash } from 'lucide-react';
 
 import { validateCheckboxField } from '@documenso/lib/advanced-fields-validation/validate-checkbox';
@@ -36,8 +33,6 @@ export const CheckboxFieldAdvancedSettings = ({
   handleFieldChange,
   handleErrors,
 }: CheckboxFieldAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   const [showValidation, setShowValidation] = useState(false);
   const [values, setValues] = useState(fieldState.values ?? [{ id: 1, checked: false, value: '' }]);
   const [readOnly, setReadOnly] = useState(fieldState.readOnly ?? false);
@@ -135,12 +130,12 @@ export const CheckboxFieldAdvancedSettings = ({
     <div className="flex flex-col gap-4">
       <div className="mb-2">
         <Label>
-          <Trans>Label</Trans>
+          Label
         </Label>
         <Input
           id="label"
           className="bg-background mt-2"
-          placeholder={_(msg`Field label`)}
+          placeholder={"Field label"}
           value={fieldState.label}
           onChange={(e) => handleFieldChange('label', e.target.value)}
         />
@@ -148,21 +143,21 @@ export const CheckboxFieldAdvancedSettings = ({
 
       <div className="mb-2">
         <Label>
-          <Trans>Direction</Trans>
+          Direction
         </Label>
         <Select
           value={fieldState.direction ?? 'vertical'}
           onValueChange={(val) => handleToggleChange('direction', val)}
         >
           <SelectTrigger className="text-muted-foreground bg-background mt-2 w-full">
-            <SelectValue placeholder={_(msg`Select direction`)} />
+            <SelectValue placeholder={"Select direction"} />
           </SelectTrigger>
           <SelectContent position="popper">
             <SelectItem value="vertical">
-              <Trans>Vertical</Trans>
+              Vertical
             </SelectItem>
             <SelectItem value="horizontal">
-              <Trans>Horizontal</Trans>
+              Horizontal
             </SelectItem>
           </SelectContent>
         </Select>
@@ -171,14 +166,14 @@ export const CheckboxFieldAdvancedSettings = ({
       <div className="flex flex-row items-center gap-x-4">
         <div className="flex w-2/3 flex-col">
           <Label>
-            <Trans>Validation</Trans>
+            Validation
           </Label>
           <Select
             value={fieldState.validationRule}
             onValueChange={(val) => handleToggleChange('validationRule', val)}
           >
             <SelectTrigger className="text-muted-foreground bg-background mt-2 w-full">
-              <SelectValue placeholder={_(msg`Select at least`)} />
+              <SelectValue placeholder={"Select at leas"} />
             </SelectTrigger>
             <SelectContent position="popper">
               {checkboxValidationRules.map((item, index) => (
@@ -195,7 +190,7 @@ export const CheckboxFieldAdvancedSettings = ({
             onValueChange={(val) => handleToggleChange('validationLength', val)}
           >
             <SelectTrigger className="text-muted-foreground bg-background mt-2 w-full">
-              <SelectValue placeholder={_(msg`Pick a number`)} />
+              <SelectValue placeholder={msg"Pick a number"} />
             </SelectTrigger>
             <SelectContent position="popper">
               {checkboxValidationLength.map((item, index) => (
@@ -215,7 +210,7 @@ export const CheckboxFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleToggleChange('required', checked)}
           />
           <Label>
-            <Trans>Required field</Trans>
+            Required field
           </Label>
         </div>
         <div className="flex flex-row items-center gap-2">
@@ -225,7 +220,7 @@ export const CheckboxFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleToggleChange('readOnly', checked)}
           />
           <Label>
-            <Trans>Read only</Trans>
+            Read only
           </Label>
         </div>
       </div>
@@ -236,7 +231,7 @@ export const CheckboxFieldAdvancedSettings = ({
       >
         <span className="flex w-full flex-row justify-between">
           <span className="flex items-center">
-            <Trans>Checkbox values</Trans>
+            Checkbox values
           </span>
           {showValidation ? <ChevronUp /> : <ChevronDown />}
         </span>
@@ -270,7 +265,7 @@ export const CheckboxFieldAdvancedSettings = ({
             variant="outline"
             onClick={addValue}
           >
-            <Trans>Add another value</Trans>
+            Add another value
           </Button>
         </div>
       )}

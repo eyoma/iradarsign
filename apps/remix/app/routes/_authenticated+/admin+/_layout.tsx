@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import {
   BarChart3,
   Building2Icon,
@@ -31,7 +30,7 @@ export default function AdminLayout() {
   return (
     <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
       <h1 className="text-4xl font-semibold">
-        <Trans>Admin Panel</Trans>
+        Admin Panel
       </h1>
 
       <div className="mt-4 grid grid-cols-12 gap-x-8 md:mt-8">
@@ -50,7 +49,7 @@ export default function AdminLayout() {
           >
             <Link to="/admin/stats">
               <BarChart3 className="mr-2 h-5 w-5" />
-              <Trans>Stats</Trans>
+              Stats
             </Link>
           </Button>
 
@@ -64,7 +63,7 @@ export default function AdminLayout() {
           >
             <Link to="/admin/organisations">
               <Building2Icon className="mr-2 h-5 w-5" />
-              <Trans>Organisations</Trans>
+              Organisations
             </Link>
           </Button>
 
@@ -78,7 +77,7 @@ export default function AdminLayout() {
           >
             <Link to="/admin/claims">
               <Wallet2 className="mr-2 h-5 w-5" />
-              <Trans>Claims</Trans>
+              Claims
             </Link>
           </Button>
 
@@ -92,7 +91,7 @@ export default function AdminLayout() {
           >
             <Link to="/admin/users">
               <Users className="mr-2 h-5 w-5" />
-              <Trans>Users</Trans>
+              Users
             </Link>
           </Button>
 
@@ -106,7 +105,7 @@ export default function AdminLayout() {
           >
             <Link to="/admin/documents">
               <FileStack className="mr-2 h-5 w-5" />
-              <Trans>Documents</Trans>
+              Documents
             </Link>
           </Button>
 
@@ -120,7 +119,7 @@ export default function AdminLayout() {
           >
             <Link to="/admin/leaderboard">
               <Trophy className="mr-2 h-5 w-5" />
-              <Trans>Leaderboard</Trans>
+              Leaderboard
             </Link>
           </Button>
 
@@ -134,7 +133,7 @@ export default function AdminLayout() {
           >
             <Link to="/admin/site-settings">
               <Settings className="mr-2 h-5 w-5" />
-              <Trans>Site Settings</Trans>
+              Site Settings
             </Link>
           </Button>
         </div>

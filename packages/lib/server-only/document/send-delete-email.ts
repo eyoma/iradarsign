@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
-
 import { mailer } from '@documenso/email/mailer';
 import { DocumentSuperDeleteEmailTemplate } from '@documenso/email/templates/document-super-delete';
 import { prisma } from '@documenso/prisma';
@@ -85,7 +83,7 @@ export const sendDeleteEmail = async ({ documentId, reason }: SendDeleteEmailOpt
       name: name || '',
     },
     from: senderEmail,
-    subject: i18n._(msg`Document Deleted!`),
+    subject: i18n."Document Deleted!",
     html,
     text,
   });

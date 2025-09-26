@@ -1,4 +1,3 @@
-import { lingui } from '@lingui/vite-plugin';
 import { reactRouter } from '@react-router/dev/vite';
 import autoprefixer from 'autoprefixer';
 import serverAdapter from 'hono-react-router-adapter/vite';
@@ -27,7 +26,6 @@ export default defineConfig({
   plugins: [
     reactRouter(),
     macrosPlugin(),
-    lingui(),
     tsconfigPaths(),
     serverAdapter({
       entry: 'server/router.ts',

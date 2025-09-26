@@ -1,5 +1,3 @@
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentDistributionMethod } from '@prisma/client';
 import { InfoIcon } from 'lucide-react';
 import type { Control } from 'react-hook-form';
@@ -45,8 +43,6 @@ export const ConfigureDocumentAdvancedSettings = ({
   control,
   isSubmitting,
 }: ConfigureDocumentAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   const form = useFormContext<TConfigureEmbedFormSchema>();
   const { features } = useConfigureDocument();
 
@@ -60,22 +56,22 @@ export const ConfigureDocumentAdvancedSettings = ({
   return (
     <div>
       <h3 className="text-foreground mb-1 text-lg font-medium">
-        <Trans>Advanced Settings</Trans>
+        Advanced Settings
       </h3>
 
       <p className="text-muted-foreground mb-6 text-sm">
-        <Trans>Configure additional options and preferences</Trans>
+        Configure additional options and preferences
       </p>
 
       <Tabs defaultValue="general">
         <TabsList className="mb-6 inline-flex">
           <TabsTrigger value="general" className="px-4">
-            <Trans>General</Trans>
+            General
           </TabsTrigger>
 
           {features.allowConfigureCommunication && (
             <TabsTrigger value="communication" className="px-4">
-              <Trans>Communication</Trans>
+              Communication
             </TabsTrigger>
           )}
         </TabsList>
@@ -88,16 +84,16 @@ export const ConfigureDocumentAdvancedSettings = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex flex-row items-center">
-                    <Trans>External ID</Trans>
+                    External ID
                     <Tooltip>
                       <TooltipTrigger>
                         <InfoIcon className="mx-2 h-4 w-4" />
                       </TooltipTrigger>
                       <TooltipContent className="text-muted-foreground max-w-xs">
-                        <Trans>
+                        
                           Add an external ID to the document. This can be used to identify the
                           document in external systems.
-                        </Trans>
+                        
                       </TooltipContent>
                     </Tooltip>
                   </FormLabel>
@@ -116,12 +112,12 @@ export const ConfigureDocumentAdvancedSettings = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Allowed Signature Types</Trans>
+                      Allowed Signature Types
                     </FormLabel>
                     <FormControl>
                       <MultiSelectCombobox
                         options={Object.values(DOCUMENT_SIGNATURE_TYPES).map((option) => ({
-                          label: _(option.label),
+                          label: option.label,
                           value: option.value,
                         }))}
                         selectedValues={field.value}
@@ -143,7 +139,7 @@ export const ConfigureDocumentAdvancedSettings = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Language</Trans>
+                      Language
                     </FormLabel>
                     <FormControl>
                       <Select {...field} onValueChange={field.onChange} disabled={isSubmitting}>
@@ -172,7 +168,7 @@ export const ConfigureDocumentAdvancedSettings = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Date Format</Trans>
+                      Date Format
                     </FormLabel>
                     <FormControl>
                       <Select {...field} onValueChange={field.onChange} disabled={isSubmitting}>
@@ -201,7 +197,7 @@ export const ConfigureDocumentAdvancedSettings = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Time Zone</Trans>
+                      Time Zone
                     </FormLabel>
                     <FormControl>
                       <Combobox
@@ -225,15 +221,15 @@ export const ConfigureDocumentAdvancedSettings = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex flex-row items-center">
-                      <Trans>Redirect URL</Trans>
+                      Redirect URL
                       <Tooltip>
                         <TooltipTrigger>
                           <InfoIcon className="mx-2 h-4 w-4" />
                         </TooltipTrigger>
                         <TooltipContent className="text-muted-foreground max-w-xs">
-                          <Trans>
+                          
                             Add a URL to redirect the user to once the document is signed
-                          </Trans>
+                          
                         </TooltipContent>
                       </Tooltip>
                     </FormLabel>
@@ -257,7 +253,7 @@ export const ConfigureDocumentAdvancedSettings = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Distribution Method</Trans>
+                      Distribution Method
                     </FormLabel>
 
                     <FormControl>
@@ -267,20 +263,20 @@ export const ConfigureDocumentAdvancedSettings = ({
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value={DocumentDistributionMethod.EMAIL}>
-                            <Trans>Email</Trans>
+                            Email
                           </SelectItem>
                           <SelectItem value={DocumentDistributionMethod.NONE}>
-                            <Trans>None</Trans>
+                            None
                           </SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
 
                     <FormDescription>
-                      <Trans>
+                      
                         Choose how to distribute your document to recipients. Email will send
                         notifications, None will generate signing links for manual distribution.
-                      </Trans>
+                      
                     </FormDescription>
 
                     <FormMessage />
@@ -298,9 +294,9 @@ export const ConfigureDocumentAdvancedSettings = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel htmlFor="subject">
-                        <Trans>
+                        
                           Subject <span className="text-muted-foreground">(Optional)</span>
-                        </Trans>
+                        
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -321,9 +317,9 @@ export const ConfigureDocumentAdvancedSettings = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel htmlFor="message">
-                        <Trans>
+                        
                           Message <span className="text-muted-foreground">(Optional)</span>
-                        </Trans>
+                        
                       </FormLabel>
                       <FormControl>
                         <Textarea

@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { TeamEmail } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
@@ -50,7 +47,6 @@ export const TeamEmailUpdateDialog = ({
 }: TeamEmailUpdateDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -73,8 +69,8 @@ export const TeamEmailUpdateDialog = ({
       });
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Team email was updated.`),
+        title: "Success",
+        description: "Team email was updated.",
         duration: 5000,
       });
 
@@ -83,10 +79,10 @@ export const TeamEmailUpdateDialog = ({
       setOpen(false);
     } catch (err) {
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting update the team email. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting update the team email. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -107,7 +103,7 @@ export const TeamEmailUpdateDialog = ({
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
         {trigger ?? (
           <Button variant="outline" className="bg-background">
-            <Trans>Update team email</Trans>
+            Update team email
           </Button>
         )}
       </DialogTrigger>
@@ -115,11 +111,11 @@ export const TeamEmailUpdateDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Update team email</Trans>
+            Update team email
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>To change the email you must remove and add a new email address.</Trans>
+            To change the email you must remove and add a new email address.
           </DialogDescription>
         </DialogHeader>
 
@@ -135,7 +131,7 @@ export const TeamEmailUpdateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Name</Trans>
+                      Name
                     </FormLabel>
                     <FormControl>
                       <Input className="bg-background" placeholder="eg. Legal" {...field} />
@@ -147,7 +143,7 @@ export const TeamEmailUpdateDialog = ({
 
               <FormItem>
                 <FormLabel required>
-                  <Trans>Email</Trans>
+                  Email
                 </FormLabel>
                 <FormControl>
                   <Input className="bg-background" value={teamEmail.email} disabled={true} />
@@ -156,11 +152,11 @@ export const TeamEmailUpdateDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" loading={form.formState.isSubmitting}>
-                  <Trans>Update</Trans>
+                  Update
                 </Button>
               </DialogFooter>
             </fieldset>

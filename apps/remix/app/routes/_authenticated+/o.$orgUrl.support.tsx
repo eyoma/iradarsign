@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { BookIcon, HelpCircleIcon, Link2Icon } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 
@@ -40,11 +39,11 @@ export default function SupportPage() {
       <div className="mb-8">
         <h1 className="flex flex-row items-center gap-2 text-3xl font-bold">
           <HelpCircleIcon className="text-muted-foreground h-8 w-8" />
-          <Trans>Support</Trans>
+          Support
         </h1>
 
         <p className="text-muted-foreground mt-2">
-          <Trans>Your current plan includes the following support channels:</Trans>
+          Your current plan includes the following support channels:
         </p>
 
         <div className="mt-6 flex flex-col gap-4">
@@ -57,11 +56,11 @@ export default function SupportPage() {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                <Trans>Documentation</Trans>
+                Documentation
               </Link>
             </h2>
             <p className="text-muted-foreground mt-1">
-              <Trans>Read our documentation to get started with Documenso.</Trans>
+              Read our documentation to get started with Documenso.
             </p>
           </div>
           <div className="rounded-lg border p-4">
@@ -73,11 +72,11 @@ export default function SupportPage() {
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                <Trans>Discord</Trans>
+                Discord
               </Link>
             </h2>
             <p className="text-muted-foreground mt-1">
-              <Trans>
+              
                 Join our community on{' '}
                 <Link
                   to="https://documen.so/discord"
@@ -88,7 +87,7 @@ export default function SupportPage() {
                   Discord
                 </Link>{' '}
                 for community support and discussion.
-              </Trans>
+              
             </p>
           </div>
           {organisation && IS_BILLING_ENABLED() && subscriptionStatus && (
@@ -96,15 +95,15 @@ export default function SupportPage() {
               <div className="rounded-lg border p-4">
                 <h2 className="flex items-center gap-2 text-lg font-bold">
                   <Link2Icon className="text-muted-foreground h-5 w-5" />
-                  <Trans>Contact us</Trans>
+                  Contact us
                 </h2>
                 <p className="text-muted-foreground mt-1">
-                  <Trans>We'll get back to you as soon as possible via email.</Trans>
+                  We'll get back to you as soon as possible via email.
                 </p>
                 <div className="mt-4">
                   {!showForm ? (
                     <Button variant="outline" size="sm" onClick={() => setShowForm(true)}>
-                      <Trans>Create a support ticket</Trans>
+                      Create a support ticket
                     </Button>
                   ) : (
                     <SupportTicketForm

@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { AlertCircle } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
@@ -20,7 +17,6 @@ export const LegacyFieldWarningPopover = ({
   documentId,
   templateId,
 }: LegacyFieldWarningPopoverProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const revalidator = useRevalidator();
@@ -60,10 +56,10 @@ export const LegacyFieldWarningPopover = ({
     void revalidator.revalidate();
 
     toast({
-      title: _(msg`Fields updated`),
-      description: _(
-        msg`The fields have been updated to the new field insertion method successfully`,
-      ),
+      title: "Fields updated",
+      description: 
+        "The fields have been updated to the new field insertion method successfully",
+      ,
     });
   };
 
@@ -74,9 +70,9 @@ export const LegacyFieldWarningPopover = ({
         <Button variant="outline" className="h-9 w-9 p-0">
           <span className="sr-only">
             {type === 'document' ? (
-              <Trans>Document is using legacy field insertion</Trans>
+              Document is using legacy field insertion
             ) : (
-              <Trans>Template is using legacy field insertion</Trans>
+              Template is using legacy field insertion
             )}
           </span>
           <AlertCircle className="h-5 w-5" />
@@ -85,15 +81,15 @@ export const LegacyFieldWarningPopover = ({
     >
       <p className="text-muted-foreground text-sm">
         {type === 'document' ? (
-          <Trans>
+          
             This document is using legacy field insertion, we recommend using the new field
             insertion method for more accurate results.
-          </Trans>
+          
         ) : (
-          <Trans>
+          
             This template is using legacy field insertion, we recommend using the new field
             insertion method for more accurate results.
-          </Trans>
+          
         )}
       </p>
 
@@ -104,7 +100,7 @@ export const LegacyFieldWarningPopover = ({
           loading={isUpdatingDocument || isUpdatingTemplate}
           onClick={onUpdateFieldsClick}
         >
-          <Trans>Update Fields</Trans>
+          Update Fields
         </Button>
       </div>
     </PopoverHover>

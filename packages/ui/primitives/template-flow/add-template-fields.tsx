@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Field, Recipient } from '@prisma/client';
 import { FieldType, RecipientRole, SendStatus } from '@prisma/client';
 import {
@@ -90,7 +87,6 @@ export const AddTemplateFieldsFormPartial = ({
   onAutoSave,
   teamId,
 }: AddTemplateFieldsFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { isWithinPageBounds, getFieldPosition, getPage } = useDocumentElement();
@@ -556,11 +552,11 @@ export const AddTemplateFieldsFormPartial = ({
     <>
       {showAdvancedSettings && currentField ? (
         <FieldAdvancedSettings
-          title={msg`Advanced settings`}
-          description={msg`Configure the ${parseMessageDescriptor(
+          title={"Advanced settings"}
+          description={"Configure the ${parseMessageDescriptor(
             _,
             FRIENDLY_FIELD_TYPE[currentField.type],
-          )} field`}
+          )} field"}
           field={currentField}
           fields={localFields}
           onAdvancedSettings={handleAdvancedSettings}
@@ -682,7 +678,7 @@ export const AddTemplateFieldsFormPartial = ({
 
                     <CommandEmpty>
                       <span className="text-muted-foreground inline-block px-4">
-                        <Trans>No recipient matching this description was found.</Trans>
+                        No recipient matching this description was found.
                       </span>
                     </CommandEmpty>
 
@@ -690,7 +686,7 @@ export const AddTemplateFieldsFormPartial = ({
                     {recipientsByRoleToDisplay.map(([role, roleRecipients], roleIndex) => (
                       <CommandGroup key={roleIndex}>
                         <div className="text-muted-foreground mb-1 ml-2 mt-2 text-xs font-medium">
-                          {_(RECIPIENT_ROLES_DESCRIPTION[role].roleNamePlural)}
+                          {RECIPIENT_ROLES_DESCRIPTION[role].roleNamePlural}
                         </div>
 
                         {roleRecipients.length === 0 && (
@@ -698,7 +694,7 @@ export const AddTemplateFieldsFormPartial = ({
                             key={`${role}-empty`}
                             className="text-muted-foreground/80 px-4 pb-4 pt-2.5 text-center text-xs"
                           >
-                            <Trans>No recipients with this role</Trans>
+                            No recipients with this role
                           </div>
                         )}
 
@@ -771,7 +767,7 @@ export const AddTemplateFieldsFormPartial = ({
                               'text-muted-foreground group-data-[selected]:text-foreground font-signature flex items-center justify-center gap-x-1.5 text-lg font-normal',
                             )}
                           >
-                            <Trans>Signature</Trans>
+                            Signature
                           </p>
                         </CardContent>
                       </Card>
@@ -823,7 +819,7 @@ export const AddTemplateFieldsFormPartial = ({
                             )}
                           >
                             <Mail className="h-4 w-4" />
-                            <Trans>Email</Trans>
+                            Email
                           </p>
                         </CardContent>
                       </Card>
@@ -849,7 +845,7 @@ export const AddTemplateFieldsFormPartial = ({
                             )}
                           >
                             <User className="h-4 w-4" />
-                            <Trans>Name</Trans>
+                            Name
                           </p>
                         </CardContent>
                       </Card>
@@ -875,7 +871,7 @@ export const AddTemplateFieldsFormPartial = ({
                             )}
                           >
                             <CalendarDays className="h-4 w-4" />
-                            <Trans>Date</Trans>
+                            Date
                           </p>
                         </CardContent>
                       </Card>
@@ -901,7 +897,7 @@ export const AddTemplateFieldsFormPartial = ({
                             )}
                           >
                             <Type className="h-4 w-4" />
-                            <Trans>Text</Trans>
+                            Text
                           </p>
                         </CardContent>
                       </Card>
@@ -927,7 +923,7 @@ export const AddTemplateFieldsFormPartial = ({
                             )}
                           >
                             <Hash className="h-4 w-4" />
-                            <Trans>Number</Trans>
+                            Number
                           </p>
                         </CardContent>
                       </Card>
@@ -1006,7 +1002,7 @@ export const AddTemplateFieldsFormPartial = ({
                             )}
                           >
                             <ChevronDown className="h-4 w-4" />
-                            <Trans>Dropdown</Trans>
+                            Dropdown
                           </p>
                         </CardContent>
                       </Card>
@@ -1019,7 +1015,7 @@ export const AddTemplateFieldsFormPartial = ({
                 <div className="mt-4">
                   <ul>
                     <li className="text-sm text-red-500">
-                      <Trans>
+                      
                         To proceed further, please set at least one value for the{' '}
                         {emptyCheckboxFields.length > 0
                           ? 'Checkbox'
@@ -1027,7 +1023,7 @@ export const AddTemplateFieldsFormPartial = ({
                             ? 'Radio'
                             : 'Select'}{' '}
                         field.
-                      </Trans>
+                      
                     </li>
                   </ul>
                 </div>
@@ -1039,7 +1035,7 @@ export const AddTemplateFieldsFormPartial = ({
                 <DocumentFlowFormContainerActions
                   loading={form.formState.isSubmitting}
                   disabled={form.formState.isSubmitting}
-                  goNextLabel={msg`Save Template`}
+                  goNextLabel={"Save Template"}
                   disableNextStep={hasErrors}
                   onGoBackClick={() => {
                     previousStep();

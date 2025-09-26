@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Webhook } from '@prisma/client';
 import { WebhookTriggerEvents } from '@prisma/client';
 import { useForm } from 'react-hook-form';
@@ -52,7 +49,6 @@ const ZTestWebhookFormSchema = z.object({
 type TTestWebhookFormSchema = z.infer<typeof ZTestWebhookFormSchema>;
 
 export const WebhookTestDialog = ({ webhook, children }: WebhookTestDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const team = useCurrentTeam();
@@ -77,18 +73,18 @@ export const WebhookTestDialog = ({ webhook, children }: WebhookTestDialogProps)
       });
 
       toast({
-        title: _(msg`Test webhook sent`),
-        description: _(msg`The test webhook has been successfully sent to your endpoint.`),
+        title: "Test webhook sen",
+        description: msg"The test webhook has been successfully sent to your endpoint.",
         duration: 5000,
       });
 
       setOpen(false);
     } catch (error) {
       toast({
-        title: _(msg`Test webhook failed`),
-        description: _(
-          msg`We encountered an error while sending the test webhook. Please check your endpoint and try again.`,
-        ),
+        title: "Test webhook failed",
+        description: 
+          "We encountered an error while sending the test webhook. Please check your endpoint and try again.",
+        ,
         variant: 'destructive',
         duration: 5000,
       });
@@ -102,13 +98,13 @@ export const WebhookTestDialog = ({ webhook, children }: WebhookTestDialogProps)
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Test Webhook</Trans>
+            Test Webhook
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               Send a test webhook with sample data to verify your integration is working correctly.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -124,7 +120,7 @@ export const WebhookTestDialog = ({ webhook, children }: WebhookTestDialogProps)
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Event Type</Trans>
+                      Event Type
                     </FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
@@ -147,18 +143,18 @@ export const WebhookTestDialog = ({ webhook, children }: WebhookTestDialogProps)
 
               <div className="rounded-md border p-4">
                 <h4 className="mb-2 text-sm font-medium">
-                  <Trans>Webhook URL</Trans>
+                  Webhook URL
                 </h4>
                 <p className="text-muted-foreground break-all text-sm">{webhook.webhookUrl}</p>
               </div>
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" loading={form.formState.isSubmitting}>
-                  <Trans>Send Test Webhook</Trans>
+                  Send Test Webhook
                 </Button>
               </DialogFooter>
             </fieldset>

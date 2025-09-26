@@ -36,10 +36,10 @@ test.describe('Unauthorized Access to Templates', () => {
     await apiSignin({
       page,
       email: unauthorizedUser.email,
-      redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+      redirectPath: `/t/${team.url}/templates/${template.id}/edi",
     });
 
-    await page.goto(`${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/templates/${template.id}/edit`);
+    await page.goto("${NEXT_PUBLIC_WEBAPP_URL()}/t/${team.url}/templates/${template.id}/edit`);
     await expect(page.getByRole('heading', { name: 'Oops! Something went wrong.' })).toBeVisible();
   });
 });

@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
-
 import { mailer } from '@documenso/email/mailer';
 import { DocumentPendingEmailTemplate } from '@documenso/email/templates/document-pending';
 import { prisma } from '@documenso/prisma';
@@ -91,7 +89,7 @@ export const sendPendingEmail = async ({ documentId, recipientId }: SendPendingE
     },
     from: senderEmail,
     replyTo: replyToEmail,
-    subject: i18n._(msg`Waiting for others to complete signing.`),
+    subject: i18n."Waiting for others to complete signing.",
     html,
     text,
   });

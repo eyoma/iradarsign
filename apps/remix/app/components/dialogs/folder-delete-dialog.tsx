@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -38,16 +36,14 @@ export type FolderDeleteDialogProps = {
 } & Omit<DialogPrimitive.DialogProps, 'children'>;
 
 export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDeleteDialogProps) => {
-  const { t } = useLingui();
-
   const { toast } = useToast();
   const { mutateAsync: deleteFolder } = trpc.folder.deleteFolder.useMutation();
 
-  const deleteMessage = t`delete ${folder.name}`;
+  const deleteMessage = "delete ${folder.name}";
 
   const ZDeleteFolderFormSchema = z.object({
     confirmText: z.literal(deleteMessage, {
-      errorMap: () => ({ message: t`You must type '${deleteMessage}' to confirm` }),
+      errorMap: () => ({ message: "You must type '${deleteMessage}' to confirm" }),
     }),
   });
 
@@ -69,15 +65,15 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
       onOpenChange(false);
 
       toast({
-        title: t`Folder deleted successfully`,
+        title: "Folder deleted successfully",
       });
     } catch (err) {
       const error = AppError.parseError(err);
 
       if (error.code === AppErrorCode.NOT_FOUND) {
         toast({
-          title: t`Folder not found`,
-          description: t`The folder you are trying to delete does not exist.`,
+          title: "Folder not found",
+          description: "The folder you are trying to delete does not exist.",
           variant: 'destructive',
         });
 
@@ -85,8 +81,8 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
       }
 
       toast({
-        title: t`Failed to delete folder`,
-        description: t`An unknown error occurred while deleting the folder.`,
+        title: "Failed to delete folder",
+        description: "An unknown error occurred while deleting the folder.",
         variant: 'destructive',
       });
     }
@@ -103,10 +99,10 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Delete Folder</Trans>
+            Delete Folder
           </DialogTitle>
           <DialogDescription>
-            <Trans>Are you sure you want to delete this folder?</Trans>
+            Are you sure you want to delete this folder?
           </DialogDescription>
         </DialogHeader>
 
@@ -115,10 +111,10 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
           folder._count.subfolders > 0) && (
           <Alert variant="destructive">
             <AlertDescription>
-              <Trans>
+              
                 This folder contains multiple items. Deleting it will remove all subfolders and move
                 all nested documents and templates to the root folder.
-              </Trans>
+              
             </AlertDescription>
           </Alert>
         )}
@@ -132,12 +128,12 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>
+                      
                         Confirm by typing:{' '}
                         <span className="font-sm text-destructive font-semibold">
                           {deleteMessage}
                         </span>
-                      </Trans>
+                      
                     </FormLabel>
                     <FormControl>
                       <Input placeholder={deleteMessage} {...field} />
@@ -149,7 +145,7 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
                 <Button
                   variant="destructive"
@@ -157,7 +153,7 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
                   disabled={!form.formState.isValid}
                   loading={form.formState.isSubmitting}
                 >
-                  <Trans>Delete</Trans>
+                  Delete
                 </Button>
               </DialogFooter>
             </fieldset>

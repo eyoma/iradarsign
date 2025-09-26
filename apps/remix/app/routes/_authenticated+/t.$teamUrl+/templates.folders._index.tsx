@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans, useLingui } from '@lingui/react/macro';
 import { HomeIcon, Loader2, SearchIcon } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
@@ -24,8 +23,6 @@ export function meta() {
 }
 
 export default function TemplatesFoldersPage() {
-  const { t } = useLingui();
-
   const navigate = useNavigate();
   const team = useCurrentTeam();
 
@@ -81,7 +78,7 @@ export default function TemplatesFoldersPage() {
       <div className="relative w-full max-w-md py-6">
         <SearchIcon className="text-muted-foreground absolute left-2 top-9 h-4 w-4" />
         <Input
-          placeholder={t`Search folders...`}
+          placeholder={"Search folders..."}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-8"
@@ -89,7 +86,7 @@ export default function TemplatesFoldersPage() {
       </div>
 
       <h1 className="mt-4 truncate text-2xl font-semibold md:text-3xl">
-        <Trans>All Folders</Trans>
+        All Folders
       </h1>
 
       {isFoldersLoading ? (
@@ -132,7 +129,7 @@ export default function TemplatesFoldersPage() {
           <div>
             {searchTerm && foldersData?.folders.filter(isFolderMatchingSearch).length === 0 && (
               <div className="text-muted-foreground mt-6 text-center">
-                <Trans>No folders found matching "{searchTerm}"</Trans>
+                No folders found matching "{searchTerm}"
               </div>
             )}
 

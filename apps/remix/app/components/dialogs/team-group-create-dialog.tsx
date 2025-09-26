@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans, useLingui } from '@lingui/react/macro';
 import { OrganisationGroupType, TeamMemberRole } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
@@ -60,7 +59,6 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<'SELECT' | 'ROLES'>('SELECT');
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const team = useCurrentTeam();
@@ -102,16 +100,16 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
       });
 
       toast({
-        title: t`Success`,
-        description: t`Team members have been added.`,
+        title: "Success",
+        description: "Team members have been added.",
         duration: 5000,
       });
 
       setOpen(false);
     } catch {
       toast({
-        title: t`An unknown error occurred`,
-        description: t`We encountered an unknown error while attempting to add team members. Please try again later.`,
+        title: "An unknown error occurred",
+        description: "We encountered an unknown error while attempting to add team members. Please try again later.",
         variant: 'destructive',
       });
     }
@@ -133,7 +131,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
     >
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
         <Button variant="secondary" onClick={() => setOpen(true)}>
-          <Trans>Add groups</Trans>
+          Add groups
         </Button>
       </DialogTrigger>
 
@@ -142,22 +140,22 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
           .with('SELECT', () => (
             <DialogHeader>
               <DialogTitle>
-                <Trans>Add groups</Trans>
+                Add groups
               </DialogTitle>
 
               <DialogDescription>
-                <Trans>Select groups of members to add to the team.</Trans>
+                Select groups of members to add to the team.
               </DialogDescription>
             </DialogHeader>
           ))
           .with('ROLES', () => (
             <DialogHeader>
               <DialogTitle>
-                <Trans>Add group roles</Trans>
+                Add group roles
               </DialogTitle>
 
               <DialogDescription>
-                <Trans>Configure the team roles for each group</Trans>
+                Configure the team roles for each group
               </DialogDescription>
             </DialogHeader>
           ))
@@ -174,7 +172,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          <Trans>Groups</Trans>
+                          Groups
                         </FormLabel>
 
                         <FormControl>
@@ -199,12 +197,12 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
                               );
                             }}
                             className="bg-background w-full"
-                            emptySelectionPlaceholder={t`Select groups`}
+                            emptySelectionPlaceholder={"Select groups"}
                           />
                         </FormControl>
 
                         <FormDescription>
-                          <Trans>Select groups to add to this team</Trans>
+                          Select groups to add to this team
                         </FormDescription>
                       </FormItem>
                     )}
@@ -212,7 +210,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
 
                   <DialogFooter>
                     <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                      <Trans>Cancel</Trans>
+                      Cancel
                     </Button>
 
                     <Button
@@ -222,7 +220,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
                         setStep('ROLES');
                       }}
                     >
-                      <Trans>Next</Trans>
+                      Next
                     </Button>
                   </DialogFooter>
                 </>
@@ -236,7 +234,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
                         <div className="w-full space-y-2">
                           {index === 0 && (
                             <FormLabel>
-                              <Trans>Group</Trans>
+                              Group
                             </FormLabel>
                           )}
                           <Input
@@ -245,7 +243,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
                             value={
                               avaliableOrganisationGroups.find(
                                 ({ id }) => id === group.organisationGroupId,
-                              )?.name || t`Untitled Group`
+                              )?.name || "Untitled Group"
                             }
                           />
                         </div>
@@ -257,7 +255,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
                             <FormItem className="w-full">
                               {index === 0 && (
                                 <FormLabel required>
-                                  <Trans>Team Role</Trans>
+                                  Team Role
                                 </FormLabel>
                               )}
                               <FormControl>
@@ -287,11 +285,11 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
 
                   <DialogFooter className="mt-4">
                     <Button type="button" variant="secondary" onClick={() => setStep('SELECT')}>
-                      <Trans>Back</Trans>
+                      Back
                     </Button>
 
                     <Button type="submit" loading={form.formState.isSubmitting}>
-                      <Trans>Create Groups</Trans>
+                      Create Groups
                     </Button>
                   </DialogFooter>
                 </>

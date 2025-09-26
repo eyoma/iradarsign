@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { ExternalLinkIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -60,7 +56,6 @@ export const ZCreateOrganisationFormSchema = ZCreateOrganisationRequestSchema.pi
 export type TCreateOrganisationFormSchema = z.infer<typeof ZCreateOrganisationFormSchema>;
 
 export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCreateDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
   const { refreshSession, organisations } = useSession();
 
@@ -109,8 +104,8 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
       setOpen(false);
 
       toast({
-        title: t`Success`,
-        description: t`Your organisation has been created.`,
+        title: "Success",
+        description: "Your organisation has been created.",
         duration: 5000,
       });
     } catch (err) {
@@ -119,8 +114,8 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
       console.error(error);
 
       toast({
-        title: t`An unknown error occurred`,
-        description: t`We encountered an unknown error while attempting to create a organisation. Please try again later.`,
+        title: "An unknown error occurred",
+        description: "We encountered an unknown error while attempting to create a organisation. Please try again later.",
         variant: 'destructive',
       });
     }
@@ -153,7 +148,7 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
         {trigger ?? (
           <Button className="flex-shrink-0" variant="secondary">
-            <Trans>Create organisation</Trans>
+            Create organisation
           </Button>
         )}
       </DialogTrigger>
@@ -164,11 +159,11 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
             <>
               <DialogHeader>
                 <DialogTitle>
-                  <Trans>Select a plan</Trans>
+                  Select a plan
                 </DialogTitle>
 
                 <DialogDescription>
-                  <Trans>Select a plan to continue</Trans>
+                  Select a plan to continue
                 </DialogDescription>
               </DialogHeader>
               <fieldset aria-label="Plan select">
@@ -185,16 +180,16 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
 
                 <DialogFooter className="mt-4">
                   <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   {isIndividualPlan(selectedPriceId) && isPersonalLayoutMode ? (
                     <IndividualPersonalLayoutCheckoutButton priceId={selectedPriceId}>
-                      <Trans>Checkout</Trans>
+                      Checkout
                     </IndividualPersonalLayoutCheckoutButton>
                   ) : (
                     <Button type="submit" onClick={() => setStep('create')}>
-                      <Trans>Continue</Trans>
+                      Continue
                     </Button>
                   )}
                 </DialogFooter>
@@ -205,11 +200,11 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
             <>
               <DialogHeader>
                 <DialogTitle>
-                  <Trans>Create organisation</Trans>
+                  Create organisation
                 </DialogTitle>
 
                 <DialogDescription>
-                  <Trans>Create an organisation to collaborate with teams</Trans>
+                  Create an organisation to collaborate with teams
                 </DialogDescription>
               </DialogHeader>
 
@@ -225,7 +220,7 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel required>
-                            <Trans>Organisation Name</Trans>
+                            Organisation Name
                           </FormLabel>
                           <FormControl>
                             <Input {...field} />
@@ -242,11 +237,11 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
                           variant="secondary"
                           onClick={() => setStep('billing')}
                         >
-                          <Trans>Back</Trans>
+                          Back
                         </Button>
                       ) : (
                         <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                          <Trans>Cancel</Trans>
+                          Cancel
                         </Button>
                       )}
 
@@ -255,7 +250,7 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
                         data-testid="dialog-create-organisation-button"
                         loading={form.formState.isSubmitting}
                       >
-                        {selectedPriceId ? <Trans>Checkout</Trans> : <Trans>Create</Trans>}
+                        {selectedPriceId ? Checkout : Create}
                       </Button>
                     </DialogFooter>
                   </fieldset>
@@ -275,10 +270,10 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
 const internalClaimsDescription: {
   [key in INTERNAL_CLAIM_ID]: MessageDescriptor | string;
 } = {
-  [INTERNAL_CLAIM_ID.FREE]: msg`5 Documents a month`,
-  [INTERNAL_CLAIM_ID.INDIVIDUAL]: msg`Unlimited documents, API and more`,
-  [INTERNAL_CLAIM_ID.TEAM]: msg`Embedding, 5 members included and more`,
-  [INTERNAL_CLAIM_ID.PLATFORM]: msg`Whitelabeling, unlimited members and more`,
+  [INTERNAL_CLAIM_ID.FREE]: "5 Documents a month",
+  [INTERNAL_CLAIM_ID.INDIVIDUAL]: "Unlimited documents, API and more",
+  [INTERNAL_CLAIM_ID.TEAM]: "Embedding, 5 members included and more",
+  [INTERNAL_CLAIM_ID.PLATFORM]: "Whitelabeling, unlimited members and more",
   [INTERNAL_CLAIM_ID.ENTERPRISE]: '',
   [INTERNAL_CLAIM_ID.EARLY_ADOPTER]: '',
 };
@@ -296,8 +291,6 @@ const BillingPlanForm = ({
   plans,
   canCreateFreeOrganisation,
 }: BillingPlanFormProps) => {
-  const { t } = useLingui();
-
   const [billingPeriod, setBillingPeriod] = useState<'monthlyPrice' | 'yearlyPrice'>('yearlyPrice');
 
   const dynamicPlans = useMemo(() => {
@@ -345,10 +338,10 @@ const BillingPlanForm = ({
       >
         <TabsList className="flex w-full justify-center">
           <TabsTrigger className="w-full" value="monthlyPrice">
-            <Trans>Monthly</Trans>
+            Monthly
           </TabsTrigger>
           <TabsTrigger className="w-full" value="yearlyPrice">
-            <Trans>Yearly</Trans>
+            Yearly
           </TabsTrigger>
         </TabsList>
       </Tabs>
@@ -367,20 +360,20 @@ const BillingPlanForm = ({
           <div className="w-full text-left">
             <div className="flex items-center justify-between">
               <p className="text-medium">
-                <Trans>Free</Trans>
+                Free
               </p>
 
               <Badge size="small" variant="neutral" className="ml-1.5">
                 {canCreateFreeOrganisation ? (
-                  <Trans>1 Free organisations left</Trans>
+                  1 Free organisations left
                 ) : (
-                  <Trans>0 Free organisations left</Trans>
+                  0 Free organisations left
                 )}
               </Badge>
             </div>
 
             <div className="text-muted-foreground">
-              <Trans>5 documents a month</Trans>
+              5 documents a month
             </div>
           </div>
         </button>
@@ -405,9 +398,9 @@ const BillingPlanForm = ({
               <p>{plan[billingPeriod]?.friendlyPrice}</p>
               <span className="text-muted-foreground text-xs">
                 {billingPeriod === 'monthlyPrice' ? (
-                  <Trans>per month</Trans>
+                  per month
                 ) : (
-                  <Trans>per year</Trans>
+                  per year
                 )}
               </span>
             </div>
@@ -421,10 +414,10 @@ const BillingPlanForm = ({
         >
           <div className="flex-1 font-normal">
             <p className="text-muted-foreground font-medium">
-              <Trans>Enterprise</Trans>
+              Enterprise
             </p>
             <p className="text-muted-foreground flex flex-row items-center gap-1">
-              <Trans>Contact sales here</Trans>
+              Contact sales here
               <ExternalLinkIcon className="h-4 w-4" />
             </p>
           </div>
@@ -437,7 +430,7 @@ const BillingPlanForm = ({
           className="text-primary hover:text-primary/80 flex items-center justify-center gap-1 text-sm hover:underline"
           target="_blank"
         >
-          <Trans>Compare all plans and features in detail</Trans>
+          Compare all plans and features in detail
           <ExternalLinkIcon className="h-4 w-4" />
         </Link>
       </div>

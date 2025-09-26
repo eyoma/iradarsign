@@ -1,8 +1,5 @@
 import { useId, useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { type Field, FieldType, type Recipient, RecipientRole } from '@prisma/client';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -55,7 +52,6 @@ export const DocumentSigningForm = ({
   fieldsValidated,
   nextRecipient,
 }: DocumentSigningFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -122,7 +118,7 @@ export const DocumentSigningForm = ({
     <div className="flex h-full flex-col">
       {validateUninsertedFields && uninsertedFields[0] && (
         <FieldToolTip key={uninsertedFields[0].id} field={uninsertedFields[0]} color="warning">
-          <Trans>Click to insert field</Trans>
+          Click to insert field
         </FieldToolTip>
       )}
 
@@ -141,7 +137,7 @@ export const DocumentSigningForm = ({
                     disabled={typeof window !== 'undefined' && window.history.length <= 1}
                     onClick={async () => navigate(-1)}
                   >
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   <DocumentSigningCompleteDialog
@@ -204,7 +200,7 @@ export const DocumentSigningForm = ({
 
                                       {r.id === recipient.id && (
                                         <span className="text-muted-foreground ml-2">
-                                          {_(msg`(You)`)}
+                                          {"(You")}
                                         </span>
                                       )}
                                     </Label>
@@ -229,7 +225,7 @@ export const DocumentSigningForm = ({
                     size="lg"
                     loading={isAssistantSubmitting}
                   >
-                    <Trans>Continue</Trans>
+                    Continue
                   </Button>
                 </div>
 
@@ -259,7 +255,7 @@ export const DocumentSigningForm = ({
                 <div className="flex flex-1 flex-col gap-y-4">
                   <div>
                     <Label htmlFor="full-name">
-                      <Trans>Full Name</Trans>
+                      Full Name
                     </Label>
 
                     <Input
@@ -274,7 +270,7 @@ export const DocumentSigningForm = ({
                   {hasSignatureField && (
                     <div>
                       <Label htmlFor="Signature">
-                        <Trans>Signature</Trans>
+                        Signature
                       </Label>
 
                       <SignaturePadDialog
@@ -300,7 +296,7 @@ export const DocumentSigningForm = ({
                   disabled={typeof window !== 'undefined' && window.history.length <= 1}
                   onClick={async () => navigate(-1)}
                 >
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <DocumentSigningCompleteDialog

@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentStatus } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
@@ -42,9 +39,7 @@ export const DocumentDeleteDialog = ({
 }: DocumentDeleteDialogProps) => {
   const { toast } = useToast();
   const { refreshLimits } = useLimits();
-  const { _ } = useLingui();
-
-  const deleteMessage = msg`delete`;
+  const deleteMessage = "delete";
 
   const [inputValue, setInputValue] = useState('');
   const [isDeleteEnabled, setIsDeleteEnabled] = useState(status === DocumentStatus.DRAFT);
@@ -54,8 +49,8 @@ export const DocumentDeleteDialog = ({
       void refreshLimits();
 
       toast({
-        title: _(msg`Document deleted`),
-        description: _(msg`"${documentTitle}" has been successfully deleted`),
+        title: "Document deleted",
+        description: ""${documentTitle}" has been successfully deleted",
         duration: 5000,
       });
 
@@ -65,8 +60,8 @@ export const DocumentDeleteDialog = ({
     },
     onError: () => {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`This document could not be deleted at this time. Please try again.`),
+        title: "Something went wrong",
+        description: "This document could not be deleted at this time. Please try again.",
         variant: 'destructive',
         duration: 7500,
       });
@@ -82,7 +77,7 @@ export const DocumentDeleteDialog = ({
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    setIsDeleteEnabled(event.target.value === _(deleteMessage));
+    setIsDeleteEnabled(event.target.value === deleteMessage);
   };
 
   return (
@@ -90,18 +85,18 @@ export const DocumentDeleteDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription>
             {canManageDocument ? (
-              <Trans>
+              
                 You are about to delete <strong>"{documentTitle}"</strong>
-              </Trans>
+              
             ) : (
-              <Trans>
+              
                 You are about to hide <strong>"{documentTitle}"</strong>
-              </Trans>
+              
             )}
           </DialogDescription>
         </DialogHeader>
@@ -111,36 +106,36 @@ export const DocumentDeleteDialog = ({
             {match(status)
               .with(DocumentStatus.DRAFT, () => (
                 <AlertDescription>
-                  <Trans>
+                  
                     Please note that this action is <strong>irreversible</strong>. Once confirmed,
                     this document will be permanently deleted.
-                  </Trans>
+                  
                 </AlertDescription>
               ))
               .with(DocumentStatus.PENDING, () => (
                 <AlertDescription>
                   <p>
-                    <Trans>
+                    
                       Please note that this action is <strong>irreversible</strong>.
-                    </Trans>
+                    
                   </p>
 
                   <p className="mt-1">
-                    <Trans>Once confirmed, the following will occur:</Trans>
+                    Once confirmed, the following will occur:
                   </p>
 
                   <ul className="mt-0.5 list-inside list-disc">
                     <li>
-                      <Trans>Document will be permanently deleted</Trans>
+                      Document will be permanently deleted
                     </li>
                     <li>
-                      <Trans>Document signing process will be cancelled</Trans>
+                      Document signing process will be cancelled
                     </li>
                     <li>
-                      <Trans>All inserted signatures will be voided</Trans>
+                      All inserted signatures will be voided
                     </li>
                     <li>
-                      <Trans>All recipients will be notified</Trans>
+                      All recipients will be notified
                     </li>
                   </ul>
                 </AlertDescription>
@@ -148,15 +143,15 @@ export const DocumentDeleteDialog = ({
               .with(P.union(DocumentStatus.COMPLETED, DocumentStatus.REJECTED), () => (
                 <AlertDescription>
                   <p>
-                    <Trans>By deleting this document, the following will occur:</Trans>
+                    By deleting this document, the following will occur:
                   </p>
 
                   <ul className="mt-0.5 list-inside list-disc">
                     <li>
-                      <Trans>The document will be hidden from your account</Trans>
+                      The document will be hidden from your account
                     </li>
                     <li>
-                      <Trans>Recipients will still retain their copy of the document</Trans>
+                      Recipients will still retain their copy of the document
                     </li>
                   </ul>
                 </AlertDescription>
@@ -166,7 +161,7 @@ export const DocumentDeleteDialog = ({
         ) : (
           <Alert variant="warning" className="-mt-1">
             <AlertDescription>
-              <Trans>Please contact support if you would like to revert this action.</Trans>
+              Please contact support if you would like to revert this action.
             </AlertDescription>
           </Alert>
         )}
@@ -176,13 +171,13 @@ export const DocumentDeleteDialog = ({
             type="text"
             value={inputValue}
             onChange={onInputChange}
-            placeholder={_(msg`Please type ${`'${_(deleteMessage)}'`} to confirm`)}
+            placeholder={"Please type ${"'${_(deleteMessage}'`} to confirm`)}
           />
         )}
 
         <DialogFooter>
           <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           <Button
@@ -192,7 +187,7 @@ export const DocumentDeleteDialog = ({
             disabled={!isDeleteEnabled && canManageDocument}
             variant="destructive"
           >
-            {canManageDocument ? _(msg`Delete`) : _(msg`Hide`)}
+            {canManageDocument ? "Delete" : "Hide"}
           </Button>
         </DialogFooter>
       </DialogContent>

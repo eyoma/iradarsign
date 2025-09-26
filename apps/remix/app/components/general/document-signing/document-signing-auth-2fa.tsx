@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -102,7 +101,7 @@ export const DocumentSigningAuth2FA = ({
           <AlertDescription>
             <p>
               {recipient.role === RecipientRole.VIEWER && actionTarget === 'DOCUMENT' ? (
-                <Trans>You need to setup 2FA to mark this document as viewed.</Trans>
+                You need to setup 2FA to mark this document as viewed.
               ) : (
                 // Todo: Translate
                 `You need to setup 2FA to ${actionVerb.toLowerCase()} this ${actionTarget.toLowerCase()}.`
@@ -110,16 +109,16 @@ export const DocumentSigningAuth2FA = ({
             </p>
 
             <p className="mt-2">
-              <Trans>
+              
                 By enabling 2FA, you will be required to enter a code from your authenticator app
                 every time you sign in using email password.
-              </Trans>
+              
             </p>
           </AlertDescription>
         </Alert>
         <DialogFooter>
           <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-            <Trans>Close</Trans>
+            Close
           </Button>
 
           <EnableAuthenticatorAppDialog onSuccess={() => setIs2FASetupSuccessful(true)} />
@@ -160,23 +159,23 @@ export const DocumentSigningAuth2FA = ({
             {formErrorCode && (
               <Alert variant="destructive">
                 <AlertTitle>
-                  <Trans>Unauthorized</Trans>
+                  Unauthorized
                 </AlertTitle>
                 <AlertDescription>
-                  <Trans>
+                  
                     We were unable to verify your details. Please try again or contact support
-                  </Trans>
+                  
                 </AlertDescription>
               </Alert>
             )}
 
             <DialogFooter>
               <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button type="submit" loading={isCurrentlyAuthenticating}>
-                <Trans>Sign</Trans>
+                Sign
               </Button>
             </DialogFooter>
           </div>

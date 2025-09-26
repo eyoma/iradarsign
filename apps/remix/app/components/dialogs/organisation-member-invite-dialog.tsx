@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Download, Mail, MailIcon, PlusCircle, Trash, Upload, UsersIcon } from 'lucide-react';
@@ -107,7 +104,6 @@ export const OrganisationMemberInviteDialog = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [invitationType, setInvitationType] = useState<TabTypes>('INDIVIDUAL');
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const organisation = useCurrentOrganisation();
@@ -155,18 +151,18 @@ export const OrganisationMemberInviteDialog = ({
       });
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Organisation invitations have been sent.`),
+        title: "Success",
+        description: "Organisation invitations have been sent.",
         duration: 5000,
       });
 
       setOpen(false);
     } catch {
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to invite organisation members. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to invite organisation members. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -236,10 +232,10 @@ export const OrganisationMemberInviteDialog = ({
           console.error(err);
 
           toast({
-            title: _(msg`Something went wrong`),
-            description: _(
-              msg`Please check the CSV file and make sure it is according to our format`,
-            ),
+            title: "Something went wrong",
+            description: 
+              "Please check the CSV file and make sure it is according to our forma",
+            ,
             variant: 'destructive',
           });
         }
@@ -255,7 +251,7 @@ export const OrganisationMemberInviteDialog = ({
     ];
 
     const csvContent =
-      'Email address,Role\n' + data.map((row) => `${row.email},${row.role}`).join('\n');
+      'Email address,Role\n' + data.map((row) => "${row.email},${row.role}").join('\n');
 
     const blob = new Blob([csvContent], {
       type: 'text/csv',
@@ -276,7 +272,7 @@ export const OrganisationMemberInviteDialog = ({
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
         {trigger ?? (
           <Button variant="secondary">
-            <Trans>Invite member</Trans>
+            Invite member
           </Button>
         )}
       </DialogTrigger>
@@ -284,11 +280,11 @@ export const OrganisationMemberInviteDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Invite organisation members</Trans>
+            Invite organisation members
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>An email containing an invitation will be sent to each member.</Trans>
+            An email containing an invitation will be sent to each member.
           </DialogDescription>
         </DialogHeader>
 
@@ -301,17 +297,17 @@ export const OrganisationMemberInviteDialog = ({
               variant="neutral"
             >
               <AlertDescription>
-                <Trans>
+                
                   Your plan does not support inviting members. Please upgrade or your plan or
                   contact sales at <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> if you
                   would like to discuss your options.
-                </Trans>
+                
               </AlertDescription>
             </Alert>
 
             <DialogFooter>
               <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
             </DialogFooter>
           </>
@@ -327,11 +323,11 @@ export const OrganisationMemberInviteDialog = ({
             <TabsList className="w-full">
               <TabsTrigger value="INDIVIDUAL" className="hover:text-foreground w-full">
                 <MailIcon size={20} className="mr-2" />
-                <Trans>Invite Members</Trans>
+                Invite Members
               </TabsTrigger>
 
               <TabsTrigger value="BULK" className="hover:text-foreground w-full">
-                <UsersIcon size={20} className="mr-2" /> <Trans>Bulk Import</Trans>
+                <UsersIcon size={20} className="mr-2" /> Bulk Import
               </TabsTrigger>
             </TabsList>
 
@@ -355,7 +351,7 @@ export const OrganisationMemberInviteDialog = ({
                               <FormItem className="w-full">
                                 {index === 0 && (
                                   <FormLabel required>
-                                    <Trans>Email address</Trans>
+                                    Email address
                                   </FormLabel>
                                 )}
                                 <FormControl>
@@ -373,7 +369,7 @@ export const OrganisationMemberInviteDialog = ({
                               <FormItem className="w-full">
                                 {index === 0 && (
                                   <FormLabel required>
-                                    <Trans>Organisation Role</Trans>
+                                    Organisation Role
                                   </FormLabel>
                                 )}
                                 <FormControl>
@@ -387,7 +383,7 @@ export const OrganisationMemberInviteDialog = ({
                                         organisation.currentOrganisationRole
                                       ].map((role) => (
                                         <SelectItem key={role} value={role}>
-                                          {_(ORGANISATION_MEMBER_ROLE_MAP[role]) ?? role}
+                                          {ORGANISATION_MEMBER_ROLE_MAP[role] ?? role}
                                         </SelectItem>
                                       ))}
                                     </SelectContent>
@@ -421,17 +417,17 @@ export const OrganisationMemberInviteDialog = ({
                       onClick={() => onAddOrganisationMemberInvite()}
                     >
                       <PlusCircle className="mr-2 h-4 w-4" />
-                      <Trans>Add more</Trans>
+                      Add more
                     </Button>
 
                     <DialogFooter>
                       <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                        <Trans>Cancel</Trans>
+                        Cancel
                       </Button>
 
                       <Button type="submit" loading={form.formState.isSubmitting}>
                         {!form.formState.isSubmitting && <Mail className="mr-2 h-4 w-4" />}
-                        <Trans>Invite</Trans>
+                        Invite
                       </Button>
                     </DialogFooter>
                   </fieldset>
@@ -449,7 +445,7 @@ export const OrganisationMemberInviteDialog = ({
                     <Upload className="h-5 w-5" />
 
                     <p className="mt-1 text-sm">
-                      <Trans>Click here to upload</Trans>
+                      Click here to upload
                     </p>
 
                     <input
@@ -465,7 +461,7 @@ export const OrganisationMemberInviteDialog = ({
                 <DialogFooter>
                   <Button type="button" variant="secondary" onClick={downloadTemplate}>
                     <Download className="mr-2 h-4 w-4" />
-                    <Trans>Template</Trans>
+                    Template
                   </Button>
                 </DialogFooter>
               </div>

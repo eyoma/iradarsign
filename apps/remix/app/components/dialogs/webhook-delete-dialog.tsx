@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Webhook } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -39,18 +36,17 @@ export type WebhookDeleteDialogProps = {
 };
 
 export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const team = useCurrentTeam();
 
   const [open, setOpen] = useState(false);
 
-  const deleteMessage = _(msg`delete ${webhook.webhookUrl}`);
+  const deleteMessage = "delete ${webhook.webhookUrl}";
 
   const ZDeleteWebhookFormSchema = z.object({
     webhookUrl: z.literal(deleteMessage, {
-      errorMap: () => ({ message: _(msg`You must enter '${deleteMessage}' to proceed`) }),
+      errorMap: () => ({ message: "You must enter '${deleteMessage}' to proceed" }),
     }),
   });
 
@@ -70,18 +66,18 @@ export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogPr
       await deleteWebhook({ id: webhook.id, teamId: team.id });
 
       toast({
-        title: _(msg`Webhook deleted`),
-        description: _(msg`The webhook has been successfully deleted.`),
+        title: "Webhook deleted",
+        description: "The webhook has been successfully deleted.",
         duration: 5000,
       });
 
       setOpen(false);
     } catch (error) {
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to delete it. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to delete it. Please try again later.",
+        ,
         variant: 'destructive',
         duration: 5000,
       });
@@ -99,7 +95,7 @@ export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogPr
       <DialogTrigger asChild>
         {children ?? (
           <Button className="mr-4" variant="destructive">
-            <Trans>Delete</Trans>
+            Delete
           </Button>
         )}
       </DialogTrigger>
@@ -107,14 +103,14 @@ export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogPr
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Delete Webhook</Trans>
+            Delete Webhook
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               Please note that this action is irreversible. Once confirmed, your webhook will be
               permanently deleted.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -130,12 +126,12 @@ export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogPr
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>
+                      
                         Confirm by typing:{' '}
                         <span className="font-sm text-destructive font-semibold">
                           {deleteMessage}
                         </span>
-                      </Trans>
+                      
                     </FormLabel>
                     <FormControl>
                       <Input className="bg-background" type="text" {...field} />
@@ -153,7 +149,7 @@ export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogPr
                     className="flex-1"
                     onClick={() => setOpen(false)}
                   >
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   <Button
@@ -163,7 +159,7 @@ export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogPr
                     disabled={!form.formState.isValid}
                     loading={form.formState.isSubmitting}
                   >
-                    <Trans>I'm sure! Delete it</Trans>
+                    I'm sure! Delete it
                   </Button>
                 </div>
               </DialogFooter>

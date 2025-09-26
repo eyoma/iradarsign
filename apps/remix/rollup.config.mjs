@@ -1,4 +1,3 @@
-import linguiMacro from '@lingui/babel-plugin-lingui-macro';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
@@ -24,7 +23,7 @@ const config = {
     typescript({
       noEmitOnError: true,
       moduleResolution: 'bundler',
-      include: ['server/**/*', '../../packages/**/*', '../../packages/lib/translations/**/*'],
+      include: ['server/**/*', '../../packages/**/*'],
       jsx: 'preserve',
     }),
     resolve({
@@ -44,7 +43,7 @@ const config = {
       babelHelpers: 'bundled',
       extensions: ['.ts', '.tsx'],
       presets: ['@babel/preset-typescript', ['@babel/preset-react', { runtime: 'automatic' }]],
-      plugins: [linguiMacro],
+      plugins: [],
     }),
   ],
 };

@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { validateFields as validateDateFields } from '@documenso/lib/advanced-fields-validation/validate-fields';
 import { type TDateFieldMeta as DateFieldMeta } from '@documenso/lib/types/field-meta';
 import { Input } from '@documenso/ui/primitives/input';
@@ -25,8 +21,6 @@ export const DateFieldAdvancedSettings = ({
   handleFieldChange,
   handleErrors,
 }: DateFieldAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   // const handleInput = (field: keyof DateFieldMeta, value: string | boolean) => {
   //   if (field === 'fontSize') {
   //     const fontSize = value === '' ? '' : Number(value);
@@ -61,13 +55,13 @@ export const DateFieldAdvancedSettings = ({
     <div className="flex flex-col gap-4">
       <div>
         <Label>
-          <Trans>Font Size</Trans>
+          Font Size
         </Label>
         <Input
           id="fontSize"
           type="number"
           className="bg-background mt-2"
-          placeholder={_(msg`Field font size`)}
+          placeholder={"Field font size"}
           value={fieldState.fontSize}
           onChange={(e) => handleInput('fontSize', e.target.value)}
           min={8}
@@ -77,7 +71,7 @@ export const DateFieldAdvancedSettings = ({
 
       <div>
         <Label>
-          <Trans>Text Align</Trans>
+          Text Align
         </Label>
 
         <Select

@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
@@ -42,7 +39,6 @@ export type PasswordFormProps = {
 };
 
 export const PasswordForm = ({ className }: PasswordFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const form = useForm<TPasswordFormSchema>({
@@ -66,28 +62,28 @@ export const PasswordForm = ({ className }: PasswordFormProps) => {
       form.reset();
 
       toast({
-        title: _(msg`Password updated`),
-        description: _(msg`Your password has been updated successfully.`),
+        title: "Password updated",
+        description: "Your password has been updated successfully.",
         duration: 5000,
       });
     } catch (err) {
       const error = AppError.parseError(err);
 
       const errorMessage = match(error.code)
-        .with('NO_PASSWORD', () => msg`User has no password.`)
-        .with('INCORRECT_PASSWORD', () => msg`Current password is incorrect.`)
+        .with('NO_PASSWORD', () => "User has no password.")
+        .with('INCORRECT_PASSWORD', () => "Current password is incorrect.")
         .with(
           'SAME_PASSWORD',
-          () => msg`Your new password cannot be the same as your old password.`,
+          () => "Your new password cannot be the same as your old password.",
         )
         .otherwise(
           () =>
-            msg`We encountered an unknown error while attempting to update your password. Please try again later.`,
+            "We encountered an unknown error while attempting to update your password. Please try again later.",
         );
 
       toast({
-        title: _(msg`An error occurred`),
-        description: _(errorMessage),
+        title: "An error occurred",
+        description: errorMessage,
         variant: 'destructive',
       });
     }
@@ -106,7 +102,7 @@ export const PasswordForm = ({ className }: PasswordFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Current Password</Trans>
+                  Current Password
                 </FormLabel>
                 <FormControl>
                   <PasswordInput autoComplete="current-password" {...field} />
@@ -122,7 +118,7 @@ export const PasswordForm = ({ className }: PasswordFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>New Password</Trans>
+                  New Password
                 </FormLabel>
                 <FormControl>
                   <PasswordInput autoComplete="new-password" {...field} />
@@ -138,7 +134,7 @@ export const PasswordForm = ({ className }: PasswordFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Repeat Password</Trans>
+                  Repeat Password
                 </FormLabel>
                 <FormControl>
                   <PasswordInput autoComplete="new-password" {...field} />
@@ -151,7 +147,7 @@ export const PasswordForm = ({ className }: PasswordFormProps) => {
 
         <div className="ml-auto mt-4">
           <Button type="submit" loading={isSubmitting}>
-            {isSubmitting ? <Trans>Updating password...</Trans> : <Trans>Update password</Trans>}
+            {isSubmitting ? Updating password... : Update password}
           </Button>
         </div>
       </form>

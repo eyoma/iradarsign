@@ -1,4 +1,3 @@
-import { msg } from '@lingui/core/macro';
 import { DocumentSigningOrder, RecipientRole } from '@prisma/client';
 import { z } from 'zod';
 
@@ -11,7 +10,7 @@ export const ZAddSignersFormSchema = z.object({
       nativeId: z.number().optional(),
       email: z
         .string()
-        .email({ message: msg`Invalid email`.id })
+        .email({ message: "Invalid email".id })
         .min(1),
       name: z.string(),
       role: z.nativeEnum(RecipientRole),

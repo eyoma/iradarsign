@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { Plural, Trans, useLingui } from '@lingui/react/macro';
 import { Building2Icon, InboxIcon, SettingsIcon, UsersIcon } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
@@ -29,8 +28,6 @@ export function meta() {
 }
 
 export default function DashboardPage() {
-  const { t } = useLingui();
-
   const { user, organisations } = useSession();
 
   // Todo: Sort by recent access (TBD by cookies)
@@ -52,10 +49,10 @@ export default function DashboardPage() {
       <div className="container">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">
-            <Trans>Dashboard</Trans>
+            Dashboard
           </h1>
           <p className="text-muted-foreground mt-1">
-            <Trans>Welcome back! Here's an overview of your account.</Trans>
+            Welcome back! Here's an overview of your account.
           </p>
 
           <OrganisationInvitations className="mt-4" />
@@ -67,16 +64,16 @@ export default function DashboardPage() {
 
             <div className="mt-2 flex flex-col items-center gap-0.5">
               <p className="font-semibold">
-                <Trans>No organisations found</Trans>
+                No organisations found
               </p>
               <p className="text-muted-foreground text-sm">
-                <Trans>Create an organisation to get started.</Trans>
+                Create an organisation to get started.
               </p>
             </div>
 
             <Button asChild className="mt-4" variant="outline">
               <Link to="/settings/organisations?action=add-organisation">
-                <Trans>Create organisation</Trans>
+                Create organisation
               </Link>
             </Button>
           </div>
@@ -89,14 +86,14 @@ export default function DashboardPage() {
               <div className="flex items-center gap-2">
                 <Building2Icon className="text-muted-foreground h-5 w-5" />
                 <h2 className="text-xl font-semibold">
-                  <Trans>Organisations</Trans>
+                  Organisations
                 </h2>
               </div>
 
               {/* Right hand side action if required. */}
               {/* <Button variant="outline" size="sm" className="gap-1">
                 <PlusIcon className="h-4 w-4" />
-                <Trans>New</Trans>
+                New
               </Button> */}
             </div>
 
@@ -123,7 +120,7 @@ export default function DashboardPage() {
                                 <UsersIcon className="h-3 w-3" />
                                 <span>
                                   {org.ownerUserId === user.id
-                                    ? t`Owner`
+                                    ? "Owner"
                                     : t(ORGANISATION_MEMBER_ROLE_MAP[org.currentOrganisationRole])}
                                 </span>
                               </div>
@@ -132,8 +129,8 @@ export default function DashboardPage() {
                                 <span>
                                   <Plural
                                     value={org.teams.length}
-                                    one={<Trans># team</Trans>}
-                                    other={<Trans># teams</Trans>}
+                                    one={# team}
+                                    other={# teams}
                                   />
                                 </span>
                               </div>
@@ -167,12 +164,12 @@ export default function DashboardPage() {
               <div className="flex items-center gap-2">
                 <UsersIcon className="text-muted-foreground h-5 w-5" />
                 <h2 className="text-xl font-semibold">
-                  <Trans>Teams</Trans>
+                  Teams
                 </h2>
               </div>
               {/* <Button variant="ghost" size="sm" asChild>
               <Link to="/" className="gap-1">
-                <Trans>View all</Trans>
+                View all
                 <ChevronRightIcon className="h-4 w-4" />
               </Link>
             </Button> */}
@@ -201,7 +198,7 @@ export default function DashboardPage() {
                                 <div className="flex items-center gap-1">
                                   <UsersIcon className="h-3 w-3" />
                                   {team.organisation.ownerUserId === user.id
-                                    ? t`Owner`
+                                    ? "Owner"
                                     : t(TEAM_MEMBER_ROLE_MAP[team.currentTeamRole])}
                                 </div>
                                 <div className="flex items-center gap-1">
@@ -212,10 +209,10 @@ export default function DashboardPage() {
                             </div>
                           </div>
                           <div className="text-muted-foreground mt-3 text-xs">
-                            <Trans>
+                            
                               Joined{' '}
                               {DateTime.fromJSDate(team.createdAt).toRelative({ style: 'short' })}
-                            </Trans>
+                            
                           </div>
                         </CardContent>
                       </Card>
@@ -242,13 +239,13 @@ export default function DashboardPage() {
             <div className="flex items-center gap-2">
               <InboxIcon className="text-muted-foreground h-5 w-5" />
               <h2 className="text-xl font-semibold">
-                <Trans>Personal Inbox</Trans>
+                Personal Inbox
               </h2>
             </div>
             {/* <Button variant="ghost" size="sm" asChild>
               <Link to="/inbox" className="gap-1">
                 <span>
-                  <Trans>View all</Trans>
+                  View all
                 </span>
                 <ChevronRightIcon className="h-4 w-4" />
               </Link>

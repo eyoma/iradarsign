@@ -1,4 +1,3 @@
-import { useLingui } from '@lingui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { cn } from '../../lib/utils';
@@ -13,8 +12,6 @@ const isErrorWithMessage = (error: unknown): error is { message?: string } => {
 };
 
 export const FormErrorMessage = ({ error, className }: FormErrorMessageProps) => {
-  const { i18n } = useLingui();
-
   let errorMessage = isErrorWithMessage(error) ? error.message : '';
 
   // Checks to see if there's a translation for the string, since we're passing IDs for Zod errors.

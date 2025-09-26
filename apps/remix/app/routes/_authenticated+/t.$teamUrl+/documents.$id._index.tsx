@@ -1,5 +1,3 @@
-import { useLingui } from '@lingui/react';
-import { Plural, Trans } from '@lingui/react/macro';
 import { DocumentStatus, TeamMemberRole } from '@prisma/client';
 import { ChevronLeft, Users2 } from 'lucide-react';
 import { Link, redirect } from 'react-router';
@@ -100,7 +98,6 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 export default function DocumentPage() {
   const loaderData = useSuperLoaderData<typeof loader>();
 
-  const { _ } = useLingui();
   const { user } = useSession();
 
   const { document, documentRootPath } = loaderData;
@@ -115,7 +112,7 @@ export default function DocumentPage() {
 
       <Link to={documentRootPath} className="flex items-center text-[#7AC455] hover:opacity-80">
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
-        <Trans>Documents</Trans>
+        Documents
       </Link>
 
       <div className="flex flex-row justify-between truncate">
@@ -144,7 +141,7 @@ export default function DocumentPage() {
                   position="bottom"
                 >
                   <span>
-                    <Trans>{recipients.length} Recipient(s)</Trans>
+                    {recipients.length} Recipient(s)
                   </span>
                 </StackAvatarsWithTooltip>
               </div>
@@ -152,7 +149,7 @@ export default function DocumentPage() {
 
             {document.deletedAt && (
               <Badge variant="destructive">
-                <Trans>Document deleted</Trans>
+                Document deleted
               </Badge>
             )}
           </div>
@@ -184,7 +181,7 @@ export default function DocumentPage() {
             <section className="border-border bg-widget flex flex-col rounded-xl border pb-4 pt-6">
               <div className="flex flex-row items-center justify-between px-4">
                 <h3 className="text-foreground text-2xl font-semibold">
-                  {_(FRIENDLY_STATUS_MAP[document.status].labelExtended)}
+                  {FRIENDLY_STATUS_MAP[document.status].labelExtended}
                 </h3>
 
                 <DocumentPageViewDropdown document={document} />
@@ -193,13 +190,13 @@ export default function DocumentPage() {
               <p className="text-muted-foreground mt-2 px-4 text-sm">
                 {match(document.status)
                   .with(DocumentStatus.COMPLETED, () => (
-                    <Trans>This document has been signed by all recipients</Trans>
+                    This document has been signed by all recipients
                   ))
                   .with(DocumentStatus.REJECTED, () => (
-                    <Trans>This document has been rejected by a recipient</Trans>
+                    This document has been rejected by a recipient
                   ))
                   .with(DocumentStatus.DRAFT, () => (
-                    <Trans>This document is currently a draft and has not been sent</Trans>
+                    This document is currently a draft and has not been sent
                   ))
                   .with(DocumentStatus.PENDING, () => {
                     const pendingRecipients = recipients.filter(

@@ -1,4 +1,3 @@
-import { Trans, useLingui } from '@lingui/react/macro';
 import {
   ArrowRight,
   CalendarIcon,
@@ -32,8 +31,6 @@ import { TeamCreateDialog } from '~/components/dialogs/team-create-dialog';
 import { TeamDeleteDialog } from '~/components/dialogs/team-delete-dialog';
 
 export default function OrganisationSettingsTeamsPage() {
-  const { t, i18n } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   // No teams view.
@@ -45,7 +42,7 @@ export default function OrganisationSettingsTeamsPage() {
         </div>
 
         <h2 className="mb-2 text-xl font-semibold">
-          <Trans>No teams yet</Trans>
+          No teams yet
         </h2>
 
         {canExecuteOrganisationAction(
@@ -54,53 +51,53 @@ export default function OrganisationSettingsTeamsPage() {
         ) ? (
           <>
             <p className="text-muted-foreground mb-8 max-w-md text-center text-sm">
-              <Trans>
+              
                 Teams help you organise your work and collaborate with others. Create your first
                 team to get started.
-              </Trans>
+              
             </p>
 
             <TeamCreateDialog
               trigger={
                 <Button className="flex items-center gap-2">
                   <PlusIcon className="h-4 w-4" />
-                  <Trans>Create team</Trans>
+                  Create team
                 </Button>
               }
             />
 
             <div className="mt-12 max-w-md rounded-lg border px-8 py-6">
               <h3 className="mb-2 font-medium">
-                <Trans>What you can do with teams:</Trans>
+                What you can do with teams:
               </h3>
               <ul className="text-muted-foreground space-y-2 text-sm">
                 <li className="flex flex-row items-center gap-2">
                   <div className="bg-muted mt-0.5 flex h-5 w-5 items-center justify-center rounded-full font-bold">
                     <span className="text-xs">1</span>
                   </div>
-                  <Trans>Organize your documents and templates</Trans>
+                  Organize your documents and templates
                 </li>
                 <li className="flex flex-row items-center gap-2">
                   <div className="bg-muted mt-0.5 flex h-5 w-5 items-center justify-center rounded-full font-bold">
                     <span className="text-xs">2</span>
                   </div>
-                  <Trans>Invite team members to collaborate</Trans>
+                  Invite team members to collaborate
                 </li>
                 <li className="flex flex-row items-center gap-2">
                   <div className="bg-muted mt-0.5 flex h-5 w-5 items-center justify-center rounded-full font-bold">
                     <span className="text-xs">3</span>
                   </div>
-                  <Trans>Manage permissions and access controls</Trans>
+                  Manage permissions and access controls
                 </li>
               </ul>
             </div>
           </>
         ) : (
           <p className="text-muted-foreground mb-8 max-w-md text-center text-sm">
-            <Trans>
+            
               You currently have no access to any teams within this organisation. Please contact
               your organisation to request access.
-            </Trans>
+            
           </p>
         )}
       </div>
@@ -112,10 +109,10 @@ export default function OrganisationSettingsTeamsPage() {
       <div className="mb-6 flex flex-row justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
-            <Trans>{organisation.name} Teams</Trans>
+            {organisation.name} Teams
           </h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            <Trans>Select a team to view its dashboard</Trans>
+            Select a team to view its dashboard
           </p>
         </div>
 
@@ -185,19 +182,19 @@ const TeamDropdownMenu = ({ team }: { team: TGetOrganisationSessionResponse[0]['
         <DropdownMenuItem asChild>
           <Link to={`/t/${team.url}`}>
             <ArrowRight className="mr-2 h-4 w-4" />
-            <Trans>Go to team</Trans>
+            Go to team
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link to={`/t/${team.url}/settings`}>
             <SettingsIcon className="mr-2 h-4 w-4" />
-            <Trans>Settings</Trans>
+            Settings
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link to={`/t/${team.url}/settings/members`}>
             <UsersIcon className="mr-2 h-4 w-4" />
-            <Trans>Members</Trans>
+            Members
           </Link>
         </DropdownMenuItem>
 
@@ -211,7 +208,7 @@ const TeamDropdownMenu = ({ team }: { team: TGetOrganisationSessionResponse[0]['
               trigger={
                 <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                   <TrashIcon className="mr-2 h-4 w-4" />
-                  <Trans>Delete</Trans>
+                  Delete
                 </DropdownMenuItem>
               }
             />

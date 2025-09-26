@@ -1,7 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { UAParser } from 'ua-parser-js';
@@ -27,8 +25,6 @@ export function meta() {
 const parser = new UAParser();
 
 export default function SettingsSecuritySessions() {
-  const { t } = useLingui();
-
   const { data, isLoading, isLoadingError, refetch } = useQuery({
     queryKey: ['active-sessions'],
     queryFn: async () => await authClient.getSessions(),
@@ -41,15 +37,15 @@ export default function SettingsSecuritySessions() {
   const columns = useMemo(() => {
     return [
       {
-        header: t`Device`,
+        header: "Device",
         accessorKey: 'userAgent',
         cell: ({ row }) => {
           const userAgent = row.original.userAgent || '';
           parser.setUA(userAgent);
 
           const result = parser.getResult();
-          const browser = result.browser.name || t`Unknown`;
-          const os = result.os.name || t`Unknown`;
+          const browser = result.browser.name || "Unknown";
+          const os = result.os.name || "Unknown";
           const isCurrentSession = row.original.id === session?.id;
 
           return (
@@ -59,7 +55,7 @@ export default function SettingsSecuritySessions() {
               </span>
               {isCurrentSession && (
                 <Badge>
-                  <Trans>Current</Trans>
+                  Current
                 </Badge>
               )}
             </div>
@@ -67,17 +63,17 @@ export default function SettingsSecuritySessions() {
         },
       },
       {
-        header: t`IP Address`,
+        header: "IP Address",
         accessorKey: 'ipAddress',
-        cell: ({ row }) => row.original.ipAddress || t`Unknown`,
+        cell: ({ row }) => row.original.ipAddress || "Unknown",
       },
       {
-        header: t`Last Active`,
+        header: "Last Active",
         accessorKey: 'updatedAt',
         cell: ({ row }) => DateTime.fromJSDate(row.original.updatedAt).toRelative(),
       },
       {
-        header: t`Created`,
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) => DateTime.fromJSDate(row.original.createdAt).toRelative(),
       },
@@ -97,8 +93,8 @@ export default function SettingsSecuritySessions() {
   return (
     <div>
       <SettingsHeader
-        title={t`Active sessions`}
-        subtitle={t`View and manage all active sessions for your account.`}
+        title={"Active sessions"}
+        subtitle={"View and manage all active sessions for your account."}
       >
         <SessionLogoutAllDialog onSuccess={refetch} disabled={results.length === 1 || isLoading} />
       </SettingsHeader>
@@ -152,8 +148,6 @@ const SessionRevokeButton = ({
   onSuccess,
 }: SessionRevokeButtonProps) => {
   const { toast } = useToast();
-  const { t } = useLingui();
-
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRevoke = async () => {
@@ -169,14 +163,14 @@ const SessionRevokeButton = ({
       }
 
       toast({
-        title: t`Session revoked`,
+        title: "Session revoked",
       });
     } catch (error) {
       console.error(error);
 
       toast({
-        title: t`Error`,
-        description: t`Failed to revoke session`,
+        title: "Error",
+        description: "Failed to revoke session",
         variant: 'destructive',
       });
     }
@@ -186,7 +180,7 @@ const SessionRevokeButton = ({
 
   return (
     <Button variant="destructive" size="sm" onClick={handleRevoke} loading={isLoading}>
-      <Trans>Revoke</Trans>
+      Revoke
     </Button>
   );
 };

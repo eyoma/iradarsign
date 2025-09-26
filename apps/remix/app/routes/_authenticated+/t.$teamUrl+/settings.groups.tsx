@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
 import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 import { useLocation, useSearchParams } from 'react-router';
 
@@ -16,8 +15,6 @@ import { TeamGroupsTable } from '~/components/tables/team-groups-table';
 import { useCurrentTeam } from '~/providers/team';
 
 export default function TeamsSettingsGroupsPage() {
-  const { t } = useLingui();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { pathname } = useLocation();
@@ -58,14 +55,14 @@ export default function TeamsSettingsGroupsPage() {
 
   return (
     <div>
-      <SettingsHeader title={t`Team Groups`} subtitle={t`Manage the groups assigned to this team.`}>
+      <SettingsHeader title={"Team Groups"} subtitle={"Manage the groups assigned to this team."}>
         <TeamGroupCreateDialog />
       </SettingsHeader>
 
       <Input
         defaultValue={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder={t`Search`}
+        placeholder={"Search"}
         className="mb-4"
       />
 

@@ -1,8 +1,5 @@
 import type { HTMLAttributes } from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { CheckCircle2, Clock, File, XCircle } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react/dist/lucide-react';
 
@@ -19,38 +16,38 @@ type FriendlyStatus = {
 
 export const FRIENDLY_STATUS_MAP: Record<ExtendedDocumentStatus, FriendlyStatus> = {
   PENDING: {
-    label: msg`Pending`,
-    labelExtended: msg`Document pending`,
+    label: "Pending",
+    labelExtended: "Document pending",
     icon: Clock,
     color: 'text-blue-600 dark:text-blue-300',
   },
   COMPLETED: {
-    label: msg`Completed`,
-    labelExtended: msg`Document completed`,
+    label: "Completed",
+    labelExtended: "Document completed",
     icon: CheckCircle2,
     color: 'text-green-500 dark:text-green-300',
   },
   DRAFT: {
-    label: msg`Draft`,
-    labelExtended: msg`Document draft`,
+    label: "Draf",
+    labelExtended: msg"Document draf",
     icon: File,
     color: 'text-yellow-500 dark:text-yellow-200',
   },
   REJECTED: {
-    label: msg`Rejected`,
-    labelExtended: msg`Document rejected`,
+    label: msg"Rejected",
+    labelExtended: "Document rejected",
     icon: XCircle,
     color: 'text-red-500 dark:text-red-300',
   },
   INBOX: {
-    label: msg`Inbox`,
-    labelExtended: msg`Document inbox`,
+    label: "Inbox",
+    labelExtended: "Document inbox",
     icon: SignatureIcon,
     color: 'text-muted-foreground',
   },
   ALL: {
-    label: msg`All`,
-    labelExtended: msg`Document All`,
+    label: "All",
+    labelExtended: "Document All",
     color: 'text-muted-foreground',
   },
 };
@@ -66,8 +63,6 @@ export const DocumentStatus = ({
   inheritColor,
   ...props
 }: DocumentStatusProps) => {
-  const { _ } = useLingui();
-
   const { label, icon: Icon, color } = FRIENDLY_STATUS_MAP[status];
 
   return (
@@ -79,7 +74,7 @@ export const DocumentStatus = ({
           })}
         />
       )}
-      {_(label)}
+      {label}
     </span>
   );
 };

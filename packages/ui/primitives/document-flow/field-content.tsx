@@ -1,4 +1,3 @@
-import { useLingui } from '@lingui/react';
 import type { DocumentMeta, Signature, TemplateMeta } from '@prisma/client';
 import { FieldType } from '@prisma/client';
 import { ChevronDown } from 'lucide-react';
@@ -34,8 +33,6 @@ type FieldIconProps = {
  * Renders the content inside field containers prior to sealing.
  */
 export const FieldContent = ({ field, documentMeta }: FieldIconProps) => {
-  const { _ } = useLingui();
-
   const { type, fieldMeta } = field;
 
   // Render checkbox layout for checkbox fields, even if no values exist yet
@@ -160,7 +157,7 @@ export const FieldContent = ({ field, documentMeta }: FieldIconProps) => {
     );
   }
 
-  const labelToDisplay = fieldMeta?.label || _(FRIENDLY_FIELD_TYPE[type]) || '';
+  const labelToDisplay = fieldMeta?.label || FRIENDLY_FIELD_TYPE[type] || '';
   let textToDisplay: string | undefined;
 
   const isSignatureField =

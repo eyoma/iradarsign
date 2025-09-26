@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { Role } from '@prisma/client';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
@@ -61,7 +60,7 @@ const MultiSelectRoleCombobox = ({ listValues, onChange }: ComboboxProps) => {
         <Command>
           <CommandInput placeholder={selectedValues.join(', ')} />
           <CommandEmpty>
-            <Trans>No value found.</Trans>
+            No value found.
           </CommandEmpty>
           <CommandGroup>
             {allRoles.map((value: string, i: number) => (

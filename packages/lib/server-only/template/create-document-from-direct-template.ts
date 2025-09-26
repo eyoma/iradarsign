@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import type { Field, Signature } from '@prisma/client';
 import {
   DocumentSource,
@@ -592,7 +591,7 @@ export const createDocumentFromDirectTemplate = async ({
         },
       ],
       from: senderEmail,
-      subject: i18n._(msg`Document created from direct template`),
+      subject: i18n."Document created from direct template",
       html,
       text,
     });

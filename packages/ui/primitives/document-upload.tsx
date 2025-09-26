@@ -1,7 +1,3 @@
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Upload } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { Link } from 'react-router';
@@ -32,12 +28,10 @@ export const DocumentDropzone = ({
   onDrop,
   onDropRejected,
   disabled,
-  disabledMessage = msg`You cannot upload documents at this time.`,
+  disabledMessage = "You cannot upload documents at this time.",
   type = 'document',
   ...props
 }: DocumentDropzoneProps) => {
-  const { _ } = useLingui();
-
   const { organisations } = useSession();
 
   const organisation = useCurrentOrganisation();
@@ -64,8 +58,8 @@ export const DocumentDropzone = ({
   });
 
   const heading = {
-    document: msg`Upload Document`,
-    template: msg`Upload Template Document`,
+    document: "Upload Documen",
+    template: msg"Upload Template Documen",
   };
 
   if (disabled && IS_BILLING_ENABLED()) {
@@ -77,16 +71,16 @@ export const DocumentDropzone = ({
               <Link
                 to={
                   isPersonalLayoutMode
-                    ? `/settings/billing`
+                    ? "/settings/billing"
                     : `/o/${organisation.url}/settings/billing`
                 }
               >
-                <Trans>Upgrade</Trans>
+                Upgrade
               </Link>
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p className="text-sm">{_(disabledMessage)}</p>
+            <p className="text-sm">{disabledMessage}</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -98,7 +92,7 @@ export const DocumentDropzone = ({
       <div className="flex items-center gap-2">
         <input data-testid="document-upload-input" {...getInputProps()} />
         {!loading && <Upload className="h-4 w-4" />}
-        {disabled ? _(disabledMessage) : _(heading[type])}
+        {disabled ? disabledMessage : heading[type]}
       </div>
     </Button>
   );

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { DocumentMeta, Field, Recipient, TemplateMeta } from '@prisma/client';
 import { SigningStatus } from '@prisma/client';
 import { Clock, EyeOffIcon } from 'lucide-react';
@@ -87,8 +85,6 @@ export const DocumentReadOnlyFields = ({
   showRecipientTooltip = false,
   showRecipientColors = false,
 }: DocumentReadOnlyFieldsProps) => {
-  const { _ } = useLingui();
-
   const [hiddenFieldIds, setHiddenFieldIds] = useState<Record<string, boolean>>({});
 
   const handleHideField = (fieldId: string) => {
@@ -143,12 +139,12 @@ export const DocumentReadOnlyFields = ({
                         {field.recipient.signingStatus === SigningStatus.SIGNED ? (
                           <>
                             <SignatureIcon className="mr-1 h-3 w-3" />
-                            <Trans>Signed</Trans>
+                            Signed
                           </>
                         ) : (
                           <>
                             <Clock className="mr-1 h-3 w-3" />
-                            <Trans>Pending</Trans>
+                            Pending
                           </>
                         )}
                       </Badge>

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { Trans, useLingui } from '@lingui/react/macro';
-
 import { authClient } from '@documenso/auth/client';
 import { Button } from '@documenso/ui/primitives/button';
 import {
@@ -22,7 +20,6 @@ type SessionLogoutAllDialogProps = {
 };
 
 export const SessionLogoutAllDialog = ({ onSuccess, disabled }: SessionLogoutAllDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +36,7 @@ export const SessionLogoutAllDialog = ({ onSuccess, disabled }: SessionLogoutAll
       }
 
       toast({
-        title: t`Sessions have been revoked`,
+        title: "Sessions have been revoked",
       });
 
       setIsOpen(false);
@@ -47,8 +44,8 @@ export const SessionLogoutAllDialog = ({ onSuccess, disabled }: SessionLogoutAll
       console.error(error);
 
       toast({
-        title: t`Error`,
-        description: t`Failed to sign out all sessions`,
+        title: "Error",
+        description: "Failed to sign out all sessions",
         variant: 'destructive',
       });
     }
@@ -60,32 +57,32 @@ export const SessionLogoutAllDialog = ({ onSuccess, disabled }: SessionLogoutAll
     <Dialog open={isOpen} onOpenChange={(value) => (isLoading ? undefined : setIsOpen(value))}>
       <DialogTrigger asChild>
         <Button variant="secondary" disabled={disabled}>
-          <Trans>Revoke all sessions</Trans>
+          Revoke all sessions
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Revoke all sessions</Trans>
+            Revoke all sessions
           </DialogTitle>
           <DialogDescription>
-            <Trans>
+            
               This will sign you out of all other devices. You will need to sign in again on those
               devices to continue using your account.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="secondary" disabled={isLoading}>
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
           </DialogClose>
 
           <Button loading={isLoading} variant="destructive" onClick={handleSignOutAllSessions}>
-            <Trans>Revoke all sessions</Trans>
+            Revoke all sessions
           </Button>
         </DialogFooter>
       </DialogContent>

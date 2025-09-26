@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import type { Field } from '@prisma/client';
 import { FieldType, RecipientRole } from '@prisma/client';
 import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
@@ -176,38 +175,38 @@ export const DocumentSigningPageView = ({
               {match(recipient.role)
                 .with(RecipientRole.VIEWER, () =>
                   includeSenderDetails ? (
-                    <Trans>
+                    
                       on behalf of "{document.team?.name}" has invited you to view this document
-                    </Trans>
+                    
                   ) : (
-                    <Trans>has invited you to view this document</Trans>
+                    has invited you to view this document
                   ),
                 )
                 .with(RecipientRole.SIGNER, () =>
                   includeSenderDetails ? (
-                    <Trans>
+                    
                       on behalf of "{document.team?.name}" has invited you to sign this document
-                    </Trans>
+                    
                   ) : (
-                    <Trans>has invited you to sign this document</Trans>
+                    has invited you to sign this document
                   ),
                 )
                 .with(RecipientRole.APPROVER, () =>
                   includeSenderDetails ? (
-                    <Trans>
+                    
                       on behalf of "{document.team?.name}" has invited you to approve this document
-                    </Trans>
+                    
                   ) : (
-                    <Trans>has invited you to approve this document</Trans>
+                    has invited you to approve this document
                   ),
                 )
                 .with(RecipientRole.ASSISTANT, () =>
                   includeSenderDetails ? (
-                    <Trans>
+                    
                       on behalf of "{document.team?.name}" has invited you to assist this document
-                    </Trans>
+                    
                   ) : (
-                    <Trans>has invited you to assist this document</Trans>
+                    has invited you to assist this document
                   ),
                 )
                 .otherwise(() => null)}
@@ -235,10 +234,10 @@ export const DocumentSigningPageView = ({
               <div className="flex items-center justify-between gap-x-2">
                 <h3 className="text-foreground text-xl font-semibold md:text-2xl">
                   {match(recipient.role)
-                    .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
-                    .with(RecipientRole.SIGNER, () => <Trans>Sign Document</Trans>)
-                    .with(RecipientRole.APPROVER, () => <Trans>Approve Document</Trans>)
-                    .with(RecipientRole.ASSISTANT, () => <Trans>Assist Document</Trans>)
+                    .with(RecipientRole.VIEWER, () => View Document)
+                    .with(RecipientRole.SIGNER, () => Sign Document)
+                    .with(RecipientRole.APPROVER, () => Approve Document)
+                    .with(RecipientRole.ASSISTANT, () => Assist Document)
                     .otherwise(() => null)}
                 </h3>
 
@@ -297,16 +296,16 @@ export const DocumentSigningPageView = ({
                 <p className="text-muted-foreground mt-2 text-sm">
                   {match(recipient.role)
                     .with(RecipientRole.VIEWER, () => (
-                      <Trans>Please mark as viewed to complete.</Trans>
+                      Please mark as viewed to complete.
                     ))
                     .with(RecipientRole.SIGNER, () => (
-                      <Trans>Please review the document before signing.</Trans>
+                      Please review the document before signing.
                     ))
                     .with(RecipientRole.APPROVER, () => (
-                      <Trans>Please review the document before approving.</Trans>
+                      Please review the document before approving.
                     ))
                     .with(RecipientRole.ASSISTANT, () => (
-                      <Trans>Complete the fields for the following signers.</Trans>
+                      Complete the fields for the following signers.
                     ))
                     .otherwise(() => null)}
                 </p>

@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
 import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
@@ -81,18 +80,18 @@ export default function AcceptInvitationPage({ loaderData }: Route.ComponentProp
       <div className="w-screen max-w-lg px-4">
         <div className="w-full">
           <h1 className="text-4xl font-semibold">
-            <Trans>Invalid token</Trans>
+            Invalid token
           </h1>
 
           <p className="text-muted-foreground mb-4 mt-2 text-sm">
-            <Trans>
+            
               This token is invalid or has expired. Please contact your team for a new invitation.
-            </Trans>
+            
           </p>
 
           <Button asChild>
             <Link to="/">
-              <Trans>Return</Trans>
+              Return
             </Link>
           </Button>
         </div>
@@ -104,23 +103,23 @@ export default function AcceptInvitationPage({ loaderData }: Route.ComponentProp
     return (
       <div>
         <h1 className="text-4xl font-semibold">
-          <Trans>Organisation invitation</Trans>
+          Organisation invitation
         </h1>
 
         <p className="text-muted-foreground mt-2 text-sm">
-          <Trans>
+          
             You have been invited by <strong>{data.organisationName}</strong> to join their
             organisation.
-          </Trans>
+          
         </p>
 
         <p className="text-muted-foreground mb-4 mt-1 text-sm">
-          <Trans>To accept this invitation you must create an account.</Trans>
+          To accept this invitation you must create an account.
         </p>
 
         <Button asChild>
           <Link to={`/signup#email=${encodeURIComponent(data.email)}`}>
-            <Trans>Create account</Trans>
+            Create account
           </Link>
         </Button>
       </div>
@@ -130,26 +129,26 @@ export default function AcceptInvitationPage({ loaderData }: Route.ComponentProp
   return (
     <div>
       <h1 className="text-4xl font-semibold">
-        <Trans>Invitation accepted!</Trans>
+        Invitation accepted!
       </h1>
 
       <p className="text-muted-foreground mb-4 mt-2 text-sm">
-        <Trans>
+        
           You have accepted an invitation from <strong>{data.organisationName}</strong> to join
           their organisation.
-        </Trans>
+        
       </p>
 
       {data.isSessionUserTheInvitedUser ? (
         <Button asChild>
           <Link to="/">
-            <Trans>Continue</Trans>
+            Continue
           </Link>
         </Button>
       ) : (
         <Button asChild>
           <Link to={`/signin#email=${encodeURIComponent(data.email)}`}>
-            <Trans>Continue to login</Trans>
+            Continue to login
           </Link>
         </Button>
       )}

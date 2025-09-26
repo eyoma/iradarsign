@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { ChevronsUpDown, Plus } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -24,8 +21,6 @@ import {
 } from '@documenso/ui/primitives/dropdown-menu';
 
 export const MenuSwitcher = () => {
-  const { _ } = useLingui();
-
   const { user } = useSession();
 
   const [languageSwitcherOpen, setLanguageSwitcherOpen] = useState(false);
@@ -52,7 +47,7 @@ export const MenuSwitcher = () => {
             avatarSrc={formatAvatarUrl(user.avatarImageId)}
             avatarFallback={formatAvatarFallback(user.name || user.email)}
             primaryText={user.name}
-            secondaryText={_(msg`Personal Account`)}
+            secondaryText={"Personal Account"}
             rightSideComponent={
               <ChevronsUpDown className="text-muted-foreground ml-auto h-4 w-4" />
             }
@@ -71,7 +66,7 @@ export const MenuSwitcher = () => {
             to="/settings/organisations?action=add-organisation"
             className="flex items-center justify-between"
           >
-            <Trans>Create Organisation</Trans>
+            Create Organisation
             <Plus className="ml-2 h-4 w-4" />
           </Link>
         </DropdownMenuItem>
@@ -80,20 +75,20 @@ export const MenuSwitcher = () => {
         {isUserAdmin && (
           <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
             <Link to="/admin">
-              <Trans>Admin panel</Trans>
+              Admin panel
             </Link>
           </DropdownMenuItem>
         )}
 
         <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
           <Link to="/inbox">
-            <Trans>Personal Inbox</Trans>
+            Personal Inbox
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
           <Link to="/settings/profile">
-            <Trans>User settings</Trans>
+            User settings
           </Link>
         </DropdownMenuItem>
 
@@ -101,14 +96,14 @@ export const MenuSwitcher = () => {
           className="text-muted-foreground px-4 py-2"
           onClick={() => setLanguageSwitcherOpen(true)}
         >
-          <Trans>Language</Trans>
+          Language
         </DropdownMenuItem>
 
         <DropdownMenuItem
           className="text-destructive/90 hover:!text-destructive px-4 py-2"
           onSelect={async () => authClient.signOut()}
         >
-          <Trans>Sign Out</Trans>
+          Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>
 

@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { ReadStatus } from '@prisma/client';
 import { Link } from 'react-router';
 
@@ -21,8 +19,6 @@ export type AppNavMobileProps = {
 };
 
 export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps) => {
-  const { t } = useLingui();
-
   const { organisations } = useSession();
 
   const currentTeam = useOptionalCurrentTeam();
@@ -51,11 +47,11 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
       return [
         {
           href: '/inbox',
-          text: t`Inbox`,
+          text: "Inbox",
         },
         {
           href: '/settings/profile',
-          text: t`Settings`,
+          text: "Settings",
         },
       ];
     }
@@ -63,19 +59,19 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
     return [
       {
         href: `/t/${teamUrl}/documents`,
-        text: t`Documents`,
+        text: "Documents",
       },
       {
         href: `/t/${teamUrl}/templates`,
-        text: t`Templates`,
+        text: "Templates",
       },
       {
         href: '/inbox',
-        text: t`Inbox`,
+        text: "Inbox",
       },
       {
         href: '/settings/profile',
-        text: t`Settings`,
+        text: "Settings",
       },
     ];
   }, [currentTeam, organisations]);
@@ -108,7 +104,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
             className="text-foreground hover:text-foreground/80 text-2xl font-semibold"
             onClick={async () => authClient.signOut()}
           >
-            <Trans>Sign Out</Trans>
+            Sign Out
           </button>
         </div>
 

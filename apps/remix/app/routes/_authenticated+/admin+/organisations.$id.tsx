@@ -1,9 +1,6 @@
 import { useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { ExternalLinkIcon, InfoIcon, Loader } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
@@ -40,7 +37,6 @@ import { SettingsHeader } from '~/components/general/settings-header';
 import type { Route } from './+types/organisations.$id';
 
 export default function OrganisationGroupSettingsPage({ params }: Route.ComponentProps) {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const navigate = useNavigate();
@@ -58,14 +54,14 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
         await navigate(0);
 
         toast({
-          title: t`Success`,
-          description: t`Stripe customer created successfully`,
+          title: "Success",
+          description: "Stripe customer created successfully",
         });
       },
       onError: () => {
         toast({
-          title: t`Error`,
-          description: t`We couldn't create a Stripe customer. Please try again.`,
+          title: "Error",
+          description: "We couldn't create a Stripe customer. Please try again.",
           variant: 'destructive',
         });
       },
@@ -74,11 +70,11 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
   const teamsColumns = useMemo(() => {
     return [
       {
-        header: t`Team`,
+        header: "Team",
         accessorKey: 'name',
       },
       {
-        header: t`Team url`,
+        header: "Team url",
         accessorKey: 'url',
       },
     ] satisfies DataTableColumnDef<TGetAdminOrganisationResponse['teams'][number]>[];
@@ -87,7 +83,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
   const organisationMembersColumns = useMemo(() => {
     return [
       {
-        header: t`Member`,
+        header: "Member",
         cell: ({ row }) => (
           <div className="flex items-center gap-2">
             <Link to={`/admin/users/${row.original.user.id}`}>{row.original.user.name}</Link>
@@ -96,7 +92,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
         ),
       },
       {
-        header: t`Email`,
+        header: "Email",
         cell: ({ row }) => (
           <Link to={`/admin/users/${row.original.user.id}`}>{row.original.user.email}</Link>
         ),
@@ -118,16 +114,16 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
         errorCode={404}
         errorCodeMap={{
           404: {
-            heading: msg`Organisation not found`,
-            subHeading: msg`404 Organisation not found`,
-            message: msg`The organisation you are looking for may have been removed, renamed or may have never
-                    existed.`,
+            heading: "Organisation not found",
+            subHeading: "404 Organisation not found",
+            message: "The organisation you are looking for may have been removed, renamed or may have never
+                    existed.",
           },
         }}
         primaryButton={
           <Button asChild>
             <Link to={`/admin/organisations`}>
-              <Trans>Go back</Trans>
+              Go back
             </Link>
           </Button>
         }
@@ -139,15 +135,15 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
   return (
     <div>
       <SettingsHeader
-        title={t`Manage organisation`}
-        subtitle={t`Manage the ${organisation.name} organisation`}
+        title={"Manage organisation"}
+        subtitle={"Manage the ${organisation.name} organisation"}
       />
 
       <GenericOrganisationAdminForm organisation={organisation} />
 
       <SettingsHeader
-        title={t`Manage subscription`}
-        subtitle={t`Manage the ${organisation.name} organisation subscription`}
+        title={"Manage subscription"}
+        subtitle={"Manage the ${organisation.name} organisation subscription"}
         className="mt-16"
       />
 
@@ -157,7 +153,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
       >
         <div className="mb-4 sm:mb-0">
           <AlertTitle>
-            <Trans>Subscription</Trans>
+            Subscription
           </AlertTitle>
 
           <AlertDescription className="mr-2">
@@ -178,7 +174,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
               loading={isCreatingStripeCustomer}
               onClick={async () => createStripeCustomer({ organisationId })}
             >
-              <Trans>Create Stripe customer</Trans>
+              Create Stripe customer
             </Button>
           </div>
         )}
@@ -190,7 +186,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
                 target="_blank"
                 to={`https://dashboard.stripe.com/customers/${organisation.customerId}?create=subscription&subscription_default_customer=${organisation.customerId}`}
               >
-                <Trans>Create subscription</Trans>
+                Create subscription
                 <ExternalLinkIcon className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -204,7 +200,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
                 target="_blank"
                 to={`https://dashboard.stripe.com/subscriptions/${organisation.subscription.planId}`}
               >
-                <Trans>Manage subscription</Trans>
+                Manage subscription
                 <ExternalLinkIcon className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -217,7 +213,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
       <div className="mt-16 space-y-10">
         <div>
           <label className="text-sm font-medium leading-none">
-            <Trans>Organisation Members</Trans>
+            Organisation Members
           </label>
 
           <div className="my-2">
@@ -227,7 +223,7 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
 
         <div>
           <label className="text-sm font-medium leading-none">
-            <Trans>Organisation Teams</Trans>
+            Organisation Teams
           </label>
 
           <div className="my-2">
@@ -255,8 +251,6 @@ type OrganisationAdminFormOptions = {
 
 const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) => {
   const { toast } = useToast();
-  const { t } = useLingui();
-
   const { mutateAsync: updateOrganisation } = trpc.admin.organisation.update.useMutation();
 
   const form = useForm<TUpdateGenericOrganisationDataFormSchema>({
@@ -275,8 +269,8 @@ const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOpt
       });
 
       toast({
-        title: t`Success`,
-        description: t`Organisation has been updated successfully`,
+        title: "Success",
+        description: "Organisation has been updated successfully",
         duration: 5000,
       });
     } catch (err) {
@@ -284,8 +278,8 @@ const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOpt
       console.error(error);
 
       toast({
-        title: t`An error occurred`,
-        description: t`We couldn't update the organisation. Please try again.`,
+        title: "An error occurred",
+        description: "We couldn't update the organisation. Please try again.",
         variant: 'destructive',
       });
     }
@@ -300,7 +294,7 @@ const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOpt
           render={({ field }) => (
             <FormItem>
               <FormLabel required>
-                <Trans>Organisation Name</Trans>
+                Organisation Name
               </FormLabel>
               <FormControl>
                 <Input {...field} />
@@ -316,7 +310,7 @@ const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOpt
           render={({ field }) => (
             <FormItem>
               <FormLabel required>
-                <Trans>Organisation URL</Trans>
+                Organisation URL
               </FormLabel>
               <FormControl>
                 <Input {...field} />
@@ -326,7 +320,7 @@ const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOpt
                   {field.value ? (
                     `${NEXT_PUBLIC_WEBAPP_URL()}/o/${field.value}`
                   ) : (
-                    <Trans>A unique URL to identify the organisation</Trans>
+                    A unique URL to identify the organisation
                   )}
                 </span>
               )}
@@ -338,7 +332,7 @@ const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOpt
 
         <div className="flex justify-end">
           <Button type="submit" loading={form.formState.isSubmitting}>
-            <Trans>Update</Trans>
+            Update
           </Button>
         </div>
       </form>
@@ -356,8 +350,6 @@ type TUpdateOrganisationBillingFormSchema = z.infer<typeof ZUpdateOrganisationBi
 
 const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) => {
   const { toast } = useToast();
-  const { t } = useLingui();
-
   const { mutateAsync: updateOrganisation } = trpc.admin.organisation.update.useMutation();
 
   const form = useForm<TUpdateOrganisationBillingFormSchema>({
@@ -381,8 +373,8 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
       });
 
       toast({
-        title: t`Success`,
-        description: t`Organisation has been updated successfully`,
+        title: "Success",
+        description: "Organisation has been updated successfully",
         duration: 5000,
       });
     } catch (err) {
@@ -390,8 +382,8 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
       console.error(error);
 
       toast({
-        title: t`An error occurred`,
-        description: t`We couldn't update the organisation. Please try again.`,
+        title: "An error occurred",
+        description: "We couldn't update the organisation. Please try again.",
         variant: 'destructive',
       });
     }
@@ -406,7 +398,7 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center">
-                <Trans>Inherited subscription claim</Trans>
+                Inherited subscription claim
                 <Tooltip>
                   <TooltipTrigger>
                     <InfoIcon className="mx-2 h-4 w-4" />
@@ -415,29 +407,29 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
                   <TooltipContent className="text-foreground max-w-md space-y-2 p-4">
                     <h2>
                       <strong>
-                        <Trans>Inherited subscription claim</Trans>
+                        Inherited subscription claim
                       </strong>
                     </h2>
 
                     <p>
-                      <Trans>
+                      
                         This is the claim that this organisation was initially created with. Any
                         feature flag changes to this claim will be backported into this
                         organisation.
-                      </Trans>
+                      
                     </p>
 
                     <p>
-                      <Trans>
+                      
                         For example, if the claim has a new flag "FLAG_1" set to true, then this
                         organisation will get that flag added.
-                      </Trans>
+                      
                     </p>
                     <p>
-                      <Trans>
+                      
                         This will ONLY backport feature flags which are set to true, anything
                         disabled in the initial claim will not be backported
-                      </Trans>
+                      
                     </p>
                   </TooltipContent>
                 </Tooltip>
@@ -456,10 +448,10 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
           render={({ field }) => (
             <FormItem>
               <FormLabel required>
-                <Trans>Stripe Customer ID</Trans>
+                Stripe Customer ID
               </FormLabel>
               <FormControl>
-                <Input {...field} placeholder={t`No Stripe customer attached`} />
+                <Input {...field} placeholder={"No Stripe customer attached"} />
               </FormControl>
               {!form.formState.errors.customerId && field.value && (
                 <Link
@@ -482,7 +474,7 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                <Trans>Team Count</Trans>
+                Team Count
               </FormLabel>
               <FormControl>
                 <Input
@@ -493,7 +485,7 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
                 />
               </FormControl>
               <FormDescription>
-                <Trans>Number of teams allowed. 0 = Unlimited</Trans>
+                Number of teams allowed. 0 = Unlimited
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -506,7 +498,7 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
           render={({ field }) => (
             <FormItem>
               <FormLabel>
-                <Trans>Member Count</Trans>
+                Member Count
               </FormLabel>
               <FormControl>
                 <Input
@@ -517,7 +509,7 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
                 />
               </FormControl>
               <FormDescription>
-                <Trans>Number of members allowed. 0 = Unlimited</Trans>
+                Number of members allowed. 0 = Unlimited
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -526,7 +518,7 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
 
         <div>
           <FormLabel>
-            <Trans>Feature Flags</Trans>
+            Feature Flags
           </FormLabel>
 
           <div className="mt-2 space-y-2 rounded-md border p-4">
@@ -562,7 +554,7 @@ const OrganisationAdminForm = ({ organisation }: OrganisationAdminFormOptions) =
 
         <div className="flex justify-end">
           <Button type="submit" loading={form.formState.isSubmitting}>
-            <Trans>Update</Trans>
+            Update
           </Button>
         </div>
       </form>

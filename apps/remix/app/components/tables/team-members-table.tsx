@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 import { EditIcon, MoreHorizontal, Trash2Icon } from 'lucide-react';
 import { useSearchParams } from 'react-router';
@@ -36,8 +33,6 @@ import { TeamMemberUpdateDialog } from '../dialogs/team-member-update-dialog';
 import { TeamInheritMemberAlert } from '../general/teams/team-inherit-member-alert';
 
 export const TeamMembersTable = () => {
-  const { _ } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
 
@@ -90,7 +85,7 @@ export const TeamMembersTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Team Member`),
+        header: "Team Member",
         cell: ({ row }) => {
           const avatarFallbackText = row.original.name
             ? extractInitials(row.original.name)
@@ -109,12 +104,12 @@ export const TeamMembersTable = () => {
         },
       },
       {
-        header: _(msg`Role`),
+        header: "Role",
         accessorKey: 'role',
-        cell: ({ row }) => _(EXTENDED_TEAM_MEMBER_ROLE_MAP[row.original.teamRole]),
+        cell: ({ row }) => EXTENDED_TEAM_MEMBER_ROLE_MAP[row.original.teamRole],
       },
       {
-        header: _(msg`Source`),
+        header: "Source",
         cell: ({ row }) => {
           const internalTeamGroupFound = groups.find(
             (group) =>
@@ -122,11 +117,11 @@ export const TeamMembersTable = () => {
               group.members.some((member) => member.id === row.original.id),
           );
 
-          return internalTeamGroupFound ? _(msg`Member`) : _(msg`Group`);
+          return internalTeamGroupFound ? "Member" : "Group";
         },
       },
       {
-        header: _(msg`Actions`),
+        header: "Actions",
         cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -135,7 +130,7 @@ export const TeamMembersTable = () => {
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
               <DropdownMenuLabel>
-                <Trans>Actions</Trans>
+                Actions
               </DropdownMenuLabel>
 
               <TeamMemberUpdateDialog
@@ -154,7 +149,7 @@ export const TeamMembersTable = () => {
                     title="Update team member role"
                   >
                     <EditIcon className="mr-2 h-4 w-4" />
-                    <Trans>Update role</Trans>
+                    Update role
                   </DropdownMenuItem>
                 }
               />
@@ -173,10 +168,10 @@ export const TeamMembersTable = () => {
                       organisation.ownerUserId === row.original.userId ||
                       !isTeamRoleWithinUserHierarchy(team.currentTeamRole, row.original.teamRole)
                     }
-                    title={_(msg`Remove team member`)}
+                    title={"Remove team member"}
                   >
                     <Trash2Icon className="mr-2 h-4 w-4" />
-                    <Trans>Remove</Trans>
+                    Remove
                   </DropdownMenuItem>
                 }
               />

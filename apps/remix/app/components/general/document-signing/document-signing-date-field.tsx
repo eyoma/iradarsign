@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
@@ -40,7 +37,6 @@ export const DocumentSigningDateField = ({
   onSignField,
   onUnsignField,
 }: DocumentSigningDateFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -61,9 +57,9 @@ export const DocumentSigningDateField = ({
 
   const localDateString = convertToLocalSystemFormat(field.customText, dateFormat, timezone);
   const isDifferentTime = field.inserted && localDateString !== field.customText;
-  const tooltipText = _(
-    msg`"${field.customText}" will appear on the document as it has a timezone of "${timezone || ''}".`,
-  );
+  const tooltipText = 
+    ""${field.customText}" will appear on the document as it has a timezone of "${timezone || ''}".",
+  ;
 
   const onSign = async (authOptions?: TRecipientActionAuth) => {
     try {
@@ -92,10 +88,10 @@ export const DocumentSigningDateField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
+        title: "Error",
         description: isAssistantMode
-          ? _(msg`An error occurred while signing as assistant.`)
-          : _(msg`An error occurred while signing the document.`),
+          ? "An error occurred while signing as assistant."
+          : "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -120,8 +116,8 @@ export const DocumentSigningDateField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the field.`),
+        title: "Error",
+        description: "An error occurred while removing the field.",
         variant: 'destructive',
       });
     }
@@ -143,7 +139,7 @@ export const DocumentSigningDateField = ({
 
       {!field.inserted && (
         <p className="group-hover:text-primary text-foreground group-hover:text-recipient-green text-[clamp(0.425rem,25cqw,0.825rem)] duration-200">
-          <Trans>Date</Trans>
+          Date
         </p>
       )}
 

@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { type DocumentStatus, type Recipient } from '@prisma/client';
 
 import { RecipientStatusType, getRecipientType } from '@documenso/lib/client-only/recipient-type';
@@ -26,8 +24,6 @@ export const StackAvatarsWithTooltip = ({
   position,
   children,
 }: StackAvatarsWithTooltipProps) => {
-  const { _ } = useLingui();
-
   const waitingRecipients = recipients.filter(
     (recipient) => getRecipientType(recipient) === RecipientStatusType.WAITING,
   );
@@ -72,7 +68,7 @@ export const StackAvatarsWithTooltip = ({
       {completedRecipients.length > 0 && (
         <div>
           <h1 className="text-base font-medium">
-            <Trans>Completed</Trans>
+            Completed
           </h1>
           {completedRecipients.map((recipient: Recipient) => (
             <div key={recipient.id} className="my-1 flex items-center gap-2">
@@ -85,7 +81,7 @@ export const StackAvatarsWithTooltip = ({
               <div>
                 <p className="text-muted-foreground text-sm">{recipient.email}</p>
                 <p className="text-muted-foreground/70 text-xs">
-                  {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
+                  {RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}
                 </p>
               </div>
             </div>
@@ -96,7 +92,7 @@ export const StackAvatarsWithTooltip = ({
       {rejectedRecipients.length > 0 && (
         <div>
           <h1 className="text-base font-medium">
-            <Trans>Rejected</Trans>
+            Rejected
           </h1>
           {rejectedRecipients.map((recipient: Recipient) => (
             <div key={recipient.id} className="my-1 flex items-center gap-2">
@@ -109,7 +105,7 @@ export const StackAvatarsWithTooltip = ({
               <div>
                 <p className="text-muted-foreground text-sm">{recipient.email}</p>
                 <p className="text-muted-foreground/70 text-xs">
-                  {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
+                  {RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}
                 </p>
               </div>
             </div>
@@ -120,7 +116,7 @@ export const StackAvatarsWithTooltip = ({
       {waitingRecipients.length > 0 && (
         <div>
           <h1 className="text-base font-medium">
-            <Trans>Waiting</Trans>
+            Waiting
           </h1>
           {waitingRecipients.map((recipient: Recipient) => (
             <AvatarWithRecipient
@@ -135,7 +131,7 @@ export const StackAvatarsWithTooltip = ({
       {openedRecipients.length > 0 && (
         <div>
           <h1 className="text-base font-medium">
-            <Trans>Opened</Trans>
+            Opened
           </h1>
           {openedRecipients.map((recipient: Recipient) => (
             <AvatarWithRecipient
@@ -150,7 +146,7 @@ export const StackAvatarsWithTooltip = ({
       {uncompletedRecipients.length > 0 && (
         <div>
           <h1 className="text-base font-medium">
-            <Trans>Uncompleted</Trans>
+            Uncompleted
           </h1>
           {uncompletedRecipients.map((recipient: Recipient) => (
             <AvatarWithRecipient

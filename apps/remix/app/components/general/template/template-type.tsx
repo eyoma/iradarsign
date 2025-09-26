@@ -1,8 +1,5 @@
 import type { HTMLAttributes } from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import type { TemplateType as TemplateTypePrisma } from '@prisma/client';
 import { Globe2, Lock } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react/dist/lucide-react';
@@ -19,12 +16,12 @@ type TemplateTypes = (typeof TemplateTypePrisma)[keyof typeof TemplateTypePrisma
 
 const TEMPLATE_TYPES: Record<TemplateTypes, TemplateTypeIcon> = {
   PRIVATE: {
-    label: msg`Private`,
+    label: "Private",
     icon: Lock,
     color: 'text-blue-600 dark:text-blue-300',
   },
   PUBLIC: {
-    label: msg`Public`,
+    label: "Public",
     icon: Globe2,
     color: 'text-green-500 dark:text-green-300',
   },
@@ -36,8 +33,6 @@ export type TemplateTypeProps = HTMLAttributes<HTMLSpanElement> & {
 };
 
 export const TemplateType = ({ className, type, inheritColor, ...props }: TemplateTypeProps) => {
-  const { _ } = useLingui();
-
   const { label, icon: Icon, color } = TEMPLATE_TYPES[type];
 
   return (
@@ -49,7 +44,7 @@ export const TemplateType = ({ className, type, inheritColor, ...props }: Templa
           })}
         />
       )}
-      {_(label)}
+      {label}
     </span>
   );
 };

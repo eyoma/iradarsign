@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
@@ -41,17 +38,16 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { refreshSession } = useSession();
 
   const organisation = useCurrentOrganisation();
 
-  const deleteMessage = _(msg`delete ${organisation.name}`);
+  const deleteMessage = "delete ${organisation.name}";
 
   const ZDeleteOrganisationFormSchema = z.object({
     organisationName: z.literal(deleteMessage, {
-      errorMap: () => ({ message: _(msg`You must enter '${deleteMessage}' to proceed`) }),
+      errorMap: () => ({ message: "You must enter '${deleteMessage}' to proceed" }),
     }),
   });
 
@@ -69,8 +65,8 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
       await deleteOrganisation({ organisationId: organisation.id });
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Your organisation has been successfully deleted.`),
+        title: "Success",
+        description: "Your organisation has been successfully deleted.",
         duration: 5000,
       });
 
@@ -83,10 +79,10 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
       console.error(error);
 
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to delete this organisation. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to delete this organisation. Please try again later.",
+        ,
         variant: 'destructive',
         duration: 10000,
       });
@@ -104,7 +100,7 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="destructive">
-            <Trans>Delete</Trans>
+            Delete
           </Button>
         )}
       </DialogTrigger>
@@ -112,15 +108,15 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure you wish to delete this organisation?</Trans>
+            Are you sure you wish to delete this organisation?
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               You are about to delete <span className="font-semibold">{organisation.name}</span>.
               All data related to this organisation such as teams, documents, and all other
               resources will be deleted. This action is irreversible.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -136,9 +132,9 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>
+                      
                         Confirm by typing <span className="text-destructive">{deleteMessage}</span>
-                      </Trans>
+                      
                     </FormLabel>
                     <FormControl>
                       <Input className="bg-background" {...field} />
@@ -150,11 +146,11 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" variant="destructive" loading={form.formState.isSubmitting}>
-                  <Trans>Delete</Trans>
+                  Delete
                 </Button>
               </DialogFooter>
             </fieldset>

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
@@ -60,7 +58,6 @@ export const OrganisationGroupCreateDialog = ({
   trigger,
   ...props
 }: OrganisationGroupCreateDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -100,8 +97,8 @@ export const OrganisationGroupCreateDialog = ({
       setOpen(false);
 
       toast({
-        title: t`Success`,
-        description: t`Group has been created.`,
+        title: "Success",
+        description: "Group has been created.",
         duration: 5000,
       });
     } catch (err) {
@@ -110,8 +107,8 @@ export const OrganisationGroupCreateDialog = ({
       console.error(error);
 
       toast({
-        title: t`An unknown error occurred`,
-        description: t`We encountered an unknown error while attempting to create a group. Please try again later.`,
+        title: "An unknown error occurred",
+        description: "We encountered an unknown error while attempting to create a group. Please try again later.",
         variant: 'destructive',
       });
     }
@@ -130,7 +127,7 @@ export const OrganisationGroupCreateDialog = ({
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
         {trigger ?? (
           <Button className="flex-shrink-0" variant="secondary">
-            <Trans>Create group</Trans>
+            Create group
           </Button>
         )}
       </DialogTrigger>
@@ -138,11 +135,11 @@ export const OrganisationGroupCreateDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Create group</Trans>
+            Create group
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>Organise your members into groups which can be assigned to teams</Trans>
+            Organise your members into groups which can be assigned to teams
           </DialogDescription>
         </DialogHeader>
 
@@ -158,7 +155,7 @@ export const OrganisationGroupCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Group Name</Trans>
+                      Group Name
                     </FormLabel>
                     <FormControl>
                       <Input className="bg-background" {...field} />
@@ -174,7 +171,7 @@ export const OrganisationGroupCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Organisation role</Trans>
+                      Organisation role
                     </FormLabel>
                     <FormControl>
                       <Select {...field} onValueChange={field.onChange}>
@@ -205,7 +202,7 @@ export const OrganisationGroupCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Members</Trans>
+                      Members
                     </FormLabel>
 
                     <FormControl>
@@ -218,12 +215,12 @@ export const OrganisationGroupCreateDialog = ({
                         selectedValues={field.value}
                         onChange={field.onChange}
                         className="bg-background w-full"
-                        emptySelectionPlaceholder={t`Select members`}
+                        emptySelectionPlaceholder={"Select members"}
                       />
                     </FormControl>
 
                     <FormDescription>
-                      <Trans>Select the members to add to this group</Trans>
+                      Select the members to add to this group
                     </FormDescription>
                   </FormItem>
                 )}
@@ -231,7 +228,7 @@ export const OrganisationGroupCreateDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button
@@ -239,7 +236,7 @@ export const OrganisationGroupCreateDialog = ({
                   data-testid="dialog-create-organisation-button"
                   loading={form.formState.isSubmitting}
                 >
-                  <Trans>Create</Trans>
+                  Create
                 </Button>
               </DialogFooter>
             </fieldset>

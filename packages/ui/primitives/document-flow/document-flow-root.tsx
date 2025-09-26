@@ -1,10 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import React from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 
 import { cn } from '../../lib/utils';
@@ -43,13 +39,11 @@ export const DocumentFlowFormContainerHeader = ({
   title,
   description,
 }: DocumentFlowFormContainerHeaderProps) => {
-  const { _ } = useLingui();
-
   return (
     <>
-      <h3 className="text-foreground text-2xl font-semibold">{_(title)}</h3>
+      <h3 className="text-foreground text-2xl font-semibold">{title}</h3>
 
-      <p className="text-muted-foreground mt-2 text-sm">{_(description)}</p>
+      <p className="text-muted-foreground mt-2 text-sm">{description}</p>
 
       <hr className="border-border mb-8 mt-4" />
     </>
@@ -103,9 +97,9 @@ export const DocumentFlowFormContainerStep = ({
   return (
     <div>
       <p className="text-muted-foreground text-sm">
-        <Trans>
+        
           Step <span>{`${step} of ${maxStep}`}</span>
-        </Trans>
+        
       </p>
 
       <div className="bg-muted relative mt-4 h-[2px] rounded-md">
@@ -137,15 +131,14 @@ export type DocumentFlowFormContainerActionsProps = {
 export const DocumentFlowFormContainerActions = ({
   canGoBack = true,
   canGoNext = true,
-  goNextLabel = msg`Continue`,
-  goBackLabel = msg`Go Back`,
+  goNextLabel = "Continue",
+  goBackLabel = "Go Back",
   onGoBackClick,
   onGoNextClick,
   loading,
   disabled,
   disableNextStep = false,
 }: DocumentFlowFormContainerActionsProps) => {
-  const { _ } = useLingui();
   return (
     <div className="mt-4 flex gap-x-4">
       <Button
@@ -156,7 +149,7 @@ export const DocumentFlowFormContainerActions = ({
         disabled={disabled || loading || !canGoBack || !onGoBackClick}
         onClick={onGoBackClick}
       >
-        {_(goBackLabel)}
+        {goBackLabel}
       </Button>
 
       <Button
@@ -167,7 +160,7 @@ export const DocumentFlowFormContainerActions = ({
         loading={loading}
         onClick={onGoNextClick}
       >
-        {_(goNextLabel)}
+        {goNextLabel}
       </Button>
     </div>
   );

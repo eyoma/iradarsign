@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -48,7 +45,6 @@ export const SettingsSecurityPasskeyTableActions = ({
   passkeyId,
   passkeyName,
 }: SettingsSecurityPasskeyTableActionsProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -65,18 +61,18 @@ export const SettingsSecurityPasskeyTableActions = ({
     trpc.auth.passkey.update.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Passkey has been updated`),
+          title: "Success",
+          description: "Passkey has been updated",
         });
 
         setIsUpdateDialogOpen(false);
       },
       onError: () => {
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(
-            msg`We are unable to update this passkey at the moment. Please try again later.`,
-          ),
+          title: "Something went wrong",
+          description: 
+            "We are unable to update this passkey at the moment. Please try again later.",
+          ,
           duration: 10000,
           variant: 'destructive',
         });
@@ -87,18 +83,18 @@ export const SettingsSecurityPasskeyTableActions = ({
     trpc.auth.passkey.delete.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Passkey has been removed`),
+          title: "Success",
+          description: "Passkey has been removed",
         });
 
         setIsDeleteDialogOpen(false);
       },
       onError: () => {
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(
-            msg`We are unable to remove this passkey at the moment. Please try again later.`,
-          ),
+          title: "Something went wrong",
+          description: 
+            "We are unable to remove this passkey at the moment. Please try again later.",
+          ,
           duration: 10000,
           variant: 'destructive',
         });
@@ -113,20 +109,20 @@ export const SettingsSecurityPasskeyTableActions = ({
       >
         <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
           <Button variant="outline">
-            <Trans>Edit</Trans>
+            Edit
           </Button>
         </DialogTrigger>
 
         <DialogContent position="center">
           <DialogHeader>
             <DialogTitle>
-              <Trans>Update passkey</Trans>
+              Update passkey
             </DialogTitle>
 
             <DialogDescription className="mt-4">
-              <Trans>
+              
                 You are currently updating the <strong>{passkeyName}</strong> passkey.
-              </Trans>
+              
             </DialogDescription>
           </DialogHeader>
 
@@ -146,7 +142,7 @@ export const SettingsSecurityPasskeyTableActions = ({
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel required>
-                        <Trans>Name</Trans>
+                        Name
                       </FormLabel>
                       <FormControl>
                         <Input {...field} />
@@ -159,12 +155,12 @@ export const SettingsSecurityPasskeyTableActions = ({
                 <DialogFooter className="mt-4">
                   <DialogClose asChild>
                     <Button type="button" variant="secondary">
-                      <Trans>Cancel</Trans>
+                      Cancel
                     </Button>
                   </DialogClose>
 
                   <Button type="submit" loading={isUpdatingPasskey}>
-                    <Trans>Update</Trans>
+                    Update
                   </Button>
                 </DialogFooter>
               </fieldset>
@@ -179,20 +175,20 @@ export const SettingsSecurityPasskeyTableActions = ({
       >
         <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
           <Button variant="destructive">
-            <Trans>Delete</Trans>
+            Delete
           </Button>
         </DialogTrigger>
 
         <DialogContent position="center">
           <DialogHeader>
             <DialogTitle>
-              <Trans>Delete passkey</Trans>
+              Delete passkey
             </DialogTitle>
 
             <DialogDescription className="mt-4">
-              <Trans>
+              
                 Are you sure you want to remove the <strong>{passkeyName}</strong> passkey.
-              </Trans>
+              
             </DialogDescription>
           </DialogHeader>
 
@@ -200,7 +196,7 @@ export const SettingsSecurityPasskeyTableActions = ({
             <DialogFooter>
               <DialogClose asChild>
                 <Button type="button" variant="secondary">
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
               </DialogClose>
 
@@ -213,7 +209,7 @@ export const SettingsSecurityPasskeyTableActions = ({
                 variant="destructive"
                 loading={isDeletingPasskey}
               >
-                <Trans>Delete</Trans>
+                Delete
               </Button>
             </DialogFooter>
           </fieldset>

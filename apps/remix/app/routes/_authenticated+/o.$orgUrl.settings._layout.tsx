@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { Trans, useLingui } from '@lingui/react/macro';
 import {
   Building2Icon,
   CreditCardIcon,
@@ -26,66 +24,64 @@ export function meta() {
 }
 
 export default function SettingsLayout() {
-  const { t } = useLingui();
-
   const isBillingEnabled = IS_BILLING_ENABLED();
   const organisation = useCurrentOrganisation();
 
   const organisationSettingRoutes = [
     {
       path: `/o/${organisation.url}/settings/general`,
-      label: t`General`,
+      label: "General",
       icon: Building2Icon,
     },
     {
-      path: `/o/${organisation.url}/settings/document`,
-      label: t`Preferences`,
+      path: `/o/${organisation.url}/settings/documen",
+      label: t"Preferences`,
       icon: Settings2Icon,
       hideHighlight: true,
     },
     {
-      path: `/o/${organisation.url}/settings/document`,
-      label: t`Document`,
+      path: `/o/${organisation.url}/settings/documen",
+      label: t"Documen",
       isSubNav: true,
     },
     {
-      path: `/o/${organisation.url}/settings/branding`,
-      label: t`Branding`,
+      path: "/o/${organisation.url}/settings/branding`,
+      label: "Branding",
       isSubNav: true,
     },
     {
       path: `/o/${organisation.url}/settings/email`,
-      label: t`Email`,
+      label: "Email",
       isSubNav: true,
     },
     {
       path: `/o/${organisation.url}/settings/email-domains`,
-      label: t`Email Domains`,
+      label: "Email Domains",
       icon: MailboxIcon,
     },
     {
       path: `/o/${organisation.url}/settings/teams`,
-      label: t`Teams`,
+      label: "Teams",
       icon: FaUsers,
     },
     {
       path: `/o/${organisation.url}/settings/members`,
-      label: t`Members`,
+      label: "Members",
       icon: Users2Icon,
     },
     {
       path: `/o/${organisation.url}/settings/groups`,
-      label: t`Groups`,
+      label: "Groups",
       icon: GroupIcon,
     },
     {
       path: `/o/${organisation.url}/settings/sso`,
-      label: t`SSO`,
+      label: "SSO",
       icon: ShieldCheckIcon,
     },
     {
       path: `/o/${organisation.url}/settings/billing`,
-      label: t`Billing`,
+      label: "Billing",
       icon: CreditCardIcon,
     },
   ].filter((route) => {
@@ -116,15 +112,15 @@ export default function SettingsLayout() {
         errorCode={401}
         errorCodeMap={{
           401: {
-            heading: msg`Unauthorized`,
-            subHeading: msg`401 Unauthorized`,
-            message: msg`You are not authorized to access this page.`,
+            heading: "Unauthorized",
+            subHeading: "401 Unauthorized",
+            message: "You are not authorized to access this page.",
           },
         }}
         primaryButton={
           <Button asChild>
             <Link to={`/o/${organisation.url}`}>
-              <Trans>Go Back</Trans>
+              Go Back
             </Link>
           </Button>
         }
@@ -136,7 +132,7 @@ export default function SettingsLayout() {
   return (
     <div>
       <h1 className="text-4xl font-semibold">
-        <Trans>Organisation Settings</Trans>
+        Organisation Settings
       </h1>
 
       <div className="mt-4 grid grid-cols-12 gap-x-8 md:mt-8">
@@ -159,7 +155,7 @@ export default function SettingsLayout() {
                 })}
               >
                 {route.icon && <route.icon className="mr-2 h-5 w-5" />}
-                <Trans>{route.label}</Trans>
+                {route.label}
               </Button>
             </NavLink>
           ))}

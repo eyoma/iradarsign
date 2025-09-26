@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp, Trash } from 'lucide-react';
 
 import { validateRadioField } from '@documenso/lib/advanced-fields-validation/validate-radio';
@@ -27,8 +24,6 @@ export const RadioFieldAdvancedSettings = ({
   handleFieldChange,
   handleErrors,
 }: RadioFieldAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   const [showValidation, setShowValidation] = useState(false);
   const [values, setValues] = useState(
     fieldState.values ?? [{ id: 1, checked: false, value: 'Default value' }],
@@ -106,12 +101,12 @@ export const RadioFieldAdvancedSettings = ({
       <div className="flex flex-col gap-4">
         <div>
           <Label>
-            <Trans>Label</Trans>
+            Label
           </Label>
           <Input
             id="label"
             className="bg-background mt-2"
-            placeholder={_(msg`Field label`)}
+            placeholder={"Field label"}
             value={fieldState.label}
             onChange={(e) => handleFieldChange('label', e.target.value)}
           />
@@ -123,7 +118,7 @@ export const RadioFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleToggleChange('required', checked)}
           />
           <Label>
-            <Trans>Required field</Trans>
+            Required field
           </Label>
         </div>
         <div className="flex flex-row items-center gap-2">
@@ -133,7 +128,7 @@ export const RadioFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleToggleChange('readOnly', checked)}
           />
           <Label>
-            <Trans>Read only</Trans>
+            Read only
           </Label>
         </div>
       </div>
@@ -144,7 +139,7 @@ export const RadioFieldAdvancedSettings = ({
       >
         <span className="flex w-full flex-row justify-between">
           <span className="flex items-center">
-            <Trans>Radio values</Trans>
+            Radio values
           </span>
           {showValidation ? <ChevronUp /> : <ChevronDown />}
         </span>
@@ -178,7 +173,7 @@ export const RadioFieldAdvancedSettings = ({
             variant="outline"
             onClick={addValue}
           >
-            <Trans>Add another value</Trans>
+            Add another value
           </Button>
         </div>
       )}

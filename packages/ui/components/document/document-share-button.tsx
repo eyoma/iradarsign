@@ -1,9 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import React, { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Copy, Sparkles } from 'lucide-react';
 import { FaXTwitter } from 'react-icons/fa6';
 
@@ -36,19 +33,18 @@ export const DocumentShareButton = ({
   className,
   trigger,
 }: DocumentShareButtonProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { copyShareLink, createAndCopyShareLink, isCopyingShareLink } = useCopyShareLink({
     onSuccess: () =>
       toast({
-        title: _(msg`Copied to clipboard`),
-        description: _(msg`The sharing link has been copied to your clipboard.`),
+        title: "Copied to clipboard",
+        description: "The sharing link has been copied to your clipboard.",
       }),
     onError: () =>
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`The sharing link could not be created at this time. Please try again.`),
+        title: "Something went wrong",
+        description: "The sharing link could not be created at this time. Please try again.",
         variant: 'destructive',
         duration: 5000,
       }),
@@ -131,7 +127,7 @@ export const DocumentShareButton = ({
             loading={isLoading}
           >
             {!isLoading && <Sparkles className="mr-2 h-5 w-5" />}
-            <Trans>Share Signature Card</Trans>
+            Share Signature Card
           </Button>
         )}
       </DialogTrigger>
@@ -139,15 +135,15 @@ export const DocumentShareButton = ({
       <DialogContent position="end">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Share your signing experience!</Trans>
+            Share your signing experience!
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               Rest assured, your document is strictly confidential and will never be shared. Only
               your signing experience will be highlighted. Share your personalized signing card to
               showcase your signature!
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -190,7 +186,7 @@ export const DocumentShareButton = ({
 
             <Button variant="outline" className="flex-1" onClick={onCopyClick}>
               <Copy className="mr-2 h-4 w-4" />
-              <Trans>Copy Link</Trans>
+              Copy Link
             </Button>
           </div>
         </div>

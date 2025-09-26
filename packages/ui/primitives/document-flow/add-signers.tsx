@@ -3,9 +3,6 @@ import { useCallback, useId, useMemo, useRef, useState } from 'react';
 import type { DropResult, SensorAPI } from '@hello-pangea/dnd';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Field, Recipient } from '@prisma/client';
 import { DocumentSigningOrder, RecipientRole, SendStatus } from '@prisma/client';
 import { motion } from 'framer-motion';
@@ -78,7 +75,6 @@ export const AddSignersFormPartial = ({
   onAutoSave,
   isDocumentPdfLoaded,
 }: AddSignersFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { remaining } = useLimits();
   const { user } = useSession();
@@ -291,8 +287,8 @@ export const AddSignersFormPartial = ({
 
     if (!canRecipientBeModified(signer.nativeId)) {
       toast({
-        title: _(msg`Cannot remove signer`),
-        description: _(msg`This signer has already signed the document.`),
+        title: "Cannot remove signer",
+        description: "This signer has already signed the document.",
         variant: 'destructive',
       });
 
@@ -382,10 +378,10 @@ export const AddSignersFormPartial = ({
       const lastSigner = updatedSigners[updatedSigners.length - 1];
       if (lastSigner.role === RecipientRole.ASSISTANT) {
         toast({
-          title: _(msg`Warning: Assistant as last signer`),
-          description: _(
-            msg`Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.`,
-          ),
+          title: "Warning: Assistant as last signer",
+          description: 
+            "Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.",
+          ,
         });
       }
 
@@ -408,8 +404,8 @@ export const AddSignersFormPartial = ({
           shouldDirty: true,
         });
         toast({
-          title: _(msg`Signing order is enabled.`),
-          description: _(msg`You cannot add assistants when signing order is disabled.`),
+          title: "Signing order is enabled.",
+          description: "You cannot add assistants when signing order is disabled.",
           variant: 'destructive',
         });
         return;
@@ -428,10 +424,10 @@ export const AddSignersFormPartial = ({
 
       if (role === RecipientRole.ASSISTANT && index === updatedSigners.length - 1) {
         toast({
-          title: _(msg`Warning: Assistant as last signer`),
-          description: _(
-            msg`Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.`,
-          ),
+          title: "Warning: Assistant as last signer",
+          description: 
+            "Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.",
+          ,
         });
       }
     },
@@ -470,10 +466,10 @@ export const AddSignersFormPartial = ({
 
       if (signer.role === RecipientRole.ASSISTANT && newPosition === remainingSigners.length - 1) {
         toast({
-          title: _(msg`Warning: Assistant as last signer`),
-          description: _(
-            msg`Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.`,
-          ),
+          title: "Warning: Assistant as last signer",
+          description: 
+            "Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.",
+          ,
         });
       }
     },
@@ -561,7 +557,7 @@ export const AddSignersFormPartial = ({
                       htmlFor="signingOrder"
                       className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      <Trans>Enable signing order</Trans>
+                      Enable signing order
                     </FormLabel>
 
                     <Tooltip>
@@ -572,7 +568,7 @@ export const AddSignersFormPartial = ({
                       </TooltipTrigger>
                       <TooltipContent className="max-w-80 p-4">
                         <p>
-                          <Trans>Add 2 or more signers to enable signing order.</Trans>
+                          Add 2 or more signers to enable signing order.
                         </p>
                       </TooltipContent>
                     </Tooltip>
@@ -604,7 +600,7 @@ export const AddSignersFormPartial = ({
                       htmlFor="allowDictateNextSigner"
                       className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      <Trans>Allow signers to dictate next signer</Trans>
+                      Allow signers to dictate next signer
                     </FormLabel>
 
                     <Tooltip>
@@ -615,10 +611,10 @@ export const AddSignersFormPartial = ({
                       </TooltipTrigger>
                       <TooltipContent className="max-w-80 p-4">
                         <p>
-                          <Trans>
+                          
                             When enabled, signers can choose who should sign next in the sequence
                             instead of following the predefined order.
-                          </Trans>
+                          
                         </p>
                       </TooltipContent>
                     </Tooltip>
@@ -736,14 +732,14 @@ export const AddSignersFormPartial = ({
                                   >
                                     {!showAdvancedSettings && (
                                       <FormLabel required>
-                                        <Trans>Email</Trans>
+                                        Email
                                       </FormLabel>
                                     )}
 
                                     <FormControl>
                                       <RecipientAutoCompleteInput
                                         type="email"
-                                        placeholder={_(msg`Email`)}
+                                        placeholder={"Email"}
                                         value={field.value}
                                         disabled={
                                           snapshot.isDragging ||
@@ -786,14 +782,14 @@ export const AddSignersFormPartial = ({
                                   >
                                     {!showAdvancedSettings && (
                                       <FormLabel>
-                                        <Trans>Name</Trans>
+                                        Name
                                       </FormLabel>
                                     )}
 
                                     <FormControl>
                                       <RecipientAutoCompleteInput
                                         type="text"
-                                        placeholder={_(msg`Name`)}
+                                        placeholder={"Name"}
                                         {...field}
                                         disabled={
                                           snapshot.isDragging ||
@@ -935,7 +931,7 @@ export const AddSignersFormPartial = ({
                 onClick={() => onAddSigner()}
               >
                 <Plus className="-ml-1 mr-2 h-5 w-5" />
-                <Trans>Add Signer</Trans>
+                Add Signer
               </Button>
 
               <Button
@@ -946,7 +942,7 @@ export const AddSignersFormPartial = ({
                 onClick={() => onAddSelfSigner()}
               >
                 <Plus className="-ml-1 mr-2 h-5 w-5" />
-                <Trans>Add myself</Trans>
+                Add myself
               </Button>
             </div>
 
@@ -963,7 +959,7 @@ export const AddSignersFormPartial = ({
                   className="text-muted-foreground ml-2 text-sm"
                   htmlFor="showAdvancedRecipientSettings"
                 >
-                  <Trans>Show advanced settings</Trans>
+                  Show advanced settings
                 </label>
               </div>
             )}

@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState, useTransition } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import type { Document, Role, Subscription } from '@prisma/client';
 import { Edit, Loader } from 'lucide-react';
 import { Link } from 'react-router';
@@ -43,8 +41,6 @@ export const AdminDashboardUsersTable = ({
   perPage,
   page,
 }: AdminDashboardUsersTableProps) => {
-  const { _ } = useLingui();
-
   const [isPending, startTransition] = useTransition();
   const updateSearchParams = useUpdateSearchParams();
   const [searchString, setSearchString] = useState('');
@@ -58,22 +54,22 @@ export const AdminDashboardUsersTable = ({
         cell: ({ row }) => <div>{row.original.id}</div>,
       },
       {
-        header: _(msg`Name`),
+        header: "Name",
         accessorKey: 'name',
         cell: ({ row }) => <div>{row.original.name}</div>,
       },
       {
-        header: _(msg`Email`),
+        header: "Email",
         accessorKey: 'email',
         cell: ({ row }) => <div>{row.original.email}</div>,
       },
       {
-        header: _(msg`Roles`),
+        header: "Roles",
         accessorKey: 'roles',
         cell: ({ row }) => row.original.roles.join(', '),
       },
       {
-        header: _(msg`Documents`),
+        header: "Documents",
         accessorKey: 'documents',
         cell: ({ row }) => {
           return <div>{row.original.documents?.length}</div>;
@@ -125,7 +121,7 @@ export const AdminDashboardUsersTable = ({
       <Input
         className="my-6 flex flex-row gap-4"
         type="text"
-        placeholder={_(msg`Search by name or email`)}
+        placeholder={"Search by name or email"}
         value={searchString}
         onChange={handleChange}
       />

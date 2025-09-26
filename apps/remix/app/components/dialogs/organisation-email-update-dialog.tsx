@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
@@ -51,7 +49,6 @@ export const OrganisationEmailUpdateDialog = ({
 }: OrganisationEmailUpdateDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const form = useForm<ZUpdateOrganisationEmailSchema>({
@@ -74,14 +71,14 @@ export const OrganisationEmailUpdateDialog = ({
       });
 
       toast({
-        title: t`Success`,
+        title: "Success",
         duration: 5000,
       });
 
       setOpen(false);
     } catch {
       toast({
-        title: t`An unknown error occurred`,
+        title: "An unknown error occurred",
         variant: 'destructive',
       });
     }
@@ -111,14 +108,14 @@ export const OrganisationEmailUpdateDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Update email</Trans>
+            Update email
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               You are currently updating{' '}
               <span className="font-bold">{organisationEmail.email}</span>
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -131,14 +128,14 @@ export const OrganisationEmailUpdateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Display Name</Trans>
+                      Display Name
                     </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="Support" />
                     </FormControl>
                     <FormMessage />
                     <FormDescription>
-                      <Trans>The display name for this email address</Trans>
+                      The display name for this email address
                     </FormDescription>
                   </FormItem>
                 )}
@@ -150,17 +147,17 @@ export const OrganisationEmailUpdateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Reply-To Email</Trans>
+                      Reply-To Email
                     </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="noreply@example.com" />
                     </FormControl>
                     <FormMessage />
                     <FormDescription>
-                      <Trans>
+                      
                         Optional no-reply email address attached to emails. Leave blank to default
                         to the organisation settings reply-to email.
-                      </Trans>
+                      
                     </FormDescription>
                   </FormItem>
                 )}
@@ -168,11 +165,11 @@ export const OrganisationEmailUpdateDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" loading={isPending}>
-                  <Trans>Update</Trans>
+                  Update
                 </Button>
               </DialogFooter>
             </fieldset>

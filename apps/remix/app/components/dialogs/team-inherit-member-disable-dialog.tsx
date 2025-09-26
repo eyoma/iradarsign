@@ -1,4 +1,3 @@
-import { Trans, useLingui } from '@lingui/react/macro';
 import type { TeamGroup } from '@prisma/client';
 
 import { trpc } from '@documenso/trpc/react';
@@ -23,21 +22,19 @@ type TeamMemberInheritDisableDialogProps = {
 
 export const TeamMemberInheritDisableDialog = ({ group }: TeamMemberInheritDisableDialogProps) => {
   const { toast } = useToast();
-  const { t } = useLingui();
-
   const team = useCurrentTeam();
 
   const deleteGroupMutation = trpc.team.group.delete.useMutation({
     onSuccess: () => {
       toast({
-        title: t`Access disabled`,
+        title: "Access disabled",
         duration: 5000,
       });
     },
     onError: () => {
       toast({
-        title: t`Something went wrong`,
-        description: t`We encountered an unknown error while attempting to disable access.`,
+        title: "Something went wrong",
+        description: "We encountered an unknown error while attempting to disable access.",
         variant: 'destructive',
         duration: 5000,
       });
@@ -48,28 +45,28 @@ export const TeamMemberInheritDisableDialog = ({ group }: TeamMemberInheritDisab
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <Trans>Disable access</Trans>
+          Disable access
         </Button>
       </DialogTrigger>
 
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to remove default access to this team for all organisation members. Any
               members not explicitly added to this team will no longer have access.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
           </DialogClose>
 
@@ -84,7 +81,7 @@ export const TeamMemberInheritDisableDialog = ({ group }: TeamMemberInheritDisab
               })
             }
           >
-            <Trans>Disable</Trans>
+            Disable
           </Button>
         </DialogFooter>
       </DialogContent>

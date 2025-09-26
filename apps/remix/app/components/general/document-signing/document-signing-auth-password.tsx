@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -98,12 +97,12 @@ export const DocumentSigningAuthPassword = ({
             {formErrorCode && (
               <Alert variant="destructive">
                 <AlertTitle>
-                  <Trans>Unauthorized</Trans>
+                  Unauthorized
                 </AlertTitle>
                 <AlertDescription>
-                  <Trans>
+                  
                     We were unable to verify your details. Please try again or contact support
-                  </Trans>
+                  
                 </AlertDescription>
               </Alert>
             )}
@@ -114,7 +113,7 @@ export const DocumentSigningAuthPassword = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required>
-                    <Trans>Password</Trans>
+                    Password
                   </FormLabel>
 
                   <FormControl>
@@ -133,11 +132,11 @@ export const DocumentSigningAuthPassword = ({
 
             <DialogFooter>
               <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button type="submit" loading={isCurrentlyAuthenticating}>
-                <Trans>Sign</Trans>
+                Sign
               </Button>
             </DialogFooter>
           </div>

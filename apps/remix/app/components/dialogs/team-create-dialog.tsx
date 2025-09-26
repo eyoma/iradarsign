@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router';
@@ -58,7 +55,6 @@ const ZCreateTeamFormSchema = ZCreateTeamRequestSchema.pick({
 type TCreateTeamFormSchema = z.infer<typeof ZCreateTeamFormSchema>;
 
 export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { refreshSession } = useSession();
 
@@ -100,8 +96,8 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
       await refreshSession();
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Your team has been created.`),
+        title: "Success",
+        description: "Your team has been created.",
         duration: 5000,
       });
     } catch (err) {
@@ -110,17 +106,17 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
       if (error.code === AppErrorCode.ALREADY_EXISTS) {
         form.setError('teamUrl', {
           type: 'manual',
-          message: _(msg`This URL is already in use.`),
+          message: "This URL is already in use.",
         });
 
         return;
       }
 
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to create a team. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to create a team. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -170,7 +166,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
         {trigger ?? (
           <Button className="flex-shrink-0" variant="secondary">
-            <Trans>Create team</Trans>
+            Create team
           </Button>
         )}
       </DialogTrigger>
@@ -178,11 +174,11 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Create team</Trans>
+            Create team
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>Create a team to collaborate with your team members.</Trans>
+            Create a team to collaborate with your team members.
           </DialogDescription>
         </DialogHeader>
 
@@ -195,17 +191,17 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
               variant="neutral"
             >
               <AlertDescription className="mt-0">
-                <Trans>
+                
                   You have reached the maximum number of teams for your plan. Please contact sales
                   at <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> if you would like to
                   adjust your plan.
-                </Trans>
+                
               </AlertDescription>
             </Alert>
 
             <DialogFooter>
               <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
             </DialogFooter>
           </>
@@ -224,7 +220,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel required>
-                        <Trans>Team Name</Trans>
+                        Team Name
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -254,7 +250,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel required>
-                        <Trans>Team URL</Trans>
+                        Team URL
                       </FormLabel>
                       <FormControl>
                         <Input className="bg-background" {...field} />
@@ -264,7 +260,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
                           {field.value ? (
                             `${NEXT_PUBLIC_WEBAPP_URL()}/t/${field.value}`
                           ) : (
-                            <Trans>A unique URL to identify your team</Trans>
+                            A unique URL to identify your team
                           )}
                         </span>
                       )}
@@ -291,7 +287,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
                             className="text-muted-foreground ml-2 text-sm"
                             htmlFor="inherit-members"
                           >
-                            <Trans>Allow all organisation members to access this team</Trans>
+                            Allow all organisation members to access this team
                           </label>
                         </div>
                       </FormControl>
@@ -301,7 +297,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
 
                 <DialogFooter>
                   <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   <Button
@@ -309,7 +305,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
                     data-testid="dialog-create-team-button"
                     loading={form.formState.isSubmitting}
                   >
-                    <Trans>Create Team</Trans>
+                    Create Team
                   </Button>
                 </DialogFooter>
               </fieldset>

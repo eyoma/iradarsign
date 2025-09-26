@@ -1,8 +1,6 @@
 import { useMemo, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Building2Icon, PlusIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -81,10 +79,10 @@ export const BillingPlans = ({ plans }: BillingPlansProps) => {
       >
         <TabsList>
           <TabsTrigger className="min-w-[150px]" value="monthlyPrice">
-            <Trans>Monthly</Trans>
+            Monthly
           </TabsTrigger>
           <TabsTrigger className="min-w-[150px]" value="yearlyPrice">
-            <Trans>Yearly</Trans>
+            Yearly
           </TabsTrigger>
         </TabsList>
       </Tabs>
@@ -105,9 +103,9 @@ export const BillingPlans = ({ plans }: BillingPlansProps) => {
                   {price.friendlyPrice + ' '}
                   <span className="text-xs">
                     {interval === 'monthlyPrice' ? (
-                      <Trans>per month</Trans>
+                      per month
                     ) : (
-                      <Trans>per year</Trans>
+                      per year
                     )}
                   </span>
                 </div>
@@ -134,7 +132,7 @@ export const BillingPlans = ({ plans }: BillingPlansProps) => {
 
                 {isPersonalLayoutMode && price.claim === INTERNAL_CLAIM_ID.INDIVIDUAL ? (
                   <IndividualPersonalLayoutCheckoutButton priceId={price.id}>
-                    <Trans>Subscribe</Trans>
+                    Subscribe
                   </IndividualPersonalLayoutCheckoutButton>
                 ) : (
                   <BillingDialog
@@ -165,7 +163,6 @@ const BillingDialog = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const organisation = useCurrentOrganisation();
@@ -221,8 +218,8 @@ const BillingDialog = ({
       window.location.href = redirectUrl;
     } catch (_err) {
       toast({
-        title: t`Something went wrong`,
-        description: t`An error occurred while trying to create a checkout session.`,
+        title: "Something went wrong",
+        description: "An error occurred while trying to create a checkout session.",
         variant: 'destructive',
       });
     }
@@ -232,18 +229,18 @@ const BillingDialog = ({
     <Dialog open={isOpen} onOpenChange={(value) => !isPending && setIsOpen(value)}>
       <DialogTrigger asChild>
         <Button>
-          <Trans>Subscribe</Trans>
+          Subscribe
         </Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Subscribe</Trans>
+            Subscribe
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>You are about to subscribe to the {planName}</Trans>
+            You are about to subscribe to the {planName}
           </DialogDescription>
         </DialogHeader>
 
@@ -259,12 +256,12 @@ const BillingDialog = ({
                 <div className="space-y-1.5 leading-none">
                   <Label htmlFor="update" className="flex items-center gap-2 font-medium">
                     <Building2Icon className="h-4 w-4" />
-                    <Trans>Update current organisation</Trans>
+                    Update current organisation
                   </Label>
                   <p className="text-muted-foreground text-sm">
-                    <Trans>
+                    
                       Upgrade <strong>{organisation.name}</strong> to {planName}
-                    </Trans>
+                    
                   </p>
                 </div>
               </div>
@@ -274,13 +271,13 @@ const BillingDialog = ({
                 <div className="space-y-1.5 leading-none">
                   <Label htmlFor="create" className="flex items-center gap-2 font-medium">
                     <PlusIcon className="h-4 w-4" />
-                    <Trans>Create separate organisation</Trans>
+                    Create separate organisation
                   </Label>
                   <p className="text-muted-foreground text-sm">
-                    <Trans>
+                    
                       Create a new organisation with {planName} plan. Keep your current organisation
                       on it's current plan
-                    </Trans>
+                    
                   </p>
                 </div>
               </div>
@@ -294,7 +291,7 @@ const BillingDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required>
-                    <Trans>Organisation Name</Trans>
+                    Organisation Name
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -309,17 +306,17 @@ const BillingDialog = ({
         <DialogFooter>
           <DialogClose>
             <Button disabled={isPending} variant="secondary">
-              <Trans>Close</Trans>
+              Close
             </Button>
           </DialogClose>
 
           {subscriptionOption === 'create' && step === 0 ? (
             <Button className="mt-4" loading={isPending} onClick={() => setStep(1)}>
-              <Trans>Continue</Trans>
+              Continue
             </Button>
           ) : (
             <Button className="mt-4" loading={isPending} onClick={() => void onSubscribeClick()}>
-              <Trans>Checkout</Trans>
+              Checkout
             </Button>
           )}
         </DialogFooter>
@@ -341,7 +338,6 @@ export const IndividualPersonalLayoutCheckoutButton = ({
   priceId: string;
   children: React.ReactNode;
 }) => {
-  const { t } = useLingui();
   const { toast } = useToast();
   const { organisations } = useSession();
 
@@ -359,8 +355,8 @@ export const IndividualPersonalLayoutCheckoutButton = ({
       window.location.href = createSubscriptionResponse.redirectUrl;
     } catch (_err) {
       toast({
-        title: t`Something went wrong`,
-        description: t`An error occurred while trying to create a checkout session.`,
+        title: "Something went wrong",
+        description: "An error occurred while trying to create a checkout session.",
         variant: 'destructive',
       });
     }

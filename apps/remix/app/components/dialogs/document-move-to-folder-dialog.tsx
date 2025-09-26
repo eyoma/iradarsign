@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderIcon, HomeIcon, Loader2, Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -56,7 +53,6 @@ export const DocumentMoveToFolderDialog = ({
   currentFolderId,
   ...props
 }: DocumentMoveToFolderDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const navigate = useNavigate();
@@ -108,8 +104,8 @@ export const DocumentMoveToFolderDialog = ({
       }
 
       toast({
-        title: _(msg`Document moved`),
-        description: _(msg`The document has been moved successfully.`),
+        title: "Document moved",
+        description: "The document has been moved successfully.",
         variant: 'default',
       });
 
@@ -119,8 +115,8 @@ export const DocumentMoveToFolderDialog = ({
 
       if (error.code === AppErrorCode.NOT_FOUND) {
         toast({
-          title: _(msg`Error`),
-          description: _(msg`The folder you are trying to move the document to does not exist.`),
+          title: "Error",
+          description: "The folder you are trying to move the document to does not exist.",
           variant: 'destructive',
         });
 
@@ -129,8 +125,8 @@ export const DocumentMoveToFolderDialog = ({
 
       if (error.code === AppErrorCode.UNAUTHORIZED) {
         toast({
-          title: _(msg`Error`),
-          description: _(msg`You are not allowed to move this document.`),
+          title: "Error",
+          description: "You are not allowed to move this document.",
           variant: 'destructive',
         });
 
@@ -138,8 +134,8 @@ export const DocumentMoveToFolderDialog = ({
       }
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while moving the document.`),
+        title: "Error",
+        description: "An error occurred while moving the document.",
         variant: 'destructive',
       });
     }
@@ -154,18 +150,18 @@ export const DocumentMoveToFolderDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Move Document to Folder</Trans>
+            Move Document to Folder
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>Select a folder to move this document to.</Trans>
+            Select a folder to move this document to.
           </DialogDescription>
         </DialogHeader>
 
         <div className="relative">
           <Search className="text-muted-foreground absolute left-2 top-3 h-4 w-4" />
           <Input
-            placeholder={_(msg`Search folders...`)}
+            placeholder={"Search folders..."}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-8"
@@ -180,7 +176,7 @@ export const DocumentMoveToFolderDialog = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    <Trans>Folder</Trans>
+                    Folder
                   </FormLabel>
 
                   <FormControl>
@@ -199,7 +195,7 @@ export const DocumentMoveToFolderDialog = ({
                             disabled={currentFolderId === null}
                           >
                             <HomeIcon className="mr-2 h-4 w-4" />
-                            <Trans>Home (No Folder)</Trans>
+                            Home (No Folder)
                           </Button>
 
                           {filteredFolders?.map((folder) => (
@@ -218,7 +214,7 @@ export const DocumentMoveToFolderDialog = ({
 
                           {searchTerm && filteredFolders?.length === 0 && (
                             <div className="text-muted-foreground px-2 py-2 text-center text-sm">
-                              <Trans>No folders found</Trans>
+                              No folders found
                             </div>
                           )}
                         </>
@@ -232,7 +228,7 @@ export const DocumentMoveToFolderDialog = ({
 
             <DialogFooter>
               <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button
@@ -241,7 +237,7 @@ export const DocumentMoveToFolderDialog = ({
                   isFoldersLoading || form.formState.isSubmitting || currentFolderId === null
                 }
               >
-                <Trans>Move</Trans>
+                Move
               </Button>
             </DialogFooter>
           </form>

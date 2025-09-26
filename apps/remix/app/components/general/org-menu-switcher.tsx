@@ -1,8 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import {
   Building2Icon,
   ChevronsUpDown,
@@ -38,8 +35,6 @@ import {
 import { useOptionalCurrentTeam } from '~/providers/team';
 
 export const OrgMenuSwitcher = () => {
-  const { _ } = useLingui();
-
   const { user, organisations } = useSession();
 
   const { pathname } = useLocation();
@@ -85,7 +80,7 @@ export const OrgMenuSwitcher = () => {
         avatarSrc: formatAvatarUrl(currentTeam.avatarImageId),
         avatarFallback: formatAvatarFallback(currentTeam.name),
         primaryText: currentTeam.name,
-        secondaryText: _(EXTENDED_TEAM_MEMBER_ROLE_MAP[currentTeam.currentTeamRole]),
+        secondaryText: EXTENDED_TEAM_MEMBER_ROLE_MAP[currentTeam.currentTeamRole],
       };
     }
 
@@ -94,9 +89,9 @@ export const OrgMenuSwitcher = () => {
         avatarSrc: formatAvatarUrl(currentOrganisation.avatarImageId),
         avatarFallback: formatAvatarFallback(currentOrganisation.name),
         primaryText: currentOrganisation.name,
-        secondaryText: _(
+        secondaryText: 
           EXTENDED_ORGANISATION_MEMBER_ROLE_MAP[currentOrganisation.currentOrganisationRole],
-        ),
+        ,
       };
     }
 
@@ -104,7 +99,7 @@ export const OrgMenuSwitcher = () => {
       avatarSrc: formatAvatarUrl(user.avatarImageId),
       avatarFallback: formatAvatarFallback(user.name ?? user.email),
       primaryText: user.name,
-      secondaryText: _(msg`Personal Account`),
+      secondaryText: "Personal Accoun",
     };
   }, [currentTeam, currentOrganisation, user]);
 
@@ -150,7 +145,7 @@ export const OrgMenuSwitcher = () => {
             <div className="flex h-12 items-center border-b p-2">
               <h3 className="text-muted-foreground flex items-center px-2 text-sm font-medium">
                 <Building2Icon className="mr-2 h-3.5 w-3.5" />
-                <Trans>Organisations</Trans>
+                Organisations
               </h3>
             </div>
             <div className="flex-1 space-y-1 overflow-y-auto p-1.5">
@@ -168,7 +163,7 @@ export const OrgMenuSwitcher = () => {
                     )}
                     asChild
                   >
-                    <Link to={`/o/${org.url}`} className="flex items-center space-x-2 pr-8">
+                    <Link to={"/o/${org.url}"} className="flex items-center space-x-2 pr-8">
                       <span
                         className={cn('min-w-0 flex-1 truncate', {
                           'font-semibold': org.id === selectedOrg?.id,
@@ -198,7 +193,7 @@ export const OrgMenuSwitcher = () => {
               <Button variant="ghost" className="w-full justify-start" asChild>
                 <Link to="/settings/organisations?action=add-organisation">
                   <Plus className="mr-2 h-4 w-4" />
-                  <Trans>Create Organisation</Trans>
+                  Create Organisation
                 </Link>
               </Button>
             </div>
@@ -209,7 +204,7 @@ export const OrgMenuSwitcher = () => {
             <div className="flex h-12 items-center border-b p-2">
               <h3 className="text-muted-foreground flex items-center px-2 text-sm font-medium">
                 <UsersIcon className="mr-2 h-3.5 w-3.5" />
-                <Trans>Teams</Trans>
+                Teams
               </h3>
             </div>
             <div className="flex-1 space-y-1 overflow-y-auto p-1.5">
@@ -249,7 +244,7 @@ export const OrgMenuSwitcher = () => {
                   ))
                 ) : (
                   <div className="text-muted-foreground my-12 flex items-center justify-center px-2 text-center text-sm">
-                    <Trans>Select an organisation to view teams</Trans>
+                    Select an organisation to view teams
                   </div>
                 )}
 
@@ -257,7 +252,7 @@ export const OrgMenuSwitcher = () => {
                   <Button variant="ghost" className="w-full justify-start" asChild>
                     <Link to={`/o/${displayedOrg.url}/settings/teams?action=add-team`}>
                       <Plus className="mr-2 h-4 w-4" />
-                      <Trans>Create Team</Trans>
+                      Create Team
                     </Link>
                   </Button>
                 )}
@@ -270,27 +265,27 @@ export const OrgMenuSwitcher = () => {
             <div className="flex h-12 items-center border-b p-2">
               <h3 className="text-muted-foreground flex items-center px-2 text-sm font-medium">
                 <SettingsIcon className="mr-2 h-3.5 w-3.5" />
-                <Trans>Settings</Trans>
+                Settings
               </h3>
             </div>
             <div className="flex-1 overflow-y-auto p-1.5">
               {isUserAdmin && (
                 <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
                   <Link to="/admin">
-                    <Trans>Admin panel</Trans>
+                    Admin panel
                   </Link>
                 </DropdownMenuItem>
               )}
 
               <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
                 <Link to="/inbox">
-                  <Trans>Personal Inbox</Trans>
+                  Personal Inbox
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
                 <Link to="/settings/profile">
-                  <Trans>Account</Trans>
+                  Account
                 </Link>
               </DropdownMenuItem>
 
@@ -301,7 +296,7 @@ export const OrgMenuSwitcher = () => {
                 ) && (
                   <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
                     <Link to={`/o/${currentOrganisation.url}/settings`}>
-                      <Trans>Organisation settings</Trans>
+                      Organisation settings
                     </Link>
                   </DropdownMenuItem>
                 )}
@@ -309,7 +304,7 @@ export const OrgMenuSwitcher = () => {
               {currentTeam && canExecuteTeamAction('MANAGE_TEAM', currentTeam.currentTeamRole) && (
                 <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
                   <Link to={`/t/${currentTeam.url}/settings`}>
-                    <Trans>Team settings</Trans>
+                    Team settings
                   </Link>
                 </DropdownMenuItem>
               )}
@@ -318,18 +313,18 @@ export const OrgMenuSwitcher = () => {
                 className="text-muted-foreground px-4 py-2"
                 onClick={() => setLanguageSwitcherOpen(true)}
               >
-                <Trans>Language</Trans>
+                Language
               </DropdownMenuItem>
 
               {currentOrganisation && (
                 <DropdownMenuItem className="text-muted-foreground px-4 py-2" asChild>
                   <Link
                     to={{
-                      pathname: `/o/${currentOrganisation.url}/support`,
-                      search: currentTeam ? `?team=${currentTeam.id}` : '',
+                      pathname: `/o/${currentOrganisation.url}/suppor",
+                      search: currentTeam ? "?team=${currentTeam.id}` : '',
                     }}
                   >
-                    <Trans>Support</Trans>
+                    Support
                   </Link>
                 </DropdownMenuItem>
               )}
@@ -338,7 +333,7 @@ export const OrgMenuSwitcher = () => {
                 className="text-muted-foreground hover:!text-muted-foreground px-4 py-2"
                 onSelect={async () => authClient.signOut()}
               >
-                <Trans>Sign Out</Trans>
+                Sign Out
               </DropdownMenuItem>
             </div>
           </div>

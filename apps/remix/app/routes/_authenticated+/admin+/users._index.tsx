@@ -1,5 +1,3 @@
-import { Trans } from '@lingui/react/macro';
-
 import { findUsers } from '@documenso/lib/server-only/user/get-all-users';
 
 import { AdminDashboardUsersTable } from '~/components/tables/admin-dashboard-users-table';
@@ -31,7 +29,7 @@ export default function AdminManageUsersPage({ loaderData }: Route.ComponentProp
   return (
     <div>
       <h2 className="text-4xl font-semibold">
-        <Trans>Manage users</Trans>
+        Manage users
       </h2>
 
       <AdminDashboardUsersTable

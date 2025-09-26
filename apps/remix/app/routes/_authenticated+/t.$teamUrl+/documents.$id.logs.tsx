@@ -1,7 +1,3 @@
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Recipient } from '@prisma/client';
 import { ChevronLeft } from 'lucide-react';
 import { DateTime } from 'luxon';
@@ -72,41 +68,39 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 export default function DocumentsLogsPage({ loaderData }: Route.ComponentProps) {
   const { document, recipients, documentRootPath } = loaderData;
 
-  const { _, i18n } = useLingui();
-
   const documentInformation: { description: MessageDescriptor; value: string }[] = [
     {
-      description: msg`Document title`,
+      description: "Document title",
       value: document.title,
     },
     {
-      description: msg`Document ID`,
+      description: "Document ID",
       value: document.id.toString(),
     },
     {
-      description: msg`Document status`,
-      value: _(FRIENDLY_STATUS_MAP[document.status].label),
+      description: "Document status",
+      value: FRIENDLY_STATUS_MAP[document.status].label,
     },
     {
-      description: msg`Created by`,
+      description: "Created by",
       value: document.user.name
         ? `${document.user.name} (${document.user.email})`
         : document.user.email,
     },
     {
-      description: msg`Date created`,
+      description: "Date created",
       value: DateTime.fromJSDate(document.createdAt)
         .setLocale(i18n.locales?.[0] || i18n.locale)
         .toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS),
     },
     {
-      description: msg`Last updated`,
+      description: "Last updated",
       value: DateTime.fromJSDate(document.updatedAt)
         .setLocale(i18n.locales?.[0] || i18n.locale)
         .toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS),
     },
     {
-      description: msg`Time zone`,
+      description: "Time zone",
       value: document.documentMeta?.timezone ?? 'N/A',
     },
   ];
@@ -127,7 +121,7 @@ export default function DocumentsLogsPage({ loaderData }: Route.ComponentProps) 
         className="flex items-center text-[#7AC455] hover:opacity-80"
       >
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
-        <Trans>Document</Trans>
+        Document
       </Link>
 
       <div className="flex flex-col">
@@ -163,7 +157,7 @@ export default function DocumentsLogsPage({ loaderData }: Route.ComponentProps) 
         <Card className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2" degrees={45} gradient>
           {documentInformation.map((info, i) => (
             <div className="text-foreground text-sm" key={i}>
-              <h3 className="font-semibold">{_(info.description)}</h3>
+              <h3 className="font-semibold">{info.description}</h3>
               <p className="text-muted-foreground truncate">{info.value}</p>
             </div>
           ))}

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
@@ -57,7 +55,6 @@ export const OrganisationEmailDomainCreateDialog = ({
   trigger,
   ...props
 }: OrganisationEmailCreateDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
   const organisation = useCurrentOrganisation();
 
@@ -94,8 +91,8 @@ export const OrganisationEmailDomainCreateDialog = ({
       setStep('verification');
 
       toast({
-        title: t`Domain Added`,
-        description: t`DKIM records generated. Please add the DNS records to verify your domain.`,
+        title: "Domain Added",
+        description: "DKIM records generated. Please add the DNS records to verify your domain.",
       });
     } catch (err) {
       const error = AppError.parseError(err);
@@ -103,15 +100,15 @@ export const OrganisationEmailDomainCreateDialog = ({
 
       if (error.code === AppErrorCode.ALREADY_EXISTS) {
         toast({
-          title: t`Domain already in use`,
-          description: t`Please try a different domain.`,
+          title: "Domain already in use",
+          description: "Please try a different domain.",
           variant: 'destructive',
           duration: 10000,
         });
       } else {
         toast({
-          title: t`An unknown error occurred`,
-          description: t`We encountered an unknown error while attempting to add your domain. Please try again later.`,
+          title: "An unknown error occurred",
+          description: "We encountered an unknown error while attempting to add your domain. Please try again later.",
           variant: 'destructive',
         });
       }
@@ -127,7 +124,7 @@ export const OrganisationEmailDomainCreateDialog = ({
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
         {trigger ?? (
           <Button className="flex-shrink-0" variant="secondary">
-            <Trans>Add Email Domain</Trans>
+            Add Email Domain
           </Button>
         )}
       </DialogTrigger>
@@ -136,13 +133,13 @@ export const OrganisationEmailDomainCreateDialog = ({
         <DialogContent position="center" className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
           <DialogHeader>
             <DialogTitle>
-              <Trans>Add Custom Email Domain</Trans>
+              Add Custom Email Domain
             </DialogTitle>
             <DialogDescription>
-              <Trans>
+              
                 Add a custom domain to send emails on behalf of your organisation. We'll generate
                 DKIM records that you need to add to your DNS provider.
-              </Trans>
+              
             </DialogDescription>
           </DialogHeader>
 
@@ -158,17 +155,17 @@ export const OrganisationEmailDomainCreateDialog = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel required>
-                        <Trans>Domain Name</Trans>
+                        Domain Name
                       </FormLabel>
                       <FormControl>
                         <Input {...field} placeholder="example.com" className="bg-background" />
                       </FormControl>
                       <FormMessage />
                       <FormDescription>
-                        <Trans>
+                        
                           Enter the domain you want to use for sending emails (without http:// or
                           www)
-                        </Trans>
+                        
                       </FormDescription>
                     </FormItem>
                   )}
@@ -176,7 +173,7 @@ export const OrganisationEmailDomainCreateDialog = ({
 
                 <DialogFooter>
                   <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   <Button
@@ -184,7 +181,7 @@ export const OrganisationEmailDomainCreateDialog = ({
                     data-testid="dialog-create-organisation-email-button"
                     loading={form.formState.isSubmitting}
                   >
-                    <Trans>Generate DKIM Records</Trans>
+                    Generate DKIM Records
                   </Button>
                 </DialogFooter>
               </fieldset>

@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { DocumentVisibility, TeamMemberRole } from '@prisma/client';
 import { DocumentDistributionMethod, type Field, type Recipient } from '@prisma/client';
 import { InfoIcon } from 'lucide-react';
@@ -97,8 +95,6 @@ export const AddTemplateSettingsFormPartial = ({
   onSubmit,
   onAutoSave,
 }: AddTemplateSettingsFormProps) => {
-  const { t, i18n } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const { documentAuthOption } = extractDocumentAuthMethods({
@@ -212,7 +208,7 @@ export const AddTemplateSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required>
-                    <Trans>Template title</Trans>
+                    Template title
                   </FormLabel>
 
                   <FormControl>
@@ -229,7 +225,7 @@ export const AddTemplateSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="inline-flex items-center">
-                    <Trans>Language</Trans>
+                    Language
                     <Tooltip>
                       <TooltipTrigger>
                         <InfoIcon className="mx-2 h-4 w-4" />
@@ -275,7 +271,7 @@ export const AddTemplateSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex flex-row items-center">
-                    <Trans>Document access</Trans>
+                    Document access
                     <DocumentGlobalAuthAccessTooltip />
                   </FormLabel>
 
@@ -327,7 +323,7 @@ export const AddTemplateSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex flex-row items-center">
-                    <Trans>Document Distribution Method</Trans>
+                    Document Distribution Method
                     <Tooltip>
                       <TooltipTrigger>
                         <InfoIcon className="mx-2 h-4 w-4" />
@@ -336,37 +332,36 @@ export const AddTemplateSettingsFormPartial = ({
                       <TooltipContent className="text-foreground max-w-md space-y-2 p-4">
                         <h2>
                           <strong>
-                            <Trans>Document Distribution Method</Trans>
+                            Document Distribution Method
                           </strong>
                         </h2>
 
                         <p>
-                          <Trans>
+                          
                             This is how the document will reach the recipients once the document is
                             ready for signing.
-                          </Trans>
+                          
                         </p>
 
                         <ul className="ml-3.5 list-outside list-disc space-y-0.5 py-2">
                           <li>
-                            <Trans>
+                            
                               <strong>Email</strong> - The recipient will be emailed the document to
                               sign, approve, etc.
-                            </Trans>
+                            
                           </li>
                           <li>
-                            <Trans>
+                            
                               <strong>None</strong> - We will generate links which you can send to
                               the recipients manually.
-                            </Trans>
+                            
                           </li>
                         </ul>
 
-                        <Trans>
                           <strong>Note</strong> - If you use Links in combination with direct
                           templates, you will need to manually send the links to the remaining
                           recipients.
-                        </Trans>
+                        
                       </TooltipContent>
                     </Tooltip>
                   </FormLabel>
@@ -387,7 +382,7 @@ export const AddTemplateSettingsFormPartial = ({
                         {Object.values(DOCUMENT_DISTRIBUTION_METHODS).map(
                           ({ value, description }) => (
                             <SelectItem key={value} value={value}>
-                              {i18n._(description)}
+                              {i18n.description}
                             </SelectItem>
                           ),
                         )}
@@ -404,7 +399,7 @@ export const AddTemplateSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex flex-row items-center">
-                    <Trans>Allowed Signature Types</Trans>
+                    Allowed Signature Types
                     <DocumentSignatureSettingsTooltip />
                   </FormLabel>
 
@@ -436,7 +431,7 @@ export const AddTemplateSettingsFormPartial = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex flex-row items-center">
-                      <Trans>Recipient action authentication</Trans>
+                      Recipient action authentication
                       <DocumentGlobalAuthActionTooltip />
                     </FormLabel>
 
@@ -460,7 +455,7 @@ export const AddTemplateSettingsFormPartial = ({
               <Accordion type="multiple">
                 <AccordionItem value="email-options" className="border-none">
                   <AccordionTrigger className="text-foreground rounded border px-3 py-2 text-left hover:bg-neutral-200/30 hover:no-underline">
-                    <Trans>Email Options</Trans>
+                    Email Options
                   </AccordionTrigger>
 
                   <AccordionContent className="text-muted-foreground -mx-1 px-1 pt-4 text-sm leading-relaxed [&>div]:pb-0">
@@ -472,7 +467,7 @@ export const AddTemplateSettingsFormPartial = ({
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>
-                                <Trans>Email Sender</Trans>
+                                Email Sender
                               </FormLabel>
 
                               <FormControl>
@@ -514,7 +509,7 @@ export const AddTemplateSettingsFormPartial = ({
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>
-                              <Trans>Reply To Email</Trans>{' '}
+                              Reply To Email{' '}
                               <span className="text-muted-foreground">(Optional)</span>
                             </FormLabel>
 
@@ -533,9 +528,9 @@ export const AddTemplateSettingsFormPartial = ({
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>
-                              <Trans>
+                              
                                 Subject <span className="text-muted-foreground">(Optional)</span>
-                              </Trans>
+                              
                             </FormLabel>
 
                             <FormControl>
@@ -553,7 +548,7 @@ export const AddTemplateSettingsFormPartial = ({
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="flex flex-row items-center">
-                              <Trans>Message</Trans>{' '}
+                              Message{' '}
                               <span className="text-muted-foreground">(Optional)</span>
                               <Tooltip>
                                 <TooltipTrigger>
@@ -597,7 +592,7 @@ export const AddTemplateSettingsFormPartial = ({
             <Accordion type="multiple">
               <AccordionItem value="advanced-options" className="border-none">
                 <AccordionTrigger className="text-foreground rounded border px-3 py-2 text-left hover:bg-neutral-200/30 hover:no-underline">
-                  <Trans>Advanced Options</Trans>
+                  Advanced Options
                 </AccordionTrigger>
 
                 <AccordionContent className="text-muted-foreground -mx-1 px-1 pt-4 text-sm leading-relaxed">
@@ -608,17 +603,17 @@ export const AddTemplateSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="flex flex-row items-center">
-                            <Trans>External ID</Trans>{' '}
+                            External ID{' '}
                             <Tooltip>
                               <TooltipTrigger>
                                 <InfoIcon className="mx-2 h-4 w-4" />
                               </TooltipTrigger>
 
                               <TooltipContent className="text-muted-foreground max-w-xs">
-                                <Trans>
+                                
                                   Add an external ID to the template. This can be used to identify
                                   in external systems.
-                                </Trans>
+                                
                               </TooltipContent>
                             </Tooltip>
                           </FormLabel>
@@ -638,7 +633,7 @@ export const AddTemplateSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            <Trans>Date Format</Trans>
+                            Date Format
                           </FormLabel>
 
                           <FormControl>
@@ -674,7 +669,7 @@ export const AddTemplateSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            <Trans>Time Zone</Trans>
+                            Time Zone
                           </FormLabel>
 
                           <FormControl>
@@ -700,16 +695,16 @@ export const AddTemplateSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="flex flex-row items-center">
-                            <Trans>Redirect URL</Trans>{' '}
+                            Redirect URL{' '}
                             <Tooltip>
                               <TooltipTrigger>
                                 <InfoIcon className="mx-2 h-4 w-4" />
                               </TooltipTrigger>
 
                               <TooltipContent className="text-muted-foreground max-w-xs">
-                                <Trans>
+                                
                                   Add a URL to redirect the user to once the document is signed
-                                </Trans>
+                                
                               </TooltipContent>
                             </Tooltip>
                           </FormLabel>

@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { DocumentSource } from '@prisma/client';
 
 import { mailer } from '@documenso/email/mailer';
@@ -124,7 +123,7 @@ export const sendCompletedEmail = async ({ documentId, requestMetadata }: SendDo
       ],
       from: senderEmail,
       replyTo: replyToEmail,
-      subject: i18n._(msg`Signing Complete!`),
+      subject: i18n."Signing Complete!",
       html,
       text,
       attachments: [
@@ -200,7 +199,7 @@ export const sendCompletedEmail = async ({ documentId, requestMetadata }: SendDo
         subject:
           isDirectTemplate && document.documentMeta?.subject
             ? renderCustomEmailTemplate(document.documentMeta.subject, customEmailTemplate)
-            : i18n._(msg`Signing Complete!`),
+            : i18n."Signing Complete!",
         html,
         text,
         attachments: [

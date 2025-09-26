@@ -1,4 +1,3 @@
-import { msg } from '@lingui/core/macro';
 import { DocumentDistributionMethod } from '@prisma/client';
 import { DocumentVisibility } from '@prisma/client';
 import { z } from 'zod';
@@ -55,7 +54,7 @@ export const ZAddTemplateSettingsFormSchema = z.object({
     ),
     emailSettings: ZDocumentEmailSettingsSchema,
     signatureTypes: z.array(z.nativeEnum(DocumentSignatureType)).min(1, {
-      message: msg`At least one signature type must be enabled`.id,
+      message: "At least one signature type must be enabled".id,
     }),
   }),
 });

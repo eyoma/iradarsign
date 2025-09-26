@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { Trans, useLingui } from '@lingui/react/macro';
 import { EmailDomainStatus } from '@prisma/client';
 import { CheckCircle2Icon, ClockIcon } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
@@ -24,7 +23,6 @@ import { useToast } from '@documenso/ui/primitives/use-toast';
 import { OrganisationEmailDomainDeleteDialog } from '../dialogs/organisation-email-domain-delete-dialog';
 
 export const OrganisationEmailDomainsDataTable = () => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [searchParams] = useSearchParams();
@@ -37,8 +35,8 @@ export const OrganisationEmailDomainsDataTable = () => {
     trpc.enterprise.organisation.emailDomain.verify.useMutation({
       onSuccess: () => {
         toast({
-          title: t`Email domains synced`,
-          description: t`All email domains have been synced successfully`,
+          title: "Email domains synced",
+          description: "All email domains have been synced successfully",
         });
       },
     });
@@ -73,35 +71,35 @@ export const OrganisationEmailDomainsDataTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: t`Domain`,
+        header: "Domain",
         accessorKey: 'domain',
       },
       {
-        header: t`Status`,
+        header: "Status",
         accessorKey: 'status',
         cell: ({ row }) =>
           match(row.original.status)
             .with(EmailDomainStatus.ACTIVE, () => (
               <Badge>
                 <CheckCircle2Icon className="mr-2 h-4 w-4 text-green-500 dark:text-green-300" />
-                <Trans>Active</Trans>
+                Active
               </Badge>
             ))
             .with(EmailDomainStatus.PENDING, () => (
               <Badge variant="warning">
                 <ClockIcon className="mr-2 h-4 w-4 text-yellow-500 dark:text-yellow-200" />
-                <Trans>Pending</Trans>
+                Pending
               </Badge>
             ))
             .exhaustive(),
       },
       {
-        header: t`Emails`,
+        header: "Emails",
         accessorKey: 'emailCount',
         cell: ({ row }) => row.original.emailCount,
       },
       {
-        header: t`Actions`,
+        header: "Actions",
         cell: ({ row }) => (
           <div className="flex justify-end space-x-2">
             <Button asChild variant="outline">
@@ -114,8 +112,8 @@ export const OrganisationEmailDomainsDataTable = () => {
               emailDomainId={row.original.id}
               emailDomain={row.original.domain}
               trigger={
-                <Button variant="destructive" title={t`Remove email domain`}>
-                  <Trans>Delete</Trans>
+                <Button variant="destructive" title={"Remove email domain"}>
+                  Delete
                 </Button>
               }
             />
@@ -176,13 +174,13 @@ export const OrganisationEmailDomainsDataTable = () => {
           >
             <div className="mb-4 sm:mb-0">
               <AlertTitle>
-                <Trans>Sync Email Domains</Trans>
+                Sync Email Domains
               </AlertTitle>
 
               <AlertDescription className="mr-2">
-                <Trans>
+                
                   This will check and sync the status of all email domains for this organisation
-                </Trans>
+                
               </AlertDescription>
             </div>
 
@@ -195,7 +193,7 @@ export const OrganisationEmailDomainsDataTable = () => {
                 });
               }}
             >
-              <Trans>Sync</Trans>
+              Sync
             </Button>
           </Alert>
         )}

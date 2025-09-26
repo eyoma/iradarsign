@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, FieldType, SigningStatus } from '@prisma/client';
 import { Loader, LucideChevronDown, LucideChevronUp, X } from 'lucide-react';
 import { P, match } from 'ts-pattern';
@@ -57,7 +54,6 @@ export const MultiSignDocumentSigningView = ({
   isNameLocked = false,
   allowDocumentRejection = false,
 }: MultiSignDocumentSigningViewProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { fullName, email, signature, setFullName, setSignature } =
@@ -109,8 +105,8 @@ export const MultiSignDocumentSigningView = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while signing the document.`),
+        title: "Error",
+        description: "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -185,7 +181,7 @@ export const MultiSignDocumentSigningView = ({
               <div className="flex flex-col items-center gap-4">
                 <Loader className="text-primary h-8 w-8 animate-spin" />
                 <p className="text-muted-foreground text-sm">
-                  <Trans>Loading document...</Trans>
+                  Loading document...
                 </p>
               </div>
             </div>
@@ -193,7 +189,7 @@ export const MultiSignDocumentSigningView = ({
           .with({ isLoading: false, document: undefined }, () => (
             <div className="flex min-h-[400px] w-full items-center justify-center">
               <p className="text-muted-foreground text-sm">
-                <Trans>Failed to load document</Trans>
+                Failed to load document
               </p>
             </div>
           ))
@@ -246,7 +242,7 @@ export const MultiSignDocumentSigningView = ({
                       <div className="embed--DocumentWidgetHeader">
                         <div className="flex items-center justify-between gap-x-2">
                           <h3 className="text-foreground text-xl font-semibold md:text-2xl">
-                            <Trans>Sign document</Trans>
+                            Sign document
                           </h3>
 
                           <Button variant="outline" className="h-8 w-8 p-0 md:hidden">
@@ -267,7 +263,7 @@ export const MultiSignDocumentSigningView = ({
 
                       <div className="embed--DocumentWidgetContent hidden group-data-[expanded]/document-widget:block md:block">
                         <p className="text-muted-foreground mt-2 text-sm">
-                          <Trans>Sign the document to complete the process.</Trans>
+                          Sign the document to complete the process.
                         </p>
 
                         <hr className="border-border mb-8 mt-4" />
@@ -280,7 +276,7 @@ export const MultiSignDocumentSigningView = ({
                             <>
                               <div>
                                 <Label htmlFor="full-name">
-                                  <Trans>Full Name</Trans>
+                                  Full Name
                                 </Label>
 
                                 <Input
@@ -295,7 +291,7 @@ export const MultiSignDocumentSigningView = ({
 
                               <div>
                                 <Label htmlFor="email">
-                                  <Trans>Email</Trans>
+                                  Email
                                 </Label>
 
                                 <Input
@@ -310,7 +306,7 @@ export const MultiSignDocumentSigningView = ({
                               {hasSignatureField && (
                                 <div>
                                   <Label htmlFor="Signature">
-                                    <Trans>Signature</Trans>
+                                    Signature
                                   </Label>
 
                                   <SignaturePadDialog
@@ -341,7 +337,7 @@ export const MultiSignDocumentSigningView = ({
                       <div className="embed--DocumentWidgetFooter mt-4 hidden w-full grid-cols-2 items-center group-data-[expanded]/document-widget:grid md:grid">
                         {uninsertedFields.length > 0 ? (
                           <Button className="col-start-2" onClick={onNextFieldClick}>
-                            <Trans>Next</Trans>
+                            Next
                           </Button>
                         ) : (
                           <Button
@@ -349,7 +345,7 @@ export const MultiSignDocumentSigningView = ({
                             loading={isSubmitting}
                             onClick={onDocumentComplete}
                           >
-                            <Trans>Complete</Trans>
+                            Complete
                           </Button>
                         )}
                       </div>
@@ -368,7 +364,7 @@ export const MultiSignDocumentSigningView = ({
                       field={pendingFields[0]}
                       color="warning"
                     >
-                      <Trans>Click to insert field</Trans>
+                      Click to insert field
                     </FieldToolTip>
                   )}
                 </ElementVisible>

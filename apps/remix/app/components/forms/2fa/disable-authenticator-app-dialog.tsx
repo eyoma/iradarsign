@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { flushSync } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -40,7 +37,6 @@ export const ZDisable2FAForm = z.object({
 export type TDisable2FAForm = z.infer<typeof ZDisable2FAForm>;
 
 export const DisableAuthenticatorAppDialog = () => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { refreshSession } = useSession();
 
@@ -82,10 +78,10 @@ export const DisableAuthenticatorAppDialog = () => {
       await authClient.twoFactor.disable({ totpCode, backupCode });
 
       toast({
-        title: _(msg`Two-factor authentication disabled`),
-        description: _(
-          msg`Two-factor authentication has been disabled for your account. You will no longer be required to enter a code from your authenticator app when signing in.`,
-        ),
+        title: "Two-factor authentication disabled",
+        description: 
+          "Two-factor authentication has been disabled for your account. You will no longer be required to enter a code from your authenticator app when signing in.",
+        ,
       });
 
       flushSync(() => {
@@ -95,10 +91,10 @@ export const DisableAuthenticatorAppDialog = () => {
       await refreshSession();
     } catch (_err) {
       toast({
-        title: _(msg`Unable to disable two-factor authentication`),
-        description: _(
-          msg`We were unable to disable two-factor authentication for your account. Please ensure that you have entered your password and backup code correctly and try again.`,
-        ),
+        title: "Unable to disable two-factor authentication",
+        description: 
+          "We were unable to disable two-factor authentication for your account. Please ensure that you have entered your password and backup code correctly and try again.",
+        ,
         variant: 'destructive',
       });
     }
@@ -108,21 +104,21 @@ export const DisableAuthenticatorAppDialog = () => {
     <Dialog open={isOpen} onOpenChange={onCloseTwoFactorDisableDialog}>
       <DialogTrigger asChild={true}>
         <Button className="flex-shrink-0" variant="destructive">
-          <Trans>Disable 2FA</Trans>
+          Disable 2FA
         </Button>
       </DialogTrigger>
 
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Disable 2FA</Trans>
+            Disable 2FA
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               Please provide a token from the authenticator, or a backup code. If you do not have a
               backup code available, please contact support.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -159,7 +155,7 @@ export const DisableAuthenticatorAppDialog = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        <Trans>Backup Code</Trans>
+                        Backup Code
                       </FormLabel>
                       <FormControl>
                         <Input type="text" {...field} />
@@ -177,14 +173,14 @@ export const DisableAuthenticatorAppDialog = () => {
                   onClick={onToggleTwoFactorDisableMethodClick}
                 >
                   {twoFactorDisableMethod === 'totp' ? (
-                    <Trans>Use Backup Code</Trans>
+                    Use Backup Code
                   ) : (
-                    <Trans>Use Authenticator</Trans>
+                    Use Authenticator
                   )}
                 </Button>
 
                 <Button type="submit" variant="destructive" loading={isDisable2FASubmitting}>
-                  <Trans>Disable 2FA</Trans>
+                  Disable 2FA
                 </Button>
               </DialogFooter>
             </fieldset>

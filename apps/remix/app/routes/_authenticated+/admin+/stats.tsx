@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import {
   File,
   FileCheck,
@@ -64,8 +61,6 @@ export async function loader() {
 }
 
 export default function AdminStatsPage({ loaderData }: Route.ComponentProps) {
-  const { _ } = useLingui();
-
   const {
     usersCount,
     organisationsWithSubscriptionsCount,
@@ -79,37 +74,37 @@ export default function AdminStatsPage({ loaderData }: Route.ComponentProps) {
   return (
     <div>
       <h2 className="text-4xl font-semibold">
-        <Trans>Instance Stats</Trans>
+        Instance Stats
       </h2>
 
       <div className="mt-8 grid flex-1 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <CardMetric icon={Users} title={_(msg`Total Users`)} value={usersCount} />
-        <CardMetric icon={File} title={_(msg`Total Documents`)} value={docStats.ALL} />
+        <CardMetric icon={Users} title={"Total Users"} value={usersCount} />
+        <CardMetric icon={File} title={"Total Documents"} value={docStats.ALL} />
         <CardMetric
           icon={UserPlus}
-          title={_(msg`Active Subscriptions`)}
+          title={"Active Subscriptions"}
           value={organisationsWithSubscriptionsCount}
         />
 
-        <CardMetric icon={FileCog} title={_(msg`App Version`)} value={`v${version}`} />
+        <CardMetric icon={FileCog} title={"App Version"} value={`v${version}`} />
       </div>
 
       <div className="mt-16 gap-8">
         <div>
           <h3 className="text-3xl font-semibold">
-            <Trans>Document metrics</Trans>
+            Document metrics
           </h3>
 
           <div className="mb-8 mt-4 grid flex-1 grid-cols-1 gap-4 md:grid-cols-2">
-            <CardMetric icon={FileEdit} title={_(msg`Drafted Documents`)} value={docStats.DRAFT} />
+            <CardMetric icon={FileEdit} title={"Drafted Documents"} value={docStats.DRAFT} />
             <CardMetric
               icon={FileClock}
-              title={_(msg`Pending Documents`)}
+              title={"Pending Documents"}
               value={docStats.PENDING}
             />
             <CardMetric
               icon={FileCheck}
-              title={_(msg`Completed Documents`)}
+              title={"Completed Documents"}
               value={docStats.COMPLETED}
             />
           </div>
@@ -117,28 +112,28 @@ export default function AdminStatsPage({ loaderData }: Route.ComponentProps) {
 
         <div>
           <h3 className="text-3xl font-semibold">
-            <Trans>Recipients metrics</Trans>
+            Recipients metrics
           </h3>
 
           <div className="mb-8 mt-4 grid flex-1 grid-cols-1 gap-4 md:grid-cols-2">
             <CardMetric
               icon={UserSquare2}
-              title={_(msg`Total Recipients`)}
+              title={"Total Recipients"}
               value={recipientStats.TOTAL_RECIPIENTS}
             />
             <CardMetric
               icon={Mail}
-              title={_(msg`Documents Received`)}
+              title={"Documents Received"}
               value={recipientStats.SENT}
             />
             <CardMetric
               icon={MailOpen}
-              title={_(msg`Documents Viewed`)}
+              title={"Documents Viewed"}
               value={recipientStats.OPENED}
             />
             <CardMetric
               icon={PenTool}
-              title={_(msg`Signatures Collected`)}
+              title={"Signatures Collected"}
               value={recipientStats.SIGNED}
             />
           </div>
@@ -147,36 +142,36 @@ export default function AdminStatsPage({ loaderData }: Route.ComponentProps) {
 
       <div className="mt-16">
         <h3 className="text-3xl font-semibold">
-          <Trans>Charts</Trans>
+          Charts
         </h3>
         <div className="mt-5 grid grid-cols-2 gap-8">
-          <MonthlyActiveUsersChart title={_(msg`MAU (signed in)`)} data={monthlyActiveUsers} />
+          <MonthlyActiveUsersChart title={"MAU (signed in")} data={monthlyActiveUsers} />
 
           <MonthlyActiveUsersChart
-            title={_(msg`Cumulative MAU (signed in)`)}
+            title={"Cumulative MAU (signed in")}
             data={monthlyActiveUsers}
             cummulative
           />
 
           <AdminStatsUsersWithDocumentsChart
             data={monthlyUsersWithDocuments}
-            title={_(msg`MAU (created document)`)}
-            tooltip={_(msg`Monthly Active Users: Users that created at least one Document`)}
+            title={"MAU (created document")}
+            tooltip={"Monthly Active Users: Users that created at least one Documen"}
           />
           <AdminStatsUsersWithDocumentsChart
             data={monthlyUsersWithDocuments}
             completed
-            title={_(msg`MAU (had document completed)`)}
-            tooltip={_(
-              msg`Monthly Active Users: Users that had at least one of their documents completed`,
-            )}
+            title={msg"MAU (had document completed")}
+            tooltip={
+              "Monthly Active Users: Users that had at least one of their documents completed",
+            }
           />
           <AdminStatsSignerConversionChart
             title="Signers that Signed Up"
             data={signerConversionMonthly}
           />
           <AdminStatsSignerConversionChart
-            title={_(msg`Total Signers that Signed Up`)}
+            title={"Total Signers that Signed Up"}
             data={signerConversionMonthly}
             cummulative
           />

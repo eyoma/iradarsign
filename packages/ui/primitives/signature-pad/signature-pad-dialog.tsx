@@ -1,8 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import { useState } from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { Trans, useLingui } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 
 import { parseMessageDescriptor } from '@documenso/lib/utils/i18n';
@@ -35,8 +33,6 @@ export const SignaturePadDialog = ({
   drawSignatureEnabled,
   dialogConfirmText,
 }: SignaturePadDialogProps) => {
-  const { i18n } = useLingui();
-
   const [showSignatureModal, setShowSignatureModal] = useState(false);
   const [signature, setSignature] = useState<string>(value ?? '');
 
@@ -124,7 +120,7 @@ export const SignaturePadDialog = ({
           <DialogFooter>
             <DialogClose asChild>
               <Button type="button" variant="ghost">
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
             </DialogClose>
 
@@ -139,7 +135,7 @@ export const SignaturePadDialog = ({
               {dialogConfirmText ? (
                 parseMessageDescriptor(i18n._, dialogConfirmText)
               ) : (
-                <Trans>Next</Trans>
+                Next
               )}
             </Button>
           </DialogFooter>

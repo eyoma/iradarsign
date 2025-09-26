@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 import { browserSupportsWebAuthn, startAuthentication } from '@simplewebauthn/browser';
 import { Loader } from 'lucide-react';
@@ -57,8 +54,6 @@ export const DocumentSigningAuthPasskey = ({
   open,
   onOpenChange,
 }: DocumentSigningAuthPasskeyProps) => {
-  const { _ } = useLingui();
-
   const {
     recipient,
     passkeyData,
@@ -136,7 +131,7 @@ export const DocumentSigningAuthPasskey = ({
 
         <DialogFooter>
           <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-            <Trans>Close</Trans>
+            Close
           </Button>
         </DialogFooter>
       </div>
@@ -156,17 +151,17 @@ export const DocumentSigningAuthPasskey = ({
       <div className="h-28 space-y-4">
         <Alert variant="destructive">
           <AlertDescription>
-            <Trans>Something went wrong while loading your passkeys.</Trans>
+            Something went wrong while loading your passkeys.
           </AlertDescription>
         </Alert>
 
         <DialogFooter>
           <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           <Button type="button" onClick={() => void refetchPasskeys()}>
-            <Trans>Retry</Trans>
+            Retry
           </Button>
         </DialogFooter>
       </div>
@@ -187,14 +182,14 @@ export const DocumentSigningAuthPasskey = ({
 
         <DialogFooter>
           <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           <PasskeyCreateDialog
             onSuccess={async () => refetchPasskeys()}
             trigger={
               <Button>
-                <Trans>Setup</Trans>
+                Setup
               </Button>
             }
           />
@@ -220,7 +215,7 @@ export const DocumentSigningAuthPasskey = ({
                       <SelectTrigger className="bg-background text-muted-foreground">
                         <SelectValue
                           data-testid="documentAccessSelectValue"
-                          placeholder={_(msg`Select passkey`)}
+                          placeholder={"Select passkey"}
                         />
                       </SelectTrigger>
 

@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { browserSupportsWebAuthn, startAuthentication } from '@simplewebauthn/browser';
 import { KeyRoundIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -42,14 +38,14 @@ import { PinInput, PinInputGroup, PinInputSlot } from '@documenso/ui/primitives/
 import { useToast } from '@documenso/ui/primitives/use-toast';
 
 const CommonErrorMessages: Record<string, MessageDescriptor> = {
-  [AuthenticationErrorCode.AccountDisabled]: msg`This account has been disabled. Please contact support.`,
+  [AuthenticationErrorCode.AccountDisabled]: "This account has been disabled. Please contact support.",
 };
 
 const handleFallbackErrorMessages = (code: string) => {
   const message = CommonErrorMessages[code];
 
   if (!message) {
-    return msg`An unknown error occurred`;
+    return "An unknown error occurred";
   }
 
   return message;
@@ -83,7 +79,6 @@ export const SignInForm = ({
   oidcProviderLabel,
   returnTo,
 }: SignInFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const navigate = useNavigate();
@@ -152,8 +147,8 @@ export const SignInForm = ({
   const onSignInWithPasskey = async () => {
     if (!browserSupportsWebAuthn()) {
       toast({
-        title: _(msg`Not supported`),
-        description: _(msg`Passkeys are not supported on this browser`),
+        title: "Not supported",
+        description: "Passkeys are not supported on this browser",
         duration: 10000,
         variant: 'destructive',
       });
@@ -187,17 +182,17 @@ export const SignInForm = ({
         .with(
           AuthenticationErrorCode.NotSetup,
           () =>
-            msg`This passkey is not configured for this application. Please login and add one in the user settings.`,
+            "This passkey is not configured for this application. Please login and add one in the user settings.",
         )
         .with(
           AuthenticationErrorCode.SessionExpired,
-          () => msg`This session has expired. Please try again.`,
+          () => "This session has expired. Please try again.",
         )
         .otherwise(() => handleFallbackErrorMessages(error.code));
 
       toast({
         title: 'Something went wrong',
-        description: _(errorMessage),
+        description: errorMessage,
         duration: 10000,
         variant: 'destructive',
       });
@@ -227,10 +222,10 @@ export const SignInForm = ({
         await navigate('/unverified-account');
 
         toast({
-          title: _(msg`Unable to sign in`),
-          description: _(
-            msg`This account has not been verified. Please verify your account before signing in.`,
-          ),
+          title: "Unable to sign in",
+          description: 
+            "This account has not been verified. Please verify your account before signing in.",
+          ,
         });
 
         return;
@@ -239,17 +234,17 @@ export const SignInForm = ({
       const errorMessage = match(error.code)
         .with(
           AuthenticationErrorCode.InvalidCredentials,
-          () => msg`The email or password provided is incorrect`,
+          () => "The email or password provided is incorrec",
         )
         .with(
           AuthenticationErrorCode.InvalidTwoFactorCode,
-          () => msg`The two-factor authentication code provided is incorrect`,
+          () => msg"The two-factor authentication code provided is incorrec",
         )
         .otherwise(() => handleFallbackErrorMessages(error.code));
 
       toast({
-        title: _(msg`Unable to sign in`),
-        description: _(errorMessage),
+        title: msg"Unable to sign in",
+        description: errorMessage,
         variant: 'destructive',
       });
     }
@@ -262,10 +257,10 @@ export const SignInForm = ({
       });
     } catch (err) {
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to sign you In. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to sign you In. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -278,10 +273,10 @@ export const SignInForm = ({
       });
     } catch (err) {
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to sign you In. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to sign you In. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -315,7 +310,7 @@ export const SignInForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Email</Trans>
+                  Email
                 </FormLabel>
 
                 <FormControl>
@@ -333,7 +328,7 @@ export const SignInForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Password</Trans>
+                  Password
                 </FormLabel>
 
                 <FormControl>
@@ -347,7 +342,7 @@ export const SignInForm = ({
                     to="/forgot-password"
                     className="text-muted-foreground text-sm duration-200 hover:opacity-70"
                   >
-                    <Trans>Forgot your password?</Trans>
+                    Forgot your password?
                   </Link>
                 </p>
               </FormItem>
@@ -360,14 +355,14 @@ export const SignInForm = ({
             loading={isSubmitting}
             className="dark:bg-documenso dark:hover:opacity-90"
           >
-            {isSubmitting ? <Trans>Signing in...</Trans> : <Trans>Sign In</Trans>}
+            {isSubmitting ? Signing in... : Sign In}
           </Button>
 
           {(isGoogleSSOEnabled || isOIDCSSOEnabled) && (
             <div className="relative flex items-center justify-center gap-x-4 py-2 text-xs uppercase">
               <div className="bg-border h-px flex-1" />
               <span className="text-muted-foreground bg-transparent">
-                <Trans>Or continue with</Trans>
+                Or continue with
               </span>
               <div className="bg-border h-px flex-1" />
             </div>
@@ -411,7 +406,7 @@ export const SignInForm = ({
             onClick={onSignInWithPasskey}
           >
             {!isPasskeyLoading && <KeyRoundIcon className="-ml-1 mr-1 h-5 w-5" />}
-            <Trans>Passkey</Trans>
+            Passkey
           </Button>
         </fieldset>
       </form>
@@ -423,7 +418,7 @@ export const SignInForm = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              <Trans>Two-Factor Authentication</Trans>
+              Two-Factor Authentication
             </DialogTitle>
           </DialogHeader>
 
@@ -460,7 +455,7 @@ export const SignInForm = ({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        <Trans>Backup Code</Trans>
+                        Backup Code
                       </FormLabel>
                       <FormControl>
                         <Input type="text" {...field} />
@@ -478,14 +473,14 @@ export const SignInForm = ({
                   onClick={onToggleTwoFactorAuthenticationMethodClick}
                 >
                   {twoFactorAuthenticationMethod === 'totp' ? (
-                    <Trans>Use Backup Code</Trans>
+                    Use Backup Code
                   ) : (
-                    <Trans>Use Authenticator</Trans>
+                    Use Authenticator
                   )}
                 </Button>
 
                 <Button type="submit" loading={isSubmitting}>
-                  {isSubmitting ? <Trans>Signing in...</Trans> : <Trans>Sign In</Trans>}
+                  {isSubmitting ? Signing in... : Sign In}
                 </Button>
               </DialogFooter>
             </fieldset>

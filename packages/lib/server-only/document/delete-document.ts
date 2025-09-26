@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import type { Document, DocumentMeta, Recipient, User } from '@prisma/client';
 import { DocumentStatus, SendStatus, WebhookTriggerEvents } from '@prisma/client';
 
@@ -251,7 +250,7 @@ const handleDocumentOwnerDelete = async ({
         },
         from: senderEmail,
         replyTo: replyToEmail,
-        subject: i18n._(msg`Document Cancelled`),
+        subject: i18n."Document Cancelled",
         html,
         text,
       });

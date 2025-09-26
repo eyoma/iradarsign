@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentSource, DocumentStatus as DocumentStatusEnum } from '@prisma/client';
 import { InfoIcon } from 'lucide-react';
 import { DateTime } from 'luxon';
@@ -33,9 +29,9 @@ import { useCurrentTeam } from '~/providers/team';
 import { PeriodSelector } from '../period-selector';
 
 const DOCUMENT_SOURCE_LABELS: { [key in DocumentSource]: MessageDescriptor } = {
-  DOCUMENT: msg`Document`,
-  TEMPLATE: msg`Template`,
-  TEMPLATE_DIRECT_LINK: msg`Direct link`,
+  DOCUMENT: "Documen",
+  TEMPLATE: msg"Template",
+  TEMPLATE_DIRECT_LINK: "Direct link",
 };
 
 const ZDocumentSearchParamsSchema = ZUrlSearchParamsSchema.extend({
@@ -56,8 +52,6 @@ type TemplatePageViewDocumentsTableProps = {
 export const TemplatePageViewDocumentsTable = ({
   templateId,
 }: TemplatePageViewDocumentsTableProps) => {
-  const { _, i18n } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
 
@@ -98,18 +92,18 @@ export const TemplatePageViewDocumentsTable = ({
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Created`),
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) =>
           i18n.date(row.original.createdAt, { ...DateTime.DATETIME_SHORT, hourCycle: 'h12' }),
       },
       {
-        header: _(msg`Title`),
+        header: "Title",
         cell: ({ row }) => <DataTableTitle row={row.original} teamUrl={team?.url} />,
       },
 
       {
-        header: _(msg`Recipient`),
+        header: "Recipien",
         accessorKey: 'recipient',
         cell: ({ row }) => (
           <StackAvatarsWithTooltip
@@ -119,7 +113,7 @@ export const TemplatePageViewDocumentsTable = ({
         ),
       },
       {
-        header: _(msg`Status`),
+        header: msg"Status",
         accessorKey: 'status',
         cell: ({ row }) => <DocumentStatus status={row.getValue('status')} />,
         size: 140,
@@ -127,7 +121,7 @@ export const TemplatePageViewDocumentsTable = ({
       {
         header: () => (
           <div className="flex flex-row items-center">
-            <Trans>Source</Trans>
+            Source
             <Tooltip>
               <TooltipTrigger>
                 <InfoIcon className="mx-2 h-4 w-4" />
@@ -137,23 +131,23 @@ export const TemplatePageViewDocumentsTable = ({
                 <ul className="text-muted-foreground space-y-0.5 divide-y [&>li]:p-4">
                   <li>
                     <h2 className="mb-2 flex flex-row items-center font-semibold">
-                      <Trans>Template</Trans>
+                      Template
                     </h2>
 
                     <p>
-                      <Trans>
+                      
                         This document was created by you or a team member using the template above.
-                      </Trans>
+                      
                     </p>
                   </li>
 
                   <li>
                     <h2 className="mb-2 flex flex-row items-center font-semibold">
-                      <Trans>Direct Link</Trans>
+                      Direct Link
                     </h2>
 
                     <p>
-                      <Trans>This document was created using a direct link.</Trans>
+                      This document was created using a direct link.
                     </p>
                   </li>
                 </ul>
@@ -164,13 +158,13 @@ export const TemplatePageViewDocumentsTable = ({
         accessorKey: 'type',
         cell: ({ row }) => (
           <div className="flex flex-row items-center">
-            {_(DOCUMENT_SOURCE_LABELS[row.original.source])}
+            {DOCUMENT_SOURCE_LABELS[row.original.source]}
           </div>
         ),
       },
       {
         id: 'actions',
-        header: _(msg`Actions`),
+        header: "Actions",
         cell: ({ row }) => (
           <div className="flex items-center space-x-2">
             <DocumentsTableActionButton row={row.original} />
@@ -194,16 +188,16 @@ export const TemplatePageViewDocumentsTable = ({
           }
         >
           <SelectItem value="all">
-            <Trans>Any Status</Trans>
+            Any Status
           </SelectItem>
           <SelectItem value={DocumentStatusEnum.COMPLETED}>
-            <Trans>Completed</Trans>
+            Completed
           </SelectItem>
           <SelectItem value={DocumentStatusEnum.PENDING}>
-            <Trans>Pending</Trans>
+            Pending
           </SelectItem>
           <SelectItem value={DocumentStatusEnum.DRAFT}>
-            <Trans>Draft</Trans>
+            Draft
           </SelectItem>
         </SearchParamSelector>
 
@@ -214,13 +208,13 @@ export const TemplatePageViewDocumentsTable = ({
           }
         >
           <SelectItem value="all">
-            <Trans>Any Source</Trans>
+            Any Source
           </SelectItem>
           <SelectItem value={DocumentSource.TEMPLATE}>
-            <Trans>Template</Trans>
+            Template
           </SelectItem>
           <SelectItem value={DocumentSource.TEMPLATE_DIRECT_LINK}>
-            <Trans>Direct Link</Trans>
+            Direct Link
           </SelectItem>
         </SearchParamSelector>
 

@@ -1,5 +1,3 @@
-import { Trans } from '@lingui/react/macro';
-
 import { Column, Img, Section, Text } from '../components';
 import { TemplateDocumentImage } from './template-document-image';
 
@@ -28,21 +26,21 @@ export const TemplateDocumentPending = ({
                 src={getAssetUrl('/static/clock.png')}
                 className="-mt-0.5 mr-2 inline h-7 w-7 align-middle"
               />
-              <Trans>Waiting for others</Trans>
+              Waiting for others
             </Text>
           </Column>
         </Section>
 
         <Text className="text-primary mb-0 text-center text-lg font-semibold">
-          <Trans>“{documentName}” has been signed</Trans>
+          “{documentName}” has been signed
         </Text>
 
         <Text className="mx-auto mb-6 mt-1 max-w-[80%] text-center text-base text-slate-400">
-          <Trans>
+          
             We're still waiting for other signers to sign this document.
             <br />
             We'll notify you as soon as it's ready.
-          </Trans>
+          
         </Text>
       </Section>
     </>

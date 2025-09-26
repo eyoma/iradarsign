@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { Trans } from '@lingui/react/macro';
 import { SubscriptionStatus } from '@prisma/client';
 import { Link, Outlet } from 'react-router';
 
@@ -53,16 +51,16 @@ export default function Layout() {
         errorCode={404}
         errorCodeMap={{
           404: {
-            heading: msg`Team not found`,
-            subHeading: msg`404 Team not found`,
-            message: msg`The team you are looking for may have been removed, renamed or may have never
-                existed.`,
+            heading: "Team not found",
+            subHeading: "404 Team not found",
+            message: "The team you are looking for may have been removed, renamed or may have never
+                existed.",
           },
         }}
         primaryButton={
           <Button asChild>
             <Link to="/settings/teams">
-              <Trans>View teams</Trans>
+              View teams
             </Link>
           </Button>
         }

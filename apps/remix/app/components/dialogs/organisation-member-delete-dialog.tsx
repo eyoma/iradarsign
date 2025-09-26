@@ -1,9 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
 import { trpc } from '@documenso/trpc/react';
 import { Alert } from '@documenso/ui/primitives/alert';
@@ -35,7 +31,6 @@ export const OrganisationMemberDeleteDialog = ({
 }: OrganisationMemberDeleteDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const organisation = useCurrentOrganisation();
@@ -44,8 +39,8 @@ export const OrganisationMemberDeleteDialog = ({
     trpc.organisation.member.delete.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`You have successfully removed this user from the organisation.`),
+          title: "Success",
+          description: "You have successfully removed this user from the organisation.",
           duration: 5000,
         });
 
@@ -53,10 +48,10 @@ export const OrganisationMemberDeleteDialog = ({
       },
       onError: () => {
         toast({
-          title: _(msg`An unknown error occurred`),
-          description: _(
-            msg`We encountered an unknown error while attempting to remove this user. Please try again later.`,
-          ),
+          title: "An unknown error occurred",
+          description: 
+            "We encountered an unknown error while attempting to remove this user. Please try again later.",
+          ,
           variant: 'destructive',
           duration: 10000,
         });
@@ -68,7 +63,7 @@ export const OrganisationMemberDeleteDialog = ({
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="secondary">
-            <Trans>Delete organisation member</Trans>
+            Delete organisation member
           </Button>
         )}
       </DialogTrigger>
@@ -76,14 +71,14 @@ export const OrganisationMemberDeleteDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to remove the following user from{' '}
               <span className="font-semibold">{organisation.name}</span>.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -99,7 +94,7 @@ export const OrganisationMemberDeleteDialog = ({
         <fieldset disabled={isDeletingOrganisationMember}>
           <DialogFooter>
             <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
 
             <Button
@@ -113,7 +108,7 @@ export const OrganisationMemberDeleteDialog = ({
                 })
               }
             >
-              <Trans>Delete</Trans>
+              Delete
             </Button>
           </DialogFooter>
         </fieldset>

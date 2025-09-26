@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { validateFields as validateEmailFields } from '@documenso/lib/advanced-fields-validation/validate-fields';
 import { type TEmailFieldMeta as EmailFieldMeta } from '@documenso/lib/types/field-meta';
 import { Input } from '@documenso/ui/primitives/input';
@@ -25,8 +21,6 @@ export const EmailFieldAdvancedSettings = ({
   handleFieldChange,
   handleErrors,
 }: EmailFieldAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   const handleInput = (field: keyof EmailFieldMeta, value: string | boolean) => {
     const fontSize = field === 'fontSize' ? Number(value) : Number(fieldState.fontSize ?? 14);
 
@@ -43,13 +37,13 @@ export const EmailFieldAdvancedSettings = ({
     <div className="flex flex-col gap-4">
       <div>
         <Label>
-          <Trans>Font Size</Trans>
+          Font Size
         </Label>
         <Input
           id="fontSize"
           type="number"
           className="bg-background mt-2"
-          placeholder={_(msg`Field font size`)}
+          placeholder={"Field font size"}
           value={fieldState.fontSize}
           onChange={(e) => handleInput('fontSize', e.target.value)}
           min={8}
@@ -59,7 +53,7 @@ export const EmailFieldAdvancedSettings = ({
 
       <div>
         <Label>
-          <Trans>Text Align</Trans>
+          Text Align
         </Label>
 
         <Select

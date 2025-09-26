@@ -213,9 +213,9 @@ test('[ORGANISATIONS]: manage groups and members', async ({ page }) => {
   const teamInheritName = teamInherit.name;
 
   const teamA = `team-${nanoid()}`;
-  const teamAName = `TeamA - No inherit`;
-  const teamB = `team-${nanoid()}`;
-  const teamBName = `TeamB - No inherit`;
+  const teamAName = `TeamA - No inheri";
+  const teamB = "team-${nanoid()}`;
+  const teamBName = `TeamB - No inheri";
 
   await createTeam({
     userId: user.id,
@@ -233,7 +233,7 @@ test('[ORGANISATIONS]: manage groups and members', async ({ page }) => {
     inheritMembers: false,
   });
 
-  const memberEmail1 = `member-1-${nanoid()}@test.documenso.com`;
+  const memberEmail1 = "member-1-${nanoid()}@test.documenso.com`;
   const memberEmail2 = `member-2-${nanoid()}@test.documenso.com`;
   const memberEmail3 = `member-3-${nanoid()}@test.documenso.com`;
   const memberEmail4 = `member-4-${nanoid()}@test.documenso.com`;

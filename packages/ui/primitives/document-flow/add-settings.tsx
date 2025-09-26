@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans, useLingui } from '@lingui/react/macro';
 import {
   DocumentStatus,
   DocumentVisibility,
@@ -93,8 +92,6 @@ export const AddSettingsFormPartial = ({
   onSubmit,
   onAutoSave,
 }: AddSettingsFormProps) => {
-  const { t } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const { documentAuthOption } = extractDocumentAuthMethods({
@@ -213,7 +210,7 @@ export const AddSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required>
-                    <Trans>Title</Trans>
+                    Title
                   </FormLabel>
 
                   <FormControl>
@@ -236,18 +233,18 @@ export const AddSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="inline-flex items-center">
-                    <Trans>Language</Trans>
+                    Language
                     <Tooltip>
                       <TooltipTrigger>
                         <InfoIcon className="mx-2 h-4 w-4" />
                       </TooltipTrigger>
 
                       <TooltipContent className="text-foreground max-w-md space-y-2 p-4">
-                        <Trans>
+                        
                           Controls the language for the document, including the language to be used
                           for email notifications, and the final certificate that is generated and
                           attached to the document.
-                        </Trans>
+                        
                       </TooltipContent>
                     </Tooltip>
                   </FormLabel>
@@ -286,7 +283,7 @@ export const AddSettingsFormPartial = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="flex flex-row items-center">
-                    <Trans>Document access</Trans>
+                    Document access
                     <DocumentGlobalAuthAccessTooltip />
                   </FormLabel>
 
@@ -339,7 +336,7 @@ export const AddSettingsFormPartial = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex flex-row items-center">
-                      <Trans>Recipient action authentication</Trans>
+                      Recipient action authentication
                       <DocumentGlobalAuthActionTooltip />
                     </FormLabel>
 
@@ -362,7 +359,7 @@ export const AddSettingsFormPartial = ({
             <Accordion type="multiple" className="mt-6">
               <AccordionItem value="advanced-options" className="border-none">
                 <AccordionTrigger className="text-foreground mb-2 rounded border px-3 py-2 text-left hover:bg-neutral-200/30 hover:no-underline">
-                  <Trans>Advanced Options</Trans>
+                  Advanced Options
                 </AccordionTrigger>
 
                 <AccordionContent className="text-muted-foreground -mx-1 px-1 pt-2 text-sm leading-relaxed">
@@ -373,17 +370,17 @@ export const AddSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="flex flex-row items-center">
-                            <Trans>External ID</Trans>{' '}
+                            External ID{' '}
                             <Tooltip>
                               <TooltipTrigger>
                                 <InfoIcon className="mx-2 h-4 w-4" />
                               </TooltipTrigger>
 
                               <TooltipContent className="text-muted-foreground max-w-xs">
-                                <Trans>
+                                
                                   Add an external ID to the document. This can be used to identify
                                   the document in external systems.
-                                </Trans>
+                                
                               </TooltipContent>
                             </Tooltip>
                           </FormLabel>
@@ -403,7 +400,7 @@ export const AddSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="flex flex-row items-center">
-                            <Trans>Allowed Signature Types</Trans>
+                            Allowed Signature Types
                             <DocumentSignatureSettingsTooltip />
                           </FormLabel>
 
@@ -434,7 +431,7 @@ export const AddSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            <Trans>Date Format</Trans>
+                            Date Format
                           </FormLabel>
 
                           <FormControl>
@@ -472,7 +469,7 @@ export const AddSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            <Trans>Time Zone</Trans>
+                            Time Zone
                           </FormLabel>
 
                           <FormControl>
@@ -500,16 +497,16 @@ export const AddSettingsFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="flex flex-row items-center">
-                            <Trans>Redirect URL</Trans>{' '}
+                            Redirect URL{' '}
                             <Tooltip>
                               <TooltipTrigger>
                                 <InfoIcon className="mx-2 h-4 w-4" />
                               </TooltipTrigger>
 
                               <TooltipContent className="text-muted-foreground max-w-xs">
-                                <Trans>
+                                
                                   Add a URL to redirect the user to once the document is signed
-                                </Trans>
+                                
                               </TooltipContent>
                             </Tooltip>
                           </FormLabel>

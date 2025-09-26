@@ -1,7 +1,3 @@
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 import { AlertTriangle, Plus } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
@@ -39,12 +35,10 @@ export const DocumentDropzone = ({
   onDrop,
   onDropRejected,
   disabled,
-  disabledMessage = msg`You cannot upload documents at this time.`,
+  disabledMessage = "You cannot upload documents at this time.",
   type = 'document',
   ...props
 }: DocumentDropzoneProps) => {
-  const { _ } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -67,8 +61,8 @@ export const DocumentDropzone = ({
   });
 
   const heading = {
-    document: disabled ? msg`You have reached your document limit.` : msg`Add a document`,
-    template: msg`Upload Template Document`,
+    document: disabled ? "You have reached your document limit." : "Add a documen",
+    template: msg"Upload Template Documen",
   };
 
   return (
@@ -153,16 +147,16 @@ export const DocumentDropzone = ({
 
           <input {...getInputProps()} />
 
-          <p className="text-foreground mt-8 font-medium">{_(heading[type])}</p>
+          <p className="text-foreground mt-8 font-medium">{heading[type]}</p>
 
           <p className="text-muted-foreground/80 mt-1 text-center text-sm">
-            {_(disabled ? disabledMessage : msg`Drag & drop your PDF here.`)}
+            {disabled ? disabledMessage : msg"Drag & drop your PDF here."}
           </p>
 
           {disabled && IS_BILLING_ENABLED() && (
             <Button className="hover:bg-warning/80 bg-warning mt-4 w-32" asChild>
               <Link to={`/o/${organisation.url}/settings/billing`}>
-                <Trans>Upgrade</Trans>
+                Upgrade
               </Link>
             </Button>
           )}

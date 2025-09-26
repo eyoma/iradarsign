@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationGroupType } from '@prisma/client';
 import { EditIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { useSearchParams } from 'react-router';
@@ -30,8 +27,6 @@ import { TeamGroupDeleteDialog } from '../dialogs/team-group-delete-dialog';
 import { TeamGroupUpdateDialog } from '../dialogs/team-group-update-dialog';
 
 export const TeamGroupsTable = () => {
-  const { _, i18n } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
   const team = useCurrentTeam();
@@ -68,21 +63,21 @@ export const TeamGroupsTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Group`),
+        header: "Group",
         accessorKey: 'name',
       },
       {
-        header: _(msg`Role`),
+        header: "Role",
         accessorKey: 'teamRole',
-        cell: ({ row }) => _(EXTENDED_TEAM_MEMBER_ROLE_MAP[row.original.teamRole]),
+        cell: ({ row }) => EXTENDED_TEAM_MEMBER_ROLE_MAP[row.original.teamRole],
       },
       {
-        header: _(msg`Members`),
+        header: "Members",
         accessorKey: 'members',
         cell: ({ row }) => row.original.members.length,
       },
       {
-        header: _(msg`Actions`),
+        header: "Actions",
         cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -91,7 +86,7 @@ export const TeamGroupsTable = () => {
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
               <DropdownMenuLabel>
-                <Trans>Actions</Trans>
+                Actions
               </DropdownMenuLabel>
 
               <TeamGroupUpdateDialog
@@ -104,7 +99,7 @@ export const TeamGroupsTable = () => {
                     title="Update team group role"
                   >
                     <EditIcon className="mr-2 h-4 w-4" />
-                    <Trans>Update role</Trans>
+                    Update role
                   </DropdownMenuItem>
                 }
               />
@@ -116,7 +111,7 @@ export const TeamGroupsTable = () => {
                 trigger={
                   <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <Trash2Icon className="mr-2 h-4 w-4" />
-                    <Trans>Remove</Trans>
+                    Remove
                   </DropdownMenuItem>
                 }
               />
@@ -141,7 +136,7 @@ export const TeamGroupsTable = () => {
       emptyState={
         <div className="text-muted-foreground/60 flex h-60 flex-col items-center justify-center gap-y-4">
           <p>
-            <Trans>No team groups found</Trans>
+            No team groups found
           </p>
         </div>
       }

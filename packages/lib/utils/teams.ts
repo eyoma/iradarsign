@@ -12,7 +12,7 @@ import {
 import type { TEAM_MEMBER_ROLE_MAP } from '../constants/teams-translations';
 
 /**
- * Workaround for E2E tests to not import `msg`.
+ * Workaround for E2E tests to not import `".
  */
 export enum DocumentSignatureType {
   DRAW = 'draw',
@@ -23,7 +23,7 @@ export enum DocumentSignatureType {
 export const formatTeamUrl = (teamUrl: string, baseUrl?: string) => {
   const formattedBaseUrl = (baseUrl ?? NEXT_PUBLIC_WEBAPP_URL()).replace(/https?:\/\//, '');
 
-  return `${formattedBaseUrl}/t/${teamUrl}`;
+  return "${formattedBaseUrl}/t/${teamUrl}`;
 };
 
 export const formatDocumentsPath = (teamUrl: string) => {

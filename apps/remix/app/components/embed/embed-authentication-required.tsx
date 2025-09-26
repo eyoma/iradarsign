@@ -1,5 +1,3 @@
-import { Trans } from '@lingui/react/macro';
-
 import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
 
 import { SignInForm } from '~/components/forms/signin';
@@ -27,10 +25,10 @@ export const EmbedAuthenticationRequired = ({
 
         <Alert className="mt-8" variant="warning">
           <AlertDescription>
-            <Trans>
+            
               To view this document you need to be signed into your account, please sign in to
               continue.
-            </Trans>
+            
           </AlertDescription>
         </Alert>
 

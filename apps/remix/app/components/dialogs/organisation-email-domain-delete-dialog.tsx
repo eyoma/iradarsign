@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -42,16 +40,15 @@ export const OrganisationEmailDomainDeleteDialog = ({
 }: OrganisationEmailDomainDeleteDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const organisation = useCurrentOrganisation();
 
-  const deleteMessage = t`delete ${emailDomain}`;
+  const deleteMessage = "delete ${emailDomain}";
 
   const ZDeleteEmailDomainFormSchema = z.object({
     confirmText: z.literal(deleteMessage, {
-      errorMap: () => ({ message: t`You must type '${deleteMessage}' to confirm` }),
+      errorMap: () => ({ message: "You must type '${deleteMessage}' to confirm" }),
     }),
   });
 
@@ -66,8 +63,8 @@ export const OrganisationEmailDomainDeleteDialog = ({
     trpc.enterprise.organisation.emailDomain.delete.useMutation({
       onSuccess: () => {
         toast({
-          title: t`Success`,
-          description: t`You have successfully removed this email domain from the organisation.`,
+          title: "Success",
+          description: "You have successfully removed this email domain from the organisation.",
           duration: 5000,
         });
 
@@ -75,8 +72,8 @@ export const OrganisationEmailDomainDeleteDialog = ({
       },
       onError: () => {
         toast({
-          title: t`An unknown error occurred`,
-          description: t`We encountered an unknown error while attempting to remove this email domain. Please try again later.`,
+          title: "An unknown error occurred",
+          description: "We encountered an unknown error while attempting to remove this email domain. Please try again later.",
           variant: 'destructive',
           duration: 10000,
         });
@@ -94,7 +91,7 @@ export const OrganisationEmailDomainDeleteDialog = ({
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="secondary">
-            <Trans>Delete email domain</Trans>
+            Delete email domain
           </Button>
         )}
       </DialogTrigger>
@@ -102,16 +99,16 @@ export const OrganisationEmailDomainDeleteDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to remove the email domain{' '}
               <span className="font-semibold">{emailDomain}</span> from{' '}
               <span className="font-semibold">{organisation.name}</span>. All emails associated with
               this domain will be deleted.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -124,12 +121,12 @@ export const OrganisationEmailDomainDeleteDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>
+                      
                         Confirm by typing{' '}
                         <span className="font-sm text-destructive font-semibold">
                           {deleteMessage}
                         </span>
-                      </Trans>
+                      
                     </FormLabel>
                     <FormControl>
                       <Input placeholder={deleteMessage} {...field} />
@@ -141,7 +138,7 @@ export const OrganisationEmailDomainDeleteDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
                 <Button
                   variant="destructive"
@@ -149,7 +146,7 @@ export const OrganisationEmailDomainDeleteDialog = ({
                   disabled={!form.formState.isValid}
                   loading={form.formState.isSubmitting}
                 >
-                  <Trans>Delete</Trans>
+                  Delete
                 </Button>
               </DialogFooter>
             </fieldset>

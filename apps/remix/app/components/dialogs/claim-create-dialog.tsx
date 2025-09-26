@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans, useLingui } from '@lingui/react/macro';
 import type { z } from 'zod';
 
 import { generateDefaultSubscriptionClaim } from '@documenso/lib/utils/organisations-claims';
@@ -23,7 +22,6 @@ import { SubscriptionClaimForm } from '../forms/subscription-claim-form';
 export type CreateClaimFormValues = z.infer<typeof ZCreateSubscriptionClaimRequestSchema>;
 
 export const ClaimCreateDialog = () => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -31,14 +29,14 @@ export const ClaimCreateDialog = () => {
   const { mutateAsync: createClaim, isPending } = trpc.admin.claims.create.useMutation({
     onSuccess: () => {
       toast({
-        title: t`Subscription claim created successfully.`,
+        title: "Subscription claim created successfully.",
       });
 
       setOpen(false);
     },
     onError: () => {
       toast({
-        title: t`Failed to create subscription claim.`,
+        title: "Failed to create subscription claim.",
         variant: 'destructive',
       });
     },
@@ -48,17 +46,17 @@ export const ClaimCreateDialog = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
         <Button className="flex-shrink-0" variant="secondary">
-          <Trans>Create claim</Trans>
+          Create claim
         </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Create Subscription Claim</Trans>
+            Create Subscription Claim
           </DialogTitle>
           <DialogDescription>
-            <Trans>Fill in the details to create a new subscription claim.</Trans>
+            Fill in the details to create a new subscription claim.
           </DialogDescription>
         </DialogHeader>
 
@@ -75,11 +73,11 @@ export const ClaimCreateDialog = () => {
                 onClick={() => setOpen(false)}
                 disabled={isPending}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button type="submit" loading={isPending}>
-                <Trans>Create Claim</Trans>
+                Create Claim
               </Button>
             </DialogFooter>
           }

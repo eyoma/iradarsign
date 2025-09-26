@@ -1,4 +1,3 @@
-import { msg } from '@lingui/core/macro';
 import { z } from 'zod';
 
 import { DocumentMetaSchema } from '@documenso/prisma/generated/zod/modelSchema/DocumentMetaSchema';
@@ -46,7 +45,7 @@ export const ZDocumentSignatureSettingsSchema = z
       );
     },
     {
-      message: msg`At least one signature type must be enabled`.id,
+      message: "At least one signature type must be enabled".id,
     },
   );
 

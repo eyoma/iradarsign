@@ -1,7 +1,5 @@
 import { useMemo, useTransition } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { Loader } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link } from 'react-router';
@@ -40,8 +38,6 @@ export const DocumentsTable = ({
   isLoadingError,
   onMoveDocument,
 }: DocumentsTableProps) => {
-  const { _, i18n } = useLingui();
-
   const team = useCurrentTeam();
   const [isPending, startTransition] = useTransition();
 
@@ -50,22 +46,22 @@ export const DocumentsTable = ({
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Created`),
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) =>
           i18n.date(row.original.createdAt, { ...DateTime.DATETIME_SHORT, hourCycle: 'h12' }),
       },
       {
-        header: _(msg`Title`),
+        header: "Title",
         cell: ({ row }) => <DataTableTitle row={row.original} teamUrl={team?.url} />,
       },
       {
         id: 'sender',
-        header: _(msg`Sender`),
+        header: "Sender",
         cell: ({ row }) => row.original.user.name ?? row.original.user.email,
       },
       {
-        header: _(msg`Recipient`),
+        header: "Recipien",
         accessorKey: 'recipient',
         cell: ({ row }) => (
           <StackAvatarsWithTooltip
@@ -75,13 +71,13 @@ export const DocumentsTable = ({
         ),
       },
       {
-        header: _(msg`Status`),
+        header: msg"Status",
         accessorKey: 'status',
         cell: ({ row }) => <DocumentStatus status={row.original.status} />,
         size: 140,
       },
       {
-        header: _(msg`Actions`),
+        header: "Actions",
         cell: ({ row }) =>
           (!row.original.deletedAt || isDocumentCompleted(row.original.status)) && (
             <div className="flex items-center gap-x-4">

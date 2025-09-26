@@ -1,8 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 
@@ -20,8 +17,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitive
 import { DocumentStatus } from '~/components/general/document/document-status';
 
 export default function AdminDocumentsPage() {
-  const { _, i18n } = useLingui();
-
   const [searchParams] = useSearchParams();
 
   const updateSearchParams = useUpdateSearchParams();
@@ -54,12 +49,12 @@ export default function AdminDocumentsPage() {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Created`),
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt),
       },
       {
-        header: _(msg`Title`),
+        header: "Title",
         accessorKey: 'title',
         cell: ({ row }) => {
           return (
@@ -73,12 +68,12 @@ export default function AdminDocumentsPage() {
         },
       },
       {
-        header: _(msg`Status`),
+        header: "Status",
         accessorKey: 'status',
         cell: ({ row }) => <DocumentStatus status={row.original.status} />,
       },
       {
-        header: _(msg`Owner`),
+        header: "Owner",
         accessorKey: 'owner',
         cell: ({ row }) => {
           const avatarFallbackText = row.original.user.name
@@ -131,14 +126,14 @@ export default function AdminDocumentsPage() {
   return (
     <div>
       <h2 className="text-4xl font-semibold">
-        <Trans>Manage documents</Trans>
+        Manage documents
       </h2>
 
       <div className="mt-8">
         <div>
           <Input
             type="search"
-            placeholder={_(msg`Search by document title`)}
+            placeholder={"Search by document title"}
             value={term}
             onChange={(e) => setTerm(e.target.value)}
           />

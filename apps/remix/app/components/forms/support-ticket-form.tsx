@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans, useLingui } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -37,7 +36,6 @@ export const SupportTicketForm = ({
   onSuccess,
   onClose,
 }: SupportTicketFormProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const { mutateAsync: submitSupportTicket, isPending } =
@@ -65,8 +63,8 @@ export const SupportTicketForm = ({
       });
 
       toast({
-        title: t`Support ticket created`,
-        description: t`Your support request has been submitted. We'll get back to you soon!`,
+        title: "Support ticket created",
+        description: "Your support request has been submitted. We'll get back to you soon!",
       });
 
       if (onSuccess) {
@@ -76,8 +74,8 @@ export const SupportTicketForm = ({
       form.reset();
     } catch (err) {
       toast({
-        title: t`Failed to create support ticket`,
-        description: t`An error occurred. Please try again later.`,
+        title: "Failed to create support ticket",
+        description: "An error occurred. Please try again later.",
         variant: 'destructive',
       });
     }
@@ -94,7 +92,7 @@ export const SupportTicketForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required>
-                    <Trans>Subject</Trans>
+                    Subject
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -110,7 +108,7 @@ export const SupportTicketForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required>
-                    <Trans>Message</Trans>
+                    Message
                   </FormLabel>
                   <FormControl>
                     <Textarea rows={5} {...field} />
@@ -122,11 +120,11 @@ export const SupportTicketForm = ({
 
             <div className="mt-2 flex flex-row gap-2">
               <Button type="submit" size="sm" loading={isLoading}>
-                <Trans>Submit</Trans>
+                Submit
               </Button>
               {onClose && (
                 <Button variant="outline" size="sm" type="button" onClick={onClose}>
-                  <Trans>Close</Trans>
+                  Close
                 </Button>
               )}
             </div>

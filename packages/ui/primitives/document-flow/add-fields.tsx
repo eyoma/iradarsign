@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Field, Recipient } from '@prisma/client';
 import { FieldType, Prisma, RecipientRole, SendStatus } from '@prisma/client';
 import {
@@ -104,8 +101,6 @@ export const AddFieldsFormPartial = ({
   teamId,
 }: AddFieldsFormProps) => {
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const [isMissingSignatureDialogVisible, setIsMissingSignatureDialogVisible] = useState(false);
 
   const { isWithinPageBounds, getFieldPosition, getPage } = useDocumentElement();
@@ -620,11 +615,11 @@ export const AddFieldsFormPartial = ({
     <>
       {showAdvancedSettings && currentField ? (
         <FieldAdvancedSettings
-          title={msg`Advanced settings`}
-          description={msg`Configure the ${parseMessageDescriptor(
+          title={"Advanced settings"}
+          description={"Configure the ${parseMessageDescriptor(
             _,
             FRIENDLY_FIELD_TYPE[currentField.type],
-          )} field`}
+          )} field"}
           field={currentField}
           fields={localFields}
           onAdvancedSettings={handleAdvancedSettings}
@@ -755,7 +750,7 @@ export const AddFieldsFormPartial = ({
                               'text-muted-foreground group-data-[selected]:text-foreground font-signature flex items-center justify-center gap-x-1.5 text-lg font-normal',
                             )}
                           >
-                            <Trans>Signature</Trans>
+                            Signature
                           </p>
                         </CardContent>
                       </Card>
@@ -805,7 +800,7 @@ export const AddFieldsFormPartial = ({
                             )}
                           >
                             <Mail className="h-4 w-4" />
-                            <Trans>Email</Trans>
+                            Email
                           </p>
                         </CardContent>
                       </Card>
@@ -830,7 +825,7 @@ export const AddFieldsFormPartial = ({
                             )}
                           >
                             <User className="h-4 w-4" />
-                            <Trans>Name</Trans>
+                            Name
                           </p>
                         </CardContent>
                       </Card>
@@ -855,7 +850,7 @@ export const AddFieldsFormPartial = ({
                             )}
                           >
                             <CalendarDays className="h-4 w-4" />
-                            <Trans>Date</Trans>
+                            Date
                           </p>
                         </CardContent>
                       </Card>
@@ -880,7 +875,7 @@ export const AddFieldsFormPartial = ({
                             )}
                           >
                             <Type className="h-4 w-4" />
-                            <Trans>Text</Trans>
+                            Text
                           </p>
                         </CardContent>
                       </Card>
@@ -905,7 +900,7 @@ export const AddFieldsFormPartial = ({
                             )}
                           >
                             <Hash className="h-4 w-4" />
-                            <Trans>Number</Trans>
+                            Number
                           </p>
                         </CardContent>
                       </Card>
@@ -981,7 +976,7 @@ export const AddFieldsFormPartial = ({
                             )}
                           >
                             <ChevronDown className="h-4 w-4" />
-                            <Trans>Dropdown</Trans>
+                            Dropdown
                           </p>
                         </CardContent>
                       </Card>
@@ -996,7 +991,7 @@ export const AddFieldsFormPartial = ({
             <div className="mt-4">
               <ul>
                 <li className="text-sm text-red-500">
-                  <Trans>
+                  
                     To proceed further, please set at least one value for the{' '}
                     {emptyCheckboxFields.length > 0
                       ? 'Checkbox'
@@ -1004,7 +999,7 @@ export const AddFieldsFormPartial = ({
                         ? 'Radio'
                         : 'Select'}{' '}
                     field.
-                  </Trans>
+                  
                 </li>
               </ul>
             </div>
@@ -1013,10 +1008,10 @@ export const AddFieldsFormPartial = ({
           {selectedSigner && !canRecipientFieldsBeModified(selectedSigner, fields) && (
             <Alert variant="warning">
               <AlertDescription>
-                <Trans>
+                
                   This recipient can no longer be modified as they have signed a field, or completed
                   the document.
-                </Trans>
+                
               </AlertDescription>
             </Alert>
           )}
@@ -1033,7 +1028,7 @@ export const AddFieldsFormPartial = ({
                 remove();
                 documentFlow.onBackStep?.();
               }}
-              goBackLabel={canRenderBackButtonAsRemove ? msg`Remove` : undefined}
+              goBackLabel={canRenderBackButtonAsRemove ? "Remove" : undefined}
               onGoNextClick={handleGoNextClick}
             />
           </DocumentFlowFormContainerFooter>
@@ -1046,7 +1041,7 @@ export const AddFieldsFormPartial = ({
       )}
       {validateUninsertedFields && fieldsWithError[0] && (
         <FieldToolTip key={fieldsWithError[0].id} field={fieldsWithError[0]} color="warning">
-          <Trans>Empty field</Trans>
+          Empty field
         </FieldToolTip>
       )}
     </>

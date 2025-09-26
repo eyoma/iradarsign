@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import type { z } from 'zod';
@@ -47,7 +44,6 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
   const { banner } = loaderData;
 
   const { toast } = useToast();
-  const { _ } = useLingui();
   const { revalidate } = useRevalidator();
 
   const form = useForm<TBannerFormSchema>({
@@ -77,19 +73,19 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
       });
 
       toast({
-        title: _(msg`Banner Updated`),
-        description: _(msg`Your banner has been updated successfully.`),
+        title: "Banner Updated",
+        description: "Your banner has been updated successfully.",
         duration: 5000,
       });
 
       await revalidate();
     } catch (err) {
       toast({
-        title: _(msg`An unknown error occurred`),
+        title: "An unknown error occurred",
         variant: 'destructive',
-        description: _(
-          msg`We encountered an unknown error while attempting to update the banner. Please try again later.`,
-        ),
+        description: 
+          "We encountered an unknown error while attempting to update the banner. Please try again later.",
+        ,
       });
     }
   };
@@ -97,20 +93,20 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
   return (
     <div>
       <SettingsHeader
-        title={_(msg`Site Settings`)}
-        subtitle={_(msg`Manage your site settings here`)}
+        title={"Site Settings"}
+        subtitle={"Manage your site settings here"}
       />
 
       <div className="mt-8">
         <div>
           <h2 className="font-semibold">
-            <Trans>Site Banner</Trans>
+            Site Banner
           </h2>
           <p className="text-muted-foreground mt-2 text-sm">
-            <Trans>
+            
               The site banner is a message that is shown at the top of the site. It can be used to
               display important information to your users.
-            </Trans>
+            
           </p>
 
           <Form {...form}>
@@ -125,7 +121,7 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormLabel>
-                        <Trans>Enabled</Trans>
+                        Enabled
                       </FormLabel>
 
                       <FormControl>
@@ -148,7 +144,7 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          <Trans>Background Color</Trans>
+                          Background Color
                         </FormLabel>
 
                         <FormControl>
@@ -168,7 +164,7 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          <Trans>Text Color</Trans>
+                          Text Color
                         </FormLabel>
 
                         <FormControl>
@@ -191,7 +187,7 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        <Trans>Content</Trans>
+                        Content
                       </FormLabel>
 
                       <FormControl>
@@ -199,7 +195,7 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
                       </FormControl>
 
                       <FormDescription>
-                        <Trans>The content to show in the banner, HTML is allowed</Trans>
+                        The content to show in the banner, HTML is allowed
                       </FormDescription>
 
                       <FormMessage />
@@ -213,7 +209,7 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
                 loading={isUpdateSiteSettingLoading}
                 className="mt-4 justify-end self-end"
               >
-                <Trans>Update Banner</Trans>
+                Update Banner
               </Button>
             </form>
           </Form>

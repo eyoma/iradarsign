@@ -1,8 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useNavigate, useParams } from 'react-router';
 import { match } from 'ts-pattern';
 
@@ -33,7 +30,6 @@ export type DocumentUploadDropzoneProps = {
 };
 
 export const DocumentUploadDropzone = ({ className }: DocumentUploadDropzoneProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { user } = useSession();
   const { folderId } = useParams();
@@ -56,15 +52,15 @@ export const DocumentUploadDropzone = ({ className }: DocumentUploadDropzoneProp
 
   const disabledMessage = useMemo(() => {
     if (organisation.subscription && remaining.documents === 0) {
-      return msg`Document upload disabled due to unpaid invoices`;
+      return "Document upload disabled due to unpaid invoices";
     }
 
     if (remaining.documents === 0) {
-      return msg`You have reached your document limit.`;
+      return "You have reached your document limit.";
     }
 
     if (!user.emailVerified) {
-      return msg`Verify your email to upload documents.`;
+      return "Verify your email to upload documents.";
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remaining.documents, user.emailVerified, team]);
@@ -84,11 +80,11 @@ export const DocumentUploadDropzone = ({ className }: DocumentUploadDropzoneProp
 
       void refreshLimits();
 
-      await navigate(`${formatDocumentsPath(team.url)}/${id}/edit`);
+      await navigate(`${formatDocumentsPath(team.url)}/${id}/edi");
 
       toast({
-        title: _(msg`Document uploaded`),
-        description: _(msg`Your document has been uploaded successfully.`),
+        title: msg"Document uploaded`,
+        description: "Your document has been uploaded successfully.",
         duration: 5000,
       });
 
@@ -103,16 +99,16 @@ export const DocumentUploadDropzone = ({ className }: DocumentUploadDropzoneProp
       console.error(err);
 
       const errorMessage = match(error.code)
-        .with('INVALID_DOCUMENT_FILE', () => msg`You cannot upload encrypted PDFs`)
+        .with('INVALID_DOCUMENT_FILE', () => "You cannot upload encrypted PDFs")
         .with(
           AppErrorCode.LIMIT_EXCEEDED,
-          () => msg`You have reached your document limit for this month. Please upgrade your plan.`,
+          () => "You have reached your document limit for this month. Please upgrade your plan.",
         )
-        .otherwise(() => msg`An error occurred while uploading your document.`);
+        .otherwise(() => "An error occurred while uploading your document.");
 
       toast({
-        title: _(msg`Error`),
-        description: _(errorMessage),
+        title: "Error",
+        description: errorMessage,
         variant: 'destructive',
         duration: 7500,
       });
@@ -123,8 +119,8 @@ export const DocumentUploadDropzone = ({ className }: DocumentUploadDropzoneProp
 
   const onFileDropRejected = () => {
     toast({
-      title: _(msg`Your document failed to upload.`),
-      description: _(msg`File cannot be larger than ${APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB`),
+      title: "Your document failed to upload.",
+      description: "File cannot be larger than ${APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB",
       duration: 5000,
       variant: 'destructive',
     });
@@ -151,9 +147,9 @@ export const DocumentUploadDropzone = ({ className }: DocumentUploadDropzoneProp
             Number.isFinite(remaining.documents) && (
               <TooltipContent>
                 <p className="text-sm">
-                  <Trans>
+                  
                     {remaining.documents} of {quota.documents} documents remaining this month.
-                  </Trans>
+                  
                 </p>
               </TooltipContent>
             )}

@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { useLingui } from '@lingui/react';
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -137,8 +136,6 @@ const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
-  const { i18n } = useLingui();
-
   const { error, formMessageId } = useFormField();
 
   let body = error ? String(error?.message) : children;

@@ -1,6 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { Trans, useLingui } from '@lingui/react/macro';
 import { OrganisationMemberRole } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -61,7 +59,7 @@ const ZProviderFormSchema = ZUpdateOrganisationAuthenticationPortalRequestSchema
         return domains.every((domain) => domainRegex.test(domain));
       },
       {
-        message: msg`Invalid domains`.id,
+        message: "Invalid domains".id,
       },
     ),
   });
@@ -73,7 +71,6 @@ export function meta() {
 }
 
 export default function OrganisationSettingSSOLoginPage() {
-  const { t } = useLingui();
   const organisation = useCurrentOrganisation();
 
   const { data: authenticationPortal, isLoading: isLoadingAuthenticationPortal } =
@@ -88,8 +85,8 @@ export default function OrganisationSettingSSOLoginPage() {
   return (
     <div className="max-w-2xl">
       <SettingsHeader
-        title={t`Organisation SSO Portal`}
-        subtitle={t`Manage a custom SSO login portal for your organisation.`}
+        title={"Organisation SSO Portal"}
+        subtitle={"Manage a custom SSO login portal for your organisation."}
       />
 
       <SSOProviderForm authenticationPortal={authenticationPortal} />
@@ -102,7 +99,6 @@ type SSOProviderFormProps = {
 };
 
 const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const organisation = useCurrentOrganisation();
@@ -128,7 +124,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
 
     if (enabled && !clientId) {
       form.setError('clientId', {
-        message: t`Client ID is required`,
+        message: "Client ID is required",
       });
 
       return;
@@ -136,7 +132,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
 
     if (enabled && clientSecret === '') {
       form.setError('clientSecret', {
-        message: t`Client secret is required`,
+        message: "Client secret is required",
       });
 
       return;
@@ -144,7 +140,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
 
     if (enabled && !wellKnownUrl) {
       form.setError('wellKnownUrl', {
-        message: t`Well-known URL is required`,
+        message: "Well-known URL is required",
       });
 
       return;
@@ -165,16 +161,16 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
       });
 
       toast({
-        title: t`Success`,
-        description: t`Provider has been updated successfully`,
+        title: "Success",
+        description: "Provider has been updated successfully",
         duration: 5000,
       });
     } catch (err) {
       console.error(err);
 
       toast({
-        title: t`An error occurred`,
-        description: t`We couldn't update the provider. Please try again.`,
+        title: "An error occurred",
+        description: "We couldn't update the provider. Please try again.",
         variant: 'destructive',
       });
     }
@@ -188,7 +184,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
         <fieldset disabled={form.formState.isSubmitting} className="space-y-6">
           <div className="space-y-2">
             <Label>
-              <Trans>Organisation authentication portal URL</Trans>
+              Organisation authentication portal URL
             </Label>
 
             <div className="relative">
@@ -200,19 +196,19 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
               <div className="absolute bottom-0 right-2 top-0 flex items-center justify-center">
                 <CopyTextButton
                   value={formatOrganisationLoginUrl(organisation.url)}
-                  onCopySuccess={() => toast({ title: t`Copied to clipboard` })}
+                  onCopySuccess={() => toast({ title: "Copied to clipboard" })}
                 />
               </div>
             </div>
 
             <p className="text-muted-foreground text-xs">
-              <Trans>This is the URL which users will use to sign in to your organisation.</Trans>
+              This is the URL which users will use to sign in to your organisation.
             </p>
           </div>
 
           <div className="space-y-2">
             <Label>
-              <Trans>Redirect URI</Trans>
+              Redirect URI
             </Label>
 
             <div className="relative">
@@ -224,25 +220,25 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
               <div className="absolute bottom-0 right-2 top-0 flex items-center justify-center">
                 <CopyTextButton
                   value={formatOrganisationCallbackUrl(organisation.url)}
-                  onCopySuccess={() => toast({ title: t`Copied to clipboard` })}
+                  onCopySuccess={() => toast({ title: "Copied to clipboard" })}
                 />
               </div>
             </div>
 
             <p className="text-muted-foreground text-xs">
-              <Trans>Add this URL to your provider's allowed redirect URIs</Trans>
+              Add this URL to your provider's allowed redirect URIs
             </p>
           </div>
 
           <div className="space-y-2">
             <Label>
-              <Trans>Required scopes</Trans>
+              Required scopes
             </Label>
 
             <Input className="pr-12" disabled value={`openid profile email`} />
 
             <p className="text-muted-foreground text-xs">
-              <Trans>This is the required scopes you must set in your provider's settings</Trans>
+              This is the required scopes you must set in your provider's settings
             </p>
           </div>
 
@@ -252,7 +248,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel required={isSsoEnabled}>
-                  <Trans>Issuer URL</Trans>
+                  Issuer URL
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -263,7 +259,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
 
                 {!form.formState.errors.wellKnownUrl && (
                   <p className="text-muted-foreground text-xs">
-                    <Trans>The OpenID discovery endpoint URL for your provider</Trans>
+                    The OpenID discovery endpoint URL for your provider
                   </p>
                 )}
                 <FormMessage />
@@ -278,7 +274,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required={isSsoEnabled}>
-                    <Trans>Client ID</Trans>
+                    Client ID
                   </FormLabel>
                   <FormControl>
                     <Input id="client-id" {...field} />
@@ -294,7 +290,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required={isSsoEnabled}>
-                    <Trans>Client Secret</Trans>
+                    Client Secret
                   </FormLabel>
                   <FormControl>
                     <Input
@@ -316,12 +312,12 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Default Organisation Role for New Users</Trans>
+                  Default Organisation Role for New Users
                 </FormLabel>
                 <FormControl>
                   <Select value={field.value} onValueChange={field.onChange}>
                     <SelectTrigger>
-                      <SelectValue placeholder={t`Select default role`} />
+                      <SelectValue placeholder={"Select default role"} />
                     </SelectTrigger>
                     <SelectContent>
                       {ORGANISATION_MEMBER_ROLE_HIERARCHY[OrganisationMemberRole.MANAGER].map(
@@ -345,21 +341,21 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Allowed Email Domains</Trans>
+                  Allowed Email Domains
                 </FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
-                    placeholder={t`your-domain.com another-domain.com`}
+                    placeholder={"your-domain.com another-domain.com"}
                     className="min-h-[80px]"
                   />
                 </FormControl>
 
                 {!form.formState.errors.allowedDomains && (
                   <p className="text-muted-foreground text-xs">
-                    <Trans>
+                    
                       Space-separated list of domains. Leave empty to allow all domains.
-                    </Trans>
+                    
                   </p>
                 )}
 
@@ -376,10 +372,10 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
               <FormItem className="flex items-center justify-between rounded-lg border px-4 py-3">
                 <div className="space-y-0.5">
                   <FormLabel>
-                    <Trans>Auto-provision Users</Trans>
+                    Auto-provision Users
                   </FormLabel>
                   <p className="text-muted-foreground text-sm">
-                    <Trans>Automatically create accounts for new users on first login</Trans>
+                    Automatically create accounts for new users on first login
                   </p>
                 </div>
                 <FormControl>
@@ -397,10 +393,10 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
               <FormItem className="flex items-center justify-between rounded-lg border px-4 py-3">
                 <div className="space-y-0.5">
                   <FormLabel>
-                    <Trans>Enable SSO portal</Trans>
+                    Enable SSO portal
                   </FormLabel>
                   <p className="text-muted-foreground text-sm">
-                    <Trans>Whether to enable the SSO portal for your organisation</Trans>
+                    Whether to enable the SSO portal for your organisation
                   </p>
                 </div>
                 <FormControl>
@@ -413,16 +409,16 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
 
           <Alert variant="warning">
             <AlertDescription>
-              <Trans>
+              
                 Please note that anyone who signs in through your portal will be added to your
                 organisation as a member.
-              </Trans>
+              
             </AlertDescription>
           </Alert>
 
           <div className="flex justify-end gap-2">
             <Button loading={form.formState.isSubmitting} type="submit">
-              <Trans>Update</Trans>
+              Update
             </Button>
           </div>
         </fieldset>

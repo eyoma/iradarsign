@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { DateTime } from 'luxon';
 import type { DateTimeFormatOptions } from 'luxon';
 import { useSearchParams } from 'react-router';
@@ -27,8 +25,6 @@ const dateFormat: DateTimeFormatOptions = {
 };
 
 export const DocumentLogsTable = ({ documentId }: DocumentLogsTableProps) => {
-  const { _, i18n } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
 
@@ -64,12 +60,12 @@ export const DocumentLogsTable = ({ documentId }: DocumentLogsTableProps) => {
 
     return [
       {
-        header: _(msg`Time`),
+        header: "Time",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt, dateFormat),
       },
       {
-        header: _(msg`User`),
+        header: "User",
         accessorKey: 'name',
         cell: ({ row }) =>
           row.original.name || row.original.email ? (
@@ -91,7 +87,7 @@ export const DocumentLogsTable = ({ documentId }: DocumentLogsTableProps) => {
           ),
       },
       {
-        header: _(msg`Action`),
+        header: "Action",
         accessorKey: 'type',
         cell: ({ row }) => <span>{formatDocumentAuditLogAction(_, row.original).description}</span>,
       },

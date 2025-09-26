@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DownloadIcon } from 'lucide-react';
 
 import { trpc } from '@documenso/trpc/react';
@@ -18,8 +15,6 @@ export const DocumentAuditLogDownloadButton = ({
   documentId,
 }: DocumentAuditLogDownloadButtonProps) => {
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const { mutateAsync: downloadAuditLogs, isPending } =
     trpc.document.auditLog.download.useMutation();
 
@@ -59,10 +54,10 @@ export const DocumentAuditLogDownloadButton = ({
       console.error(error);
 
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(
-          msg`Sorry, we were unable to download the audit logs. Please try again later.`,
-        ),
+        title: "Something went wrong",
+        description: 
+          "Sorry, we were unable to download the audit logs. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -75,7 +70,7 @@ export const DocumentAuditLogDownloadButton = ({
       onClick={() => void onDownloadAuditLogsClick()}
     >
       {!isPending && <DownloadIcon className="mr-1.5 h-4 w-4" />}
-      <Trans>Download Audit Logs</Trans>
+      Download Audit Logs
     </Button>
   );
 };

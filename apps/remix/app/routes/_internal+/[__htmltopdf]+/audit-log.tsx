@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { DateTime } from 'luxon';
 import { redirect } from 'react-router';
 
@@ -9,7 +7,6 @@ import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-
 import { getEntireDocument } from '@documenso/lib/server-only/admin/get-entire-document';
 import { decryptSecondaryData } from '@documenso/lib/server-only/crypto/decrypt';
 import { findDocumentAuditLogs } from '@documenso/lib/server-only/document/find-document-audit-logs';
-import { getTranslations } from '@documenso/lib/utils/i18n';
 import { Card, CardContent } from '@documenso/ui/primitives/card';
 
 import appStylesheet from '~/app.css?url';
@@ -56,14 +53,11 @@ export async function loader({ request }: Route.LoaderArgs) {
     perPage: 100_000,
   });
 
-  const messages = await getTranslations(documentLanguage);
-
   return {
     auditLogs,
     document,
     documentLanguage,
-    messages,
-  };
+    };
 }
 
 /**
@@ -75,44 +69,39 @@ export async function loader({ request }: Route.LoaderArgs) {
  * Update: Maybe <Trans> tags work now after RR7 migration.
  */
 export default function AuditLog({ loaderData }: Route.ComponentProps) {
-  const { auditLogs, document, documentLanguage, messages } = loaderData;
-
-  const { i18n, _ } = useLingui();
-
-  i18n.loadAndActivate({ locale: documentLanguage, messages });
-
-  return (
+  const { auditLogs, document, documentLanguage } = loaderData;
+return (
     <div className="print-provider pointer-events-none mx-auto max-w-screen-md">
       <div className="mb-6 border-b pb-4">
-        <h1 className="text-xl font-semibold">{_(msg`Audit Log`)}</h1>
+        <h1 className="text-xl font-semibold">{"Audit Log"}</h1>
       </div>
 
       <Card>
         <CardContent className="grid grid-cols-2 gap-4 p-6 text-sm print:text-xs">
           <p>
-            <span className="font-medium">{_(msg`Document ID`)}</span>
+            <span className="font-medium">{"Document ID"}</span>
 
             <span className="mt-1 block break-words">{document.id}</span>
           </p>
 
           <p>
-            <span className="font-medium">{_(msg`Enclosed Document`)}</span>
+            <span className="font-medium">{"Enclosed Documen"}</span>
 
             <span className="mt-1 block break-words">{document.title}</span>
           </p>
 
           <p>
-            <span className="font-medium">{_(msg`Status`)}</span>
+            <span className="font-medium">{msg"Status"}</span>
 
             <span className="mt-1 block">
-              {_(
-                document.deletedAt ? msg`Deleted` : DOCUMENT_STATUS[document.status].description,
-              ).toUpperCase()}
+              {
+                document.deletedAt ? "Deleted" : DOCUMENT_STATUS[document.status].description,
+              .toUpperCase()}
             </span>
           </p>
 
           <p>
-            <span className="font-medium">{_(msg`Owner`)}</span>
+            <span className="font-medium">{"Owner"}</span>
 
             <span className="mt-1 block break-words">
               {document.user.name} ({document.user.email})
@@ -120,7 +109,7 @@ export default function AuditLog({ loaderData }: Route.ComponentProps) {
           </p>
 
           <p>
-            <span className="font-medium">{_(msg`Created At`)}</span>
+            <span className="font-medium">{"Created A"}</span>
 
             <span className="mt-1 block">
               {DateTime.fromJSDate(document.createdAt)
@@ -130,7 +119,7 @@ export default function AuditLog({ loaderData }: Route.ComponentProps) {
           </p>
 
           <p>
-            <span className="font-medium">{_(msg`Last Updated`)}</span>
+            <span className="font-medium">{msg"Last Updated"}</span>
 
             <span className="mt-1 block">
               {DateTime.fromJSDate(document.updatedAt)
@@ -140,7 +129,7 @@ export default function AuditLog({ loaderData }: Route.ComponentProps) {
           </p>
 
           <p>
-            <span className="font-medium">{_(msg`Time Zone`)}</span>
+            <span className="font-medium">{"Time Zone"}</span>
 
             <span className="mt-1 block break-words">
               {document.documentMeta?.timezone ?? 'N/A'}
@@ -148,13 +137,13 @@ export default function AuditLog({ loaderData }: Route.ComponentProps) {
           </p>
 
           <div>
-            <p className="font-medium">{_(msg`Recipients`)}</p>
+            <p className="font-medium">{"Recipients"}</p>
 
             <ul className="mt-1 list-inside list-disc">
               {document.recipients.map((recipient) => (
                 <li key={recipient.id}>
                   <span className="text-muted-foreground">
-                    [{_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}]
+                    [{RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}]
                   </span>{' '}
                   {recipient.name} ({recipient.email})
                 </li>

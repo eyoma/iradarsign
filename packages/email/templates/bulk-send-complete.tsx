@@ -1,6 +1,3 @@
-import { Trans, msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Preview, Section, Text } from '../components';
 import { TemplateFooter } from '../template-components/template-footer';
 
@@ -22,44 +19,42 @@ export const BulkSendCompleteEmail = ({
   failedCount,
   errors,
 }: BulkSendCompleteEmailProps) => {
-  const { _ } = useLingui();
-
   return (
     <Html>
       <Head />
-      <Preview>{_(msg`Bulk send operation complete for template "${templateName}"`)}</Preview>
+      <Preview>{"Bulk send operation complete for template "${templateName}""}</Preview>
       <Body className="mx-auto my-auto bg-white font-sans">
         <Section>
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
               <Text className="text-sm">
-                <Trans>Hi {userName},</Trans>
+                Hi {userName},
               </Text>
 
               <Text className="text-sm">
-                <Trans>Your bulk send operation for template "{templateName}" has completed.</Trans>
+                Your bulk send operation for template "{templateName}" has completed.
               </Text>
 
               <Text className="text-lg font-semibold">
-                <Trans>Summary:</Trans>
+                Summary:
               </Text>
 
               <ul className="my-2 ml-4 list-inside list-disc">
                 <li>
-                  <Trans>Total rows processed: {totalProcessed}</Trans>
+                  Total rows processed: {totalProcessed}
                 </li>
                 <li className="mt-1">
-                  <Trans>Successfully created: {successCount}</Trans>
+                  Successfully created: {successCount}
                 </li>
                 <li className="mt-1">
-                  <Trans>Failed: {failedCount}</Trans>
+                  Failed: {failedCount}
                 </li>
               </ul>
 
               {failedCount > 0 && (
                 <Section className="mt-4">
                   <Text className="text-lg font-semibold">
-                    <Trans>The following errors occurred:</Trans>
+                    The following errors occurred:
                   </Text>
 
                   <ul className="my-2 ml-4 list-inside list-disc">
@@ -73,10 +68,10 @@ export const BulkSendCompleteEmail = ({
               )}
 
               <Text className="text-sm">
-                <Trans>
+                
                   You can view the created documents in your dashboard under the "Documents created
                   from template" section.
-                </Trans>
+                
               </Text>
             </Section>
           </Container>

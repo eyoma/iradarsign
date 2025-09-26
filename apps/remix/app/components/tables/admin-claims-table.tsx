@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { EditIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 
@@ -28,7 +26,6 @@ import { ClaimDeleteDialog } from '../dialogs/claim-delete-dialog';
 import { ClaimUpdateDialog } from '../dialogs/claim-update-dialog';
 
 export const AdminClaimsTable = () => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [searchParams] = useSearchParams();
@@ -59,18 +56,18 @@ export const AdminClaimsTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: t`ID`,
+        header: "ID",
         accessorKey: 'id',
         maxSize: 50,
         cell: ({ row }) => (
           <CopyTextButton
             value={row.original.id}
-            onCopySuccess={() => toast({ title: t`ID copied to clipboard` })}
+            onCopySuccess={() => toast({ title: "ID copied to clipboard" })}
           />
         ),
       },
       {
-        header: t`Name`,
+        header: "Name",
         accessorKey: 'name',
         cell: ({ row }) => (
           <Link to={`/admin/organisations?query=claim:${row.original.id}`}>
@@ -79,25 +76,25 @@ export const AdminClaimsTable = () => {
         ),
       },
       {
-        header: t`Allowed teams`,
+        header: "Allowed teams",
         accessorKey: 'teamCount',
         cell: ({ row }) => {
           if (row.original.teamCount === 0) {
-            return <p className="text-muted-foreground">{t`Unlimited`}</p>;
+            return <p className="text-muted-foreground">{"Unlimited"}</p>;
           }
 
           return <p className="text-muted-foreground">{row.original.teamCount}</p>;
         },
       },
       {
-        header: t`Feature Flags`,
+        header: "Feature Flags",
         cell: ({ row }) => {
           const flags = Object.values(SUBSCRIPTION_CLAIM_FEATURE_FLAGS).filter(
             ({ key }) => row.original.flags[key],
           );
 
           if (flags.length === 0) {
-            return <p className="text-muted-foreground text-xs">{t`None`}</p>;
+            return <p className="text-muted-foreground text-xs">{"None"}</p>;
           }
 
           return (
@@ -119,7 +116,7 @@ export const AdminClaimsTable = () => {
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
               <DropdownMenuLabel>
-                <Trans>Actions</Trans>
+                Actions
               </DropdownMenuLabel>
 
               <ClaimUpdateDialog
@@ -128,7 +125,7 @@ export const AdminClaimsTable = () => {
                   <DropdownMenuItem asChild onSelect={(e) => e.preventDefault()}>
                     <div>
                       <EditIcon className="mr-2 h-4 w-4" />
-                      <Trans>Update</Trans>
+                      Update
                     </div>
                   </DropdownMenuItem>
                 }
@@ -142,7 +139,7 @@ export const AdminClaimsTable = () => {
                   <DropdownMenuItem asChild onSelect={(e) => e.preventDefault()}>
                     <div>
                       <Trash2Icon className="mr-2 h-4 w-4" />
-                      <Trans>Delete</Trans>
+                      Delete
                     </div>
                   </DropdownMenuItem>
                 }

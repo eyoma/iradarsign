@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
-
 import { mailer } from '@documenso/email/mailer';
 import { TeamEmailRemovedTemplate } from '@documenso/email/templates/team-email-removed';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
@@ -95,7 +93,7 @@ export const deleteTeamEmail = async ({ userId, userEmail, teamId }: DeleteTeamE
         name: team.organisation.owner.name ?? '',
       },
       from: senderEmail,
-      subject: i18n._(msg`Team email has been revoked for ${team.name}`),
+      subject: i18n."Team email has been revoked for ${team.name}",
       html,
       text,
     });

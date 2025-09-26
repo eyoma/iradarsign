@@ -1,5 +1,3 @@
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 
 import { CopyTextButton } from '@documenso/ui/components/common/copy-text-button';
@@ -47,17 +45,16 @@ export const OrganisationEmailDomainRecordsDialog = ({
 };
 
 export const OrganisationEmailDomainRecordContent = ({ records }: { records: DomainRecord[] }) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   return (
     <DialogContent position="center" className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
       <DialogHeader>
         <DialogTitle>
-          <Trans>Verify Domain</Trans>
+          Verify Domain
         </DialogTitle>
         <DialogDescription>
-          <Trans>Add these DNS records to verify your domain ownership</Trans>
+          Add these DNS records to verify your domain ownership
         </DialogDescription>
       </DialogHeader>
 
@@ -67,7 +64,7 @@ export const OrganisationEmailDomainRecordContent = ({ records }: { records: Dom
             <div className="space-y-4 rounded-md border p-4" key={record.name}>
               <div className="space-y-2">
                 <Label>
-                  <Trans>Record Type</Trans>
+                  Record Type
                 </Label>
 
                 <div className="relative">
@@ -75,7 +72,7 @@ export const OrganisationEmailDomainRecordContent = ({ records }: { records: Dom
                   <div className="absolute bottom-0 right-2 top-0 flex items-center justify-center">
                     <CopyTextButton
                       value={record.type}
-                      onCopySuccess={() => toast({ title: t`Copied to clipboard` })}
+                      onCopySuccess={() => toast({ title: "Copied to clipboard" })}
                     />
                   </div>
                 </div>
@@ -83,7 +80,7 @@ export const OrganisationEmailDomainRecordContent = ({ records }: { records: Dom
 
               <div className="space-y-2">
                 <Label>
-                  <Trans>Record Name</Trans>
+                  Record Name
                 </Label>
 
                 <div className="relative">
@@ -91,7 +88,7 @@ export const OrganisationEmailDomainRecordContent = ({ records }: { records: Dom
                   <div className="absolute bottom-0 right-2 top-0 flex items-center justify-center">
                     <CopyTextButton
                       value={record.name}
-                      onCopySuccess={() => toast({ title: t`Copied to clipboard` })}
+                      onCopySuccess={() => toast({ title: "Copied to clipboard" })}
                     />
                   </div>
                 </div>
@@ -99,7 +96,7 @@ export const OrganisationEmailDomainRecordContent = ({ records }: { records: Dom
 
               <div className="space-y-2">
                 <Label>
-                  <Trans>Record Value</Trans>
+                  Record Value
                 </Label>
 
                 <div className="relative">
@@ -107,7 +104,7 @@ export const OrganisationEmailDomainRecordContent = ({ records }: { records: Dom
                   <div className="absolute bottom-0 right-2 top-0 flex items-center justify-center">
                     <CopyTextButton
                       value={record.value}
-                      onCopySuccess={() => toast({ title: t`Copied to clipboard` })}
+                      onCopySuccess={() => toast({ title: "Copied to clipboard" })}
                     />
                   </div>
                 </div>
@@ -118,18 +115,18 @@ export const OrganisationEmailDomainRecordContent = ({ records }: { records: Dom
 
         <Alert variant="neutral">
           <AlertDescription>
-            <Trans>
+            
               Once you update your DNS records, it may take up to 48 hours for it to be propogated.
               Once the DNS propagation is complete you will need to come back and press the "Sync"
               domains button
-            </Trans>
+            
           </AlertDescription>
         </Alert>
 
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="secondary">
-              <Trans>Close</Trans>
+              Close
             </Button>
           </DialogClose>
         </DialogFooter>

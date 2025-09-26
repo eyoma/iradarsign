@@ -1,7 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 
@@ -30,8 +28,6 @@ export function meta() {
 }
 
 export default function SettingsSecurityLinkedAccounts() {
-  const { t } = useLingui();
-
   const { data, isLoading, isLoadingError, refetch } = useQuery({
     queryKey: ['linked-accounts'],
     queryFn: async () => await authClient.account.getMany(),
@@ -42,17 +38,17 @@ export default function SettingsSecurityLinkedAccounts() {
   const columns = useMemo(() => {
     return [
       {
-        header: t`Provider`,
+        header: "Provider",
         accessorKey: 'provider',
         cell: ({ row }) => row.original.provider,
       },
       {
-        header: t`Linked At`,
+        header: "Linked At",
         accessorKey: 'createdAt',
         cell: ({ row }) =>
           row.original.createdAt
             ? DateTime.fromJSDate(row.original.createdAt).toRelative()
-            : t`Unknown`,
+            : "Unknown",
       },
       {
         id: 'actions',
@@ -70,8 +66,8 @@ export default function SettingsSecurityLinkedAccounts() {
   return (
     <div>
       <SettingsHeader
-        title={t`Linked Accounts`}
-        subtitle={t`View and manage all login methods linked to your account.`}
+        title={"Linked Accounts"}
+        subtitle={"View and manage all login methods linked to your account."}
       />
 
       <div className="mt-4">
@@ -113,8 +109,6 @@ type AccountUnlinkDialogProps = {
 
 const AccountUnlinkDialog = ({ accountId, onSuccess, provider }: AccountUnlinkDialogProps) => {
   const { toast } = useToast();
-  const { t } = useLingui();
-
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -127,14 +121,14 @@ const AccountUnlinkDialog = ({ accountId, onSuccess, provider }: AccountUnlinkDi
       await onSuccess();
 
       toast({
-        title: t`Account unlinked`,
+        title: "Account unlinked",
       });
     } catch (error) {
       console.error(error);
 
       toast({
-        title: t`Error`,
-        description: t`Failed to unlink account`,
+        title: "Error",
+        description: "Failed to unlink account",
         variant: 'destructive',
       });
     }
@@ -146,31 +140,31 @@ const AccountUnlinkDialog = ({ accountId, onSuccess, provider }: AccountUnlinkDi
     <Dialog open={open} onOpenChange={(value) => !isLoading && setOpen(value)}>
       <DialogTrigger asChild>
         <Button variant="destructive" size="sm">
-          <Trans>Unlink</Trans>
+          Unlink
         </Button>
       </DialogTrigger>
 
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to remove the <span className="font-semibold">{provider}</span> login
               method from your account.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter>
           <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           <Button variant="destructive" loading={isLoading} onClick={handleRevoke}>
-            <Trans>Unlink</Trans>
+            Unlink
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 import { UploadCloudIcon } from 'lucide-react';
 
@@ -154,7 +153,7 @@ export const SignaturePadUpload = ({
               <div className="flex flex-col items-center">
                 <UploadCloudIcon className="h-8 w-8" />
                 <span className="text-lg font-semibold">
-                  <Trans>Upload Signature</Trans>
+                  Upload Signature
                 </span>
               </div>
             </div>

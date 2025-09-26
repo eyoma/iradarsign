@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -26,8 +23,8 @@ export const ZProfileFormSchema = z.object({
   name: z
     .string()
     .trim()
-    .min(1, { message: msg`Please enter a valid name.`.id }),
-  signature: z.string().min(1, { message: msg`Signature Pad cannot be empty.`.id }),
+    .min(1, { message: "Please enter a valid name.".id }),
+  signature: z.string().min(1, { message: "Signature Pad cannot be empty.".id }),
 });
 
 export const ZTwoFactorAuthTokenSchema = z.object({
@@ -42,7 +39,6 @@ export type ProfileFormProps = {
 };
 
 export const ProfileForm = ({ className }: ProfileFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { user, refreshSession } = useSession();
 
@@ -68,16 +64,16 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
       await refreshSession();
 
       toast({
-        title: _(msg`Profile updated`),
-        description: _(msg`Your profile has been updated successfully.`),
+        title: "Profile updated",
+        description: "Your profile has been updated successfully.",
         duration: 5000,
       });
     } catch (err) {
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting update your profile. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting update your profile. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -96,7 +92,7 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Full Name</Trans>
+                  Full Name
                 </FormLabel>
                 <FormControl>
                   <Input type="text" {...field} />
@@ -108,7 +104,7 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
 
           <div>
             <Label htmlFor="email" className="text-muted-foreground">
-              <Trans>Email</Trans>
+              Email
             </Label>
             <Input id="email" type="email" className="bg-muted mt-2" value={user.email} disabled />
           </div>
@@ -119,7 +115,7 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
             render={({ field: { onChange, value } }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Signature</Trans>
+                  Signature
                 </FormLabel>
                 <FormControl>
                   <SignaturePadDialog
@@ -135,7 +131,7 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
         </fieldset>
 
         <Button type="submit" loading={isSubmitting} className="self-end">
-          <Trans>Update profile</Trans>
+          Update profile
         </Button>
       </form>
     </Form>

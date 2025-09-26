@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import {
   BracesIcon,
   CreditCardIcon,
@@ -44,7 +43,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
           )}
         >
           <User className="mr-2 h-5 w-5" />
-          <Trans>Profile</Trans>
+          Profile
         </Button>
       </Link>
 
@@ -59,7 +58,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
               )}
             >
               <Settings2Icon className="mr-2 h-5 w-5" />
-              <Trans>Document Preferences</Trans>
+              Document Preferences
             </Button>
           </Link>
 
@@ -72,7 +71,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
               )}
             >
               <PaletteIcon className="mr-2 h-5 w-5" />
-              <Trans>Branding Preferences</Trans>
+              Branding Preferences
             </Button>
           </Link>
 
@@ -85,7 +84,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
               )}
             >
               <MailIcon className="mr-2 h-5 w-5" />
-              <Trans>Email Preferences</Trans>
+              Email Preferences
             </Button>
           </Link>
 
@@ -98,7 +97,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
               )}
             >
               <Globe2Icon className="mr-2 h-5 w-5" />
-              <Trans>Public Profile</Trans>
+              Public Profile
             </Button>
           </Link>
 
@@ -111,7 +110,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
               )}
             >
               <BracesIcon className="mr-2 h-5 w-5" />
-              <Trans>API Tokens</Trans>
+              API Tokens
             </Button>
           </Link>
 
@@ -124,7 +123,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
               )}
             >
               <WebhookIcon className="mr-2 h-5 w-5" />
-              <Trans>Webhooks</Trans>
+              Webhooks
             </Button>
           </Link>
 
@@ -138,7 +137,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
                 )}
               >
                 <CreditCardIcon className="mr-2 h-5 w-5" />
-                <Trans>Billing</Trans>
+                Billing
               </Button>
             </Link>
           )}
@@ -154,7 +153,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
           )}
         >
           <Users className="mr-2 h-5 w-5" />
-          <Trans>Organisations</Trans>
+          Organisations
         </Button>
       </Link>
 
@@ -167,7 +166,7 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
           )}
         >
           <Lock className="mr-2 h-5 w-5" />
-          <Trans>Security</Trans>
+          Security
         </Button>
       </Link>
     </div>

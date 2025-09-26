@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
@@ -65,7 +62,6 @@ export const TeamGroupUpdateDialog = ({
 }: TeamGroupUpdateDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const team = useCurrentTeam();
@@ -89,18 +85,18 @@ export const TeamGroupUpdateDialog = ({
       });
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`You have updated the team group.`),
+        title: "Success",
+        description: "You have updated the team group.",
         duration: 5000,
       });
 
       setOpen(false);
     } catch {
       toast({
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to update this team member. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to update this team member. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -125,7 +121,7 @@ export const TeamGroupUpdateDialog = ({
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
         {trigger ?? (
           <Button variant="secondary">
-            <Trans>Update team group</Trans>
+            Update team group
           </Button>
         )}
       </DialogTrigger>
@@ -133,14 +129,14 @@ export const TeamGroupUpdateDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Update team group</Trans>
+            Update team group
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               You are currently updating the <span className="font-bold">{teamGroupName}</span> team
               group.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -154,7 +150,7 @@ export const TeamGroupUpdateDialog = ({
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormLabel required>
-                        <Trans>Role</Trans>
+                        Role
                       </FormLabel>
                       <FormControl>
                         <Select {...field} onValueChange={field.onChange}>
@@ -165,7 +161,7 @@ export const TeamGroupUpdateDialog = ({
                           <SelectContent className="w-full" position="popper">
                             {TEAM_MEMBER_ROLE_HIERARCHY[team.currentTeamRole].map((role) => (
                               <SelectItem key={role} value={role}>
-                                {_(EXTENDED_TEAM_MEMBER_ROLE_MAP[role]) ?? role}
+                                {EXTENDED_TEAM_MEMBER_ROLE_MAP[role] ?? role}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -178,11 +174,11 @@ export const TeamGroupUpdateDialog = ({
 
                 <DialogFooter className="mt-4">
                   <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   <Button type="submit" loading={form.formState.isSubmitting}>
-                    <Trans>Update</Trans>
+                    Update
                   </Button>
                 </DialogFooter>
               </fieldset>
@@ -192,13 +188,13 @@ export const TeamGroupUpdateDialog = ({
           <>
             <Alert variant="neutral">
               <AlertDescription className="text-center font-semibold">
-                <Trans>You cannot modify a group which has a higher role than you.</Trans>
+                You cannot modify a group which has a higher role than you.
               </AlertDescription>
             </Alert>
 
             <DialogFooter>
               <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                <Trans>Close</Trans>
+                Close
               </Button>
             </DialogFooter>
           </>

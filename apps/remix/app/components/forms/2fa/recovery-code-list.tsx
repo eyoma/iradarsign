@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { Copy } from 'lucide-react';
 
 import { useCopyToClipboard } from '@documenso/lib/client-only/hooks/use-copy-to-clipboard';
@@ -10,7 +8,6 @@ export type RecoveryCodeListProps = {
 };
 
 export const RecoveryCodeList = ({ recoveryCodes }: RecoveryCodeListProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const [, copyToClipboard] = useCopyToClipboard();
 
@@ -23,15 +20,15 @@ export const RecoveryCodeList = ({ recoveryCodes }: RecoveryCodeListProps) => {
       }
 
       toast({
-        title: _(msg`Recovery code copied`),
-        description: _(msg`Your recovery code has been copied to your clipboard.`),
+        title: "Recovery code copied",
+        description: "Your recovery code has been copied to your clipboard.",
       });
     } catch (_err) {
       toast({
-        title: _(msg`Unable to copy recovery code`),
-        description: _(
-          msg`We were unable to copy your recovery code to your clipboard. Please try again.`,
-        ),
+        title: "Unable to copy recovery code",
+        description: 
+          "We were unable to copy your recovery code to your clipboard. Please try again.",
+        ,
         variant: 'destructive',
       });
     }

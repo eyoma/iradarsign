@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Field, Recipient } from '@prisma/client';
 import { DocumentDistributionMethod, DocumentStatus, RecipientRole } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -76,8 +73,6 @@ export const AddSubjectFormPartial = ({
   onAutoSave,
   isDocumentPdfLoaded,
 }: AddSubjectFormProps) => {
-  const { _ } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const form = useForm<TAddSubjectFormSchema>({
@@ -115,18 +110,18 @@ export const AddSubjectFormPartial = ({
 
   const GoNextLabel = {
     [DocumentDistributionMethod.EMAIL]: {
-      [DocumentStatus.DRAFT]: msg`Send`,
+      [DocumentStatus.DRAFT]: "Send",
       [DocumentStatus.PENDING]: recipients.some((recipient) => recipient.sendStatus === 'SENT')
-        ? msg`Resend`
-        : msg`Send`,
-      [DocumentStatus.COMPLETED]: msg`Update`,
-      [DocumentStatus.REJECTED]: msg`Update`,
+        ? "Resend"
+        : "Send",
+      [DocumentStatus.COMPLETED]: "Update",
+      [DocumentStatus.REJECTED]: "Update",
     },
     [DocumentDistributionMethod.NONE]: {
-      [DocumentStatus.DRAFT]: msg`Generate Links`,
-      [DocumentStatus.PENDING]: msg`View Document`,
-      [DocumentStatus.COMPLETED]: msg`View Document`,
-      [DocumentStatus.REJECTED]: msg`View Document`,
+      [DocumentStatus.DRAFT]: "Generate Links",
+      [DocumentStatus.PENDING]: "View Documen",
+      [DocumentStatus.COMPLETED]: msg"View Documen",
+      [DocumentStatus.REJECTED]: msg"View Documen",
     },
   };
 
@@ -219,7 +214,7 @@ export const AddSubjectFormPartial = ({
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>
-                              <Trans>Email Sender</Trans>
+                              Email Sender
                             </FormLabel>
                             <FormControl>
                               <Select
@@ -257,7 +252,7 @@ export const AddSubjectFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            <Trans>Reply To Email</Trans>{' '}
+                            Reply To Email{' '}
                             <span className="text-muted-foreground">(Optional)</span>
                           </FormLabel>
 
@@ -276,7 +271,7 @@ export const AddSubjectFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            <Trans>Reply To Name</Trans>{' '}
+                            Reply To Name{' '}
                             <span className="text-muted-foreground">(Optional)</span>
                           </FormLabel>
 
@@ -295,7 +290,7 @@ export const AddSubjectFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            <Trans>Subject</Trans>{' '}
+                            Subject{' '}
                             <span className="text-muted-foreground">(Optional)</span>
                           </FormLabel>
 
@@ -313,7 +308,7 @@ export const AddSubjectFormPartial = ({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="flex flex-row items-center">
-                            <Trans>Message</Trans>{' '}
+                            Message{' '}
                             <span className="text-muted-foreground">(Optional)</span>
                             <Tooltip>
                               <TooltipTrigger>
@@ -358,21 +353,21 @@ export const AddSubjectFormPartial = ({
                 {document.status === DocumentStatus.DRAFT ? (
                   <div className="text-muted-foreground py-16 text-center text-sm">
                     <p>
-                      <Trans>We won't send anything to notify recipients.</Trans>
+                      We won't send anything to notify recipients.
                     </p>
 
                     <p className="mt-2">
-                      <Trans>
+                      
                         We will generate signing links for you, which you can send to the recipients
                         through your method of choice.
-                      </Trans>
+                      
                     </p>
                   </div>
                 ) : (
                   <ul className="text-muted-foreground divide-y">
                     {recipients.length === 0 && (
                       <li className="flex flex-col items-center justify-center py-6 text-sm">
-                        <Trans>No recipients</Trans>
+                        No recipients
                       </li>
                     )}
 
@@ -388,7 +383,7 @@ export const AddSubjectFormPartial = ({
                           }
                           secondaryText={
                             <p className="text-muted-foreground/70 text-xs">
-                              {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
+                              {RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}
                             </p>
                           }
                         />
@@ -398,20 +393,20 @@ export const AddSubjectFormPartial = ({
                             value={formatSigningLink(recipient.token)}
                             onCopySuccess={() => {
                               toast({
-                                title: _(msg`Copied to clipboard`),
-                                description: _(
-                                  msg`The signing link has been copied to your clipboard.`,
-                                ),
+                                title: msg"Copied to clipboard",
+                                description: 
+                                  "The signing link has been copied to your clipboard.",
+                                ,
                               });
                             }}
                             badgeContentUncopied={
                               <p className="ml-1 text-xs">
-                                <Trans>Copy</Trans>
+                                Copy
                               </p>
                             }
                             badgeContentCopied={
                               <p className="ml-1 text-xs">
-                                <Trans>Copied</Trans>
+                                Copied
                               </p>
                             }
                           />

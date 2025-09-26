@@ -1,5 +1,3 @@
-import { Trans } from '@lingui/react/macro';
-
 import { Link, Section, Text } from '../components';
 import { useBranding } from '../providers/branding';
 
@@ -14,12 +12,12 @@ export const TemplateFooter = ({ isDocument = true }: TemplateFooterProps) => {
     <Section>
       {isDocument && !branding.brandingHidePoweredBy && (
         <Text className="my-4 text-base text-slate-400">
-          <Trans>
+          
             This document was sent using{' '}
             <Link className="text-[#7AC455]" href="https://documen.so/mail-footer">
               Documenso.
             </Link>
-          </Trans>
+          
         </Text>
       )}
 

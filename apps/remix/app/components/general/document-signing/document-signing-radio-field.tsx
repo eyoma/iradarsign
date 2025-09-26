@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { useRevalidator } from 'react-router';
 
 import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
@@ -34,7 +32,6 @@ export const DocumentSigningRadioField = ({
   onSignField,
   onUnsignField,
 }: DocumentSigningRadioFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -100,10 +97,10 @@ export const DocumentSigningRadioField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
+        title: "Error",
         description: isAssistantMode
-          ? _(msg`An error occurred while signing as assistant.`)
-          : _(msg`An error occurred while signing the document.`),
+          ? "An error occurred while signing as assistant."
+          : "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -129,8 +126,8 @@ export const DocumentSigningRadioField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the selection.`),
+        title: "Error",
+        description: "An error occurred while removing the selection.",
         variant: 'destructive',
       });
     }

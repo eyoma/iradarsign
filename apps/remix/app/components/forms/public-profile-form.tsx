@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Plural, Trans } from '@lingui/react/macro';
 import type { TeamProfile } from '@prisma/client';
 import { motion } from 'framer-motion';
 import { AnimatePresence } from 'framer-motion';
@@ -53,7 +50,6 @@ export const PublicProfileForm = ({
   profile,
   onProfileUpdate,
 }: PublicProfileFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [, copy] = useCopyToClipboard();
@@ -81,8 +77,8 @@ export const PublicProfileForm = ({
       await onProfileUpdate(data);
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Your public profile has been updated.`),
+        title: "Success",
+        description: "Your public profile has been updated.",
         duration: 5000,
       });
 
@@ -106,10 +102,10 @@ export const PublicProfileForm = ({
 
         default:
           toast({
-            title: _(msg`An unknown error occurred`),
-            description: _(
-              msg`We encountered an unknown error while attempting to update your public profile. Please try again later.`,
-            ),
+            title: "An unknown error occurred",
+            description: 
+              "We encountered an unknown error while attempting to update your public profile. Please try again later.",
+            ,
             variant: 'destructive',
           });
       }
@@ -119,8 +115,8 @@ export const PublicProfileForm = ({
   const onCopy = async () => {
     await copy(formatUserProfilePath(form.getValues('url') ?? '')).then(() => {
       toast({
-        title: _(msg`Copied to clipboard`),
-        description: _(msg`The profile link has been copied to your clipboard`),
+        title: "Copied to clipboard",
+        description: "The profile link has been copied to your clipboard",
       });
     });
 
@@ -148,7 +144,7 @@ export const PublicProfileForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Public profile URL</Trans>
+                  Public profile URL
                 </FormLabel>
                 <FormControl>
                   <Input {...field} disabled={field.disabled || !isPersonalLayoutMode} />
@@ -156,10 +152,10 @@ export const PublicProfileForm = ({
 
                 {!isPersonalLayoutMode && (
                   <p className="text-muted-foreground text-xs">
-                    <Trans>
+                    
                       You can update the profile URL by updating the team URL in the general
                       settings page.
-                    </Trans>
+                    
                   </p>
                 )}
 
@@ -200,7 +196,7 @@ export const PublicProfileForm = ({
                         </div>
                       ) : (
                         <p>
-                          <Trans>A unique URL to access your profile</Trans>
+                          A unique URL to access your profile
                         </p>
                       )}
                     </div>
@@ -224,7 +220,7 @@ export const PublicProfileForm = ({
                   <FormControl>
                     <Textarea
                       {...field}
-                      placeholder={_(msg`Write a description to display on your public profile`)}
+                      placeholder={"Write a description to display on your public profile"}
                     />
                   </FormControl>
 
@@ -233,14 +229,14 @@ export const PublicProfileForm = ({
                       {remaningLength >= 0 ? (
                         <Plural
                           value={remaningLength}
-                          one={<Trans># character remaining</Trans>}
-                          other={<Trans># characters remaining</Trans>}
+                          one={# character remaining}
+                          other={# characters remaining}
                         />
                       ) : (
                         <Plural
                           value={Math.abs(remaningLength)}
-                          one={<Trans># character over the limit</Trans>}
-                          other={<Trans># characters over the limit</Trans>}
+                          one={# character over the limit}
+                          other={# characters over the limit}
                         />
                       )}
                     </p>
@@ -267,7 +263,7 @@ export const PublicProfileForm = ({
                   }}
                 >
                   <Button type="button" variant="secondary" onClick={() => form.reset()}>
-                    <Trans>Reset</Trans>
+                    Reset
                   </Button>
                 </motion.div>
               )}
@@ -279,7 +275,7 @@ export const PublicProfileForm = ({
               disabled={!form.formState.isDirty}
               loading={form.formState.isSubmitting}
             >
-              <Trans>Update</Trans>
+              Update
             </Button>
           </div>
         </fieldset>

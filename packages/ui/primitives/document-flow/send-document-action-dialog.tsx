@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 
 import type { ButtonProps } from '../button';
@@ -31,20 +30,20 @@ export const SendDocumentActionDialog = ({
       <DialogTrigger asChild>
         <Button type="button" className={className}>
           {loading && <Loader className="text-documenso mr-2 h-5 w-5 animate-spin" />}
-          <Trans>Send</Trans>
+          Send
         </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center text-lg font-semibold">
-            <Trans>Send Document</Trans>
+            Send Document
           </DialogTitle>
           <DialogDescription className="text-center text-base">
-            <Trans>
+            
               You are about to send this document to the recipients. Are you sure you want to
               continue?
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -55,13 +54,13 @@ export const SendDocumentActionDialog = ({
             variant="secondary"
             onClick={() => setOpen(false)}
           >
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           {/* We would use DialogAction here but it interrupts the submit action */}
           <Button className={className} {...props}>
             {loading && <Loader className="mr-2 h-5 w-5 animate-spin" />}
-            <Trans>Send</Trans>
+            Send
           </Button>
         </DialogFooter>
       </DialogContent>

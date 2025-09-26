@@ -1,8 +1,5 @@
 import { useMemo, useTransition } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { AlertTriangle, Globe2Icon, InfoIcon, Link2Icon, Loader, LockIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -43,7 +40,6 @@ export const TemplatesTable = ({
   documentRootPath,
   templateRootPath,
 }: TemplatesTableProps) => {
-  const { _, i18n } = useLingui();
   const { remaining } = useLimits();
 
   const team = useCurrentTeam();
@@ -62,12 +58,12 @@ export const TemplatesTable = ({
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Created`),
+        header: "Created",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt),
       },
       {
-        header: _(msg`Title`),
+        header: "Title",
         cell: ({ row }) => (
           <Link
             to={formatTemplateLink(row.original)}
@@ -80,7 +76,7 @@ export const TemplatesTable = ({
       {
         header: () => (
           <div className="flex flex-row items-center">
-            <Trans>Type</Trans>
+            Type
             <Tooltip>
               <TooltipTrigger>
                 <InfoIcon className="mx-2 h-4 w-4" />
@@ -91,44 +87,44 @@ export const TemplatesTable = ({
                   <li>
                     <h2 className="mb-2 flex flex-row items-center font-semibold">
                       <Globe2Icon className="mr-2 h-5 w-5 text-green-500 dark:text-green-300" />
-                      <Trans>Public</Trans>
+                      Public
                     </h2>
 
                     <p>
-                      <Trans>
+                      
                         Public templates are connected to your public profile. Any modifications to
                         public templates will also appear in your public profile.
-                      </Trans>
+                      
                     </p>
                   </li>
                   <li>
                     <div className="mb-2 flex w-fit flex-row items-center rounded border border-neutral-300 bg-neutral-200 px-1.5 py-0.5 text-xs dark:border-neutral-500 dark:bg-neutral-600">
                       <Link2Icon className="mr-1 h-3 w-3" />
-                      <Trans>direct link</Trans>
+                      direct link
                     </div>
 
                     <p>
-                      <Trans>
+                      
                         Direct link templates contain one dynamic recipient placeholder. Anyone with
                         access to this link can sign the document, and it will then appear on your
                         documents page.
-                      </Trans>
+                      
                     </p>
                   </li>
                   <li>
                     <h2 className="mb-2 flex flex-row items-center font-semibold">
                       <LockIcon className="mr-2 h-5 w-5 text-blue-600 dark:text-blue-300" />
-                      {team?.id ? <Trans>Team Only</Trans> : <Trans>Private</Trans>}
+                      {team?.id ? Team Only : Private}
                     </h2>
 
                     <p>
                       {team?.id ? (
-                        <Trans>
+                        
                           Team only templates are not linked anywhere and are visible only to your
                           team.
-                        </Trans>
+                        
                       ) : (
-                        <Trans>Private templates can only be modified and viewed by you.</Trans>
+                        Private templates can only be modified and viewed by you.
                       )}
                     </p>
                   </li>
@@ -153,7 +149,7 @@ export const TemplatesTable = ({
         ),
       },
       {
-        header: _(msg`Actions`),
+        header: "Actions",
         accessorKey: 'actions',
         cell: ({ row }) => {
           return (
@@ -200,10 +196,10 @@ export const TemplatesTable = ({
         <Alert variant="warning" className="mb-4">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>
-            <Trans>Document Limit Exceeded!</Trans>
+            Document Limit Exceeded!
           </AlertTitle>
           <AlertDescription className="mt-2">
-            <Trans>
+            
               You have reached your document limit.{' '}
               <Link
                 className="underline underline-offset-4"
@@ -211,7 +207,7 @@ export const TemplatesTable = ({
               >
                 Upgrade your account to continue!
               </Link>
-            </Trans>
+            
           </AlertDescription>
         </Alert>
       )}

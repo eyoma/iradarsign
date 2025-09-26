@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Bird } from 'lucide-react';
 import { useParams, useSearchParams } from 'react-router';
 
@@ -51,7 +50,7 @@ export default function TemplatesPage() {
             </Avatar>
 
             <h1 className="truncate text-2xl font-semibold md:text-3xl">
-              <Trans>Templates</Trans>
+              Templates
             </h1>
           </div>
 
@@ -62,14 +61,14 @@ export default function TemplatesPage() {
 
                 <div className="text-center">
                   <h3 className="text-lg font-semibold">
-                    <Trans>We're all empty</Trans>
+                    We're all empty
                   </h3>
 
                   <p className="mt-2 max-w-[50ch]">
-                    <Trans>
+                    
                       You have not yet created any templates. To create a template please upload
                       one.
-                    </Trans>
+                    
                   </p>
                 </div>
               </div>

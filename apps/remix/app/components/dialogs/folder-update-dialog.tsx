@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -55,7 +53,6 @@ export const ZUpdateFolderFormSchema = z.object({
 export type TUpdateFolderFormSchema = z.infer<typeof ZUpdateFolderFormSchema>;
 
 export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdateDialogProps) => {
-  const { t } = useLingui();
   const team = useOptionalCurrentTeam();
 
   const { toast } = useToast();
@@ -95,7 +92,7 @@ export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdat
       });
 
       toast({
-        title: t`Folder updated successfully`,
+        title: "Folder updated successfully",
       });
 
       onOpenChange(false);
@@ -104,7 +101,7 @@ export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdat
 
       if (error.code === AppErrorCode.NOT_FOUND) {
         toast({
-          title: t`Folder not found`,
+          title: "Folder not found",
         });
       }
     }
@@ -115,10 +112,10 @@ export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdat
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Folder Settings</Trans>
+            Folder Settings
           </DialogTitle>
           <DialogDescription>
-            <Trans>Manage the settings for this folder.</Trans>
+            Manage the settings for this folder.
           </DialogDescription>
         </DialogHeader>
 
@@ -130,7 +127,7 @@ export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdat
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    <Trans>Name</Trans>
+                    Name
                   </FormLabel>
                   <FormControl>
                     <Input {...field} />
@@ -147,23 +144,23 @@ export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdat
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Visibility</Trans>
+                      Visibility
                     </FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder={t`Select visibility`} />
+                          <SelectValue placeholder={"Select visibility"} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
                         <SelectItem value={DocumentVisibility.EVERYONE}>
-                          <Trans>Everyone</Trans>
+                          Everyone
                         </SelectItem>
                         <SelectItem value={DocumentVisibility.MANAGER_AND_ABOVE}>
-                          <Trans>Managers and above</Trans>
+                          Managers and above
                         </SelectItem>
                         <SelectItem value={DocumentVisibility.ADMIN}>
-                          <Trans>Admins only</Trans>
+                          Admins only
                         </SelectItem>
                       </SelectContent>
                     </Select>
@@ -176,12 +173,12 @@ export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdat
             <DialogFooter>
               <DialogClose asChild>
                 <Button variant="secondary">
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
               </DialogClose>
 
               <Button type="submit" loading={form.formState.isSubmitting}>
-                <Trans>Update</Trans>
+                Update
               </Button>
             </DialogFooter>
           </form>

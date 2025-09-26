@@ -1,8 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import { useState } from 'react';
 
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { DocumentData } from '@prisma/client';
 import { Download } from 'lucide-react';
 
@@ -24,7 +22,6 @@ export const DocumentDownloadButton = ({
   disabled,
   ...props
 }: DownloadButtonProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -45,8 +42,8 @@ export const DocumentDownloadButton = ({
       setIsLoading(false);
 
       toast({
-        title: _('Something went wrong'),
-        description: _('An error occurred while downloading your document.'),
+        title: "Something went wrong",
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -63,7 +60,7 @@ export const DocumentDownloadButton = ({
       {...props}
     >
       {!isLoading && <Download className="mr-2 h-5 w-5" />}
-      <Trans>Download</Trans>
+      Download
     </Button>
   );
 };

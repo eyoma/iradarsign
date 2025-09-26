@@ -1,5 +1,3 @@
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { SubscriptionStatus } from '@prisma/client';
 import { Loader } from 'lucide-react';
 import type Stripe from 'stripe';
@@ -19,8 +17,6 @@ export function meta() {
 }
 
 export default function TeamsSettingBillingPage() {
-  const { _, i18n } = useLingui();
-
   const organisation = useCurrentOrganisation();
 
   const { data: subscriptionQuery, isLoading: isLoadingSubscription } =
@@ -54,15 +50,15 @@ export default function TeamsSettingBillingPage() {
       <div className="flex flex-row items-end justify-between">
         <div>
           <h3 className="text-2xl font-semibold">
-            <Trans>Billing</Trans>
+            Billing
           </h3>
 
           <div className="text-muted-foreground mt-2 text-sm">
             {!organisationSubscription && (
               <p>
-                <Trans>
+                
                   You are currently on the <span className="font-semibold">Free Plan</span>.
-                </Trans>
+                
               </p>
             )}
 
@@ -105,24 +101,24 @@ export default function TeamsSettingBillingPage() {
                 .with('INACTIVE', () => (
                   <p>
                     {currentProductName ? (
-                      <Trans>
+                      
                         You currently have an inactive{' '}
                         <span className="font-semibold">{currentProductName}</span> subscription
-                      </Trans>
+                      
                     ) : (
-                      <Trans>Your current plan is inactive.</Trans>
+                      Your current plan is inactive.
                     )}
                   </p>
                 ))
                 .with('PAST_DUE', () => (
                   <p>
                     {currentProductName ? (
-                      <Trans>
+                      
                         Your current {currentProductName} plan is past due. Please update your
                         payment information.
-                      </Trans>
+                      
                     ) : (
-                      <Trans>Your current plan is past due.</Trans>
+                      Your current plan is past due.
                     )}
                   </p>
                 ))

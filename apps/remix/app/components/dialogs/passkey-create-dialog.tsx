@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { startRegistration } from '@simplewebauthn/browser';
 import { KeyRoundIcon } from 'lucide-react';
@@ -54,7 +51,6 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const form = useForm<TCreatePasskeyFormSchema>({
@@ -83,7 +79,7 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
       });
 
       toast({
-        description: _(msg`Successfully created passkey`),
+        description: "Successfully created passkey",
         duration: 5000,
       });
 
@@ -142,7 +138,7 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
         {trigger ?? (
           <Button variant="secondary" loading={isPending}>
             <KeyRoundIcon className="-ml-1 mr-1 h-5 w-5" />
-            <Trans>Add passkey</Trans>
+            Add passkey
           </Button>
         )}
       </DialogTrigger>
@@ -150,14 +146,14 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Add passkey</Trans>
+            Add passkey
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               Passkeys allow you to sign in and authenticate using biometrics, password managers,
               etc.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -173,7 +169,7 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Passkey name</Trans>
+                      Passkey name
                     </FormLabel>
                     <FormControl>
                       <Input className="bg-background" placeholder="eg. Mac" {...field} />
@@ -185,17 +181,17 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
 
               <Alert variant="neutral">
                 <AlertDescription>
-                  <Trans>
+                  
                     When you click continue, you will be prompted to add the first available
                     authenticator on your system.
-                  </Trans>
+                  
                 </AlertDescription>
 
                 <AlertDescription className="mt-2">
-                  <Trans>
+                  
                     If you do not want to use the authenticator prompted, you can close it, which
                     will then display the next available authenticator.
-                  </Trans>
+                  
                 </AlertDescription>
               </Alert>
 
@@ -204,31 +200,31 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
                   {match(formError)
                     .with('ERROR_AUTHENTICATOR_PREVIOUSLY_REGISTERED', () => (
                       <AlertDescription>
-                        <Trans>This passkey has already been registered.</Trans>
+                        This passkey has already been registered.
                       </AlertDescription>
                     ))
                     .with('TOO_MANY_PASSKEYS', () => (
                       <AlertDescription>
-                        <Trans>You cannot have more than {MAXIMUM_PASSKEYS} passkeys.</Trans>
+                        You cannot have more than {MAXIMUM_PASSKEYS} passkeys.
                       </AlertDescription>
                     ))
                     .with('InvalidStateError', () => (
                       <>
                         <AlertTitle className="text-sm">
-                          <Trans>
+                          
                             Passkey creation cancelled due to one of the following reasons:
-                          </Trans>
+                          
                         </AlertTitle>
                         <AlertDescription>
                           <ul className="mt-1 list-inside list-disc">
                             <li>
-                              <Trans>Cancelled by user</Trans>
+                              Cancelled by user
                             </li>
                             <li>
-                              <Trans>Passkey already exists for the provided authenticator</Trans>
+                              Passkey already exists for the provided authenticator
                             </li>
                             <li>
-                              <Trans>Exceeded timeout</Trans>
+                              Exceeded timeout
                             </li>
                           </ul>
                         </AlertDescription>
@@ -236,7 +232,7 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
                     ))
                     .otherwise(() => (
                       <AlertDescription>
-                        <Trans>Something went wrong. Please try again or contact support.</Trans>
+                        Something went wrong. Please try again or contact support.
                       </AlertDescription>
                     ))}
                 </Alert>
@@ -244,11 +240,11 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" loading={form.formState.isSubmitting}>
-                  <Trans>Continue</Trans>
+                  Continue
                 </Button>
               </DialogFooter>
             </fieldset>

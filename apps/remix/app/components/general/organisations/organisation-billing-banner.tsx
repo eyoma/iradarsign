@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { SubscriptionStatus } from '@prisma/client';
 import { AlertTriangle } from 'lucide-react';
 import { Link } from 'react-router';
@@ -27,7 +24,6 @@ import {
 import { useToast } from '@documenso/ui/primitives/use-toast';
 
 export const OrganisationBillingBanner = () => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -46,10 +42,10 @@ export const OrganisationBillingBanner = () => {
       setIsOpen(false);
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(
-          msg`We are unable to proceed to the billing portal at this time. Please try again, or contact support.`,
-        ),
+        title: "Something went wrong",
+        description: 
+          "We are unable to proceed to the billing portal at this time. Please try again, or contact support.",
+        ,
         variant: 'destructive',
         duration: 10000,
       });
@@ -81,8 +77,8 @@ export const OrganisationBillingBanner = () => {
             <AlertTriangle className="mr-2.5 h-5 w-5" />
 
             {match(subscriptionStatus)
-              .with(SubscriptionStatus.PAST_DUE, () => <Trans>Payment overdue</Trans>)
-              .with(SubscriptionStatus.INACTIVE, () => <Trans>Restricted Access</Trans>)
+              .with(SubscriptionStatus.PAST_DUE, () => Payment overdue)
+              .with(SubscriptionStatus.INACTIVE, () => Restricted Access)
               .exhaustive()}
           </div>
 
@@ -98,7 +94,7 @@ export const OrganisationBillingBanner = () => {
             onClick={() => setIsOpen(true)}
             size="sm"
           >
-            <Trans>Resolve</Trans>
+            Resolve
           </Button>
         </div>
       </div>
@@ -109,14 +105,14 @@ export const OrganisationBillingBanner = () => {
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>
-                  <Trans>Payment overdue</Trans>
+                  Payment overdue
                 </DialogTitle>
 
                 <DialogDescription>
-                  <Trans>
+                  
                     Your payment is overdue. Please settle the payment to avoid any service
                     disruptions.
-                  </Trans>
+                  
                 </DialogDescription>
               </DialogHeader>
 
@@ -129,7 +125,7 @@ export const OrganisationBillingBanner = () => {
                     loading={isPending}
                     onClick={async () => handleCreatePortal(organisation.id)}
                   >
-                    <Trans>Resolve payment</Trans>
+                    Resolve payment
                   </Button>
                 </DialogFooter>
               )}
@@ -139,23 +135,23 @@ export const OrganisationBillingBanner = () => {
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>
-                  <Trans>Subscription invalid</Trans>
+                  Subscription invalid
                 </DialogTitle>
 
                 <DialogDescription>
-                  <Trans>
+                  
                     Your plan is no longer valid. Please subscribe to a new plan to continue using
                     iRadar.
-                  </Trans>
+                  
                 </DialogDescription>
               </DialogHeader>
 
               <Alert variant="neutral">
                 <AlertDescription>
-                  <Trans>
+                  
                     If there is any issue with your subscription, please contact us at{' '}
                     <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.
-                  </Trans>
+                  
                 </AlertDescription>
               </Alert>
 
@@ -167,7 +163,7 @@ export const OrganisationBillingBanner = () => {
                   <DialogClose asChild>
                     <Button asChild>
                       <Link to={`/o/${organisation.url}/settings/billing`}>
-                        <Trans>Manage Billing</Trans>
+                        Manage Billing
                       </Link>
                     </Button>
                   </DialogClose>

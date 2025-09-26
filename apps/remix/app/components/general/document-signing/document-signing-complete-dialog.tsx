@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans } from '@lingui/react/macro';
 import type { Field } from '@prisma/client';
 import { RecipientRole } from '@prisma/client';
 import { useForm } from 'react-hook-form';
@@ -117,12 +116,12 @@ export const DocumentSigningCompleteDialog = ({
           disabled={disabled}
         >
           {match({ isComplete, role })
-            .with({ isComplete: false }, () => <Trans>Next field</Trans>)
-            .with({ isComplete: true, role: RecipientRole.APPROVER }, () => <Trans>Approve</Trans>)
+            .with({ isComplete: false }, () => Next field)
+            .with({ isComplete: true, role: RecipientRole.APPROVER }, () => Approve)
             .with({ isComplete: true, role: RecipientRole.VIEWER }, () => (
-              <Trans>Mark as viewed</Trans>
+              Mark as viewed
             ))
-            .with({ isComplete: true }, () => <Trans>Complete</Trans>)
+            .with({ isComplete: true }, () => Complete)
             .exhaustive()}
         </Button>
       </DialogTrigger>
@@ -134,11 +133,11 @@ export const DocumentSigningCompleteDialog = ({
               <DialogTitle>
                 <div className="text-foreground text-xl font-semibold">
                   {match(role)
-                    .with(RecipientRole.VIEWER, () => <Trans>Complete Viewing</Trans>)
-                    .with(RecipientRole.SIGNER, () => <Trans>Complete Signing</Trans>)
-                    .with(RecipientRole.APPROVER, () => <Trans>Complete Approval</Trans>)
-                    .with(RecipientRole.CC, () => <Trans>Complete Viewing</Trans>)
-                    .with(RecipientRole.ASSISTANT, () => <Trans>Complete Assisting</Trans>)
+                    .with(RecipientRole.VIEWER, () => Complete Viewing)
+                    .with(RecipientRole.SIGNER, () => Complete Signing)
+                    .with(RecipientRole.APPROVER, () => Complete Approval)
+                    .with(RecipientRole.CC, () => Complete Viewing)
+                    .with(RecipientRole.ASSISTANT, () => Complete Assisting)
                     .exhaustive()}
                 </div>
               </DialogTitle>
@@ -147,7 +146,7 @@ export const DocumentSigningCompleteDialog = ({
                 {match(role)
                   .with(RecipientRole.VIEWER, () => (
                     <span>
-                      <Trans>
+                      
                         <span className="inline-flex flex-wrap">
                           You are about to complete viewing "
                           <span className="inline-block max-w-[11rem] truncate align-baseline">
@@ -156,12 +155,12 @@ export const DocumentSigningCompleteDialog = ({
                           ".
                         </span>
                         <br /> Are you sure?
-                      </Trans>
+                      
                     </span>
                   ))
                   .with(RecipientRole.SIGNER, () => (
                     <span>
-                      <Trans>
+                      
                         <span className="inline-flex flex-wrap">
                           You are about to complete signing "
                           <span className="inline-block max-w-[11rem] truncate align-baseline">
@@ -170,12 +169,12 @@ export const DocumentSigningCompleteDialog = ({
                           ".
                         </span>
                         <br /> Are you sure?
-                      </Trans>
+                      
                     </span>
                   ))
                   .with(RecipientRole.APPROVER, () => (
                     <span>
-                      <Trans>
+                      
                         <span className="inline-flex flex-wrap">
                           You are about to complete approving{' '}
                           <span className="inline-block max-w-[11rem] truncate align-baseline">
@@ -184,12 +183,12 @@ export const DocumentSigningCompleteDialog = ({
                           .
                         </span>
                         <br /> Are you sure?
-                      </Trans>
+                      
                     </span>
                   ))
                   .otherwise(() => (
                     <span>
-                      <Trans>
+                      
                         <span className="inline-flex flex-wrap">
                           You are about to complete viewing "
                           <span className="inline-block max-w-[11rem] truncate align-baseline">
@@ -198,7 +197,7 @@ export const DocumentSigningCompleteDialog = ({
                           ".
                         </span>
                         <br /> Are you sure?
-                      </Trans>
+                      
                     </span>
                   ))}
               </div>
@@ -220,7 +219,7 @@ export const DocumentSigningCompleteDialog = ({
                         size="sm"
                         onClick={() => setIsEditingNextSigner((prev) => !prev)}
                       >
-                        <Trans>Update Recipient</Trans>
+                        Update Recipient
                       </Button>
                     </div>
                   )}
@@ -233,7 +232,7 @@ export const DocumentSigningCompleteDialog = ({
                         render={({ field }) => (
                           <FormItem className="flex-1">
                             <FormLabel>
-                              <Trans>Name</Trans>
+                              Name
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -254,7 +253,7 @@ export const DocumentSigningCompleteDialog = ({
                         render={({ field }) => (
                           <FormItem className="flex-1">
                             <FormLabel>
-                              <Trans>Email</Trans>
+                              Email
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -284,7 +283,7 @@ export const DocumentSigningCompleteDialog = ({
                     onClick={() => setShowDialog(false)}
                     disabled={form.formState.isSubmitting}
                   >
-                    <Trans>Cancel</Trans>
+                    Cancel
                   </Button>
 
                   <Button
@@ -294,11 +293,11 @@ export const DocumentSigningCompleteDialog = ({
                     loading={form.formState.isSubmitting}
                   >
                     {match(role)
-                      .with(RecipientRole.VIEWER, () => <Trans>Mark as Viewed</Trans>)
-                      .with(RecipientRole.SIGNER, () => <Trans>Sign</Trans>)
-                      .with(RecipientRole.APPROVER, () => <Trans>Approve</Trans>)
-                      .with(RecipientRole.CC, () => <Trans>Mark as Viewed</Trans>)
-                      .with(RecipientRole.ASSISTANT, () => <Trans>Complete</Trans>)
+                      .with(RecipientRole.VIEWER, () => Mark as Viewed)
+                      .with(RecipientRole.SIGNER, () => Sign)
+                      .with(RecipientRole.APPROVER, () => Approve)
+                      .with(RecipientRole.CC, () => Mark as Viewed)
+                      .with(RecipientRole.ASSISTANT, () => Complete)
                       .exhaustive()}
                   </Button>
                 </div>

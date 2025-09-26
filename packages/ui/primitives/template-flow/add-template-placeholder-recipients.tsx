@@ -3,9 +3,6 @@ import { useCallback, useId, useMemo, useRef, useState } from 'react';
 import type { DropResult, SensorAPI } from '@hello-pangea/dnd';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { TemplateDirectLink } from '@prisma/client';
 import { DocumentSigningOrder, type Field, type Recipient, RecipientRole } from '@prisma/client';
 import { motion } from 'framer-motion';
@@ -78,7 +75,6 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
   const initialId = useId();
   const $sensorApi = useRef<SensorAPI | null>(null);
 
-  const { _ } = useLingui();
   const { user } = useSession();
 
   const organisation = useCurrentOrganisation();
@@ -311,10 +307,10 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
       const lastSigner = updatedSigners[updatedSigners.length - 1];
       if (lastSigner.role === RecipientRole.ASSISTANT) {
         toast({
-          title: _(msg`Warning: Assistant as last signer`),
-          description: _(
-            msg`Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.`,
-          ),
+          title: "Warning: Assistant as last signer",
+          description: 
+            "Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.",
+          ,
         });
       }
 
@@ -357,10 +353,10 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
 
       if (signer.role === RecipientRole.ASSISTANT && newPosition === remainingSigners.length - 1) {
         toast({
-          title: _(msg`Warning: Assistant as last signer`),
-          description: _(
-            msg`Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.`,
-          ),
+          title: "Warning: Assistant as last signer",
+          description: 
+            "Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.",
+          ,
         });
       }
 
@@ -381,8 +377,8 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
           shouldDirty: true,
         });
         toast({
-          title: _(msg`Signing order is enabled.`),
-          description: _(msg`You cannot add assistants when signing order is disabled.`),
+          title: "Signing order is enabled.",
+          description: "You cannot add assistants when signing order is disabled.",
           variant: 'destructive',
         });
         return;
@@ -401,10 +397,10 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
 
       if (role === RecipientRole.ASSISTANT && index === updatedSigners.length - 1) {
         toast({
-          title: _(msg`Warning: Assistant as last signer`),
-          description: _(
-            msg`Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.`,
-          ),
+          title: "Warning: Assistant as last signer",
+          description: 
+            "Having an assistant as the last signer means they will be unable to take any action as there are no subsequent signers to assist.",
+          ,
         });
       }
 
@@ -499,7 +495,7 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                     htmlFor="signingOrder"
                     className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    <Trans>Enable signing order</Trans>
+                    Enable signing order
                   </FormLabel>
                 </FormItem>
               )}
@@ -528,7 +524,7 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                       htmlFor="allowDictateNextSigner"
                       className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      <Trans>Allow signers to dictate next signer</Trans>
+                      Allow signers to dictate next signer
                     </FormLabel>
 
                     <Tooltip>
@@ -539,10 +535,10 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                       </TooltipTrigger>
                       <TooltipContent className="max-w-80 p-4">
                         <p>
-                          <Trans>
+                          
                             When enabled, signers can choose who should sign next in the sequence
                             instead of following the predefined order.
-                          </Trans>
+                          
                         </p>
                       </TooltipContent>
                     </Tooltip>
@@ -648,14 +644,14 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                                   >
                                     {!showAdvancedSettings && index === 0 && (
                                       <FormLabel>
-                                        <Trans>Email</Trans>
+                                        Email
                                       </FormLabel>
                                     )}
 
                                     <FormControl>
                                       <Input
                                         type="email"
-                                        placeholder={_(msg`Email`)}
+                                        placeholder={"Email"}
                                         {...field}
                                         value={
                                           isTemplateRecipientEmailPlaceholder(field.value)
@@ -691,13 +687,13 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                                   >
                                     {!showAdvancedSettings && index === 0 && (
                                       <FormLabel>
-                                        <Trans>Name</Trans>
+                                        Name
                                       </FormLabel>
                                     )}
 
                                     <FormControl>
                                       <Input
-                                        placeholder={_(msg`Name`)}
+                                        placeholder={"Name"}
                                         {...field}
                                         disabled={
                                           field.disabled ||
@@ -770,15 +766,15 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                                     </TooltipTrigger>
                                     <TooltipContent className="text-foreground z-9999 max-w-md p-4">
                                       <h3 className="text-foreground text-lg font-semibold">
-                                        <Trans>Direct link receiver</Trans>
+                                        Direct link receiver
                                       </h3>
                                       <p className="text-muted-foreground mt-1">
-                                        <Trans>
+                                        
                                           This field cannot be modified or deleted. When you share
                                           this template's direct link or add it to your public
                                           profile, anyone who accesses it can input their name and
                                           email, and fill in the fields assigned to them.
-                                        </Trans>
+                                        
                                       </p>
                                     </TooltipContent>
                                   </Tooltip>
@@ -824,7 +820,7 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                 onClick={() => onAddPlaceholderRecipient()}
               >
                 <Plus className="-ml-1 mr-2 h-5 w-5" />
-                <Trans>Add Placeholder Recipient</Trans>
+                Add Placeholder Recipient
               </Button>
 
               <Button
@@ -838,7 +834,7 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                 onClick={() => onAddPlaceholderSelfRecipient()}
               >
                 <Plus className="-ml-1 mr-2 h-5 w-5" />
-                <Trans>Add Myself</Trans>
+                Add Myself
               </Button>
             </div>
 
@@ -855,7 +851,7 @@ export const AddTemplatePlaceholderRecipientsFormPartial = ({
                   className="text-muted-foreground ml-2 text-sm"
                   htmlFor="showAdvancedRecipientSettings"
                 >
-                  <Trans>Show advanced settings</Trans>
+                  Show advanced settings
                 </label>
               </div>
             )}

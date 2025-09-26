@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans, useLingui } from '@lingui/react/macro';
 import type { FolderType } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderPlusIcon } from 'lucide-react';
@@ -43,7 +42,6 @@ export type FolderCreateDialogProps = {
 } & Omit<DialogPrimitive.DialogProps, 'children'>;
 
 export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
   const { folderId } = useParams();
 
@@ -69,12 +67,12 @@ export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDial
       setIsCreateFolderOpen(false);
 
       toast({
-        description: t`Folder created successfully`,
+        description: "Folder created successfully",
       });
     } catch (err) {
       toast({
-        title: t`Failed to create folder`,
-        description: t`An unknown error occurred while creating the folder.`,
+        title: "Failed to create folder",
+        description: "An unknown error occurred while creating the folder.",
         variant: 'destructive',
       });
     }
@@ -96,7 +94,7 @@ export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDial
             data-testid="folder-create-button"
           >
             <FolderPlusIcon className="mr-2 h-4 w-4" />
-            <Trans>Create Folder</Trans>
+            Create Folder
           </Button>
         )}
       </DialogTrigger>
@@ -104,10 +102,10 @@ export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDial
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Create New Folder</Trans>
+            Create New Folder
           </DialogTitle>
           <DialogDescription>
-            <Trans>Enter a name for your new folder. Folders help you organise your items.</Trans>
+            Enter a name for your new folder. Folders help you organise your items.
           </DialogDescription>
         </DialogHeader>
 
@@ -120,10 +118,10 @@ export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDial
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Folder Name</Trans>
+                      Folder Name
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder={t`My Folder`} {...field} />
+                      <Input placeholder={"My Folder"} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -136,11 +134,11 @@ export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDial
                   variant="secondary"
                   onClick={() => setIsCreateFolderOpen(false)}
                 >
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" loading={form.formState.isSubmitting}>
-                  <Trans>Create</Trans>
+                  Create
                 </Button>
               </DialogFooter>
             </fieldset>

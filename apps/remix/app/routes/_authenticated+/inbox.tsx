@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { InboxIcon } from 'lucide-react';
 
 import { OrganisationInvitations } from '~/components/general/organisations/organisation-invitations';
@@ -16,10 +15,10 @@ export default function InboxPage() {
         <h1 className="flex flex-row items-center gap-2 text-3xl font-bold">
           <InboxIcon className="text-muted-foreground h-8 w-8" />
 
-          <Trans>Personal Inbox</Trans>
+          Personal Inbox
         </h1>
         <p className="text-muted-foreground mt-1">
-          <Trans>Any documents that you have been invited to will appear here</Trans>
+          Any documents that you have been invited to will appear here
         </p>
 
         <OrganisationInvitations className="mt-4" />

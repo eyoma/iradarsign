@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { Trans, useLingui } from '@lingui/react/macro';
-
 import { trpc } from '@documenso/trpc/react';
 import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
 import { Button } from '@documenso/ui/primitives/button';
@@ -29,7 +27,6 @@ export const ClaimDeleteDialog = ({
   claimLocked,
   trigger,
 }: ClaimDeleteDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -37,7 +34,7 @@ export const ClaimDeleteDialog = ({
   const { mutateAsync: deleteClaim, isPending } = trpc.admin.claims.delete.useMutation({
     onSuccess: () => {
       toast({
-        title: t`Subscription claim deleted successfully.`,
+        title: "Subscription claim deleted successfully.",
       });
 
       setOpen(false);
@@ -46,7 +43,7 @@ export const ClaimDeleteDialog = ({
       console.error(err);
 
       toast({
-        title: t`Failed to delete subscription claim.`,
+        title: "Failed to delete subscription claim.",
         variant: 'destructive',
       });
     },
@@ -61,22 +58,22 @@ export const ClaimDeleteDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Delete Subscription Claim</Trans>
+            Delete Subscription Claim
           </DialogTitle>
           <DialogDescription>
-            <Trans>Are you sure you want to delete the following claim?</Trans>
+            Are you sure you want to delete the following claim?
           </DialogDescription>
         </DialogHeader>
 
         <Alert variant="neutral">
           <AlertDescription className="text-center font-semibold">
-            {claimLocked ? <Trans>This claim is locked and cannot be deleted.</Trans> : claimName}
+            {claimLocked ? This claim is locked and cannot be deleted. : claimName}
           </AlertDescription>
         </Alert>
 
         <DialogFooter>
           <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           {!claimLocked && (
@@ -86,7 +83,7 @@ export const ClaimDeleteDialog = ({
               loading={isPending}
               onClick={async () => deleteClaim({ id: claimId })}
             >
-              <Trans>Delete</Trans>
+              Delete
             </Button>
           )}
         </DialogFooter>

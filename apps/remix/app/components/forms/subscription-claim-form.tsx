@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans, useLingui } from '@lingui/react/macro';
 import type { SubscriptionClaim } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
@@ -31,8 +30,6 @@ export const SubscriptionClaimForm = ({
   onFormSubmit,
   formSubmitTrigger,
 }: SubscriptionClaimFormProps) => {
-  const { t } = useLingui();
-
   const form = useForm<SubscriptionClaimFormValues>({
     resolver: zodResolver(ZCreateSubscriptionClaimRequestSchema),
     defaultValues: {
@@ -53,10 +50,10 @@ export const SubscriptionClaimForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Name</Trans>
+                  Name
                 </FormLabel>
                 <FormControl>
-                  <Input placeholder={t`Enter claim name`} {...field} />
+                  <Input placeholder={"Enter claim name"} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -69,7 +66,7 @@ export const SubscriptionClaimForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Team Count</Trans>
+                  Team Count
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -80,7 +77,7 @@ export const SubscriptionClaimForm = ({
                   />
                 </FormControl>
                 <FormDescription>
-                  <Trans>Number of teams allowed. 0 = Unlimited</Trans>
+                  Number of teams allowed. 0 = Unlimited
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -93,7 +90,7 @@ export const SubscriptionClaimForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Member Count</Trans>
+                  Member Count
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -104,7 +101,7 @@ export const SubscriptionClaimForm = ({
                   />
                 </FormControl>
                 <FormDescription>
-                  <Trans>Number of members allowed. 0 = Unlimited</Trans>
+                  Number of members allowed. 0 = Unlimited
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -113,7 +110,7 @@ export const SubscriptionClaimForm = ({
 
           <div>
             <FormLabel>
-              <Trans>Feature Flags</Trans>
+              Feature Flags
             </FormLabel>
 
             <div className="mt-2 space-y-2 rounded-md border p-4">

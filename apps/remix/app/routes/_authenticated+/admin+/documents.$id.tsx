@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { SigningStatus } from '@prisma/client';
 import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
@@ -44,21 +41,20 @@ export async function loader({ params }: Route.LoaderArgs) {
 export default function AdminDocumentDetailsPage({ loaderData }: Route.ComponentProps) {
   const { document } = loaderData;
 
-  const { _, i18n } = useLingui();
   const { toast } = useToast();
 
   const { mutate: resealDocument, isPending: isResealDocumentLoading } =
     trpc.admin.document.reseal.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Document resealed`),
+          title: "Success",
+          description: "Document resealed",
         });
       },
       onError: () => {
         toast({
-          title: _(msg`Error`),
-          description: _(msg`Failed to reseal document`),
+          title: "Error",
+          description: "Failed to reseal documen",
           variant: 'destructive',
         });
       },
@@ -74,25 +70,25 @@ export default function AdminDocumentDetailsPage({ loaderData }: Route.Component
 
         {document.deletedAt && (
           <Badge size="large" variant="destructive">
-            <Trans>Deleted</Trans>
+            Deleted
           </Badge>
         )}
       </div>
 
       <div className="text-muted-foreground mt-4 text-sm">
         <div>
-          <Trans>Created on</Trans>: {i18n.date(document.createdAt, DateTime.DATETIME_MED)}
+          Created on: {i18n.date(document.createdAt, DateTime.DATETIME_MED)}
         </div>
 
         <div>
-          <Trans>Last updated at</Trans>: {i18n.date(document.updatedAt, DateTime.DATETIME_MED)}
+          Last updated at: {i18n.date(document.updatedAt, DateTime.DATETIME_MED)}
         </div>
       </div>
 
       <hr className="my-4" />
 
       <h2 className="text-lg font-semibold">
-        <Trans>Admin Actions</Trans>
+        Admin Actions
       </h2>
 
       <div className="mt-2 flex gap-x-4">
@@ -109,29 +105,29 @@ export default function AdminDocumentDetailsPage({ loaderData }: Route.Component
                 )}
                 onClick={() => resealDocument({ id: document.id })}
               >
-                <Trans>Reseal document</Trans>
+                Reseal document
               </Button>
             </TooltipTrigger>
 
             <TooltipContent className="max-w-[40ch]">
-              <Trans>
+              
                 Attempts sealing the document again, useful for after a code change has occurred to
                 resolve an erroneous document.
-              </Trans>
+              
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
 
         <Button variant="outline" asChild>
-          <Link to={`/admin/users/${document.userId}`}>
-            <Trans>Go to owner</Trans>
+          <Link to={"/admin/users/${document.userId}"}>
+            Go to owner
           </Link>
         </Button>
       </div>
 
       <hr className="my-4" />
       <h2 className="text-lg font-semibold">
-        <Trans>Recipients</Trans>
+        Recipients
       </h2>
 
       <div className="mt-4">

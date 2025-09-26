@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { WebhookTriggerEvents } from '@prisma/client';
 
 import { toFriendlyWebhookEventName } from '@documenso/lib/universal/webhook/to-friendly-webhook-event-name';
@@ -19,8 +17,6 @@ export const WebhookMultiSelectCombobox = ({
   listValues,
   onChange,
 }: WebhookMultiSelectComboboxProps) => {
-  const { _ } = useLingui();
-
   const value = listValues.map((event) => ({
     value: event,
     label: toFriendlyWebhookEventName(event),
@@ -33,12 +29,12 @@ export const WebhookMultiSelectCombobox = ({
   return (
     <MultiSelect
       commandProps={{
-        label: _(msg`Select triggers`),
+        label: "Select triggers",
       }}
       defaultOptions={triggerEvents}
       value={value}
       onChange={onMutliSelectChange}
-      placeholder={_(msg`Select triggers`)}
+      placeholder={"Select triggers"}
       hideClearAllButton
       hidePlaceholderWhenSelected
       emptyIndicator={<p className="text-center text-sm">No triggers available</p>}

@@ -1,7 +1,3 @@
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 import { ChevronLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
@@ -35,14 +31,14 @@ export type GenericErrorLayoutProps = {
 
 export const defaultErrorCodeMap: ErrorCodeMap = {
   404: {
-    subHeading: msg`404 not found`,
-    heading: msg`Oops! Something went wrong.`,
-    message: msg`The page you are looking for was moved, removed, renamed or might never have existed.`,
+    subHeading: "404 not found",
+    heading: "Oops! Something went wrong.",
+    message: "The page you are looking for was moved, removed, renamed or might never have existed.",
   },
   500: {
-    subHeading: msg`500 Internal Server Error`,
-    heading: msg`Oops! Something went wrong.`,
-    message: msg`An unexpected error occurred.`,
+    subHeading: "500 Internal Server Error",
+    heading: "Oops! Something went wrong.",
+    message: "An unexpected error occurred.",
   },
 };
 
@@ -54,8 +50,6 @@ export const GenericErrorLayout = ({
   secondaryButton,
 }: GenericErrorLayoutProps) => {
   const navigate = useNavigate();
-  const { _ } = useLingui();
-
   const { subHeading, heading, message } =
     errorCodeMap[errorCode || 500] ?? defaultErrorCodeMap[500];
 
@@ -81,11 +75,11 @@ export const GenericErrorLayout = ({
 
       <div className="inset-0 mx-auto flex h-full flex-grow items-center justify-center px-6 py-32">
         <div>
-          <p className="text-muted-foreground font-semibold">{_(subHeading)}</p>
+          <p className="text-muted-foreground font-semibold">{subHeading}</p>
 
-          <h1 className="mt-3 text-2xl font-bold md:text-3xl">{_(heading)}</h1>
+          <h1 className="mt-3 text-2xl font-bold md:text-3xl">{heading}</h1>
 
-          <p className="text-muted-foreground mt-4 text-sm">{_(message)}</p>
+          <p className="text-muted-foreground mt-4 text-sm">{message}</p>
 
           <div className="mt-6 flex gap-x-2.5 gap-y-4 md:items-center">
             {secondaryButton ||
@@ -98,7 +92,7 @@ export const GenericErrorLayout = ({
                   }}
                 >
                   <ChevronLeft className="mr-2 h-4 w-4" />
-                  <Trans>Go Back</Trans>
+                  Go Back
                 </Button>
               ))}
 
@@ -106,7 +100,7 @@ export const GenericErrorLayout = ({
               (primaryButton !== null && (
                 <Button asChild>
                   <Link to={'/'}>
-                    <Trans>Home</Trans>
+                    Home
                   </Link>
                 </Button>
               ))}

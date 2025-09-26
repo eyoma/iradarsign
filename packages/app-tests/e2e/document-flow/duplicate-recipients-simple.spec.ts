@@ -12,7 +12,7 @@ test('[DOCUMENT_FLOW]: Simple duplicate recipients test', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
   // Step 1: Settings - Continue with defaults
@@ -50,7 +50,7 @@ test('[DOCUMENT_FLOW]: Simple duplicate recipients test', async ({ page }) => {
   await page.waitForTimeout(2500);
   await page.getByRole('button', { name: 'Send' }).click();
 
-  await page.waitForURL(new RegExp(`/t/${team.url}/documents/\\d+`));
+  await page.waitForURL(new RegExp("/t/${team.url}/documents/\\d+`));
 
   await expect(page.getByRole('link', { name: document.title })).toBeVisible();
 });

@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { trpc as trpcReact } from '@documenso/trpc/react';
 import { Button } from '@documenso/ui/primitives/button';
 import {
@@ -25,15 +21,14 @@ export const TemplateDuplicateDialog = ({
   open,
   onOpenChange,
 }: TemplateDuplicateDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { mutateAsync: duplicateTemplate, isPending } =
     trpcReact.template.duplicateTemplate.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Template duplicated`),
-          description: _(msg`Your template has been duplicated successfully.`),
+          title: "Template duplicated",
+          description: "Your template has been duplicated successfully.",
           duration: 5000,
         });
 
@@ -41,8 +36,8 @@ export const TemplateDuplicateDialog = ({
       },
       onError: () => {
         toast({
-          title: _(msg`Error`),
-          description: _(msg`An error occurred while duplicating template.`),
+          title: "Error",
+          description: "An error occurred while duplicating template.",
           variant: 'destructive',
         });
       },
@@ -53,11 +48,11 @@ export const TemplateDuplicateDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Do you want to duplicate this template?</Trans>
+            Do you want to duplicate this template?
           </DialogTitle>
 
           <DialogDescription className="pt-2">
-            <Trans>Your template will be duplicated.</Trans>
+            Your template will be duplicated.
           </DialogDescription>
         </DialogHeader>
 
@@ -68,7 +63,7 @@ export const TemplateDuplicateDialog = ({
             variant="secondary"
             onClick={() => onOpenChange(false)}
           >
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           <Button
@@ -80,7 +75,7 @@ export const TemplateDuplicateDialog = ({
               })
             }
           >
-            <Trans>Duplicate</Trans>
+            Duplicate
           </Button>
         </DialogFooter>
       </DialogContent>

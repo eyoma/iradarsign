@@ -2,9 +2,6 @@ import { useCallback, useRef } from 'react';
 
 import type { DropResult, SensorAPI } from '@hello-pangea/dnd';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentSigningOrder, RecipientRole } from '@prisma/client';
 import { motion } from 'framer-motion';
 import { GripVertical, HelpCircle, Plus, Trash } from 'lucide-react';
@@ -41,7 +38,6 @@ export const ConfigureDocumentRecipients = ({
   control,
   isSubmitting,
 }: ConfigureDocumentRecipientsProps) => {
-  const { _ } = useLingui();
   const { isTemplate } = useConfigureDocument();
 
   const $sensorApi = useRef<SensorAPI | null>(null);
@@ -148,11 +144,11 @@ export const ConfigureDocumentRecipients = ({
   return (
     <div>
       <h3 className="text-foreground mb-1 text-lg font-medium">
-        <Trans>Recipients</Trans>
+        Recipients
       </h3>
 
       <p className="text-muted-foreground mb-6 text-sm">
-        <Trans>Add signers and configure signing preferences</Trans>
+        Add signers and configure signing preferences
       </p>
 
       <FormField
@@ -177,7 +173,7 @@ export const ConfigureDocumentRecipients = ({
               htmlFor="signingOrder"
               className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              <Trans>Enable signing order</Trans>
+              Enable signing order
             </FormLabel>
           </FormItem>
         )}
@@ -203,7 +199,7 @@ export const ConfigureDocumentRecipients = ({
                 htmlFor="allowDictateNextSigner"
                 className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                <Trans>Allow signers to dictate next signer</Trans>
+                Allow signers to dictate next signer
               </FormLabel>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -213,10 +209,10 @@ export const ConfigureDocumentRecipients = ({
                 </TooltipTrigger>
                 <TooltipContent className="max-w-80 p-4">
                   <p>
-                    <Trans>
+                    
                       When enabled, signers can choose who should sign next in the sequence instead
                       of following the predefined order.
-                    </Trans>
+                    
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -305,11 +301,11 @@ export const ConfigureDocumentRecipients = ({
                               })}
                             >
                               <FormLabel className="sr-only">
-                                <Trans>Name</Trans>
+                                Name
                               </FormLabel>
                               <FormControl>
                                 <Input
-                                  placeholder={_(msg`Name`)}
+                                  placeholder={"Name"}
                                   className="w-full"
                                   {...field}
                                   disabled={isSubmitting || snapshot.isDragging}
@@ -331,12 +327,12 @@ export const ConfigureDocumentRecipients = ({
                               })}
                             >
                               <FormLabel className="sr-only">
-                                <Trans>Email</Trans>
+                                Email
                               </FormLabel>
                               <FormControl>
                                 <Input
                                   type="email"
-                                  placeholder={_(msg`Email`)}
+                                  placeholder={"Email"}
                                   className="w-full"
                                   {...field}
                                   disabled={isSubmitting || snapshot.isDragging}
@@ -357,7 +353,7 @@ export const ConfigureDocumentRecipients = ({
                               })}
                             >
                               <FormLabel className="sr-only">
-                                <Trans>Role</Trans>
+                                Role
                               </FormLabel>
                               <FormControl>
                                 <RecipientRoleSelect
@@ -405,7 +401,7 @@ export const ConfigureDocumentRecipients = ({
           onClick={onAddSigner}
         >
           <Plus className="-ml-1 mr-2 h-5 w-5" />
-          <Trans>Add Signer</Trans>
+          Add Signer
         </Button>
       </div>
     </div>

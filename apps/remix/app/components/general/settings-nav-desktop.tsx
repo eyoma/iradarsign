@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import {
   BracesIcon,
   CreditCardIcon,
@@ -40,7 +39,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
           )}
         >
           <User className="mr-2 h-5 w-5" />
-          <Trans>Profile</Trans>
+          Profile
         </Button>
       </Link>
 
@@ -49,7 +48,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
           <Link to="/settings/document">
             <Button variant="ghost" className={cn('w-full justify-start')}>
               <Settings2Icon className="mr-2 h-5 w-5" />
-              <Trans>Preferences</Trans>
+              Preferences
             </Button>
           </Link>
 
@@ -61,7 +60,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
                 pathname?.startsWith('/settings/document') && 'bg-secondary',
               )}
             >
-              <Trans>Document</Trans>
+              Document
             </Button>
           </Link>
 
@@ -73,7 +72,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
                 pathname?.startsWith('/settings/branding') && 'bg-secondary',
               )}
             >
-              <Trans>Branding</Trans>
+              Branding
             </Button>
           </Link>
 
@@ -85,7 +84,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
                 pathname?.startsWith('/settings/email') && 'bg-secondary',
               )}
             >
-              <Trans>Email</Trans>
+              Email
             </Button>
           </Link>
 
@@ -98,7 +97,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
               )}
             >
               <Globe2Icon className="mr-2 h-5 w-5" />
-              <Trans>Public Profile</Trans>
+              Public Profile
             </Button>
           </Link>
 
@@ -111,7 +110,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
               )}
             >
               <BracesIcon className="mr-2 h-5 w-5" />
-              <Trans>API Tokens</Trans>
+              API Tokens
             </Button>
           </Link>
 
@@ -124,7 +123,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
               )}
             >
               <WebhookIcon className="mr-2 h-5 w-5" />
-              <Trans>Webhooks</Trans>
+              Webhooks
             </Button>
           </Link>
 
@@ -138,7 +137,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
                 )}
               >
                 <CreditCardIcon className="mr-2 h-5 w-5" />
-                <Trans>Billing</Trans>
+                Billing
               </Button>
             </Link>
           )}
@@ -154,7 +153,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
           )}
         >
           <Users className="mr-2 h-5 w-5" />
-          <Trans>Organisations</Trans>
+          Organisations
         </Button>
       </Link>
 
@@ -167,7 +166,7 @@ export const SettingsDesktopNav = ({ className, ...props }: SettingsDesktopNavPr
           )}
         >
           <Lock className="mr-2 h-5 w-5" />
-          <Trans>Security</Trans>
+          Security
         </Button>
       </Link>
     </div>

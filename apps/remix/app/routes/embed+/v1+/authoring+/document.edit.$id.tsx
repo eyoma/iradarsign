@@ -1,7 +1,5 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { DocumentDistributionMethod, DocumentSigningOrder, SigningStatus } from '@prisma/client';
 import { redirect, useLoaderData } from 'react-router';
 
@@ -80,7 +78,6 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
 };
 
 export default function EmbeddingAuthoringDocumentEditPage() {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { document } = useLoaderData<typeof loader>();
@@ -188,8 +185,8 @@ export default function EmbeddingAuthoringDocumentEditPage() {
       if (!configuration) {
         toast({
           variant: 'destructive',
-          title: _(msg`Error`),
-          description: _(msg`Please configure the document first`),
+          title: "Error",
+          description: "Please configure the document firs",
         });
 
         return;
@@ -241,8 +238,8 @@ export default function EmbeddingAuthoringDocumentEditPage() {
       });
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Document updated successfully`),
+        title: msg"Success",
+        description: "Document updated successfully",
       });
 
       // Send a message to the parent window with the document details
@@ -261,8 +258,8 @@ export default function EmbeddingAuthoringDocumentEditPage() {
 
       toast({
         variant: 'destructive',
-        title: _(msg`Error`),
-        description: _(msg`Failed to update document`),
+        title: "Error",
+        description: "Failed to update document",
       });
     }
   };

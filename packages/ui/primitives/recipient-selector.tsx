@@ -1,7 +1,5 @@
 import { useCallback, useState } from 'react';
 
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Recipient } from '@prisma/client';
 import { RecipientRole, SendStatus, SigningStatus } from '@prisma/client';
 import { Check, ChevronsUpDown, Info } from 'lucide-react';
@@ -29,7 +27,6 @@ export const RecipientSelector = ({
   onSelectedRecipientChange,
   recipients,
 }: RecipientSelectorProps) => {
-  const { _ } = useLingui();
   const [showRecipientsSelector, setShowRecipientsSelector] = useState(false);
 
   const recipientsByRole = useCallback(() => {
@@ -107,14 +104,14 @@ export const RecipientSelector = ({
 
           <CommandEmpty>
             <span className="text-muted-foreground inline-block px-4">
-              <Trans>No recipient matching this description was found.</Trans>
+              No recipient matching this description was found.
             </span>
           </CommandEmpty>
 
           {recipientsByRoleToDisplay().map(([role, roleRecipients], roleIndex) => (
             <CommandGroup key={roleIndex}>
               <div className="text-muted-foreground mb-1 ml-2 mt-2 text-xs font-medium">
-                {_(RECIPIENT_ROLES_DESCRIPTION[role].roleNamePlural)}
+                {RECIPIENT_ROLES_DESCRIPTION[role].roleNamePlural}
               </div>
 
               {roleRecipients.length === 0 && (
@@ -122,7 +119,7 @@ export const RecipientSelector = ({
                   key={`${role}-empty`}
                   className="text-muted-foreground/80 px-4 pb-4 pt-2.5 text-center text-xs"
                 >
-                  <Trans>No recipients with this role</Trans>
+                  No recipients with this role
                 </div>
               )}
 
@@ -177,10 +174,10 @@ export const RecipientSelector = ({
                         </TooltipTrigger>
 
                         <TooltipContent className="text-muted-foreground max-w-xs">
-                          <Trans>
+                          
                             This document has already been sent to this recipient. You can no longer
                             edit this recipient.
-                          </Trans>
+                          
                         </TooltipContent>
                       </Tooltip>
                     )}

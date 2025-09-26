@@ -1,5 +1,3 @@
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import { DateTime } from 'luxon';
 
@@ -19,8 +17,6 @@ export function meta() {
 }
 
 export default function ApiTokensPage() {
-  const { i18n } = useLingui();
-
   const { data: tokens } = trpc.apiToken.getMany.useQuery();
 
   const team = useOptionalCurrentTeam();
@@ -28,9 +24,9 @@ export default function ApiTokensPage() {
   return (
     <div>
       <SettingsHeader
-        title={<Trans>API Tokens</Trans>}
+        title={API Tokens}
         subtitle={
-          <Trans>
+          
             On this page, you can create and manage API tokens. See our{' '}
             <a
               className="text-primary underline"
@@ -40,7 +36,7 @@ export default function ApiTokensPage() {
               Documentation
             </a>{' '}
             for more information.
-          </Trans>
+          
         }
       />
 
@@ -51,10 +47,10 @@ export default function ApiTokensPage() {
         >
           <div>
             <AlertTitle>
-              <Trans>Unauthorized</Trans>
+              Unauthorized
             </AlertTitle>
             <AlertDescription className="mr-2">
-              <Trans>You need to be an admin to manage API tokens.</Trans>
+              You need to be an admin to manage API tokens.
             </AlertDescription>
           </div>
         </Alert>
@@ -65,13 +61,13 @@ export default function ApiTokensPage() {
           <hr className="mb-4 mt-8" />
 
           <h4 className="text-xl font-medium">
-            <Trans>Your existing tokens</Trans>
+            Your existing tokens
           </h4>
 
           {tokens && tokens.length === 0 && (
             <div className="mb-4">
               <p className="text-muted-foreground mt-2 text-sm italic">
-                <Trans>Your tokens will be shown here once you create them.</Trans>
+                Your tokens will be shown here once you create them.
               </p>
             </div>
           )}
@@ -85,19 +81,19 @@ export default function ApiTokensPage() {
                       <h5 className="text-base">{token.name}</h5>
 
                       <p className="text-muted-foreground mt-2 text-xs">
-                        <Trans>
+                        
                           Created on {i18n.date(token.createdAt, DateTime.DATETIME_FULL)}
-                        </Trans>
+                        
                       </p>
                       {token.expires ? (
                         <p className="text-muted-foreground mt-1 text-xs">
-                          <Trans>
+                          
                             Expires on {i18n.date(token.expires, DateTime.DATETIME_FULL)}
-                          </Trans>
+                          
                         </p>
                       ) : (
                         <p className="text-muted-foreground mt-1 text-xs">
-                          <Trans>Token doesn't have an expiration date</Trans>
+                          Token doesn't have an expiration date
                         </p>
                       )}
                     </div>
@@ -105,7 +101,7 @@ export default function ApiTokensPage() {
                     <div>
                       <TokenDeleteDialog token={token}>
                         <Button variant="destructive">
-                          <Trans>Delete</Trans>
+                          Delete
                         </Button>
                       </TokenDeleteDialog>
                     </div>

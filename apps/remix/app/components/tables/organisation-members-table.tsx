@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationGroupType } from '@prisma/client';
 import { Edit, MoreHorizontal, Trash2 } from 'lucide-react';
 import { useSearchParams } from 'react-router';
@@ -32,8 +29,6 @@ import { OrganisationMemberDeleteDialog } from '~/components/dialogs/organisatio
 import { OrganisationMemberUpdateDialog } from '~/components/dialogs/organisation-member-update-dialog';
 
 export const OrganisationMembersDataTable = () => {
-  const { _, i18n } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
   const organisation = useCurrentOrganisation();
@@ -69,7 +64,7 @@ export const OrganisationMembersDataTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Organisation Member`),
+        header: "Organisation Member",
         cell: ({ row }) => {
           const avatarFallbackText = row.original.name
             ? extractInitials(row.original.name)
@@ -88,25 +83,25 @@ export const OrganisationMembersDataTable = () => {
         },
       },
       {
-        header: _(msg`Role`),
+        header: "Role",
         accessorKey: 'role',
         cell: ({ row }) =>
           organisation.ownerUserId === row.original.userId
-            ? _(msg`Owner`)
-            : _(EXTENDED_ORGANISATION_MEMBER_ROLE_MAP[row.original.currentOrganisationRole]),
+            ? "Owner"
+            : EXTENDED_ORGANISATION_MEMBER_ROLE_MAP[row.original.currentOrganisationRole],
       },
       {
-        header: _(msg`Member Since`),
+        header: "Member Since",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt),
       },
       {
-        header: _(msg`Groups`),
+        header: "Groups",
         cell: ({ row }) =>
           row.original.groups.filter((group) => group.type === OrganisationGroupType.CUSTOM).length,
       },
       {
-        header: _(msg`Actions`),
+        header: "Actions",
         cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -115,7 +110,7 @@ export const OrganisationMembersDataTable = () => {
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
               <DropdownMenuLabel>
-                <Trans>Actions</Trans>
+                Actions
               </DropdownMenuLabel>
 
               <OrganisationMemberUpdateDialog
@@ -137,7 +132,7 @@ export const OrganisationMembersDataTable = () => {
                     title="Update organisation member role"
                   >
                     <Edit className="mr-2 h-4 w-4" />
-                    <Trans>Update role</Trans>
+                    Update role
                   </DropdownMenuItem>
                 }
               />
@@ -156,10 +151,10 @@ export const OrganisationMembersDataTable = () => {
                         row.original.currentOrganisationRole,
                       )
                     }
-                    title={_(msg`Remove organisation member`)}
+                    title={"Remove organisation member"}
                   >
                     <Trash2 className="mr-2 h-4 w-4" />
-                    <Trans>Remove</Trans>
+                    Remove
                   </DropdownMenuItem>
                 }
               />

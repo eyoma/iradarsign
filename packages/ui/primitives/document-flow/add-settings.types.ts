@@ -1,4 +1,3 @@
-import { msg } from '@lingui/core/macro';
 import { DocumentVisibility } from '@prisma/client';
 import { z } from 'zod';
 
@@ -20,7 +19,7 @@ export const ZAddSettingsFormSchema = z.object({
   title: z
     .string()
     .trim()
-    .min(1, { message: msg`Title cannot be empty`.id }),
+    .min(1, { message: "Title cannot be empty".id }),
   externalId: z.string().optional(),
   visibility: z.nativeEnum(DocumentVisibility).optional(),
   globalAccessAuth: z
@@ -44,7 +43,7 @@ export const ZAddSettingsFormSchema = z.object({
       .optional()
       .default('en'),
     signatureTypes: z.array(z.nativeEnum(DocumentSignatureType)).min(1, {
-      message: msg`At least one signature type must be enabled`.id,
+      message: "At least one signature type must be enabled".id,
     }),
   }),
 });

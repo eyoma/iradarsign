@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Link, redirect } from 'react-router';
 
 import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
@@ -44,11 +43,11 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
     <div className="w-screen max-w-lg px-4">
       <div className="border-border dark:bg-background z-10 rounded-xl border bg-neutral-100 p-6">
         <h1 className="text-2xl font-semibold">
-          <Trans>Sign in to your account</Trans>
+          Sign in to your account
         </h1>
 
         <p className="text-muted-foreground mt-2 text-sm">
-          <Trans>Welcome back, we are lucky to have you.</Trans>
+          Welcome back, we are lucky to have you.
         </p>
         <hr className="-mx-6 my-4" />
 
@@ -60,12 +59,12 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
 
         {env('NEXT_PUBLIC_DISABLE_SIGNUP') !== 'true' && (
           <p className="text-muted-foreground mt-6 text-center text-sm">
-            <Trans>
+            
               Don't have an account?{' '}
               <Link to="/signup" className="text-documenso-700 duration-200 hover:opacity-70">
                 Sign up
               </Link>
-            </Trans>
+            
           </p>
         )}
       </div>

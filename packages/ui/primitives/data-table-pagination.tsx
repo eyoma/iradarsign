@@ -1,4 +1,3 @@
-import { Plural, Trans } from '@lingui/react/macro';
 import type { Table } from '@tanstack/react-table';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { match } from 'ts-pattern';
@@ -27,10 +26,10 @@ export function DataTablePagination<TData>({
         {match(additionalInformation)
           .with('SelectedCount', () => (
             <span>
-              <Trans>
+              
                 {table.getFilteredSelectedRowModel().rows.length} of{' '}
                 {table.getFilteredRowModel().rows.length} row(s) selected.
-              </Trans>
+              
             </span>
           ))
           .with('VisibleCount', () => {
@@ -52,7 +51,7 @@ export function DataTablePagination<TData>({
 
       <div className="flex items-center gap-x-2">
         <p className="whitespace-nowrap text-sm font-medium">
-          <Trans>Rows per page</Trans>
+          Rows per page
         </p>
         <Select
           value={`${table.getState().pagination.pageSize}`}
@@ -74,9 +73,9 @@ export function DataTablePagination<TData>({
       </div>
       <div className="flex flex-wrap items-center gap-x-6 gap-y-4 lg:gap-x-8">
         <div className="flex items-center text-sm font-medium md:justify-center">
-          <Trans>
+          
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
-          </Trans>
+          
         </div>
 
         <div className="flex items-center gap-x-2">

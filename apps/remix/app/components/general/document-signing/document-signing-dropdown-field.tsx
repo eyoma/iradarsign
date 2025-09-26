@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { Loader } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
@@ -40,7 +38,6 @@ export const DocumentSigningDropdownField = ({
   onSignField,
   onUnsignField,
 }: DocumentSigningDropdownFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -98,10 +95,10 @@ export const DocumentSigningDropdownField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
+        title: "Error",
         description: isAssistantMode
-          ? _(msg`An error occurred while signing as assistant.`)
-          : _(msg`An error occurred while signing the document.`),
+          ? "An error occurred while signing as assistant."
+          : "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -132,8 +129,8 @@ export const DocumentSigningDropdownField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the field.`),
+        title: "Error",
+        description: "An error occurred while removing the field.",
         variant: 'destructive',
       });
     }
@@ -186,7 +183,7 @@ export const DocumentSigningDropdownField = ({
               >
                 <SelectValue
                   className="text-[clamp(0.425rem,25cqw,0.825rem)]"
-                  placeholder={`${_(msg`Select`)}`}
+                  placeholder={`${msg`Selec"}"}
                 />
               </SelectTrigger>
               <SelectContent className="w-full ring-0 focus:ring-0" position="popper">

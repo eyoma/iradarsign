@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Recipient } from '@prisma/client';
 import { DocumentDistributionMethod, DocumentSigningOrder } from '@prisma/client';
 import { InfoIcon, Plus, Upload, X } from 'lucide-react';
@@ -82,8 +79,6 @@ export function TemplateUseDialog({
   trigger,
 }: TemplateUseDialogProps) {
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -135,8 +130,8 @@ export function TemplateUseDialog({
       });
 
       toast({
-        title: _(msg`Document created`),
-        description: _(msg`Your document has been created from the template successfully.`),
+        title: "Document created",
+        description: "Your document has been created from the template successfully.",
         duration: 5000,
       });
 
@@ -154,15 +149,15 @@ export function TemplateUseDialog({
       const error = AppError.parseError(err);
 
       const toastPayload: Toast = {
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while creating document from template.`),
+        title: "Error",
+        description: "An error occurred while creating document from template.",
         variant: 'destructive',
       };
 
       if (error.code === 'DOCUMENT_SEND_FAILED') {
-        toastPayload.description = _(
-          msg`The document was created but could not be sent to recipients.`,
-        );
+        toastPayload.description = 
+          "The document was created but could not be sent to recipients.",
+        ;
       }
 
       toast(toastPayload);
@@ -186,20 +181,20 @@ export function TemplateUseDialog({
         {trigger || (
           <Button variant="outline" className="bg-background">
             <Plus className="-ml-1 mr-2 h-4 w-4" />
-            <Trans>Use Template</Trans>
+            Use Template
           </Button>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Create document from template</Trans>
+            Create document from template
           </DialogTitle>
           <DialogDescription>
             {recipients.length === 0 ? (
-              <Trans>A draft document will be created</Trans>
+              A draft document will be created
             ) : (
-              <Trans>Add the recipients to create the document with</Trans>
+              Add the recipients to create the document with
             )}
           </DialogDescription>
         </DialogHeader>
@@ -244,12 +239,12 @@ export function TemplateUseDialog({
                         <FormItem className="w-full">
                           {index === 0 && (
                             <FormLabel required>
-                              <Trans>Email</Trans>
+                              Email
                             </FormLabel>
                           )}
 
                           <FormControl>
-                            <Input {...field} aria-label="Email" placeholder={_(msg`Email`)} />
+                            <Input {...field} aria-label="Email" placeholder={"Email"} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -263,7 +258,7 @@ export function TemplateUseDialog({
                         <FormItem className="w-full">
                           {index === 0 && (
                             <FormLabel>
-                              <Trans>Name</Trans>
+                              Name
                             </FormLabel>
                           )}
 
@@ -271,7 +266,7 @@ export function TemplateUseDialog({
                             <Input
                               {...field}
                               aria-label="Name"
-                              placeholder={recipients[index].name || _(msg`Name`)}
+                              placeholder={recipients[index].name || "Name"}
                             />
                           </FormControl>
                           <FormMessage />
@@ -301,7 +296,7 @@ export function TemplateUseDialog({
                                 className="text-muted-foreground ml-2 flex items-center text-sm"
                                 htmlFor="distributeDocument"
                               >
-                                <Trans>Send document</Trans>
+                                Send document
                                 <Tooltip>
                                   <TooltipTrigger type="button">
                                     <InfoIcon className="mx-1 h-4 w-4" />
@@ -309,16 +304,16 @@ export function TemplateUseDialog({
 
                                   <TooltipContent className="text-muted-foreground z-[99999] max-w-md space-y-2 p-4">
                                     <p>
-                                      <Trans>
+                                      
                                         The document will be immediately sent to recipients if this
                                         is checked.
-                                      </Trans>
+                                      
                                     </p>
 
                                     <p>
-                                      <Trans>
+                                      
                                         Otherwise, the document will be created as a draft.
-                                      </Trans>
+                                      
                                     </p>
                                   </TooltipContent>
                                 </Tooltip>
@@ -330,27 +325,27 @@ export function TemplateUseDialog({
                                 className="text-muted-foreground ml-2 flex items-center text-sm"
                                 htmlFor="distributeDocument"
                               >
-                                <Trans>Create as pending</Trans>
+                                Create as pending
                                 <Tooltip>
                                   <TooltipTrigger type="button">
                                     <InfoIcon className="mx-1 h-4 w-4" />
                                   </TooltipTrigger>
                                   <TooltipContent className="text-muted-foreground z-[99999] max-w-md space-y-2 p-4">
                                     <p>
-                                      <Trans>
+                                      
                                         Create the document as pending and ready to sign.
-                                      </Trans>
+                                      
                                     </p>
 
                                     <p>
-                                      <Trans>We won't send anything to notify recipients.</Trans>
+                                      We won't send anything to notify recipients.
                                     </p>
 
                                     <p className="mt-2">
-                                      <Trans>
+                                      
                                         We will generate signing links for you, which you can send
                                         to the recipients through your method of choice.
-                                      </Trans>
+                                      
                                     </p>
                                   </TooltipContent>
                                 </Tooltip>
@@ -384,17 +379,17 @@ export function TemplateUseDialog({
                           className="text-muted-foreground ml-2 flex items-center text-sm"
                           htmlFor="useCustomDocument"
                         >
-                          <Trans>Upload custom document</Trans>
+                          Upload custom document
                           <Tooltip>
                             <TooltipTrigger type="button">
                               <InfoIcon className="mx-1 h-4 w-4" />
                             </TooltipTrigger>
                             <TooltipContent className="text-muted-foreground z-[99999] max-w-md space-y-2 p-4">
                               <p>
-                                <Trans>
+                                
                                   Upload a custom document to use instead of the template's default
                                   document
-                                </Trans>
+                                
                               </p>
                             </TooltipContent>
                           </Tooltip>
@@ -428,12 +423,12 @@ export function TemplateUseDialog({
                                       <Upload className="text-muted-foreground/50 mx-auto h-10 w-10" />
                                       <div className="mt-4 flex text-sm leading-6">
                                         <span className="text-muted-foreground relative">
-                                          <Trans>
+                                          
                                             <span className="text-primary font-semibold">
                                               Click to upload
                                             </span>{' '}
                                             or drag and drop
-                                          </Trans>
+                                          
                                         </span>
                                       </div>
                                       <p className="text-muted-foreground/80 text-xs">
@@ -469,7 +464,7 @@ export function TemplateUseDialog({
                                     if (file.type !== 'application/pdf') {
                                       form.setError('customDocumentData', {
                                         type: 'manual',
-                                        message: _(msg`Please select a PDF file`),
+                                        message: "Please select a PDF file",
                                       });
 
                                       return;
@@ -478,9 +473,9 @@ export function TemplateUseDialog({
                                     if (file.size > APP_DOCUMENT_UPLOAD_SIZE_LIMIT * 1024 * 1024) {
                                       form.setError('customDocumentData', {
                                         type: 'manual',
-                                        message: _(
-                                          msg`File size exceeds the limit of ${APP_DOCUMENT_UPLOAD_SIZE_LIMIT} MB`,
-                                        ),
+                                        message: 
+                                          "File size exceeds the limit of ${APP_DOCUMENT_UPLOAD_SIZE_LIMIT} MB",
+                                        ,
                                       });
 
                                       return;
@@ -503,7 +498,7 @@ export function TemplateUseDialog({
                                     >
                                       <X className="h-4 w-4" />
                                       <div className="sr-only">
-                                        <Trans>Clear file</Trans>
+                                        Clear file
                                       </div>
                                     </Button>
                                   </div>
@@ -522,17 +517,17 @@ export function TemplateUseDialog({
               <DialogFooter className="mt-4">
                 <DialogClose asChild>
                   <Button type="button" variant="secondary">
-                    <Trans>Close</Trans>
+                    Close
                   </Button>
                 </DialogClose>
 
                 <Button type="submit" loading={form.formState.isSubmitting}>
                   {!form.getValues('distributeDocument') ? (
-                    <Trans>Create as draft</Trans>
+                    Create as draft
                   ) : documentDistributionMethod === DocumentDistributionMethod.EMAIL ? (
-                    <Trans>Create and send</Trans>
+                    Create and send
                   ) : (
-                    <Trans>Create signing links</Trans>
+                    Create signing links
                   )}
                 </Button>
               </DialogFooter>

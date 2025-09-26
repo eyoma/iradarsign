@@ -1,8 +1,5 @@
 import * as React from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { AnimatePresence } from 'framer-motion';
 import { Check, ChevronsUpDown, Loader, XIcon } from 'lucide-react';
 
@@ -55,8 +52,6 @@ export function MultiSelectCombobox<T = OptionValue>({
   selectedValues,
   testId,
 }: MultiSelectComboboxProps<T>) {
-  const { _ } = useLingui();
-
   const [open, setOpen] = React.useState(false);
 
   const handleSelect = (selectedOption: T) => {
@@ -153,9 +148,9 @@ export function MultiSelectCombobox<T = OptionValue>({
 
       <PopoverContent className={cn('z-[50000000] w-full p-0', contentClassName)}>
         <Command>
-          {enableSearch && <CommandInput placeholder={inputPlaceholder && _(inputPlaceholder)} />}
+          {enableSearch && <CommandInput placeholder={inputPlaceholder && inputPlaceholder} />}
           <CommandEmpty>
-            <Trans>No value found.</Trans>
+            No value found.
           </CommandEmpty>
           <CommandGroup>
             {options.map((option, i) => (

@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useRevalidator } from 'react-router';
 
 import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
@@ -35,7 +32,6 @@ export const DocumentSigningEmailField = ({
   onSignField,
   onUnsignField,
 }: DocumentSigningEmailFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -86,10 +82,10 @@ export const DocumentSigningEmailField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
+        title: "Error",
         description: isAssistantMode
-          ? _(msg`An error occurred while signing as assistant.`)
-          : _(msg`An error occurred while signing the document.`),
+          ? "An error occurred while signing as assistant."
+          : "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -114,8 +110,8 @@ export const DocumentSigningEmailField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the field.`),
+        title: "Error",
+        description: "An error occurred while removing the field.",
         variant: 'destructive',
       });
     }
@@ -127,7 +123,7 @@ export const DocumentSigningEmailField = ({
 
       {!field.inserted && (
         <DocumentSigningFieldsUninserted>
-          <Trans>Email</Trans>
+          Email
         </DocumentSigningFieldsUninserted>
       )}
 

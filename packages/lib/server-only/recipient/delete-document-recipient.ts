@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { SendStatus } from '@prisma/client';
 
 import { mailer } from '@documenso/email/mailer';
@@ -147,7 +146,7 @@ export const deleteDocumentRecipient = async ({
       },
       from: senderEmail,
       replyTo: replyToEmail,
-      subject: i18n._(msg`You have been removed from a document`),
+      subject: i18n."You have been removed from a document",
       html,
       text,
     });

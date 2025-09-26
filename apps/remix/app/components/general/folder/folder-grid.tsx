@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { FolderType } from '@prisma/client';
 import { FolderIcon, HomeIcon } from 'lucide-react';
 import { Link } from 'react-router';
@@ -74,7 +73,7 @@ export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
         >
           <Link to={formatRootPath()} className="flex items-center">
             <HomeIcon className="mr-2 h-4 w-4" />
-            <Trans>Home</Trans>
+            Home
           </Link>
 
           {isPending && parentId ? (

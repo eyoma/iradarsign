@@ -14,7 +14,7 @@ test('[TEMPLATE_FLOW]: add settings', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: `/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set title.
@@ -48,7 +48,7 @@ test('[TEMPLATE_FLOW] add document visibility settings', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: "/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Set document visibility.
@@ -63,7 +63,7 @@ test('[TEMPLATE_FLOW] add document visibility settings', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Add Placeholders' })).toBeVisible();
 
   // Navigate back to the edit page to check that the settings are saved correctly.
-  await page.goto(`/t/${team.url}/templates/${template.id}/edit`);
+  await page.goto("/t/${team.url}/templates/${template.id}/edi");
 
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
   await expect(page.getByTestId('documentVisibilitySelectValue')).toContainText(
@@ -96,7 +96,7 @@ test('[TEMPLATE_FLOW] team member visibility permissions', async ({ page }) => {
   await apiSignin({
     page,
     email: managerUser.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: "/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Manager should be able to set visibility to managers and above
@@ -115,7 +115,7 @@ test('[TEMPLATE_FLOW] team member visibility permissions', async ({ page }) => {
   await apiSignin({
     page,
     email: memberUser.email,
-    redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+    redirectPath: "/t/${team.url}/templates/${template.id}/edi",
   });
 
   // Regular member should not be able to modify visibility when set to managers and above
@@ -130,7 +130,7 @@ test('[TEMPLATE_FLOW] team member visibility permissions', async ({ page }) => {
   });
 
   // Navigate to the new template
-  await page.goto(`/t/${team.url}/templates/${everyoneTemplate.id}/edit`);
+  await page.goto("/t/${team.url}/templates/${everyoneTemplate.id}/edit`);
 
   // Regular member should be able to see but not modify visibility
   await expect(page.getByTestId('documentVisibilitySelectValue')).toBeDisabled();

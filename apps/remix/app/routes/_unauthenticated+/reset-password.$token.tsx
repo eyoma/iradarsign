@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Link, redirect } from 'react-router';
 
 import { getResetTokenValidity } from '@documenso/lib/server-only/user/get-reset-token-validity';
@@ -33,22 +32,22 @@ export default function ResetPasswordPage({ loaderData }: Route.ComponentProps) 
     <div className="w-screen max-w-lg px-4">
       <div className="w-full">
         <h1 className="text-4xl font-semibold">
-          <Trans>Reset Password</Trans>
+          Reset Password
         </h1>
 
         <p className="text-muted-foreground mt-2 text-sm">
-          <Trans>Please choose your new password</Trans>
+          Please choose your new password
         </p>
 
         <ResetPasswordForm token={token} className="mt-4" />
 
         <p className="text-muted-foreground mt-6 text-center text-sm">
-          <Trans>
+          
             Don't have an account?{' '}
             <Link to="/signup" className="text-primary duration-200 hover:opacity-70">
               Sign up
             </Link>
-          </Trans>
+          
         </p>
       </div>
     </div>

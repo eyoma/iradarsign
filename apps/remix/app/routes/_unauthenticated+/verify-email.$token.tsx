@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { AlertTriangle, CheckCircle2, Loader, XCircle } from 'lucide-react';
 import { Link, redirect, useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
@@ -31,7 +28,6 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
   const { token } = loaderData;
 
   const { refreshSession } = useOptionalSession();
-  const { _ } = useLingui();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -53,8 +49,8 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
       console.error(err);
 
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`We were unable to verify your email at this time.`),
+        title: "Something went wrong",
+        description: "We were unable to verify your email at this time.",
       });
 
       await navigate('/verify-email');
@@ -85,19 +81,19 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
 
           <div>
             <h2 className="text-2xl font-bold md:text-4xl">
-              <Trans>Something went wrong</Trans>
+              Something went wrong
             </h2>
 
             <p className="text-muted-foreground mt-4">
-              <Trans>
+              
                 We were unable to verify your email. If your email is not verified already, please
                 try again.
-              </Trans>
+              
             </p>
 
             <Button className="mt-4" asChild>
               <Link to="/">
-                <Trans>Go back home</Trans>
+                Go back home
               </Link>
             </Button>
           </div>
@@ -113,19 +109,19 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
 
           <div>
             <h2 className="text-2xl font-bold md:text-4xl">
-              <Trans>Your token has expired!</Trans>
+              Your token has expired!
             </h2>
 
             <p className="text-muted-foreground mt-4">
-              <Trans>
+              
                 It seems that the provided token has expired. We've just sent you another token,
                 please check your email and try again.
-              </Trans>
+              
             </p>
 
             <Button className="mt-4" asChild>
               <Link to="/">
-                <Trans>Go back home</Trans>
+                Go back home
               </Link>
             </Button>
           </div>
@@ -141,18 +137,18 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
 
           <div>
             <h2 className="text-2xl font-bold md:text-4xl">
-              <Trans>Email Confirmed!</Trans>
+              Email Confirmed!
             </h2>
 
             <p className="text-muted-foreground mt-4">
-              <Trans>
+              
                 Your email has been successfully confirmed! You can now use all features of iRadar.
-              </Trans>
+              
             </p>
 
             <Button className="mt-4" asChild>
               <Link to="/">
-                <Trans>Continue</Trans>
+                Continue
               </Link>
             </Button>
           </div>
@@ -168,18 +164,18 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
 
           <div>
             <h2 className="text-2xl font-bold md:text-4xl">
-              <Trans>Email already confirmed</Trans>
+              Email already confirmed
             </h2>
 
             <p className="text-muted-foreground mt-4">
-              <Trans>
+              
                 Your email has already been confirmed. You can now use all features of iRadar.
-              </Trans>
+              
             </p>
 
             <Button className="mt-4" asChild>
               <Link to="/">
-                <Trans>Go back home</Trans>
+                Go back home
               </Link>
             </Button>
           </div>

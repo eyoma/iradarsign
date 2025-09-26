@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
 import { canExecuteOrganisationAction } from '@documenso/lib/utils/organisations';
 import { trpc } from '@documenso/trpc/react';
@@ -17,7 +13,6 @@ export const OrganisationBillingPortalButton = ({
 }: OrganisationBillingPortalButtonProps) => {
   const organisation = useCurrentOrganisation();
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { mutateAsync: manageSubscription, isPending } =
@@ -35,10 +30,10 @@ export const OrganisationBillingPortalButton = ({
       window.open(redirectUrl, '_blank');
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(
-          msg`We are unable to proceed to the billing portal at this time. Please try again, or contact support.`,
-        ),
+        title: "Something went wrong",
+        description: 
+          "We are unable to proceed to the billing portal at this time. Please try again, or contact support.",
+        ,
         variant: 'destructive',
         duration: 10000,
       });
@@ -52,7 +47,7 @@ export const OrganisationBillingPortalButton = ({
       loading={isPending}
       disabled={!canManageBilling}
     >
-      <Trans>Manage billing</Trans>
+      Manage billing
     </Button>
   );
 };

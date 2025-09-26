@@ -1,8 +1,5 @@
 import { type ReactNode, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { ErrorCode, type FileRejection, useDropzone } from 'react-dropzone';
 import { Link, useNavigate, useParams } from 'react-router';
@@ -30,7 +27,6 @@ export interface DocumentDropZoneWrapperProps {
 }
 
 export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZoneWrapperProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { user } = useSession();
   const { folderId } = useParams();
@@ -74,8 +70,8 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
       void refreshLimits();
 
       toast({
-        title: _(msg`Document uploaded`),
-        description: _(msg`Your document has been uploaded successfully.`),
+        title: "Document uploaded",
+        description: "Your document has been uploaded successfully.",
         duration: 5000,
       });
 
@@ -85,21 +81,21 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
         timestamp: new Date().toISOString(),
       });
 
-      await navigate(`${formatDocumentsPath(team.url)}/${id}/edit`);
+      await navigate(`${formatDocumentsPath(team.url)}/${id}/edi");
     } catch (err) {
       const error = AppError.parseError(err);
 
       const errorMessage = match(error.code)
-        .with('INVALID_DOCUMENT_FILE', () => msg`You cannot upload encrypted PDFs`)
+        .with('INVALID_DOCUMENT_FILE', () => msg"You cannot upload encrypted PDFs`)
         .with(
           AppErrorCode.LIMIT_EXCEEDED,
-          () => msg`You have reached your document limit for this month. Please upgrade your plan.`,
+          () => "You have reached your document limit for this month. Please upgrade your plan.",
         )
-        .otherwise(() => msg`An error occurred while uploading your document.`);
+        .otherwise(() => "An error occurred while uploading your document.");
 
       toast({
-        title: _(msg`Error`),
-        description: _(errorMessage),
+        title: "Error",
+        description: errorMessage,
         variant: 'destructive',
         duration: 7500,
       });
@@ -124,15 +120,15 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
       <span key={index} className="block">
         {match(error.code)
           .with(ErrorCode.FileTooLarge, () => (
-            <Trans>File is larger than {APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB</Trans>
+            File is larger than {APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB
           ))
-          .with(ErrorCode.FileInvalidType, () => <Trans>Only PDF files are allowed</Trans>)
-          .with(ErrorCode.FileTooSmall, () => <Trans>File is too small</Trans>)
+          .with(ErrorCode.FileInvalidType, () => Only PDF files are allowed)
+          .with(ErrorCode.FileTooSmall, () => File is too small)
           .with(ErrorCode.TooManyFiles, () => (
-            <Trans>Only one file can be uploaded at a time</Trans>
+            Only one file can be uploaded at a time
           ))
           .otherwise(() => (
-            <Trans>Unknown error</Trans>
+            Unknown error
           ))}
       </span>
     ));
@@ -140,14 +136,14 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
     const description = (
       <>
         <span className="font-medium">
-          {file.name} <Trans>couldn't be uploaded:</Trans>
+          {file.name} couldn't be uploaded:
         </span>
         {errorNodes}
       </>
     );
 
     toast({
-      title: _(msg`Upload failed`),
+      title: "Upload failed",
       description,
       duration: 5000,
       variant: 'destructive',
@@ -181,11 +177,11 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
         <div className="bg-muted/60 fixed left-0 top-0 z-[9999] h-full w-full backdrop-blur-[4px]">
           <div className="pointer-events-none flex h-full w-full flex-col items-center justify-center">
             <h2 className="text-foreground text-2xl font-semibold">
-              <Trans>Upload Document</Trans>
+              Upload Document
             </h2>
 
             <p className="text-muted-foreground text-md mt-4">
-              <Trans>Drag and drop your PDF file here</Trans>
+              Drag and drop your PDF file here
             </p>
 
             {isUploadDisabled && IS_BILLING_ENABLED() && (
@@ -193,7 +189,7 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
                 to={`/o/${organisation.url}/settings/billing`}
                 className="mt-4 text-sm text-amber-500 hover:underline dark:text-amber-400"
               >
-                <Trans>Upgrade your plan to upload more documents</Trans>
+                Upgrade your plan to upload more documents
               </Link>
             )}
 
@@ -202,9 +198,9 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
               remaining.documents > 0 &&
               Number.isFinite(remaining.documents) && (
                 <p className="text-muted-foreground/80 mt-4 text-sm">
-                  <Trans>
+                  
                     {remaining.documents} of {quota.documents} documents remaining this month.
-                  </Trans>
+                  
                 </p>
               )}
           </div>
@@ -216,7 +212,7 @@ export const DocumentDropZoneWrapper = ({ children, className }: DocumentDropZon
           <div className="pointer-events-none flex h-1/2 w-full flex-col items-center justify-center">
             <Loader className="text-primary h-12 w-12 animate-spin" />
             <p className="text-foreground mt-8 font-medium">
-              <Trans>Uploading document...</Trans>
+              Uploading document...
             </p>
           </div>
         </div>

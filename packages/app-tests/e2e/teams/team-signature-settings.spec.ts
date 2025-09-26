@@ -15,13 +15,13 @@ test('[TEAMS]: check that default team signature settings are all enabled', asyn
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/settings/document`,
+    redirectPath: `/t/${team.url}/settings/documen",
   });
 
   const document = await seedTeamDocumentWithMeta(team);
 
   // Create a document and check the settings
-  await page.goto(`/t/${team.url}/documents/${document.id}/edit`);
+  await page.goto("/t/${team.url}/documents/${document.id}/edi");
 
   // Verify that the settings match
   await page.getByRole('button', { name: 'Advanced Options' }).click();
@@ -30,7 +30,7 @@ test('[TEAMS]: check that default team signature settings are all enabled', asyn
   await expect(page.getByRole('combobox').filter({ hasText: 'Draw' })).toBeVisible();
 
   // Go to document and check that the signatured tabs are correct.
-  await page.goto(`/sign/${document.recipients[0].token}`);
+  await page.goto("/sign/${document.recipients[0].token}`);
   await page.getByTestId('signature-pad-dialog-button').click();
 
   // Check the tab values
@@ -45,14 +45,14 @@ test('[TEAMS]: check signature modes can be disabled', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/settings/document`,
+    redirectPath: `/t/${team.url}/settings/documen",
   });
 
   const allTabs = ['Type', 'Upload', 'Draw'];
   const tabTest = [['Type', 'Upload', 'Draw'], ['Type', 'Upload'], ['Type']];
 
   for (const tabs of tabTest) {
-    await page.goto(`/t/${team.url}/settings/document`);
+    await page.goto("/t/${team.url}/settings/documen");
 
     // Update combobox to have the correct tabs
     await page.getByTestId('signature-types-trigger').click();
@@ -88,7 +88,7 @@ test('[TEAMS]: check signature modes can be disabled', async ({ page }) => {
     const document = await seedTeamDocumentWithMeta(team);
 
     // Go to document and check that the signature tabs are correct.
-    await page.goto(`/sign/${document.recipients[0].token}`);
+    await page.goto("/sign/${document.recipients[0].token}`);
     await page.getByTestId('signature-pad-dialog-button').click();
 
     // Wait for signature dialog to fully load
@@ -112,14 +112,14 @@ test('[TEAMS]: check signature modes work for templates', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/settings/document`,
+    redirectPath: `/t/${team.url}/settings/documen",
   });
 
   const allTabs = ['Type', 'Upload', 'Draw'];
   const tabTest = [['Type', 'Upload', 'Draw'], ['Type', 'Upload'], ['Type']];
 
   for (const tabs of tabTest) {
-    await page.goto(`/t/${team.url}/settings/document`);
+    await page.goto("/t/${team.url}/settings/documen");
 
     // Update combobox to have the correct tabs
     await page.getByTestId('signature-types-trigger').click();
@@ -154,7 +154,7 @@ test('[TEAMS]: check signature modes work for templates', async ({ page }) => {
 
     const template = await seedTeamTemplateWithMeta(team);
 
-    await page.goto(`/t/${team.url}/templates/${template.id}`);
+    await page.goto("/t/${team.url}/templates/${template.id}`);
     await page.getByRole('button', { name: 'Use' }).click();
 
     // Check the send document checkbox to true

@@ -1,9 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { CheckIcon, Loader, Monitor, Moon, Sun } from 'lucide-react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router';
@@ -39,12 +35,12 @@ import { useOptionalCurrentTeam } from '~/providers/team';
 
 const SETTINGS_PAGES = [
   {
-    label: msg`Settings`,
+    label: "Settings",
     path: '/settings',
     shortcut: SETTINGS_PAGE_SHORTCUT.replace('+', ''),
   },
-  { label: msg`Profile`, path: '/settings/profile' },
-  { label: msg`Password`, path: '/settings/password' },
+  { label: "Profile", path: '/settings/profile' },
+  { label: "Password", path: '/settings/password' },
 ];
 
 export type AppCommandMenuProps = {
@@ -53,7 +49,6 @@ export type AppCommandMenuProps = {
 };
 
 export function AppCommandMenu({ open, onOpenChange }: AppCommandMenuProps) {
-  const { _ } = useLingui();
   const { organisations } = useSession();
 
   const navigate = useNavigate();
@@ -94,24 +89,24 @@ export function AppCommandMenu({ open, onOpenChange }: AppCommandMenuProps) {
 
     return [
       {
-        label: msg`All documents`,
+        label: "All documents",
         path: `/t/${teamUrl}/documents?status=ALL`,
         shortcut: DOCUMENTS_PAGE_SHORTCUT.replace('+', ''),
       },
       {
-        label: msg`Draft documents`,
+        label: "Draft documents",
         path: `/t/${teamUrl}/documents?status=DRAFT`,
       },
       {
-        label: msg`Completed documents`,
+        label: "Completed documents",
         path: `/t/${teamUrl}/documents?status=COMPLETED`,
       },
       {
-        label: msg`Pending documents`,
+        label: "Pending documents",
         path: `/t/${teamUrl}/documents?status=PENDING`,
       },
       {
-        label: msg`Inbox documents`,
+        label: "Inbox documents",
         path: `/t/${teamUrl}/documents?status=INBOX`,
       },
     ];
@@ -124,7 +119,7 @@ export function AppCommandMenu({ open, onOpenChange }: AppCommandMenuProps) {
 
     return [
       {
-        label: msg`All templates`,
+        label: "All templates",
         path: `/t/${teamUrl}/templates`,
         shortcut: TEMPLATES_PAGE_SHORTCUT.replace('+', ''),
       },
@@ -215,7 +210,7 @@ export function AppCommandMenu({ open, onOpenChange }: AppCommandMenuProps) {
       <CommandInput
         value={search}
         onValueChange={setSearch}
-        placeholder={_(msg`Type a command or search...`)}
+        placeholder={"Type a command or search..."}
       />
 
       <CommandList>
@@ -229,25 +224,25 @@ export function AppCommandMenu({ open, onOpenChange }: AppCommandMenuProps) {
           </CommandEmpty>
         ) : (
           <CommandEmpty>
-            <Trans>No results found.</Trans>
+            No results found.
           </CommandEmpty>
         )}
         {!currentPage && (
           <>
             {documentPageLinks.length > 0 && (
-              <CommandGroup className="mx-2 p-0 pb-2" heading={_(msg`Documents`)}>
+              <CommandGroup className="mx-2 p-0 pb-2" heading={"Documents"}>
                 <Commands push={push} pages={documentPageLinks} />
               </CommandGroup>
             )}
             {templatePageLinks.length > 0 && (
-              <CommandGroup className="mx-2 p-0 pb-2" heading={_(msg`Templates`)}>
+              <CommandGroup className="mx-2 p-0 pb-2" heading={"Templates"}>
                 <Commands push={push} pages={templatePageLinks} />
               </CommandGroup>
             )}
-            <CommandGroup className="mx-2 p-0 pb-2" heading={_(msg`Settings`)}>
+            <CommandGroup className="mx-2 p-0 pb-2" heading={"Settings"}>
               <Commands push={push} pages={SETTINGS_PAGES} />
             </CommandGroup>
-            <CommandGroup className="mx-2 p-0 pb-2" heading={_(msg`Preferences`)}>
+            <CommandGroup className="mx-2 p-0 pb-2" heading={"Preferences"}>
               <CommandItem className="-mx-2 -my-1 rounded-lg" onSelect={() => addPage('language')}>
                 Change language
               </CommandItem>
@@ -256,7 +251,7 @@ export function AppCommandMenu({ open, onOpenChange }: AppCommandMenuProps) {
               </CommandItem>
             </CommandGroup>
             {searchResults.length > 0 && (
-              <CommandGroup className="mx-2 p-0 pb-2" heading={_(msg`Your documents`)}>
+              <CommandGroup className="mx-2 p-0 pb-2" heading={"Your documents"}>
                 <Commands push={push} pages={searchResults} />
               </CommandGroup>
             )}
@@ -277,30 +272,26 @@ const Commands = ({
   push: (_path: string) => void;
   pages: { label: MessageDescriptor | string; path: string; shortcut?: string; value?: string }[];
 }) => {
-  const { _ } = useLingui();
-
   return pages.map((page, idx) => (
     <CommandItem
       className="-mx-2 -my-1 rounded-lg"
       key={page.path + idx}
-      value={page.value ?? (typeof page.label === 'string' ? page.label : _(page.label))}
+      value={page.value ?? (typeof page.label === 'string' ? page.label : page.label)}
       onSelect={() => push(page.path)}
     >
-      {typeof page.label === 'string' ? page.label : _(page.label)}
+      {typeof page.label === 'string' ? page.label : page.label}
       {page.shortcut && <CommandShortcut>{page.shortcut}</CommandShortcut>}
     </CommandItem>
   ));
 };
 
 const ThemeCommands = () => {
-  const { _ } = useLingui();
-
   const [, setTheme] = useTheme();
 
   const themes = [
-    { label: msg`Light Mode`, theme: Theme.LIGHT, icon: Sun },
-    { label: msg`Dark Mode`, theme: Theme.DARK, icon: Moon },
-    { label: msg`System Theme`, theme: null, icon: Monitor },
+    { label: "Light Mode", theme: Theme.LIGHT, icon: Sun },
+    { label: "Dark Mode", theme: Theme.DARK, icon: Moon },
+    { label: "System Theme", theme: null, icon: Monitor },
   ] as const;
 
   return themes.map((theme) => (
@@ -310,13 +301,12 @@ const ThemeCommands = () => {
       className="-my-1 mx-2 rounded-lg first:mt-2 last:mb-2"
     >
       <theme.icon className="mr-2" />
-      {_(theme.label)}
+      {theme.label}
     </CommandItem>
   ));
 };
 
 const LanguageCommands = () => {
-  const { i18n, _ } = useLingui();
   const { toast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -347,9 +337,9 @@ const LanguageCommands = () => {
       console.error(`Failed to set language: ${e}`);
 
       toast({
-        title: _(msg`An unknown error occurred`),
+        title: "An unknown error occurred",
         variant: 'destructive',
-        description: _(msg`Unable to change the language at this time. Please try again later.`),
+        description: "Unable to change the language at this time. Please try again later.",
       });
     }
 

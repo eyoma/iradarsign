@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { FilePlus, Loader } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
@@ -35,8 +32,6 @@ export const TemplateCreateDialog = ({ folderId }: TemplateCreateDialogProps) =>
 
   const { user } = useSession();
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const team = useCurrentTeam();
 
   const { mutateAsync: createTemplate } = trpc.template.createTemplate.useMutation();
@@ -61,20 +56,20 @@ export const TemplateCreateDialog = ({ folderId }: TemplateCreateDialogProps) =>
       });
 
       toast({
-        title: _(msg`Template document uploaded`),
-        description: _(
-          msg`Your document has been uploaded successfully. You will be redirected to the template page.`,
-        ),
+        title: "Template document uploaded",
+        description: 
+          "Your document has been uploaded successfully. You will be redirected to the template page.",
+        ,
         duration: 5000,
       });
 
       setShowTemplateCreateDialog(false);
 
-      await navigate(`${formatTemplatesPath(team.url)}/${id}/edit`);
+      await navigate(`${formatTemplatesPath(team.url)}/${id}/edi");
     } catch {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`Please try again later.`),
+        title: msg"Something went wrong`,
+        description: "Please try again later.",
         variant: 'destructive',
       });
 
@@ -90,20 +85,20 @@ export const TemplateCreateDialog = ({ folderId }: TemplateCreateDialogProps) =>
       <DialogTrigger asChild>
         <Button className="cursor-pointer" disabled={!user.emailVerified}>
           <FilePlus className="-ml-1 mr-2 h-4 w-4" />
-          <Trans>New Template</Trans>
+          New Template
         </Button>
       </DialogTrigger>
 
       <DialogContent className="w-full max-w-xl">
         <DialogHeader>
           <DialogTitle>
-            <Trans>New Template</Trans>
+            New Template
           </DialogTitle>
           <DialogDescription>
-            <Trans>
+            
               Templates allow you to quickly generate documents with pre-filled recipients and
               fields.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -120,7 +115,7 @@ export const TemplateCreateDialog = ({ folderId }: TemplateCreateDialogProps) =>
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary" disabled={isUploadingFile}>
-              <Trans>Close</Trans>
+              Close
             </Button>
           </DialogClose>
         </DialogFooter>

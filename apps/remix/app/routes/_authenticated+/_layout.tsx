@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { Trans } from '@lingui/react/macro';
 import { Link, Outlet, redirect } from 'react-router';
 
 import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
@@ -78,22 +76,22 @@ export default function Layout({ loaderData, params }: Route.ComponentProps) {
         errorCodeMap={{
           404: orgNotFound
             ? {
-                heading: msg`Organisation not found`,
-                subHeading: msg`404 Organisation not found`,
-                message: msg`The organisation you are looking for may have been removed, renamed or may have never
-                  existed.`,
+                heading: "Organisation not found",
+                subHeading: "404 Organisation not found",
+                message: "The organisation you are looking for may have been removed, renamed or may have never
+                  existed.",
               }
             : {
-                heading: msg`Team not found`,
-                subHeading: msg`404 Team not found`,
-                message: msg`The team you are looking for may have been removed, renamed or may have never
-                  existed.`,
+                heading: "Team not found",
+                subHeading: "404 Team not found",
+                message: "The team you are looking for may have been removed, renamed or may have never
+                  existed.",
               },
         }}
         primaryButton={
           <Button asChild>
             <Link to="/">
-              <Trans>Go home</Trans>
+              Go home
             </Link>
           </Button>
         }

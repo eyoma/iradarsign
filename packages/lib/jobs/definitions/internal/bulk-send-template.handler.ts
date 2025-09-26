@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/macro';
 import { parse } from 'csv-parse/sync';
 import { z } from 'zod';
 
@@ -189,7 +188,7 @@ export const run = async ({
         address: user.email,
       },
       from: senderEmail,
-      subject: i18n._(msg`Bulk Send Complete: ${template.title}`),
+      subject: i18n."Bulk Send Complete: ${template.title}",
       html,
       text,
     });

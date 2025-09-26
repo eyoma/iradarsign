@@ -1,4 +1,3 @@
-import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 
 import { putFile } from '@documenso/lib/universal/upload/put-file';
@@ -20,7 +19,6 @@ export function meta() {
 export default function TeamsSettingsPage() {
   const team = useCurrentTeam();
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const { data: teamWithSettings, isLoading: isLoadingTeam } = trpc.team.get.useQuery({
@@ -54,13 +52,13 @@ export default function TeamsSettingsPage() {
       });
 
       toast({
-        title: t`Branding preferences updated`,
-        description: t`Your branding preferences have been updated`,
+        title: "Branding preferences updated",
+        description: "Your branding preferences have been updated",
       });
     } catch (err) {
       toast({
-        title: t`Something went wrong`,
-        description: t`We were unable to update your branding preferences at this time, please try again later`,
+        title: "Something went wrong",
+        description: "We were unable to update your branding preferences at this time, please try again later",
         variant: 'destructive',
       });
     }
@@ -77,8 +75,8 @@ export default function TeamsSettingsPage() {
   return (
     <div className="max-w-2xl">
       <SettingsHeader
-        title={t`Branding Preferences`}
-        subtitle={t`Here you can set preferences and defaults for branding.`}
+        title={"Branding Preferences"}
+        subtitle={"Here you can set preferences and defaults for branding."}
       />
 
       <section>

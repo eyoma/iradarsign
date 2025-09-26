@@ -170,10 +170,10 @@ test.describe('Template Field Prefill API v1', () => {
 
     // 8. Create a document from the template with prefilled fields
     const response = await request.post(
-      `${WEBAPP_BASE_URL}/api/v1/templates/${template.id}/generate-document`,
+      `${WEBAPP_BASE_URL}/api/v1/templates/${template.id}/generate-documen",
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: "Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         data: {
@@ -433,10 +433,10 @@ test.describe('Template Field Prefill API v1', () => {
 
     // 8. Create a document from the template without prefilled fields
     const response = await request.post(
-      `${WEBAPP_BASE_URL}/api/v1/templates/${template.id}/generate-document`,
+      `${WEBAPP_BASE_URL}/api/v1/templates/${template.id}/generate-documen",
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: "Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         data: {
@@ -579,10 +579,10 @@ test.describe('Template Field Prefill API v1', () => {
 
     // 6. Try to create a document with invalid prefill value
     const response = await request.post(
-      `${WEBAPP_BASE_URL}/api/v1/templates/${template.id}/generate-document`,
+      `${WEBAPP_BASE_URL}/api/v1/templates/${template.id}/generate-documen",
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: "Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         data: {

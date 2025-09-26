@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderIcon, HomeIcon, Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -49,7 +47,6 @@ export const FolderMoveDialog = ({
   isOpen,
   onOpenChange,
 }: FolderMoveDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -74,15 +71,15 @@ export const FolderMoveDialog = ({
       onOpenChange(false);
 
       toast({
-        title: t`Folder moved successfully`,
+        title: "Folder moved successfully",
       });
     } catch (err) {
       const error = AppError.parseError(err);
 
       if (error.code === AppErrorCode.NOT_FOUND) {
         toast({
-          title: t`Folder not found`,
-          description: t`The folder you are trying to move does not exist.`,
+          title: "Folder not found",
+          description: "The folder you are trying to move does not exist.",
           variant: 'destructive',
         });
 
@@ -90,8 +87,8 @@ export const FolderMoveDialog = ({
       }
 
       toast({
-        title: t`Failed to move folder`,
-        description: t`An unknown error occurred while moving the folder.`,
+        title: "Failed to move folder",
+        description: "An unknown error occurred while moving the folder.",
         variant: 'destructive',
       });
     }
@@ -117,17 +114,17 @@ export const FolderMoveDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Move Folder</Trans>
+            Move Folder
           </DialogTitle>
           <DialogDescription>
-            <Trans>Select a destination for this folder.</Trans>
+            Select a destination for this folder.
           </DialogDescription>
         </DialogHeader>
 
         <div className="relative">
           <Search className="text-muted-foreground absolute left-2 top-3 h-4 w-4" />
           <Input
-            placeholder={t`Search folders...`}
+            placeholder={"Search folders..."}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-8"
@@ -152,7 +149,7 @@ export const FolderMoveDialog = ({
                           onClick={() => field.onChange(null)}
                         >
                           <HomeIcon className="mr-2 h-4 w-4" />
-                          <Trans>Home</Trans>
+                          Home
                         </Button>
 
                         {filteredFolders &&
@@ -178,10 +175,10 @@ export const FolderMoveDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
                 <Button type="submit" loading={form.formState.isSubmitting}>
-                  <Trans>Move</Trans>
+                  Move
                 </Button>
               </DialogFooter>
             </fieldset>

@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import type { Team } from '@prisma/client';
 import { DocumentStatus } from '@prisma/client';
 import { Link, redirect } from 'react-router';
@@ -71,25 +70,25 @@ export default function WaitingForTurnToSignPage({ loaderData }: Route.Component
     <div className="relative flex flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md text-center">
         <h2 className="tracking-tigh text-3xl font-bold">
-          <Trans>Waiting for Your Turn</Trans>
+          Waiting for Your Turn
         </h2>
 
         <p className="text-muted-foreground mt-2 text-sm">
-          <Trans>
+          
             It's currently not your turn to sign. You will receive an email with instructions once
             it's your turn to sign the document.
-          </Trans>
+          
         </p>
 
         <p className="text-muted-foreground mt-4 text-sm">
-          <Trans>Please check your email for updates.</Trans>
+          Please check your email for updates.
         </p>
 
         <div className="mt-4">
           {documentPathForEditing ? (
             <Button variant="link" asChild>
               <Link to={documentPathForEditing}>
-                <Trans>Were you trying to edit this document instead?</Trans>
+                Were you trying to edit this document instead?
               </Link>
             </Button>
           ) : (

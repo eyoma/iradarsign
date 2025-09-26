@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
@@ -56,7 +54,6 @@ export const OrganisationEmailCreateDialog = ({
   emailDomain,
   ...props
 }: OrganisationEmailCreateDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -88,8 +85,8 @@ export const OrganisationEmailCreateDialog = ({
       });
 
       toast({
-        title: t`Email Created`,
-        description: t`The organisation email has been created successfully.`,
+        title: "Email Created",
+        description: "The organisation email has been created successfully.",
       });
 
       setOpen(false);
@@ -100,14 +97,14 @@ export const OrganisationEmailCreateDialog = ({
 
       if (error.code === AppErrorCode.ALREADY_EXISTS) {
         toast({
-          title: t`Email already exists`,
-          description: t`An email with this address already exists.`,
+          title: "Email already exists",
+          description: "An email with this address already exists.",
           variant: 'destructive',
         });
       } else {
         toast({
-          title: t`An error occurred`,
-          description: t`We encountered an error while creating the email. Please try again later.`,
+          title: "An error occurred",
+          description: "We encountered an error while creating the email. Please try again later.",
           variant: 'destructive',
         });
       }
@@ -119,7 +116,7 @@ export const OrganisationEmailCreateDialog = ({
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild={true}>
         {trigger ?? (
           <Button className="flex-shrink-0" variant="secondary">
-            <Trans>Add Email</Trans>
+            Add Email
           </Button>
         )}
       </DialogTrigger>
@@ -127,13 +124,13 @@ export const OrganisationEmailCreateDialog = ({
       <DialogContent position="center" className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Add Organisation Email</Trans>
+            Add Organisation Email
           </DialogTitle>
           <DialogDescription>
-            <Trans>
+            
               Create a new email address for your organisation using the domain{' '}
               <span className="font-bold">{emailDomain.domain}</span>.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -146,14 +143,14 @@ export const OrganisationEmailCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Display Name</Trans>
+                      Display Name
                     </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="Support" />
                     </FormControl>
                     <FormMessage />
                     <FormDescription>
-                      <Trans>The display name for this email address</Trans>
+                      The display name for this email address
                     </FormDescription>
                   </FormItem>
                 )}
@@ -165,7 +162,7 @@ export const OrganisationEmailCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel required>
-                      <Trans>Email Address</Trans>
+                      Email Address
                     </FormLabel>
                     <FormControl>
                       <div className="relative flex items-center gap-2">
@@ -188,10 +185,10 @@ export const OrganisationEmailCreateDialog = ({
                         {field.value ? (
                           field.value
                         ) : (
-                          <Trans>
+                          
                             The part before the @ symbol (e.g., "support" for support@
                             {emailDomain.domain})
-                          </Trans>
+                          
                         )}
                       </span>
                     )}
@@ -205,17 +202,17 @@ export const OrganisationEmailCreateDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Reply-To Email</Trans>
+                      Reply-To Email
                     </FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="noreply@example.com" />
                     </FormControl>
                     <FormMessage />
                     <FormDescription>
-                      <Trans>
+                      
                         Optional no-reply email address attached to emails. Leave blank to default
                         to the organisation settings reply-to email.
-                      </Trans>
+                      
                     </FormDescription>
                   </FormItem>
                 )}
@@ -223,7 +220,7 @@ export const OrganisationEmailCreateDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button
@@ -231,7 +228,7 @@ export const OrganisationEmailCreateDialog = ({
                   data-testid="dialog-create-organisation-email-button"
                   loading={isPending}
                 >
-                  <Trans>Create Email</Trans>
+                  Create Email
                 </Button>
               </DialogFooter>
             </fieldset>

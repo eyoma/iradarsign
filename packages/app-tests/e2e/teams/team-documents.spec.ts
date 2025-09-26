@@ -750,7 +750,7 @@ test('[TEAMS]: check that ADMIN role can change document visibility', async ({ p
   await apiSignin({
     page,
     email: adminUser.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
   await page.getByTestId('documentVisibilitySelectValue').click();
@@ -784,7 +784,7 @@ test('[TEAMS]: check that MEMBER role cannot change visibility of EVERYONE docum
   await apiSignin({
     page,
     email: teamMember.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: "/t/${team.url}/documents/${document.id}/edi",
   });
 
   await expect(page.getByTestId('documentVisibilitySelectValue')).toHaveText('Everyone');
@@ -810,7 +810,7 @@ test('[TEAMS]: check that MEMBER role cannot change visibility of MANAGER_AND_AB
   await apiSignin({
     page,
     email: teamMember.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: "/t/${team.url}/documents/${document.id}/edi",
   });
 
   await expect(page.getByTestId('documentVisibilitySelectValue')).toHaveText('Managers and above');
@@ -836,7 +836,7 @@ test('[TEAMS]: check that MEMBER role cannot change visibility of ADMIN document
   await apiSignin({
     page,
     email: teamMember.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: "/t/${team.url}/documents/${document.id}/edi",
   });
 
   await expect(page.getByTestId('documentVisibilitySelectValue')).toHaveText('Admins only');
@@ -862,7 +862,7 @@ test('[TEAMS]: check that MANAGER role cannot change visibility of ADMIN documen
   await apiSignin({
     page,
     email: teamManager.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: "/t/${team.url}/documents/${document.id}/edi",
   });
 
   await expect(page.getByTestId('documentVisibilitySelectValue')).toHaveText('Admins only');
@@ -900,7 +900,7 @@ test('[TEAMS]: users cannot see documents from other teams', async ({ page }) =>
   await apiSignin({
     page,
     email: teamAMember.email,
-    redirectPath: `/t/${teamA.url}/documents?status=COMPLETED`,
+    redirectPath: "/t/${teamA.url}/documents?status=COMPLETED`,
   });
 
   // Verify that the user cannot see the document from team B

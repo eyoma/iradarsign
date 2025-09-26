@@ -73,14 +73,14 @@ test.describe('[TEMPLATE_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+      redirectPath: `/t/${team.url}/templates/${template.id}/edi",
     });
 
     // Complete the template flow
     await completeTemplateFlowWithDuplicateRecipients({ page, team, template });
 
     // Verify template was created successfully
-    await expect(page).toHaveURL(`/t/${team.url}/templates`);
+    await expect(page).toHaveURL("/t/${team.url}/templates`);
   });
 
   test('should create document from template with duplicate recipients using same email', async ({
@@ -94,14 +94,14 @@ test.describe('[TEMPLATE_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+      redirectPath: `/t/${team.url}/templates/${template.id}/edi",
     });
 
     // Complete template creation
     await completeTemplateFlowWithDuplicateRecipients({ page, team, template });
 
     // Navigate to template and create document
-    await page.goto(`/t/${team.url}/templates`);
+    await page.goto("/t/${team.url}/templates`);
 
     await page
       .getByRole('row', { name: template.title })
@@ -184,7 +184,7 @@ test.describe('[TEMPLATE_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+      redirectPath: `/t/${team.url}/templates/${template.id}/edi",
     });
 
     // Step 1: Settings
@@ -222,7 +222,7 @@ test.describe('[TEMPLATE_FLOW]: Duplicate Recipients', () => {
     // Save template
     await page.getByRole('button', { name: 'Save Template' }).click();
 
-    await page.waitForURL(`/t/${team.url}/templates`);
+    await page.waitForURL("/t/${team.url}/templates`);
 
     await expect(page.getByRole('link', { name: template.title })).toBeVisible();
   });
@@ -235,14 +235,14 @@ test.describe('[TEMPLATE_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/templates/${template.id}/edit`,
+      redirectPath: `/t/${team.url}/templates/${template.id}/edi",
     });
 
     // Create template with duplicates
     await completeTemplateFlowWithDuplicateRecipients({ page, team, template });
 
     // Navigate back to edit the template
-    await page.goto(`/t/${team.url}/templates/${template.id}/edit`);
+    await page.goto("/t/${team.url}/templates/${template.id}/edi");
 
     // Go to fields step
     await page.getByRole('button', { name: 'Continue' }).click(); // Settings
@@ -253,7 +253,7 @@ test.describe('[TEMPLATE_FLOW]: Duplicate Recipients', () => {
     // Verify fields are correctly assigned to each recipient instance
     await page.getByRole('combobox').first().click();
     await page.getByRole('option', { name: 'First Instance' }).first().click();
-    let visibleFields = await page.locator(`[data-field-type="SIGNATURE"]:not(:disabled)`).all();
+    let visibleFields = await page.locator("[data-field-type="SIGNATURE"]:not(:disabled)`).all();
     expect(visibleFields.length).toBeGreaterThan(0);
 
     await page.getByRole('combobox').first().click();

@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { ReadStatus, SendStatus, SigningStatus } from '@prisma/client';
 
 import { mailer } from '@documenso/email/mailer';
@@ -102,7 +101,7 @@ export const run = async ({
           },
           from: senderEmail,
           replyTo: replyToEmail,
-          subject: i18n._(msg`Document "${document.title}" Cancelled`),
+          subject: `Document "${document.title}" Cancelled`,
           html,
           text,
         });

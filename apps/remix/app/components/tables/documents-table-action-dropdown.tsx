@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, RecipientRole } from '@prisma/client';
 import {
   CheckCircle,
@@ -55,8 +52,6 @@ export const DocumentsTableActionDropdown = ({
   const team = useCurrentTeam();
 
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isDuplicateDialogOpen, setDuplicateDialogOpen] = useState(false);
 
@@ -72,7 +67,7 @@ export const DocumentsTableActionDropdown = ({
   const canManageDocument = Boolean(isOwner || isCurrentTeamDocument);
 
   const documentsPath = formatDocumentsPath(team.url);
-  const formatPath = `${documentsPath}/${row.id}/edit`;
+  const formatPath = `${documentsPath}/${row.id}/edi";
 
   const onDownloadClick = async () => {
     try {
@@ -93,8 +88,8 @@ export const DocumentsTableActionDropdown = ({
       await downloadPDF({ documentData, fileName: row.title });
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`An error occurred while downloading your document.`),
+        title: msg"Something went wrong`,
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -119,8 +114,8 @@ export const DocumentsTableActionDropdown = ({
       await downloadPDF({ documentData, fileName: row.title, version: 'original' });
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`An error occurred while downloading your document.`),
+        title: "Something went wrong",
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -136,7 +131,7 @@ export const DocumentsTableActionDropdown = ({
 
       <DropdownMenuContent className="w-52" align="start" forceMount>
         <DropdownMenuLabel>
-          <Trans>Action</Trans>
+          Action
         </DropdownMenuLabel>
 
         {!isDraft && recipient && recipient?.role !== RecipientRole.CC && (
@@ -145,21 +140,21 @@ export const DocumentsTableActionDropdown = ({
               {recipient?.role === RecipientRole.VIEWER && (
                 <>
                   <EyeIcon className="mr-2 h-4 w-4" />
-                  <Trans>View</Trans>
+                  View
                 </>
               )}
 
               {recipient?.role === RecipientRole.SIGNER && (
                 <>
                   <Pencil className="mr-2 h-4 w-4" />
-                  <Trans>Sign</Trans>
+                  Sign
                 </>
               )}
 
               {recipient?.role === RecipientRole.APPROVER && (
                 <>
                   <CheckCircle className="mr-2 h-4 w-4" />
-                  <Trans>Approve</Trans>
+                  Approve
                 </>
               )}
             </Link>
@@ -169,29 +164,29 @@ export const DocumentsTableActionDropdown = ({
         <DropdownMenuItem disabled={!canManageDocument || isComplete} asChild>
           <Link to={formatPath}>
             <Edit className="mr-2 h-4 w-4" />
-            <Trans>Edit</Trans>
+            Edit
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem disabled={!isComplete} onClick={onDownloadClick}>
           <Download className="mr-2 h-4 w-4" />
-          <Trans>Download</Trans>
+          Download
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={onDownloadOriginalClick}>
           <FileDown className="mr-2 h-4 w-4" />
-          <Trans>Download Original</Trans>
+          Download Original
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => setDuplicateDialogOpen(true)}>
           <Copy className="mr-2 h-4 w-4" />
-          <Trans>Duplicate</Trans>
+          Duplicate
         </DropdownMenuItem>
 
         {onMoveDocument && canManageDocument && (
           <DropdownMenuItem onClick={onMoveDocument} onSelect={(e) => e.preventDefault()}>
             <FolderInput className="mr-2 h-4 w-4" />
-            <Trans>Move to Folder</Trans>
+            Move to Folder
           </DropdownMenuItem>
         )}
 
@@ -203,11 +198,11 @@ export const DocumentsTableActionDropdown = ({
 
         <DropdownMenuItem onClick={() => setDeleteDialogOpen(true)}>
           <Trash2 className="mr-2 h-4 w-4" />
-          {canManageDocument ? _(msg`Delete`) : _(msg`Hide`)}
+          {canManageDocument ? "Delete" : "Hide"}
         </DropdownMenuItem>
 
         <DropdownMenuLabel>
-          <Trans>Share</Trans>
+          Share
         </DropdownMenuLabel>
 
         {canManageDocument && (
@@ -217,7 +212,7 @@ export const DocumentsTableActionDropdown = ({
               <DropdownMenuItem disabled={!isPending} asChild onSelect={(e) => e.preventDefault()}>
                 <div>
                   <Copy className="mr-2 h-4 w-4" />
-                  <Trans>Signing Links</Trans>
+                  Signing Links
                 </div>
               </DropdownMenuItem>
             }
@@ -233,7 +228,7 @@ export const DocumentsTableActionDropdown = ({
             <DropdownMenuItem disabled={disabled || isDraft} onSelect={(e) => e.preventDefault()}>
               <div className="flex items-center">
                 {loading ? <Loader className="mr-2 h-4 w-4" /> : <Share className="mr-2 h-4 w-4" />}
-                <Trans>Share Signing Card</Trans>
+                Share Signing Card
               </div>
             </DropdownMenuItem>
           )}

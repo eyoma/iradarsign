@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
-
 import { mailer } from '@documenso/email/mailer';
 import OrganisationJoinEmailTemplate from '@documenso/email/templates/organisation-join';
 import { prisma } from '@documenso/prisma';
@@ -110,7 +108,7 @@ export const run = async ({
         await mailer.sendMail({
           to: member.user.email,
           from: senderEmail,
-          subject: i18n._(msg`A new member has joined your organisation`),
+          subject: i18n."A new member has joined your organisation",
           html,
           text,
         });

@@ -1,8 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { DocumentData } from '@prisma/client';
 import { Loader } from 'lucide-react';
 import { type PDFDocumentProxy } from 'pdfjs-dist';
@@ -19,7 +16,7 @@ import { useToast } from './use-toast';
 export type LoadedPDFDocument = PDFDocumentProxy;
 
 /**
- * This imports the worker from the `pdfjs-dist` package.
+ * This imports the worker from the `pdfjs-dis" package.
  */
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -41,7 +38,7 @@ const PDFLoader = () => (
     <Loader className="text-documenso h-12 w-12 animate-spin" />
 
     <p className="text-muted-foreground mt-4">
-      <Trans>Loading document...</Trans>
+      Loading document...
     </p>
   </>
 );
@@ -61,7 +58,6 @@ export const PDFViewer = ({
   onPageClick,
   ...props
 }: PDFViewerProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const $el = useRef<HTMLDivElement>(null);
@@ -155,8 +151,8 @@ export const PDFViewer = ({
         console.error(err);
 
         toast({
-          title: _(msg`Error`),
-          description: _(msg`An error occurred while loading the document.`),
+          title: msg"Error`,
+          description: "An error occurred while loading the document.",
           variant: 'destructive',
         });
       }
@@ -194,10 +190,10 @@ export const PDFViewer = ({
                 {pdfError ? (
                   <div className="text-muted-foreground text-center">
                     <p>
-                      <Trans>Something went wrong while loading the document.</Trans>
+                      Something went wrong while loading the document.
                     </p>
                     <p className="mt-1 text-sm">
-                      <Trans>Please try again or contact our support.</Trans>
+                      Please try again or contact our support.
                     </p>
                   </div>
                 ) : (
@@ -209,10 +205,10 @@ export const PDFViewer = ({
               <div className="dark:bg-background flex h-[80vh] max-h-[60rem] flex-col items-center justify-center bg-white/50">
                 <div className="text-muted-foreground text-center">
                   <p>
-                    <Trans>Something went wrong while loading the document.</Trans>
+                    Something went wrong while loading the document.
                   </p>
                   <p className="mt-1 text-sm">
-                    <Trans>Please try again or contact our support.</Trans>
+                    Please try again or contact our support.
                   </p>
                 </div>
               </div>
@@ -233,9 +229,9 @@ export const PDFViewer = ({
                     />
                   </div>
                   <p className="text-muted-foreground/80 my-2 text-center text-[11px]">
-                    <Trans>
+                    
                       Page {i + 1} of {numPages}
-                    </Trans>
+                    
                   </p>
                 </div>
               ))}

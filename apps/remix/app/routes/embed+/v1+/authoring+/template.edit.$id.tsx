@@ -1,7 +1,5 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { DocumentDistributionMethod, DocumentSigningOrder, SigningStatus } from '@prisma/client';
 import { redirect, useLoaderData } from 'react-router';
 
@@ -80,7 +78,6 @@ export const loader = async ({ request, params }: Route.LoaderArgs) => {
 };
 
 export default function EmbeddingAuthoringTemplateEditPage() {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { template } = useLoaderData<typeof loader>();
@@ -188,8 +185,8 @@ export default function EmbeddingAuthoringTemplateEditPage() {
       if (!configuration) {
         toast({
           variant: 'destructive',
-          title: _(msg`Error`),
-          description: _(msg`Please configure the document first`),
+          title: "Error",
+          description: "Please configure the document firs",
         });
 
         return;
@@ -241,8 +238,8 @@ export default function EmbeddingAuthoringTemplateEditPage() {
       });
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Template updated successfully`),
+        title: msg"Success",
+        description: "Template updated successfully",
       });
 
       // Send a message to the parent window with the template details
@@ -261,8 +258,8 @@ export default function EmbeddingAuthoringTemplateEditPage() {
 
       toast({
         variant: 'destructive',
-        title: _(msg`Error`),
-        description: _(msg`Failed to update template`),
+        title: "Error",
+        description: "Failed to update template",
       });
     }
   };

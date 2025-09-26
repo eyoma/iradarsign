@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 
@@ -29,7 +26,6 @@ export type AdminUserDeleteDialogProps = {
 };
 
 export const AdminUserDeleteDialog = ({ className, user }: AdminUserDeleteDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -46,21 +42,21 @@ export const AdminUserDeleteDialog = ({ className, user }: AdminUserDeleteDialog
       await navigate('/admin/users');
 
       toast({
-        title: _(msg`Account deleted`),
-        description: _(msg`The account has been deleted successfully.`),
+        title: "Account deleted",
+        description: "The account has been deleted successfully.",
         duration: 5000,
       });
     } catch (err) {
       const error = AppError.parseError(err);
 
       const errorMessage = match(error.code)
-        .with(AppErrorCode.NOT_FOUND, () => msg`User not found.`)
-        .with(AppErrorCode.UNAUTHORIZED, () => msg`You are not authorized to delete this user.`)
-        .otherwise(() => msg`An error occurred while deleting the user.`);
+        .with(AppErrorCode.NOT_FOUND, () => "User not found.")
+        .with(AppErrorCode.UNAUTHORIZED, () => "You are not authorized to delete this user.")
+        .otherwise(() => "An error occurred while deleting the user.");
 
       toast({
-        title: _(msg`Error`),
-        description: _(errorMessage),
+        title: "Error",
+        description: errorMessage,
         variant: 'destructive',
         duration: 7500,
       });
@@ -76,10 +72,10 @@ export const AdminUserDeleteDialog = ({ className, user }: AdminUserDeleteDialog
         <div>
           <AlertTitle>Delete Account</AlertTitle>
           <AlertDescription className="mr-2">
-            <Trans>
+            
               Delete the users account and all its contents. This action is irreversible and will
               cancel their subscription, so proceed with caution.
-            </Trans>
+            
           </AlertDescription>
         </div>
 
@@ -87,28 +83,28 @@ export const AdminUserDeleteDialog = ({ className, user }: AdminUserDeleteDialog
           <Dialog>
             <DialogTrigger asChild>
               <Button variant="destructive">
-                <Trans>Delete Account</Trans>
+                Delete Account
               </Button>
             </DialogTrigger>
 
             <DialogContent>
               <DialogHeader className="space-y-4">
                 <DialogTitle>
-                  <Trans>Delete Account</Trans>
+                  Delete Account
                 </DialogTitle>
 
                 <Alert variant="destructive">
                   <AlertDescription className="selection:bg-red-100">
-                    <Trans>This action is not reversible. Please be certain.</Trans>
+                    This action is not reversible. Please be certain.
                   </AlertDescription>
                 </Alert>
               </DialogHeader>
 
               <div>
                 <DialogDescription>
-                  <Trans>
+                  
                     To confirm, please enter the accounts email address <br />({user.email}).
-                  </Trans>
+                  
                 </DialogDescription>
 
                 <Input
@@ -126,7 +122,7 @@ export const AdminUserDeleteDialog = ({ className, user }: AdminUserDeleteDialog
                   variant="destructive"
                   disabled={email !== user.email}
                 >
-                  <Trans>Delete account</Trans>
+                  Delete account
                 </Button>
               </DialogFooter>
             </DialogContent>

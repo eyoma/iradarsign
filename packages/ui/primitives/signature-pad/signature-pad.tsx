@@ -3,8 +3,6 @@ import { useState } from 'react';
 
 import { KeyboardIcon, UploadCloudIcon } from 'lucide-react';
 import { match } from 'ts-pattern';
-import { Trans } from '@lingui/react/macro';
-
 import { DocumentSignatureType } from '@documenso/lib/constants/document';
 import { isBase64Image } from '@documenso/lib/constants/signatures';
 
@@ -147,21 +145,21 @@ export const SignaturePad = ({
         {drawSignatureEnabled && (
           <TabsTrigger value="draw">
             <SignatureIcon className="mr-2 size-4" />
-            <Trans>Draw</Trans>
+            Draw
           </TabsTrigger>
         )}
 
         {typedSignatureEnabled && (
           <TabsTrigger value="text">
             <KeyboardIcon className="mr-2 size-4" />
-            <Trans>Type</Trans>
+            Type
           </TabsTrigger>
         )}
 
         {uploadSignatureEnabled && (
           <TabsTrigger value="image">
             <UploadCloudIcon className="mr-2 size-4" />
-            <Trans>Upload</Trans>
+            Upload
           </TabsTrigger>
         )}
       </TabsList>

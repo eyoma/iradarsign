@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import {
   Body,
   Button,
@@ -31,18 +27,17 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
   organisationName = '<ORGANISATION_NAME>',
   assetBaseUrl = 'http://localhost:3002',
 }: OrganisationAccountLinkConfirmationTemplateProps) => {
-  const { _ } = useLingui();
   const branding = useBranding();
 
   const previewText =
     type === 'create'
-      ? msg`A request has been made to create an account for you`
-      : msg`A request has been made to link your iRadar account`;
+      ? "A request has been made to create an account for you"
+      : "A request has been made to link your Documenso accoun";
 
   return (
     <Html>
       <Head />
-      <Preview>{_(previewText)}</Preview>
+      <Preview>{previewText}</Preview>
       <Body className="mx-auto my-auto font-sans">
         <Section className="bg-white">
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 px-2 pt-2 backdrop-blur-sm">
@@ -67,52 +62,52 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
                 {type === 'create' ? (
-                  <Trans>Account creation request</Trans>
+                  Account creation request
                 ) : (
-                  <Trans>Link your iRadar account</Trans>
+                  Link your Documenso account
                 )}
               </Text>
 
               <Text className="text-center text-base">
                 {type === 'create' ? (
-                  <Trans>
+                  
                     <span className="font-bold">{organisationName}</span> has requested to create an
                     account on your behalf.
-                  </Trans>
+                  
                 ) : (
-                  <Trans>
+                  
                     <span className="font-bold">{organisationName}</span> has requested to link your
-                    current iRadar account to their organisation.
-                  </Trans>
+                    current Documenso account to their organisation.
+                  
                 )}
               </Text>
 
               {/* Placeholder text if we want to have the warning in the email as well. */}
               {/* <Section className="mt-6">
                 <Text className="my-0 text-sm">
-                  <Trans>
+                  
                     By accepting this request, you will be granting{' '}
                     <strong>{organisationName}</strong> full access to:
-                  </Trans>
+                  
                 </Text>
 
                 <ul className="mb-0 mt-2">
                   <li className="text-sm">
-                    <Trans>Your account, and everything associated with it</Trans>
+                    Your account, and everything associated with it
                   </li>
                   <li className="mt-1 text-sm">
-                    <Trans>Something something something</Trans>
+                    Something something something
                   </li>
                   <li className="mt-1 text-sm">
-                    <Trans>Something something something</Trans>
+                    Something something something
                   </li>
                 </ul>
 
                 <Text className="mt-2 text-sm">
-                  <Trans>
-                    You can unlink your account at any time in your security settings on iRadar{' '}
-                    <Link href={`${assetBaseUrl}/settings/security/linked-accounts`}>here.</Link>
-                  </Trans>
+                  
+                    You can unlink your account at any time in your security settings on Documenso{' '}
+                    <Link href={"${assetBaseUrl}/settings/security/linked-accounts"}>here.</Link>
+                  
                 </Text>
               </Section> */}
 
@@ -121,13 +116,13 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
                   className="bg-documenso-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-black no-underline"
                   href={confirmationLink}
                 >
-                  <Trans>Review request</Trans>
+                  Review request
                 </Button>
               </Section>
             </Section>
 
             <Text className="text-center text-xs text-slate-500">
-              <Trans>Link expires in 30 minutes.</Trans>
+              Link expires in 30 minutes.
             </Text>
           </Container>
 

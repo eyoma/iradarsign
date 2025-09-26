@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import type { Recipient, Template, TemplateDirectLink } from '@prisma/client';
 import { Copy, Edit, FolderIcon, MoreHorizontal, Share2Icon, Trash2, Upload } from 'lucide-react';
 import { Link } from 'react-router';
@@ -60,7 +59,7 @@ export const TemplatesTableActionDropdown = ({
         <DropdownMenuItem disabled={!isOwner && !isTeamTemplate} asChild>
           <Link to={formatPath}>
             <Edit className="mr-2 h-4 w-4" />
-            <Trans>Edit</Trans>
+            Edit
           </Link>
         </DropdownMenuItem>
 
@@ -69,17 +68,17 @@ export const TemplatesTableActionDropdown = ({
           onClick={() => setDuplicateDialogOpen(true)}
         >
           <Copy className="mr-2 h-4 w-4" />
-          <Trans>Duplicate</Trans>
+          Duplicate
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => setTemplateDirectLinkDialogOpen(true)}>
           <Share2Icon className="mr-2 h-4 w-4" />
-          <Trans>Direct link</Trans>
+          Direct link
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => setMoveToFolderDialogOpen(true)}>
           <FolderIcon className="mr-2 h-4 w-4" />
-          <Trans>Move to Folder</Trans>
+          Move to Folder
         </DropdownMenuItem>
 
         <TemplateBulkSendDialog
@@ -88,7 +87,7 @@ export const TemplatesTableActionDropdown = ({
           trigger={
             <div className="hover:bg-accent hover:text-accent-foreground relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors">
               <Upload className="mr-2 h-4 w-4" />
-              <Trans>Bulk Send via CSV</Trans>
+              Bulk Send via CSV
             </div>
           }
         />
@@ -98,7 +97,7 @@ export const TemplatesTableActionDropdown = ({
           onClick={() => setDeleteDialogOpen(true)}
         >
           <Trash2 className="mr-2 h-4 w-4" />
-          <Trans>Delete</Trans>
+          Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
 

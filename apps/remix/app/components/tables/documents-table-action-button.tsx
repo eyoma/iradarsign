@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
 import { CheckCircle, Download, Edit, EyeIcon, Pencil } from 'lucide-react';
 import { Link } from 'react-router';
@@ -24,8 +21,6 @@ export type DocumentsTableActionButtonProps = {
 export const DocumentsTableActionButton = ({ row }: DocumentsTableActionButtonProps) => {
   const { user } = useSession();
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const team = useCurrentTeam();
 
   const recipient = row.recipients.find((recipient) => recipient.email === user.email);
@@ -40,7 +35,7 @@ export const DocumentsTableActionButton = ({ row }: DocumentsTableActionButtonPr
   const isCurrentTeamDocument = team && row.team?.url === team.url;
 
   const documentsPath = formatDocumentsPath(team.url);
-  const formatPath = `${documentsPath}/${row.id}/edit`;
+  const formatPath = `${documentsPath}/${row.id}/edi";
 
   const onDownloadClick = async () => {
     try {
@@ -68,8 +63,8 @@ export const DocumentsTableActionButton = ({ row }: DocumentsTableActionButtonPr
       await downloadPDF({ documentData, fileName: row.title });
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`An error occurred while downloading your document.`),
+        title: msg"Something went wrong`,
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -95,7 +90,7 @@ export const DocumentsTableActionButton = ({ row }: DocumentsTableActionButtonPr
         <Button className="w-32" asChild>
           <Link to={formatPath}>
             <Edit className="-ml-1 mr-2 h-4 w-4" />
-            <Trans>Edit</Trans>
+            Edit
           </Link>
         </Button>
       ),
@@ -107,19 +102,19 @@ export const DocumentsTableActionButton = ({ row }: DocumentsTableActionButtonPr
             .with(RecipientRole.SIGNER, () => (
               <>
                 <Pencil className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>Sign</Trans>
+                Sign
               </>
             ))
             .with(RecipientRole.APPROVER, () => (
               <>
                 <CheckCircle className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>Approve</Trans>
+                Approve
               </>
             ))
             .otherwise(() => (
               <>
                 <EyeIcon className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>View</Trans>
+                View
               </>
             ))}
         </Link>
@@ -128,13 +123,13 @@ export const DocumentsTableActionButton = ({ row }: DocumentsTableActionButtonPr
     .with({ isPending: true, isSigned: true }, () => (
       <Button className="w-32" disabled={true}>
         <EyeIcon className="-ml-1 mr-2 h-4 w-4" />
-        <Trans>View</Trans>
+        View
       </Button>
     ))
     .with({ isComplete: true }, () => (
       <Button className="w-32" onClick={onDownloadClick}>
         <Download className="-ml-1 mr-2 inline h-4 w-4" />
-        <Trans>Download</Trans>
+        Download
       </Button>
     ))
     .otherwise(() => <div></div>);

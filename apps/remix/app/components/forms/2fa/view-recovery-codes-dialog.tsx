@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
@@ -84,7 +83,7 @@ export const ViewRecoveryCodesDialog = () => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="flex-shrink-0">
-          <Trans>View Codes</Trans>
+          View Codes
         </Button>
       </DialogTrigger>
 
@@ -93,13 +92,13 @@ export const ViewRecoveryCodesDialog = () => {
           <div>
             <DialogHeader className="mb-4">
               <DialogTitle>
-                <Trans>View Recovery Codes</Trans>
+                View Recovery Codes
               </DialogTitle>
 
               <DialogDescription>
-                <Trans>
+                
                   Your recovery codes are listed below. Please store them in a safe place.
-                </Trans>
+                
               </DialogDescription>
             </DialogHeader>
 
@@ -108,12 +107,12 @@ export const ViewRecoveryCodesDialog = () => {
             <DialogFooter className="mt-4">
               <DialogClose asChild>
                 <Button variant="secondary">
-                  <Trans>Close</Trans>
+                  Close
                 </Button>
               </DialogClose>
 
               <Button onClick={downloadRecoveryCodes}>
-                <Trans>Download</Trans>
+                Download
               </Button>
             </DialogFooter>
           </div>
@@ -122,11 +121,11 @@ export const ViewRecoveryCodesDialog = () => {
             <form onSubmit={form.handleSubmit(onFormSubmit)}>
               <DialogHeader className="mb-4">
                 <DialogTitle>
-                  <Trans>View Recovery Codes</Trans>
+                  View Recovery Codes
                 </DialogTitle>
 
                 <DialogDescription>
-                  <Trans>Please provide a token from your authenticator, or a backup code.</Trans>
+                  Please provide a token from your authenticator, or a backup code.
                 </DialogDescription>
               </DialogHeader>
 
@@ -157,10 +156,10 @@ export const ViewRecoveryCodesDialog = () => {
                     <AlertDescription>
                       {match(AppError.parseError(error).message)
                         .with('INCORRECT_TWO_FACTOR_CODE', () => (
-                          <Trans>Invalid code. Please try again.</Trans>
+                          Invalid code. Please try again.
                         ))
                         .otherwise(() => (
-                          <Trans>Something went wrong. Please try again or contact support.</Trans>
+                          Something went wrong. Please try again or contact support.
                         ))}
                     </AlertDescription>
                   </Alert>
@@ -169,12 +168,12 @@ export const ViewRecoveryCodesDialog = () => {
                 <DialogFooter>
                   <DialogClose asChild>
                     <Button type="button" variant="secondary">
-                      <Trans>Cancel</Trans>
+                      Cancel
                     </Button>
                   </DialogClose>
 
                   <Button type="submit" loading={form.formState.isSubmitting}>
-                    <Trans>View</Trans>
+                    View
                   </Button>
                 </DialogFooter>
               </fieldset>

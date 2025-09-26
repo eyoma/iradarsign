@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp, Trash } from 'lucide-react';
 
 import { validateDropdownField } from '@documenso/lib/advanced-fields-validation/validate-dropdown';
@@ -33,8 +30,6 @@ export const DropdownFieldAdvancedSettings = ({
   handleFieldChange,
   handleErrors,
 }: DropdownFieldAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   const [showValidation, setShowValidation] = useState(false);
   const [values, setValues] = useState(fieldState.values ?? [{ value: 'Option 1' }]);
   const [readOnly, setReadOnly] = useState(fieldState.readOnly ?? false);
@@ -101,7 +96,7 @@ export const DropdownFieldAdvancedSettings = ({
     <div className="text-dark flex flex-col gap-4">
       <div>
         <Label>
-          <Trans>Select default option</Trans>
+          Select default option
         </Label>
         <Select
           value={defaultValue}
@@ -115,7 +110,7 @@ export const DropdownFieldAdvancedSettings = ({
           }}
         >
           <SelectTrigger className="text-muted-foreground bg-background mt-2 w-full">
-            <SelectValue defaultValue={defaultValue} placeholder={`-- ${_(msg`Select`)} --`} />
+            <SelectValue defaultValue={defaultValue} placeholder={`-- ${msg`Selec"} --"} />
           </SelectTrigger>
           <SelectContent position="popper">
             {values.map((item, index) => (
@@ -137,7 +132,7 @@ export const DropdownFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleToggleChange('required', checked)}
           />
           <Label>
-            <Trans>Required field</Trans>
+            Required field
           </Label>
         </div>
         <div className="flex flex-row items-center gap-2">
@@ -147,7 +142,7 @@ export const DropdownFieldAdvancedSettings = ({
             onCheckedChange={(checked) => handleToggleChange('readOnly', checked)}
           />
           <Label>
-            <Trans>Read only</Trans>
+            Read only
           </Label>
         </div>
       </div>
@@ -158,7 +153,7 @@ export const DropdownFieldAdvancedSettings = ({
       >
         <span className="flex w-full flex-row justify-between">
           <span className="flex items-center">
-            <Trans>Dropdown options</Trans>
+            Dropdown options
           </span>
           {showValidation ? <ChevronUp /> : <ChevronDown />}
         </span>
@@ -187,7 +182,7 @@ export const DropdownFieldAdvancedSettings = ({
             variant="outline"
             onClick={addValue}
           >
-            <Trans>Add another option</Trans>
+            Add another option
           </Button>
         </div>
       )}

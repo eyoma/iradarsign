@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderIcon, HomeIcon, Loader2, Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -58,7 +55,6 @@ export function TemplateMoveToFolderDialog({
   currentFolderId,
   ...props
 }: TemplateMoveToFolderDialogProps) {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const navigate = useNavigate();
@@ -102,8 +98,8 @@ export function TemplateMoveToFolderDialog({
       });
 
       toast({
-        title: _(msg`Template moved`),
-        description: _(msg`The template has been moved successfully.`),
+        title: "Template moved",
+        description: "The template has been moved successfully.",
         variant: 'default',
       });
 
@@ -121,8 +117,8 @@ export function TemplateMoveToFolderDialog({
 
       if (error.code === AppErrorCode.NOT_FOUND) {
         toast({
-          title: _(msg`Error`),
-          description: _(msg`The folder you are trying to move the template to does not exist.`),
+          title: "Error",
+          description: "The folder you are trying to move the template to does not exist.",
           variant: 'destructive',
         });
 
@@ -130,8 +126,8 @@ export function TemplateMoveToFolderDialog({
       }
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while moving the template.`),
+        title: "Error",
+        description: "An error occurred while moving the template.",
         variant: 'destructive',
       });
     }
@@ -146,18 +142,18 @@ export function TemplateMoveToFolderDialog({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Move Template to Folder</Trans>
+            Move Template to Folder
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>Move &quot;{templateTitle}&quot; to a folder</Trans>
+            Move &quot;{templateTitle}&quot; to a folder
           </DialogDescription>
         </DialogHeader>
 
         <div className="relative">
           <Search className="text-muted-foreground absolute left-2 top-3 h-4 w-4" />
           <Input
-            placeholder={_(msg`Search folders...`)}
+            placeholder={"Search folders..."}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-8"
@@ -172,7 +168,7 @@ export function TemplateMoveToFolderDialog({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    <Trans>Folder</Trans>
+                    Folder
                   </FormLabel>
 
                   <FormControl>
@@ -191,7 +187,7 @@ export function TemplateMoveToFolderDialog({
                             disabled={currentFolderId === null}
                           >
                             <HomeIcon className="mr-2 h-4 w-4" />
-                            <Trans>Home (No Folder)</Trans>
+                            Home (No Folder)
                           </Button>
 
                           {filteredFolders?.map((folder) => (
@@ -210,7 +206,7 @@ export function TemplateMoveToFolderDialog({
 
                           {searchTerm && filteredFolders?.length === 0 && (
                             <div className="text-muted-foreground px-2 py-2 text-center text-sm">
-                              <Trans>No folders found</Trans>
+                              No folders found
                             </div>
                           )}
                         </>
@@ -224,11 +220,11 @@ export function TemplateMoveToFolderDialog({
 
             <DialogFooter>
               <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button type="submit" disabled={isFoldersLoading || form.formState.isSubmitting}>
-                <Trans>Move</Trans>
+                Move
               </Button>
             </DialogFooter>
           </form>

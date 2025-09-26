@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
 import { Button } from '@documenso/ui/primitives/button';
@@ -14,19 +13,19 @@ export default function ForgotPasswordPage() {
     <div className="w-screen max-w-lg px-4">
       <div className="w-full">
         <h1 className="text-4xl font-semibold">
-          <Trans>Email sent!</Trans>
+          Email sent!
         </h1>
 
         <p className="text-muted-foreground mb-4 mt-2 text-sm">
-          <Trans>
+          
             A password reset email has been sent, if you have an account you should see it in your
             inbox shortly.
-          </Trans>
+          
         </p>
 
         <Button asChild>
           <Link to="/signin">
-            <Trans>Return to sign in</Trans>
+            Return to sign in
           </Link>
         </Button>
       </div>

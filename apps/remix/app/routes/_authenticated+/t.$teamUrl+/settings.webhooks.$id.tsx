@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import { Link } from 'react-router';
@@ -44,7 +41,6 @@ export function meta() {
 }
 
 export default function WebhookPage({ params }: Route.ComponentProps) {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -79,18 +75,18 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
       });
 
       toast({
-        title: _(msg`Webhook updated`),
-        description: _(msg`The webhook has been updated successfully.`),
+        title: "Webhook updated",
+        description: "The webhook has been updated successfully.",
         duration: 5000,
       });
 
       await revalidate();
     } catch (err) {
       toast({
-        title: _(msg`Failed to update webhook`),
-        description: _(
-          msg`We encountered an error while updating the webhook. Please try again later.`,
-        ),
+        title: "Failed to update webhook",
+        description: 
+          "We encountered an error while updating the webhook. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -107,16 +103,16 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
         errorCode={404}
         errorCodeMap={{
           404: {
-            heading: msg`Webhook not found`,
-            subHeading: msg`404 Webhook not found`,
-            message: msg`The webhook you are looking for may have been removed, renamed or may have never
-                    existed.`,
+            heading: "Webhook not found",
+            subHeading: "404 Webhook not found",
+            message: "The webhook you are looking for may have been removed, renamed or may have never
+                    existed.",
           },
         }}
         primaryButton={
           <Button asChild>
             <Link to={`/t/${team.url}/settings/webhooks`}>
-              <Trans>Go back</Trans>
+              Go back
             </Link>
           </Button>
         }
@@ -128,8 +124,8 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
   return (
     <div className="max-w-2xl">
       <SettingsHeader
-        title={_(msg`Edit webhook`)}
-        subtitle={_(msg`On this page, you can edit the webhook and its settings.`)}
+        title={"Edit webhook"}
+        subtitle={"On this page, you can edit the webhook and its settings."}
       />
 
       <Form {...form}>
@@ -147,7 +143,7 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
                     </FormControl>
 
                     <FormDescription>
-                      <Trans>The URL for Documenso to send webhook events to.</Trans>
+                      The URL for Documenso to send webhook events to.
                     </FormDescription>
 
                     <FormMessage />
@@ -161,7 +157,7 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Enabled</Trans>
+                      Enabled
                     </FormLabel>
 
                     <div>
@@ -186,7 +182,7 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
               render={({ field: { onChange, value } }) => (
                 <FormItem className="flex flex-col gap-2">
                   <FormLabel required>
-                    <Trans>Triggers</Trans>
+                    Triggers
                   </FormLabel>
                   <FormControl>
                     <WebhookMultiSelectCombobox
@@ -198,7 +194,7 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
                   </FormControl>
 
                   <FormDescription>
-                    <Trans>The events that will trigger a webhook to be sent to your URL.</Trans>
+                    The events that will trigger a webhook to be sent to your URL.
                   </FormDescription>
 
                   <FormMessage />
@@ -217,10 +213,10 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
                   </FormControl>
 
                   <FormDescription>
-                    <Trans>
+                    
                       A secret that will be sent to your URL so you can verify that the request has
                       been sent by Documenso.
-                    </Trans>
+                    
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -229,7 +225,7 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
 
             <div className="flex justify-end gap-4">
               <Button type="submit" loading={form.formState.isSubmitting}>
-                <Trans>Update webhook</Trans>
+                Update webhook
               </Button>
             </div>
           </fieldset>
@@ -242,19 +238,19 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
       >
         <div>
           <AlertTitle>
-            <Trans>Test Webhook</Trans>
+            Test Webhook
           </AlertTitle>
           <AlertDescription className="mr-2">
-            <Trans>
+            
               Send a test webhook with sample data to verify your integration is working correctly.
-            </Trans>
+            
           </AlertDescription>
         </div>
 
         <div className="flex-shrink-0">
           <WebhookTestDialog webhook={webhook}>
             <Button variant="outline" disabled={!webhook.enabled}>
-              <Trans>Test Webhook</Trans>
+              Test Webhook
             </Button>
           </WebhookTestDialog>
         </div>

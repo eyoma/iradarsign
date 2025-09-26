@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { Trans, useLingui } from '@lingui/react/macro';
-
 import { trpc } from '@documenso/trpc/react';
 import type { TFindSubscriptionClaimsResponse } from '@documenso/trpc/server/admin-router/find-subscription-claims.types';
 import { Button } from '@documenso/ui/primitives/button';
@@ -24,7 +22,6 @@ export type ClaimUpdateDialogProps = {
 };
 
 export const ClaimUpdateDialog = ({ claim, trigger }: ClaimUpdateDialogProps) => {
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
@@ -32,14 +29,14 @@ export const ClaimUpdateDialog = ({ claim, trigger }: ClaimUpdateDialogProps) =>
   const { mutateAsync: updateClaim, isPending } = trpc.admin.claims.update.useMutation({
     onSuccess: () => {
       toast({
-        title: t`Subscription claim updated successfully.`,
+        title: "Subscription claim updated successfully.",
       });
 
       setOpen(false);
     },
     onError: () => {
       toast({
-        title: t`Failed to update subscription claim.`,
+        title: "Failed to update subscription claim.",
         variant: 'destructive',
       });
     },
@@ -54,10 +51,10 @@ export const ClaimUpdateDialog = ({ claim, trigger }: ClaimUpdateDialogProps) =>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Update Subscription Claim</Trans>
+            Update Subscription Claim
           </DialogTitle>
           <DialogDescription>
-            <Trans>Modify the details of the subscription claim.</Trans>
+            Modify the details of the subscription claim.
           </DialogDescription>
         </DialogHeader>
 
@@ -77,11 +74,11 @@ export const ClaimUpdateDialog = ({ claim, trigger }: ClaimUpdateDialogProps) =>
                 onClick={() => setOpen(false)}
                 disabled={isPending}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button type="submit" loading={isPending}>
-                <Trans>Update Claim</Trans>
+                Update Claim
               </Button>
             </DialogFooter>
           }

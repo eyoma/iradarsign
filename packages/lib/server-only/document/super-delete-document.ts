@@ -1,6 +1,5 @@
 import { createElement } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { DocumentStatus, SendStatus } from '@prisma/client';
 
 import { mailer } from '@documenso/email/mailer';
@@ -101,7 +100,7 @@ export const superDeleteDocument = async ({ id, requestMetadata }: SuperDeleteDo
           },
           from: senderEmail,
           replyTo: replyToEmail,
-          subject: i18n._(msg`Document Cancelled`),
+          subject: i18n."Document Cancelled",
           html,
           text,
         });

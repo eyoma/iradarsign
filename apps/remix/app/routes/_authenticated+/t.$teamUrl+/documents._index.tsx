@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { FolderType, OrganisationType } from '@prisma/client';
 import { useParams, useSearchParams } from 'react-router';
 import { Link } from 'react-router';
@@ -123,7 +122,7 @@ export default function DocumentsPage() {
             </Avatar>
 
             <h2 className="text-4xl font-semibold">
-              <Trans>Documents</Trans>
+              Documents
             </h2>
           </div>
 

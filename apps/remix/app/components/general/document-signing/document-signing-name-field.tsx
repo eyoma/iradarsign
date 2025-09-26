@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useRevalidator } from 'react-router';
 
 import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
@@ -42,7 +39,6 @@ export const DocumentSigningNameField = ({
   onSignField,
   onUnsignField,
 }: DocumentSigningNameFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -126,10 +122,10 @@ export const DocumentSigningNameField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
+        title: "Error",
         description: isAssistantMode
-          ? _(msg`An error occurred while signing as assistant.`)
-          : _(msg`An error occurred while signing the document.`),
+          ? "An error occurred while signing as assistant."
+          : "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -154,8 +150,8 @@ export const DocumentSigningNameField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the field.`),
+        title: "Error",
+        description: "An error occurred while removing the field.",
         variant: 'destructive',
       });
     }
@@ -173,7 +169,7 @@ export const DocumentSigningNameField = ({
 
       {!field.inserted && (
         <DocumentSigningFieldsUninserted>
-          <Trans>Name</Trans>
+          Name
         </DocumentSigningFieldsUninserted>
       )}
 
@@ -186,17 +182,17 @@ export const DocumentSigningNameField = ({
       <Dialog open={showFullNameModal} onOpenChange={setShowFullNameModal}>
         <DialogContent>
           <DialogTitle>
-            <Trans>
+            
               Sign as
               <div>
                 {recipient.name} <div className="text-foreground">({recipient.email})</div>
               </div>
-            </Trans>
+            
           </DialogTitle>
 
           <div>
             <Label htmlFor="signature">
-              <Trans>Full Name</Trans>
+              Full Name
             </Label>
 
             <Input
@@ -218,7 +214,7 @@ export const DocumentSigningNameField = ({
                   setLocalFullName('');
                 }}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button
@@ -227,7 +223,7 @@ export const DocumentSigningNameField = ({
                 disabled={!localFullName}
                 onClick={() => onDialogSignClick()}
               >
-                <Trans>Sign</Trans>
+                Sign
               </Button>
             </div>
           </DialogFooter>

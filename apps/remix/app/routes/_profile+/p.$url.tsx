@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { FileIcon } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
@@ -103,9 +102,9 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
                     {BADGE_DATA[publicProfile.badge.type].name}
                   </p>
                   <p className="text-muted-foreground mt-0.5 text-sm">
-                    <Trans>
+                    
                       Since {DateTime.fromJSDate(publicProfile.badge.since).toFormat('LLL ‘yy')}
-                    </Trans>
+                    
                   </p>
                 </div>
               </TooltipContent>
@@ -128,26 +127,26 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
       {templates.length === 0 && (
         <div className="mt-4 w-full max-w-xl border-t pt-4">
           <p className="text-muted-foreground max-w-[60ch] whitespace-pre-wrap break-words text-center text-sm leading-relaxed">
-            <Trans>
+            
               It looks like {publicProfile.name} hasn't added any documents to their profile yet.
-            </Trans>{' '}
+            {' '}
             {!user?.id && (
               <span className="mt-2 inline-block">
-                <Trans>
+                
                   While waiting for them to do so you can create your own Documenso account and get
                   started with document signing right away.
-                </Trans>
+                
               </span>
             )}
             {'userId' in profile && user?.id === profile.userId && (
               <span className="mt-2 inline-block">
-                <Trans>
+                
                   Go to your{' '}
                   <Link to="/settings/public-profile" className="underline">
                     public profile settings
                   </Link>{' '}
                   to add documents.
-                </Trans>
+                
               </span>
             )}
           </p>
@@ -160,7 +159,7 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
             <TableHeader>
               <TableRow>
                 <TableHead className="w-full rounded-tl-md bg-neutral-50 dark:bg-neutral-700">
-                  <Trans>Documents</Trans>
+                  Documents
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -186,7 +185,7 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
 
                         <Button asChild className="w-20">
                           <Link to={formatDirectTemplatePath(template.directLink.token)}>
-                            <Trans>Sign</Trans>
+                            Sign
                           </Link>
                         </Button>
                       </div>

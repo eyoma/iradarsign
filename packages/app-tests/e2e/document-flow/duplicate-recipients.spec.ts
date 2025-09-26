@@ -83,7 +83,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+      redirectPath: `/t/${team.url}/documents/${document.id}/edi",
     });
 
     // Complete the flow
@@ -94,7 +94,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     });
 
     // Verify document was created successfully
-    await expect(page).toHaveURL(new RegExp(`/t/${team.url}/documents`));
+    await expect(page).toHaveURL(new RegExp("/t/${team.url}/documents`));
   });
 
   test('should allow adding duplicate recipient after saving document initially', async ({
@@ -106,7 +106,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+      redirectPath: `/t/${team.url}/documents/${document.id}/edi",
     });
 
     // Step 1: Settings - Continue with defaults
@@ -157,7 +157,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     await page.waitForTimeout(2500);
     await page.getByRole('button', { name: 'Send' }).click();
 
-    await page.waitForURL(new RegExp(`/t/${team.url}/documents/\\d+`));
+    await page.waitForURL(new RegExp("/t/${team.url}/documents/\\d+`));
 
     await expect(page.getByRole('link', { name: document.title })).toBeVisible();
   });
@@ -173,7 +173,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+      redirectPath: `/t/${team.url}/documents/${document.id}/edi",
     });
 
     // Complete the document flow
@@ -184,7 +184,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     });
 
     // Navigate to documents list and get the document
-    await expect(page).toHaveURL(new RegExp(`/t/${team.url}/documents`));
+    await expect(page).toHaveURL(new RegExp("/t/${team.url}/documents`));
 
     const recipients = await prisma.recipient.findMany({
       where: {
@@ -241,7 +241,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+      redirectPath: `/t/${team.url}/documents/${document.id}/edi",
     });
 
     // Step 1: Settings
@@ -286,7 +286,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
 
     await page.getByRole('button', { name: 'Send' }).click();
 
-    await page.waitForURL(new RegExp(`/t/${team.url}/documents/\\d+`));
+    await page.waitForURL(new RegExp("/t/${team.url}/documents/\\d+`));
 
     await expect(page.getByRole('link', { name: document.title })).toBeVisible();
   });
@@ -300,7 +300,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     await apiSignin({
       page,
       email: user.email,
-      redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+      redirectPath: `/t/${team.url}/documents/${document.id}/edi",
     });
 
     // Create document with duplicates and fields
@@ -311,7 +311,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
     });
 
     // Navigate back to edit the document
-    await page.goto(`/t/${team.url}/documents/${document.id}/edit`);
+    await page.goto("/t/${team.url}/documents/${document.id}/edi");
 
     // Go to fields step
     await page.getByRole('button', { name: 'Continue' }).click(); // Settings
@@ -325,7 +325,7 @@ test.describe('[DOCUMENT_FLOW]: Duplicate Recipients', () => {
 
     // Verify their field is visible and can be selected
     const firstRecipientFields = await page
-      .locator(`[data-field-type="SIGNATURE"]:not(:disabled)`)
+      .locator("[data-field-type="SIGNATURE"]:not(:disabled)`)
       .all();
     expect(firstRecipientFields.length).toBeGreaterThan(0);
 

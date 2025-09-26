@@ -1,8 +1,5 @@
 import { useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { TemplateDirectLink } from '@prisma/client';
 import { TemplateType } from '@prisma/client';
 import { EditIcon, FileIcon, LinkIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
@@ -28,7 +25,6 @@ type DirectTemplate = FindTemplateRow & {
 };
 
 export const SettingsPublicProfileTemplatesTable = () => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [, copy] = useCopyToClipboard();
@@ -68,8 +64,8 @@ export const SettingsPublicProfileTemplatesTable = () => {
   const onCopyClick = async (token: string) =>
     copy(formatDirectTemplatePath(token)).then(() => {
       toast({
-        title: _(msg`Copied to clipboard`),
-        description: _(msg`The direct link has been copied to your clipboard`),
+        title: "Copied to clipboard",
+        description: "The direct link has been copied to your clipboard",
       });
     });
 
@@ -102,26 +98,26 @@ export const SettingsPublicProfileTemplatesTable = () => {
 
             {isLoadingError && (
               <div className="text-muted-foreground flex h-32 flex-col items-center justify-center text-sm">
-                <Trans>Unable to load your public profile templates at this time</Trans>
+                Unable to load your public profile templates at this time
                 <button
                   onClick={(e) => {
                     e.preventDefault();
                     void refetch();
                   }}
                 >
-                  <Trans>Click here to retry</Trans>
+                  Click here to retry
                 </button>
               </div>
             )}
 
             {!isLoading && (
               <div className="text-muted-foreground flex h-32 flex-col items-center justify-center text-sm">
-                <Trans>No public profile templates found</Trans>
+                No public profile templates found
                 <ManagePublicTemplateDialog
                   directTemplates={privateDirectTemplates}
                   trigger={
                     <button className="hover:text-muted-foreground/80 mt-1 text-xs">
-                      <Trans>Click here to get started</Trans>
+                      Click here to get started
                     </button>
                   }
                 />
@@ -155,12 +151,12 @@ export const SettingsPublicProfileTemplatesTable = () => {
 
               <DropdownMenuContent className="w-52" align="center" side="left">
                 <DropdownMenuLabel>
-                  <Trans>Action</Trans>
+                  Action
                 </DropdownMenuLabel>
 
                 <DropdownMenuItem onClick={() => void onCopyClick(template.directLink.token)}>
                   <LinkIcon className="mr-2 h-4 w-4" />
-                  <Trans>Copy sharable link</Trans>
+                  Copy sharable link
                 </DropdownMenuItem>
 
                 <DropdownMenuItem
@@ -172,7 +168,7 @@ export const SettingsPublicProfileTemplatesTable = () => {
                   }}
                 >
                   <EditIcon className="mr-2 h-4 w-4" />
-                  <Trans>Update</Trans>
+                  Update
                 </DropdownMenuItem>
 
                 <DropdownMenuItem
@@ -184,7 +180,7 @@ export const SettingsPublicProfileTemplatesTable = () => {
                   }
                 >
                   <Trash2Icon className="mr-2 h-4 w-4" />
-                  <Trans>Remove</Trans>
+                  Remove
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

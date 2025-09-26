@@ -16,7 +16,7 @@ test('[DOCUMENT_FLOW]: add settings', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
   // Set title.
@@ -52,13 +52,13 @@ test('[DOCUMENT_FLOW]: title should be disabled depending on document status', a
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${pendingDocument.id}/edit`,
+    redirectPath: "/t/${team.url}/documents/${pendingDocument.id}/edi",
   });
 
   // Should be disabled for pending documents.
   await expect(page.getByLabel('Title')).toBeDisabled();
 
   // Should be enabled for draft documents.
-  await page.goto(`/t/${team.url}/documents/${draftDocument.id}/edit`);
+  await page.goto("/t/${team.url}/documents/${draftDocument.id}/edit`);
   await expect(page.getByLabel('Title')).toBeEnabled();
 });

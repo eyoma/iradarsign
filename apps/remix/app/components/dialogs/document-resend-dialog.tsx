@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { type Recipient, SigningStatus } from '@prisma/client';
 import { History } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -60,8 +57,6 @@ export const DocumentResendDialog = ({ document, recipients }: DocumentResendDia
   const team = useCurrentTeam();
 
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const [isOpen, setIsOpen] = useState(false);
   const isOwner = document.userId === user.id;
   const isCurrentTeamDocument = team && document.team?.url === team.url;
@@ -90,16 +85,16 @@ export const DocumentResendDialog = ({ document, recipients }: DocumentResendDia
       await resendDocument({ documentId: document.id, recipients });
 
       toast({
-        title: _(msg`Document re-sent`),
-        description: _(msg`Your document has been re-sent successfully.`),
+        title: "Document re-sen",
+        description: msg"Your document has been re-sent successfully.",
         duration: 5000,
       });
 
       setIsOpen(false);
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`This document could not be re-sent at this time. Please try again.`),
+        title: "Something went wrong",
+        description: "This document could not be re-sent at this time. Please try again.",
         variant: 'destructive',
         duration: 7500,
       });
@@ -111,7 +106,7 @@ export const DocumentResendDialog = ({ document, recipients }: DocumentResendDia
       <DialogTrigger asChild>
         <DropdownMenuItem disabled={isDisabled} onSelect={(e) => e.preventDefault()}>
           <History className="mr-2 h-4 w-4" />
-          <Trans>Resend</Trans>
+          Resend
         </DropdownMenuItem>
       </DialogTrigger>
 
@@ -119,7 +114,7 @@ export const DocumentResendDialog = ({ document, recipients }: DocumentResendDia
         <DialogHeader>
           <DialogTitle asChild>
             <h1 className="text-center text-xl">
-              <Trans>Who do you want to remind?</Trans>
+              Who do you want to remind?
             </h1>
           </DialogTitle>
         </DialogHeader>
@@ -178,12 +173,12 @@ export const DocumentResendDialog = ({ document, recipients }: DocumentResendDia
                 variant="secondary"
                 disabled={isSubmitting}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
             </DialogClose>
 
             <Button className="flex-1" loading={isSubmitting} type="submit" form={FORM_ID}>
-              <Trans>Send reminder</Trans>
+              Send reminder
             </Button>
           </div>
         </DialogFooter>

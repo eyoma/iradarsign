@@ -16,7 +16,7 @@ test('[ORGANISATIONS]: manage document preferences', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/o/${organisation.url}/settings/document`,
+    redirectPath: `/o/${organisation.url}/settings/documen",
   });
 
   // Update document preferences.
@@ -59,7 +59,7 @@ test('[ORGANISATIONS]: manage document preferences', async ({ page }) => {
   expect(teamSettings.drawSignatureEnabled).toEqual(false);
 
   // Edit the team settings
-  await page.goto(`/t/${team.url}/settings/document`);
+  await page.goto("/t/${team.url}/settings/documen");
 
   await page.getByTestId('document-visibility-trigger').click();
   await page.getByRole('option', { name: 'Everyone can access and view' }).click();
@@ -119,7 +119,7 @@ test('[ORGANISATIONS]: manage branding preferences', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/o/${organisation.url}/settings/branding`,
+    redirectPath: "/o/${organisation.url}/settings/branding`,
   });
 
   // Update branding preferences.

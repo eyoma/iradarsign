@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Document, Recipient, Team, User } from '@prisma/client';
 import { DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
 import { CheckCircle, Download, EyeIcon, Pencil } from 'lucide-react';
@@ -27,8 +24,6 @@ export const DocumentPageViewButton = ({ document }: DocumentPageViewButtonProps
   const { user } = useSession();
 
   const { toast } = useToast();
-  const { _ } = useLingui();
-
   const recipient = document.recipients.find((recipient) => recipient.email === user.email);
 
   const isRecipient = !!recipient;
@@ -38,7 +33,7 @@ export const DocumentPageViewButton = ({ document }: DocumentPageViewButtonProps
   const role = recipient?.role;
 
   const documentsPath = formatDocumentsPath(document.team.url);
-  const formatPath = `${documentsPath}/${document.id}/edit`;
+  const formatPath = `${documentsPath}/${document.id}/edi";
 
   const onDownloadClick = async () => {
     try {
@@ -62,8 +57,8 @@ export const DocumentPageViewButton = ({ document }: DocumentPageViewButtonProps
       await downloadPDF({ documentData, fileName: documentWithData.title });
     } catch (err) {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`An error occurred while downloading your document.`),
+        title: msg"Something went wrong`,
+        description: "An error occurred while downloading your document.",
         variant: 'destructive',
       });
     }
@@ -82,19 +77,19 @@ export const DocumentPageViewButton = ({ document }: DocumentPageViewButtonProps
             .with(RecipientRole.SIGNER, () => (
               <>
                 <Pencil className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>Sign</Trans>
+                Sign
               </>
             ))
             .with(RecipientRole.APPROVER, () => (
               <>
                 <CheckCircle className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>Approve</Trans>
+                Approve
               </>
             ))
             .otherwise(() => (
               <>
                 <EyeIcon className="-ml-1 mr-2 h-4 w-4" />
-                <Trans>View</Trans>
+                View
               </>
             ))}
         </Link>
@@ -103,14 +98,14 @@ export const DocumentPageViewButton = ({ document }: DocumentPageViewButtonProps
     .with({ isComplete: false }, () => (
       <Button className="w-full" asChild>
         <Link to={formatPath}>
-          <Trans>Edit</Trans>
+          Edit
         </Link>
       </Button>
     ))
     .with({ isComplete: true }, () => (
       <Button className="w-full" onClick={onDownloadClick}>
         <Download className="-ml-1 mr-2 inline h-4 w-4" />
-        <Trans>Download</Trans>
+        Download
       </Button>
     ))
     .otherwise(() => null);

@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
 import { getSession } from '@documenso/auth/server/lib/utils/get-session';
@@ -58,14 +55,13 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function SettingsSecurity({ loaderData }: Route.ComponentProps) {
   const { hasEmailPasswordAccount } = loaderData;
 
-  const { _ } = useLingui();
   const { user } = useSession();
 
   return (
     <div>
       <SettingsHeader
-        title={_(msg`Security`)}
-        subtitle={_(msg`Here you can manage your password and security settings.`)}
+        title={"Security"}
+        subtitle={"Here you can manage your password and security settings."}
       />
       {hasEmailPasswordAccount && (
         <>
@@ -81,20 +77,20 @@ export default function SettingsSecurity({ loaderData }: Route.ComponentProps) {
       >
         <div className="mb-4 sm:mb-0">
           <AlertTitle>
-            <Trans>Two factor authentication</Trans>
+            Two factor authentication
           </AlertTitle>
 
           <AlertDescription className="mr-4">
             {hasEmailPasswordAccount ? (
-              <Trans>
+              
                 Add an authenticator to serve as a secondary authentication method when signing in,
                 or when signing documents.
-              </Trans>
+              
             ) : (
-              <Trans>
+              
                 Add an authenticator to serve as a secondary authentication method for signing
                 documents.
-              </Trans>
+              
             )}
           </AlertDescription>
         </div>
@@ -113,14 +109,14 @@ export default function SettingsSecurity({ loaderData }: Route.ComponentProps) {
         >
           <div className="mb-4 sm:mb-0">
             <AlertTitle>
-              <Trans>Recovery codes</Trans>
+              Recovery codes
             </AlertTitle>
 
             <AlertDescription className="mr-4">
-              <Trans>
+              
                 Two factor authentication recovery codes are used to access your account in the
                 event that you lose access to your authenticator app.
-              </Trans>
+              
             </AlertDescription>
           </div>
 
@@ -134,19 +130,19 @@ export default function SettingsSecurity({ loaderData }: Route.ComponentProps) {
       >
         <div className="mb-4 sm:mb-0">
           <AlertTitle>
-            <Trans>Passkeys</Trans>
+            Passkeys
           </AlertTitle>
 
           <AlertDescription className="mr-4">
-            <Trans>
+            
               Allows authenticating using biometrics, password managers, hardware keys, etc.
-            </Trans>
+            
           </AlertDescription>
         </div>
 
         <Button asChild variant="outline" className="bg-background">
           <Link to="/settings/security/passkeys">
-            <Trans>Manage passkeys</Trans>
+            Manage passkeys
           </Link>
         </Button>
       </Alert>
@@ -157,17 +153,17 @@ export default function SettingsSecurity({ loaderData }: Route.ComponentProps) {
       >
         <div className="mb-4 mr-4 sm:mb-0">
           <AlertTitle>
-            <Trans>Recent activity</Trans>
+            Recent activity
           </AlertTitle>
 
           <AlertDescription className="mr-2">
-            <Trans>View all recent security activity related to your account.</Trans>
+            View all recent security activity related to your account.
           </AlertDescription>
         </div>
 
         <Button asChild variant="outline" className="bg-background">
           <Link to="/settings/security/activity">
-            <Trans>View activity</Trans>
+            View activity
           </Link>
         </Button>
       </Alert>
@@ -178,17 +174,17 @@ export default function SettingsSecurity({ loaderData }: Route.ComponentProps) {
       >
         <div className="mb-4 mr-4 sm:mb-0">
           <AlertTitle>
-            <Trans>Active sessions</Trans>
+            Active sessions
           </AlertTitle>
 
           <AlertDescription className="mr-2">
-            <Trans>View and manage all active sessions for your account.</Trans>
+            View and manage all active sessions for your account.
           </AlertDescription>
         </div>
 
         <Button asChild variant="outline" className="bg-background">
           <Link to="/settings/security/sessions">
-            <Trans>Manage sessions</Trans>
+            Manage sessions
           </Link>
         </Button>
       </Alert>
@@ -199,17 +195,17 @@ export default function SettingsSecurity({ loaderData }: Route.ComponentProps) {
       >
         <div className="mb-4 mr-4 sm:mb-0">
           <AlertTitle>
-            <Trans>Linked Accounts</Trans>
+            Linked Accounts
           </AlertTitle>
 
           <AlertDescription className="mr-2">
-            <Trans>View and manage all login methods linked to your account.</Trans>
+            View and manage all login methods linked to your account.
           </AlertDescription>
         </div>
 
         <Button asChild variant="outline" className="bg-background">
           <Link to="/settings/security/linked-accounts">
-            <Trans>Manage linked accounts</Trans>
+            Manage linked accounts
           </Link>
         </Button>
       </Alert>

@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { DocumentSigningOrder, SigningStatus } from '@prisma/client';
 import { ChevronLeft, LucideEdit } from 'lucide-react';
 import { Link, redirect, useNavigate } from 'react-router';
@@ -95,7 +94,7 @@ export default function TemplatePage() {
     <div className="mx-auto -mt-4 w-full max-w-screen-xl px-4 md:px-8">
       <Link to={templateRootPath} className="flex items-center text-[#7AC455] hover:opacity-80">
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
-        <Trans>Templates</Trans>
+        Templates
       </Link>
 
       <div className="flex flex-row justify-between truncate">
@@ -128,7 +127,7 @@ export default function TemplatePage() {
           <Button className="w-full" asChild>
             <Link to={`${templateRootPath}/${template.id}/edit`}>
               <LucideEdit className="mr-1.5 h-3.5 w-3.5" />
-              <Trans>Edit Template</Trans>
+              Edit Template
             </Link>
           </Button>
         </div>
@@ -158,7 +157,7 @@ export default function TemplatePage() {
             <section className="border-border bg-widget flex flex-col rounded-xl border pb-4 pt-6">
               <div className="flex flex-row items-center justify-between px-4">
                 <h3 className="text-foreground text-2xl font-semibold">
-                  <Trans>Template</Trans>
+                  Template
                 </h3>
 
                 <div>
@@ -172,7 +171,7 @@ export default function TemplatePage() {
               </div>
 
               <p className="text-muted-foreground mt-2 px-4 text-sm">
-                <Trans>Manage and view template</Trans>
+                Manage and view template
               </p>
 
               <div className="mt-4 border-t px-4 pt-4">
@@ -183,7 +182,7 @@ export default function TemplatePage() {
                   documentRootPath={documentRootPath}
                   trigger={
                     <Button className="w-full">
-                      <Trans>Use</Trans>
+                      Use
                     </Button>
                   }
                 />
@@ -207,7 +206,7 @@ export default function TemplatePage() {
 
       <div className="mt-16" id="documents">
         <h1 className="mb-4 text-2xl font-bold">
-          <Trans>Documents created from template</Trans>
+          Documents created from template
         </h1>
 
         <TemplatePageViewDocumentsTable templateId={template.id} />

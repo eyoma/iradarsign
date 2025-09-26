@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { ApiToken } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -40,11 +37,11 @@ import { useToast } from '@documenso/ui/primitives/use-toast';
 import { useCurrentTeam } from '~/providers/team';
 
 export const EXPIRATION_DATES = {
-  ONE_WEEK: msg`7 days`,
-  ONE_MONTH: msg`1 month`,
-  THREE_MONTHS: msg`3 months`,
-  SIX_MONTHS: msg`6 months`,
-  ONE_YEAR: msg`12 months`,
+  ONE_WEEK: "7 days",
+  ONE_MONTH: "1 month",
+  THREE_MONTHS: "3 months",
+  SIX_MONTHS: "6 months",
+  ONE_YEAR: "12 months",
 } as const;
 
 const ZCreateTokenFormSchema = ZCreateApiTokenRequestSchema.pick({
@@ -69,7 +66,6 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
 
   const team = useCurrentTeam();
 
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [newlyCreatedToken, setNewlyCreatedToken] = useState<NewlyCreatedToken | null>();
@@ -98,13 +94,13 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
       }
 
       toast({
-        title: _(msg`Token copied to clipboard`),
-        description: _(msg`The token was copied to your clipboard.`),
+        title: "Token copied to clipboard",
+        description: "The token was copied to your clipboard.",
       });
     } catch (error) {
       toast({
-        title: _(msg`Unable to copy token`),
-        description: _(msg`We were unable to copy the token to your clipboard. Please try again.`),
+        title: "Unable to copy token",
+        description: "We were unable to copy the token to your clipboard. Please try again.",
         variant: 'destructive',
       });
     }
@@ -119,8 +115,8 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
       });
 
       toast({
-        title: _(msg`Token created`),
-        description: _(msg`A new token was created successfully.`),
+        title: "Token created",
+        description: "A new token was created successfully.",
         duration: 5000,
       });
 
@@ -131,13 +127,13 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
       const errorMessage = match(error.code)
         .with(
           AppErrorCode.UNAUTHORIZED,
-          () => msg`You do not have permission to create a token for this team`,
+          () => "You do not have permission to create a token for this team",
         )
-        .otherwise(() => msg`Something went wrong. Please try again later.`);
+        .otherwise(() => "Something went wrong. Please try again later.");
 
       toast({
-        title: _(msg`An error occurred`),
-        description: _(errorMessage),
+        title: "An error occurred",
+        description: errorMessage,
         variant: 'destructive',
         duration: 5000,
       });
@@ -158,7 +154,7 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel className="text-muted-foreground">
-                    <Trans>Token name</Trans>
+                    Token name
                   </FormLabel>
 
                   <div className="flex items-center gap-x-4">
@@ -168,10 +164,10 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
                   </div>
 
                   <FormDescription className="text-xs italic">
-                    <Trans>
+                    
                       Please enter a meaningful name for your token. This will help you identify it
                       later.
-                    </Trans>
+                    
                   </FormDescription>
 
                   <FormMessage />
@@ -186,19 +182,19 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel className="text-muted-foreground">
-                      <Trans>Token expiration date</Trans>
+                      Token expiration date
                     </FormLabel>
 
                     <div className="flex items-center gap-x-4">
                       <FormControl className="flex-1">
                         <Select onValueChange={field.onChange} disabled={noExpirationDate}>
                           <SelectTrigger className="w-full">
-                            <SelectValue placeholder={_(msg`Choose...`)} />
+                            <SelectValue placeholder={"Choose..."} />
                           </SelectTrigger>
                           <SelectContent>
                             {Object.entries(EXPIRATION_DATES).map(([key, date]) => (
                               <SelectItem key={key} value={key}>
-                                {_(date)}
+                                {date}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -213,7 +209,7 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
 
               <div>
                 <FormLabel className="text-muted-foreground mt-2">
-                  <Trans>Never expire</Trans>
+                  Never expire
                 </FormLabel>
                 <div className="block md:py-1.5">
                   <Switch
@@ -230,12 +226,12 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
               className="hidden md:inline-flex"
               loading={form.formState.isSubmitting}
             >
-              <Trans>Create token</Trans>
+              Create token
             </Button>
 
             <div className="md:hidden">
               <Button type="submit" loading={form.formState.isSubmitting}>
-                <Trans>Create token</Trans>
+                Create token
               </Button>
             </div>
           </fieldset>
@@ -255,10 +251,10 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
               <Card gradient>
                 <CardContent className="p-4">
                   <p className="text-muted-foreground mt-2 text-sm">
-                    <Trans>
+                    
                       Your token was created successfully! Make sure to copy it because you won't be
                       able to see it again!
-                    </Trans>
+                    
                   </p>
 
                   <p className="bg-muted-foreground/10 my-4 rounded-md px-2.5 py-1 font-mono text-sm">
@@ -266,7 +262,7 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
                   </p>
 
                   <Button variant="outline" onClick={() => void copyToken(newlyCreatedToken.token)}>
-                    <Trans>Copy token</Trans>
+                    Copy token
                   </Button>
                 </CardContent>
               </Card>

@@ -69,10 +69,10 @@ test('[DOCUMENT_FLOW]: should be able to create a document', async ({ page }) =>
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
-  const documentTitle = `example-${Date.now()}.pdf`;
+  const documentTitle = "example-${Date.now()}.pdf`;
 
   // Set general settings
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
@@ -130,10 +130,10 @@ test('[DOCUMENT_FLOW]: should be able to create a document with multiple recipie
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
-  const documentTitle = `example-${Date.now()}.pdf`;
+  const documentTitle = "example-${Date.now()}.pdf`;
 
   // Set title
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
@@ -215,7 +215,7 @@ test('[DOCUMENT_FLOW]: should be able to create a document with multiple recipie
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
   // Set title
@@ -298,7 +298,7 @@ test('[DOCUMENT_FLOW]: should be able to create a document with multiple recipie
   await page.waitForTimeout(2500);
   await page.getByRole('button', { name: 'Send' }).click();
 
-  await page.waitForURL(new RegExp(`/t/${team.url}/documents/\\d+`));
+  await page.waitForURL(new RegExp("/t/${team.url}/documents/\\d+`));
 
   // Assert document was created
   await expect(page.getByRole('link', { name: 'Test Title' })).toBeVisible();
@@ -313,10 +313,10 @@ test('[DOCUMENT_FLOW]: should not be able to create a document without signature
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
-  const documentTitle = `example-${Date.now()}.pdf`;
+  const documentTitle = "example-${Date.now()}.pdf`;
 
   // Set title
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
@@ -401,10 +401,10 @@ test('[DOCUMENT_FLOW]: should be able to create, send with redirect url, sign a 
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
-  const documentTitle = `example-${Date.now()}.pdf`;
+  const documentTitle = "example-${Date.now()}.pdf`;
 
   // Set title & advanced redirect
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
@@ -525,10 +525,10 @@ test('[DOCUMENT_FLOW]: should be able to create and sign a document with 3 recip
   await apiSignin({
     page,
     email: user.email,
-    redirectPath: `/t/${team.url}/documents/${document.id}/edit`,
+    redirectPath: `/t/${team.url}/documents/${document.id}/edi",
   });
 
-  const documentTitle = `Sequential-Signing-${Date.now()}.pdf`;
+  const documentTitle = "Sequential-Signing-${Date.now()}.pdf`;
 
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
   await page.getByLabel('Title').fill(documentTitle);

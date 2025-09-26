@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { History, MoreHorizontal, Trash2 } from 'lucide-react';
 import { useSearchParams } from 'react-router';
@@ -32,7 +29,6 @@ export const OrganisationMemberInvitesTable = () => {
   const updateSearchParams = useUpdateSearchParams();
   const organisation = useCurrentOrganisation();
 
-  const { _, i18n } = useLingui();
   const { toast } = useToast();
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
@@ -54,14 +50,14 @@ export const OrganisationMemberInvitesTable = () => {
     trpc.organisation.member.invite.resend.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Invitation has been resent`),
+          title: "Success",
+          description: "Invitation has been resen",
         });
       },
       onError: () => {
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(msg`Unable to resend invitation. Please try again.`),
+          title: msg"Something went wrong",
+          description: "Unable to resend invitation. Please try again.",
           variant: 'destructive',
         });
       },
@@ -71,14 +67,14 @@ export const OrganisationMemberInvitesTable = () => {
     trpc.organisation.member.invite.deleteMany.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Invitation has been deleted`),
+          title: "Success",
+          description: "Invitation has been deleted",
         });
       },
       onError: () => {
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(msg`Unable to delete invitation. Please try again.`),
+          title: "Something went wrong",
+          description: "Unable to delete invitation. Please try again.",
           variant: 'destructive',
         });
       },
@@ -101,7 +97,7 @@ export const OrganisationMemberInvitesTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Organisation Member`),
+        header: "Organisation Member",
         cell: ({ row }) => {
           return (
             <AvatarWithText
@@ -115,17 +111,17 @@ export const OrganisationMemberInvitesTable = () => {
         },
       },
       {
-        header: _(msg`Role`),
+        header: "Role",
         accessorKey: 'role',
-        cell: ({ row }) => _(ORGANISATION_MEMBER_ROLE_MAP[row.original.organisationRole]),
+        cell: ({ row }) => ORGANISATION_MEMBER_ROLE_MAP[row.original.organisationRole],
       },
       {
-        header: _(msg`Invited At`),
+        header: "Invited A",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt),
       },
       {
-        header: _(msg`Actions`),
+        header: msg"Actions",
         cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -134,7 +130,7 @@ export const OrganisationMemberInvitesTable = () => {
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
               <DropdownMenuLabel>
-                <Trans>Actions</Trans>
+                Actions
               </DropdownMenuLabel>
 
               <DropdownMenuItem
@@ -146,7 +142,7 @@ export const OrganisationMemberInvitesTable = () => {
                 }
               >
                 <History className="mr-2 h-4 w-4" />
-                <Trans>Resend</Trans>
+                Resend
               </DropdownMenuItem>
 
               <DropdownMenuItem
@@ -158,7 +154,7 @@ export const OrganisationMemberInvitesTable = () => {
                 }
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                <Trans>Remove</Trans>
+                Remove
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

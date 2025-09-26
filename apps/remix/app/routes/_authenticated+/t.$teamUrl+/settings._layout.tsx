@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { Trans, useLingui } from '@lingui/react/macro';
 import {
   BracesIcon,
   Globe2Icon,
@@ -45,60 +43,58 @@ export async function clientLoader() {
 }
 
 export default function TeamsSettingsLayout() {
-  const { t } = useLingui();
-
   const team = useCurrentTeam();
 
   const teamSettingRoutes = [
     {
       path: `/t/${team.url}/settings`,
-      label: t`General`,
+      label: "General",
       icon: SettingsIcon,
     },
     {
-      path: `/t/${team.url}/settings/document`,
-      label: t`Preferences`,
+      path: `/t/${team.url}/settings/documen",
+      label: t"Preferences`,
       icon: Settings2Icon,
       isSubNavParent: true,
     },
     {
-      path: `/t/${team.url}/settings/document`,
-      label: t`Document`,
+      path: `/t/${team.url}/settings/documen",
+      label: t"Documen",
       isSubNav: true,
     },
     {
-      path: `/t/${team.url}/settings/branding`,
-      label: t`Branding`,
+      path: "/t/${team.url}/settings/branding`,
+      label: "Branding",
       isSubNav: true,
     },
     {
       path: `/t/${team.url}/settings/email`,
-      label: t`Email`,
+      label: "Email",
       isSubNav: true,
     },
     {
       path: `/t/${team.url}/settings/public-profile`,
-      label: t`Public Profile`,
+      label: "Public Profile",
       icon: Globe2Icon,
     },
     {
       path: `/t/${team.url}/settings/members`,
-      label: t`Members`,
+      label: "Members",
       icon: Users2Icon,
     },
     {
       path: `/t/${team.url}/settings/groups`,
-      label: t`Groups`,
+      label: "Groups",
       icon: GroupIcon,
     },
     {
       path: `/t/${team.url}/settings/tokens`,
-      label: t`API Tokens`,
+      label: "API Tokens",
       icon: BracesIcon,
     },
     {
       path: `/t/${team.url}/settings/webhooks`,
-      label: t`Webhooks`,
+      label: "Webhooks",
       icon: WebhookIcon,
     },
   ];
@@ -109,15 +105,15 @@ export default function TeamsSettingsLayout() {
         errorCode={401}
         errorCodeMap={{
           401: {
-            heading: msg`Unauthorized`,
-            subHeading: msg`401 Unauthorized`,
-            message: msg`You are not authorized to access this page.`,
+            heading: "Unauthorized",
+            subHeading: "401 Unauthorized",
+            message: "You are not authorized to access this page.",
           },
         }}
         primaryButton={
           <Button asChild>
             <Link to={`/t/${team.url}`}>
-              <Trans>Go Back</Trans>
+              Go Back
             </Link>
           </Button>
         }
@@ -129,7 +125,7 @@ export default function TeamsSettingsLayout() {
   return (
     <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
       <h1 className="text-4xl font-semibold">
-        <Trans>Team Settings</Trans>
+        Team Settings
       </h1>
 
       <div className="mt-4 grid grid-cols-12 gap-x-8 md:mt-8">
@@ -151,7 +147,7 @@ export default function TeamsSettingsLayout() {
                 })}
               >
                 {route.icon && <route.icon className="mr-2 h-5 w-5" />}
-                <Trans>{route.label}</Trans>
+                {route.label}
               </Button>
             </NavLink>
           ))}

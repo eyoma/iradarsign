@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Document, Recipient, User } from '@prisma/client';
 import { DateTime } from 'luxon';
 
@@ -22,23 +19,21 @@ export const DocumentPageViewInformation = ({
 }: DocumentPageViewInformationProps) => {
   const isMounted = useIsMounted();
 
-  const { _, i18n } = useLingui();
-
   const documentInformation = useMemo(() => {
     return [
       {
-        description: msg`Uploaded by`,
+        description: "Uploaded by",
         value:
-          userId === document.userId ? _(msg`You`) : (document.user.name ?? document.user.email),
+          userId === document.userId ? "You" : (document.user.name ?? document.user.email),
       },
       {
-        description: msg`Created`,
+        description: "Created",
         value: DateTime.fromJSDate(document.createdAt)
           .setLocale(i18n.locales?.[0] || i18n.locale)
           .toFormat('MMMM d, yyyy'),
       },
       {
-        description: msg`Last modified`,
+        description: "Last modified",
         value: DateTime.fromJSDate(document.updatedAt)
           .setLocale(i18n.locales?.[0] || i18n.locale)
           .toRelative(),
@@ -50,7 +45,7 @@ export const DocumentPageViewInformation = ({
   return (
     <section className="dark:bg-background text-foreground border-border bg-widget flex flex-col rounded-xl border">
       <h1 className="px-4 py-3 font-medium">
-        <Trans>Information</Trans>
+        Information
       </h1>
 
       <ul className="divide-y border-t">
@@ -59,7 +54,7 @@ export const DocumentPageViewInformation = ({
             key={i}
             className="flex items-center justify-between px-4 py-2.5 text-sm last:border-b"
           >
-            <span className="text-muted-foreground">{_(item.description)}</span>
+            <span className="text-muted-foreground">{item.description}</span>
             <span>{item.value}</span>
           </li>
         ))}

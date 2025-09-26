@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { DocumentSource } from '@prisma/client';
 import { Loader } from 'lucide-react';
 import { DateTime } from 'luxon';
@@ -36,7 +35,7 @@ export const TemplatePageViewRecentActivity = ({
     <section className="dark:bg-background border-border bg-widget flex flex-col rounded-xl border">
       <div className="flex flex-row items-center justify-between border-b px-4 py-3">
         <h1 className="text-foreground font-medium">
-          <Trans>Recent documents</Trans>
+          Recent documents
         </h1>
 
         {/* Can add dropdown menu here for additional options. */}
@@ -51,13 +50,13 @@ export const TemplatePageViewRecentActivity = ({
       {isLoadingError && (
         <div className="flex h-full flex-col items-center justify-center py-16">
           <p className="text-foreground/80 text-sm">
-            <Trans>Unable to load documents</Trans>
+            Unable to load documents
           </p>
           <button
             onClick={async () => refetch()}
             className="text-foreground/70 hover:text-muted-foreground mt-2 text-sm"
           >
-            <Trans>Click here to retry</Trans>
+            Click here to retry
           </button>
         </div>
       )}
@@ -84,7 +83,7 @@ export const TemplatePageViewRecentActivity = ({
                   }}
                   className="text-foreground/70 hover:text-muted-foreground flex items-center text-xs"
                 >
-                  <Trans>View more</Trans>
+                  View more
                 </button>
               </li>
             )}
@@ -92,7 +91,7 @@ export const TemplatePageViewRecentActivity = ({
             {results.data.length === 0 && (
               <div className="flex items-center justify-center py-4">
                 <p className="text-muted-foreground/70 text-sm">
-                  <Trans>No recent documents</Trans>
+                  No recent documents
                 </p>
               </div>
             )}
@@ -118,14 +117,14 @@ export const TemplatePageViewRecentActivity = ({
                 >
                   {match(document.source)
                     .with(DocumentSource.DOCUMENT, DocumentSource.TEMPLATE, () => (
-                      <Trans>
+                      
                         Document created by <span className="font-bold">{document.user.name}</span>
-                      </Trans>
+                      
                     ))
                     .with(DocumentSource.TEMPLATE_DIRECT_LINK, () => (
-                      <Trans>
+                      
                         Document created using a <span className="font-bold">direct link</span>
-                      </Trans>
+                      
                     ))
                     .exhaustive()}
                 </Link>
@@ -146,7 +145,7 @@ export const TemplatePageViewRecentActivity = ({
               });
             }}
           >
-            <Trans>View all related documents</Trans>
+            View all related documents
           </Button>
         </>
       )}

@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { type Document, DocumentStatus, FieldType, RecipientRole } from '@prisma/client';
 import { CheckCircle2, Clock8, FileSearch } from 'lucide-react';
 import { Link, useRevalidator } from 'react-router';
@@ -97,8 +94,6 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 }
 
 export default function CompletedSigningPage({ loaderData }: Route.ComponentProps) {
-  const { _ } = useLingui();
-
   const { sessionData } = useOptionalSession();
   const user = sessionData?.user;
 
@@ -148,9 +143,9 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
           />
 
           <h2 className="mt-6 max-w-[35ch] text-center text-2xl font-semibold leading-normal md:text-3xl lg:text-4xl">
-            {recipient.role === RecipientRole.SIGNER && <Trans>Document Signed</Trans>}
-            {recipient.role === RecipientRole.VIEWER && <Trans>Document Viewed</Trans>}
-            {recipient.role === RecipientRole.APPROVER && <Trans>Document Approved</Trans>}
+            {recipient.role === RecipientRole.SIGNER && Document Signed}
+            {recipient.role === RecipientRole.VIEWER && Document Viewed}
+            {recipient.role === RecipientRole.APPROVER && Document Approved}
           </h2>
 
           {match({ status: document.status, deletedAt: document.deletedAt })
@@ -158,7 +153,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
               <div className="text-documenso-700 mt-4 flex items-center text-center">
                 <CheckCircle2 className="mr-2 h-5 w-5" />
                 <span className="text-sm">
-                  <Trans>Everyone has signed</Trans>
+                  Everyone has signed
                 </span>
               </div>
             ))
@@ -166,7 +161,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
               <div className="mt-4 flex items-center text-center text-blue-600">
                 <Clock8 className="mr-2 h-5 w-5" />
                 <span className="text-sm">
-                  <Trans>Waiting for others to sign</Trans>
+                  Waiting for others to sign
                 </span>
               </div>
             ))
@@ -174,7 +169,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
               <div className="flex items-center text-center text-red-600">
                 <Clock8 className="mr-2 h-5 w-5" />
                 <span className="text-sm">
-                  <Trans>Document no longer available to sign</Trans>
+                  Document no longer available to sign
                 </span>
               </div>
             ))}
@@ -182,24 +177,24 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
           {match({ status: document.status, deletedAt: document.deletedAt })
             .with({ status: DocumentStatus.COMPLETED }, () => (
               <p className="text-muted-foreground/60 mt-2.5 max-w-[60ch] text-center text-sm font-medium md:text-base">
-                <Trans>
+                
                   Everyone has signed! You will receive an Email copy of the signed document.
-                </Trans>
+                
               </p>
             ))
             .with({ deletedAt: null }, () => (
               <p className="text-muted-foreground/60 mt-2.5 max-w-[60ch] text-center text-sm font-medium md:text-base">
-                <Trans>
+                
                   You will receive an Email copy of the signed document once everyone has signed.
-                </Trans>
+                
               </p>
             ))
             .otherwise(() => (
               <p className="text-muted-foreground/60 mt-2.5 max-w-[60ch] text-center text-sm font-medium md:text-base">
-                <Trans>
+                
                   This document has been cancelled by the owner and is no longer available for
                   others to sign.
-                </Trans>
+                
               </p>
             ))}
 
@@ -219,11 +214,11 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
                 trigger={
                   <Button
                     className="text-[11px]"
-                    title={_(msg`Signatures will appear once the document has been completed`)}
+                    title={"Signatures will appear once the document has been completed"}
                     variant="outline"
                   >
                     <FileSearch className="mr-2 h-5 w-5" strokeWidth={1.7} />
-                    <Trans>View Original Document</Trans>
+                    View Original Document
                   </Button>
                 }
               />
@@ -235,13 +230,13 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
           {canSignUp && (
             <div className="flex max-w-xl flex-col items-center justify-center p-4 md:p-12">
               <h2 className="mt-8 text-center text-xl font-semibold md:mt-0">
-                <Trans>Need to sign documents?</Trans>
+                Need to sign documents?
               </h2>
 
               <p className="text-muted-foreground/60 mt-4 max-w-[55ch] text-center leading-normal">
-                <Trans>
+                
                   Create your account and start using state-of-the-art document signing.
-                </Trans>
+                
               </p>
 
               <ClaimAccount defaultName={recipientName} defaultEmail={recipient.email} />
@@ -250,7 +245,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
 
           {user && (
             <Link to="/" className="text-documenso-700 hover:text-documenso-600 mt-2">
-              <Trans>Go Back Home</Trans>
+              Go Back Home
             </Link>
           )}
         </div>

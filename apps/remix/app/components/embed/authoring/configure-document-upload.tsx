@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Cloud, FileText, Loader, X } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
@@ -27,7 +24,6 @@ export interface ConfigureDocumentUploadProps {
 }
 
 export const ConfigureDocumentUpload = ({ isSubmitting = false }: ConfigureDocumentUploadProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { isPersisted } = useConfigureDocument();
 
@@ -72,8 +68,8 @@ export const ConfigureDocumentUpload = ({ isSubmitting = false }: ConfigureDocum
       console.error('Error uploading file', error);
 
       toast({
-        title: _(msg`Error uploading file`),
-        description: _(msg`There was an error uploading your file. Please try again.`),
+        title: "Error uploading file",
+        description: "There was an error uploading your file. Please try again.",
         variant: 'destructive',
         duration: 5000,
       });
@@ -84,8 +80,8 @@ export const ConfigureDocumentUpload = ({ isSubmitting = false }: ConfigureDocum
 
   const onDropRejected = () => {
     toast({
-      title: _(msg`Your document failed to upload.`),
-      description: _(msg`File cannot be larger than ${APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB`),
+      title: "Your document failed to upload.",
+      description: "File cannot be larger than ${APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB",
       duration: 5000,
       variant: 'destructive',
     });
@@ -94,8 +90,8 @@ export const ConfigureDocumentUpload = ({ isSubmitting = false }: ConfigureDocum
   const onRemoveFile = () => {
     if (isPersisted) {
       toast({
-        title: _(msg`Cannot remove document`),
-        description: _(msg`The document is already saved and cannot be changed.`),
+        title: "Cannot remove documen",
+        description: msg"The document is already saved and cannot be changed.",
         duration: 5000,
         variant: 'destructive',
       });
@@ -134,7 +130,7 @@ export const ConfigureDocumentUpload = ({ isSubmitting = false }: ConfigureDocum
         render={() => (
           <FormItem>
             <FormLabel required>
-              <Trans>Upload Document</Trans>
+              Upload Document
             </FormLabel>
 
             <div className="relative">
@@ -171,20 +167,20 @@ export const ConfigureDocumentUpload = ({ isSubmitting = false }: ConfigureDocum
                         >
                           <p className="text-sm font-medium">
                             {isDragActive ? (
-                              <Trans>Drop your document here</Trans>
+                              Drop your document here
                             ) : isPersisted ? (
-                              <Trans>Document is already uploaded</Trans>
+                              Document is already uploaded
                             ) : (
-                              <Trans>Drag and drop or click to upload</Trans>
+                              Drag and drop or click to upload
                             )}
                           </p>
                           <p className="text-xs">
                             {isPersisted ? (
-                              <Trans>This document cannot be changed</Trans>
+                              This document cannot be changed
                             ) : (
-                              <Trans>
+                              
                                 .PDF documents accepted (max {APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB)
-                              </Trans>
+                              
                             )}
                           </p>
                         </div>

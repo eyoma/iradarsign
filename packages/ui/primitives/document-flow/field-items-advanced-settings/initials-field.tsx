@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { validateFields as validateInitialsFields } from '@documenso/lib/advanced-fields-validation/validate-fields';
 import { type TInitialsFieldMeta as InitialsFieldMeta } from '@documenso/lib/types/field-meta';
 import { Input } from '@documenso/ui/primitives/input';
@@ -20,8 +16,6 @@ export const InitialsFieldAdvancedSettings = ({
   handleFieldChange,
   handleErrors,
 }: InitialsFieldAdvancedSettingsProps) => {
-  const { _ } = useLingui();
-
   const handleInput = (field: keyof InitialsFieldMeta, value: string | boolean) => {
     const fontSize = field === 'fontSize' ? Number(value) : Number(fieldState.fontSize ?? 14);
 
@@ -38,13 +32,13 @@ export const InitialsFieldAdvancedSettings = ({
     <div className="flex flex-col gap-4">
       <div>
         <Label>
-          <Trans>Font Size</Trans>
+          Font Size
         </Label>
         <Input
           id="fontSize"
           type="number"
           className="bg-background mt-2"
-          placeholder={_(msg`Field font size`)}
+          placeholder={"Field font size"}
           value={fieldState.fontSize}
           onChange={(e) => handleInput('fontSize', e.target.value)}
           min={8}
@@ -54,7 +48,7 @@ export const InitialsFieldAdvancedSettings = ({
 
       <div>
         <Label>
-          <Trans>Text Align</Trans>
+          Text Align
         </Label>
 
         <Select

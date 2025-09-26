@@ -1,5 +1,3 @@
-import { Trans } from '@lingui/react/macro';
-
 import { getSigningVolume } from '@documenso/lib/server-only/admin/get-signing-volume';
 
 import {
@@ -59,7 +57,7 @@ export default function Leaderboard({ loaderData }: Route.ComponentProps) {
     <div>
       <div className="flex items-center">
         <h2 className="text-4xl font-semibold">
-          <Trans>Signing Volume</Trans>
+          Signing Volume
         </h2>
       </div>
       <div className="mt-8">

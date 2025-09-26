@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import type { DateTimeFormatOptions } from 'luxon';
 import { DateTime } from 'luxon';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
@@ -23,8 +21,6 @@ const dateFormat: DateTimeFormatOptions = {
 };
 
 export const SettingsSecurityActivityTable = () => {
-  const { _, i18n } = useLingui();
-
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -61,12 +57,12 @@ export const SettingsSecurityActivityTable = () => {
 
     return [
       {
-        header: _(msg`Date`),
+        header: "Date",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt, dateFormat),
       },
       {
-        header: _(msg`Device`),
+        header: "Device",
         cell: ({ row }) => {
           if (!row.original.userAgent) {
             return 'N/A';
@@ -90,7 +86,7 @@ export const SettingsSecurityActivityTable = () => {
         },
       },
       {
-        header: _(msg`Browser`),
+        header: "Browser",
         cell: ({ row }) => {
           if (!row.original.userAgent) {
             return 'N/A';
@@ -109,7 +105,7 @@ export const SettingsSecurityActivityTable = () => {
         cell: ({ row }) => row.original.ipAddress ?? 'N/A',
       },
       {
-        header: _(msg`Action`),
+        header: "Action",
         accessorKey: 'type',
         cell: ({ row }) => USER_SECURITY_AUDIT_LOG_MAP[row.original.type],
       },

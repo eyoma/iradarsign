@@ -30,10 +30,7 @@
     "precommit": "npm install && git add package.json package-lock.json",
     "trigger:dev": "npm run with:env -- npx trigger-cli dev --handler-path=\"/api/jobs\"",
     "inngest:dev": "inngest dev -u http://localhost:3000/api/jobs",
-    "make:version": "npm version --workspace @documenso/remix --include-workspace-root --no-git-tag-version -m \"v%s\"",
-    "translate": "npm run translate:extract && npm run translate:compile",
-    "translate:extract": "lingui extract --clean",
-    "translate:compile": "lingui compile"
+    "make:version": "npm version --workspace @documenso/remix --include-workspace-root --no-git-tag-version -m \"v%s\""
   },
   "packageManager": "npm@10.7.0",
   "engines": {
@@ -43,7 +40,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "@lingui/cli": "^5.2.0",
     "dotenv": "^16.5.0",
     "dotenv-cli": "^8.0.0",
     "eslint": "^8.40.0",
@@ -69,8 +65,6 @@
   "dependencies": {
     "@documenso/pdf-sign": "^0.1.0",
     "@documenso/prisma": "^0.0.0",
-    "@lingui/conf": "^5.2.0",
-    "@lingui/core": "^5.2.0",
     "inngest-cli": "^0.29.1",
     "luxon": "^3.5.0",
     "mupdf": "^1.0.0",

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 
@@ -44,7 +42,6 @@ export const TemplateEditForm = ({
   className,
   templateRootPath,
 }: TemplateEditFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const navigate = useNavigate();
@@ -70,18 +67,18 @@ export const TemplateEditForm = ({
 
   const documentFlow: Record<EditTemplateStep, DocumentFlowStep> = {
     settings: {
-      title: msg`General`,
-      description: msg`Configure general settings for the template.`,
+      title: "General",
+      description: "Configure general settings for the template.",
       stepIndex: 1,
     },
     signers: {
-      title: msg`Add Placeholders`,
-      description: msg`Add all relevant placeholders for each recipient.`,
+      title: "Add Placeholders",
+      description: "Add all relevant placeholders for each recipient.",
       stepIndex: 2,
     },
     fields: {
-      title: msg`Add Fields`,
-      description: msg`Add all relevant fields for each recipient.`,
+      title: "Add Fields",
+      description: "Add all relevant fields for each recipient.",
       stepIndex: 3,
     },
   };
@@ -160,8 +157,8 @@ export const TemplateEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while updating the document settings.`),
+        title: "Error",
+        description: "An error occurred while updating the document settings.",
         variant: 'destructive',
       });
     }
@@ -174,8 +171,8 @@ export const TemplateEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while auto-saving the template settings.`),
+        title: "Error",
+        description: "An error occurred while auto-saving the template settings.",
         variant: 'destructive',
       });
     }
@@ -209,8 +206,8 @@ export const TemplateEditForm = ({
       setStep('fields');
     } catch (err) {
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while adding signers.`),
+        title: "Error",
+        description: "An error occurred while adding signers.",
         variant: 'destructive',
       });
     }
@@ -225,8 +222,8 @@ export const TemplateEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while auto-saving the template placeholders.`),
+        title: "Error",
+        description: "An error occurred while auto-saving the template placeholders.",
         variant: 'destructive',
       });
 
@@ -248,8 +245,8 @@ export const TemplateEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while auto-saving the template fields.`),
+        title: "Error",
+        description: "An error occurred while auto-saving the template fields.",
         variant: 'destructive',
       });
     }
@@ -268,8 +265,8 @@ export const TemplateEditForm = ({
       }
 
       toast({
-        title: _(msg`Template saved`),
-        description: _(msg`Your templates has been saved successfully.`),
+        title: "Template saved",
+        description: "Your templates has been saved successfully.",
         duration: 5000,
       });
 
@@ -282,8 +279,8 @@ export const TemplateEditForm = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while adding fields.`),
+        title: "Error",
+        description: "An error occurred while adding fields.",
         variant: 'destructive',
       });
     }

@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import type { TemplateDirectLink } from '@prisma/client';
 import { TemplateType } from '@prisma/client';
 
@@ -57,7 +55,6 @@ export async function loader({ request, params }: Route.LoaderArgs) {
 export default function PublicProfilePage({ loaderData }: Route.ComponentProps) {
   const { profile } = loaderData;
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const team = useCurrentTeam();
@@ -121,8 +118,8 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
       });
     } catch {
       toast({
-        title: t`Something went wrong`,
-        description: t`We were unable to set your public profile to public. Please try again.`,
+        title: "Something went wrong",
+        description: "We were unable to set your public profile to public. Please try again.",
         variant: 'destructive',
       });
 
@@ -137,8 +134,8 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
   return (
     <div className="max-w-2xl">
       <SettingsHeader
-        title={t`Public Profile`}
-        subtitle={t`You can choose to enable or disable the profile for public view.`}
+        title={"Public Profile"}
+        subtitle={"You can choose to enable or disable the profile for public view."}
       >
         <Tooltip open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
           <TooltipTrigger asChild>
@@ -152,7 +149,7 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
               )}
             >
               <span>
-                <Trans>Hide</Trans>
+                Hide
               </span>
               <Switch
                 disabled={isUpdating}
@@ -160,7 +157,7 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
                 onCheckedChange={togglePublicProfileVisibility}
               />
               <span>
-                <Trans>Show</Trans>
+                Show
               </span>
             </div>
           </TooltipTrigger>
@@ -169,25 +166,25 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
             {isPublicProfileVisible ? (
               <>
                 <p>
-                  <Trans>
+                  
                     Profile is currently <strong>visible</strong>.
-                  </Trans>
+                  
                 </p>
 
                 <p>
-                  <Trans>Toggle the switch to hide your profile from the public.</Trans>
+                  Toggle the switch to hide your profile from the public.
                 </p>
               </>
             ) : (
               <>
                 <p>
-                  <Trans>
+                  
                     Profile is currently <strong>hidden</strong>.
-                  </Trans>
+                  
                 </p>
 
                 <p>
-                  <Trans>Toggle the switch to show your profile to the public.</Trans>
+                  Toggle the switch to show your profile to the public.
                 </p>
               </>
             )}
@@ -199,8 +196,8 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
 
       <div className="mt-4">
         <SettingsHeader
-          title={t`Templates`}
-          subtitle={t`Show templates in your public profile for your audience to sign and get started quickly`}
+          title={"Templates"}
+          subtitle={"Show templates in your public profile for your audience to sign and get started quickly"}
           hideDivider={true}
           className="mt-8 [&>*>h3]:text-base"
         >
@@ -208,7 +205,7 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
             directTemplates={enabledPrivateDirectTemplates}
             trigger={
               <Button variant="outline">
-                <Trans>Link template</Trans>
+                Link template
               </Button>
             }
           />

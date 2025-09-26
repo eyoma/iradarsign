@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trans } from '@lingui/react/macro';
 import { DocumentDistributionMethod, DocumentSigningOrder, RecipientRole } from '@prisma/client';
 import { nanoid } from 'nanoid';
 import { useForm } from 'react-hook-form';
@@ -84,14 +83,14 @@ export const ConfigureDocumentView = ({
     <div className="flex w-full flex-col space-y-8">
       <div>
         <h2 className="text-foreground mb-1 text-xl font-semibold">
-          {isTemplate ? <Trans>Configure Template</Trans> : <Trans>Configure Document</Trans>}
+          {isTemplate ? Configure Template : Configure Document}
         </h2>
 
         <p className="text-muted-foreground text-sm">
           {isTemplate ? (
-            <Trans>Set up your template properties and recipient information</Trans>
+            Set up your template properties and recipient information
           ) : (
-            <Trans>Set up your document properties and recipient information</Trans>
+            Set up your document properties and recipient information
           )}
         </p>
       </div>
@@ -105,7 +104,7 @@ export const ConfigureDocumentView = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel required>
-                    <Trans>Title</Trans>
+                    Title
                   </FormLabel>
                   <FormControl>
                     <Input {...field} disabled={isSubmitting} />
@@ -127,7 +126,7 @@ export const ConfigureDocumentView = ({
               disabled={isSubmitting}
               className="w-full sm:w-auto"
             >
-              <Trans>Continue</Trans>
+              Continue
             </Button>
           </div>
         </div>

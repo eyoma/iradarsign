@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { type TFieldMetaSchema as FieldMeta } from '@documenso/lib/types/field-meta';
 import { parseMessageDescriptor } from '@documenso/lib/utils/i18n';
 import { FieldAdvancedSettings } from '@documenso/ui/primitives/document-flow/field-item-advanced-settings';
@@ -24,8 +21,6 @@ export const FieldAdvancedSettingsDrawer = ({
   fields,
   onFieldUpdate,
 }: FieldAdvancedSettingsDrawerProps) => {
-  const { _ } = useLingui();
-
   if (!currentField) {
     return null;
   }
@@ -36,16 +31,16 @@ export const FieldAdvancedSettingsDrawer = ({
         <SheetTitle className="sr-only">
           {parseMessageDescriptor(
             _,
-            msg`Configure ${parseMessageDescriptor(_, FRIENDLY_FIELD_TYPE[currentField.type])} Field`,
+            "Configure ${parseMessageDescriptor(_, FRIENDLY_FIELD_TYPE[currentField.type])} Field",
           )}
         </SheetTitle>
 
         <FieldAdvancedSettings
-          title={msg`Advanced settings`}
-          description={msg`Configure the ${parseMessageDescriptor(
+          title={"Advanced settings"}
+          description={"Configure the ${parseMessageDescriptor(
             _,
             FRIENDLY_FIELD_TYPE[currentField.type],
-          )} field`}
+          )} field"}
           field={currentField}
           fields={fields}
           onAdvancedSettings={() => onOpenChange(false)}

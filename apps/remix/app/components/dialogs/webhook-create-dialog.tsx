@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
@@ -47,7 +44,6 @@ export type WebhookCreateDialogProps = {
 } & Omit<DialogPrimitive.DialogProps, 'children'>;
 
 export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const team = useCurrentTeam();
@@ -84,15 +80,15 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
       setOpen(false);
 
       toast({
-        title: _(msg`Webhook created`),
-        description: _(msg`The webhook was successfully created.`),
+        title: "Webhook created",
+        description: "The webhook was successfully created.",
       });
 
       form.reset();
     } catch (err) {
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while creating the webhook. Please try again.`),
+        title: "Error",
+        description: "An error occurred while creating the webhook. Please try again.",
         variant: 'destructive',
       });
     }
@@ -107,7 +103,7 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
       <DialogTrigger onClick={(e) => e.stopPropagation()} asChild>
         {trigger ?? (
           <Button className="flex-shrink-0">
-            <Trans>Create Webhook</Trans>
+            Create Webhook
           </Button>
         )}
       </DialogTrigger>
@@ -115,10 +111,10 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
       <DialogContent className="max-w-lg" position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Create webhook</Trans>
+            Create webhook
           </DialogTitle>
           <DialogDescription>
-            <Trans>On this page, you can create a new webhook.</Trans>
+            On this page, you can create a new webhook.
           </DialogDescription>
         </DialogHeader>
 
@@ -135,14 +131,14 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormLabel required>
-                        <Trans>Webhook URL</Trans>
+                        Webhook URL
                       </FormLabel>
                       <FormControl>
                         <Input className="bg-background" {...field} />
                       </FormControl>
 
                       <FormDescription>
-                        <Trans>The URL for iRadar to send webhook events to.</Trans>
+                        The URL for iRadar to send webhook events to.
                       </FormDescription>
 
                       <FormMessage />
@@ -156,7 +152,7 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        <Trans>Enabled</Trans>
+                        Enabled
                       </FormLabel>
 
                       <div>
@@ -181,7 +177,7 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                 render={({ field: { onChange, value } }) => (
                   <FormItem className="flex flex-col gap-2">
                     <FormLabel required>
-                      <Trans>Triggers</Trans>
+                      Triggers
                     </FormLabel>
                     <FormControl>
                       <WebhookMultiSelectCombobox
@@ -193,7 +189,7 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                     </FormControl>
 
                     <FormDescription>
-                      <Trans>The events that will trigger a webhook to be sent to your URL.</Trans>
+                      The events that will trigger a webhook to be sent to your URL.
                     </FormDescription>
 
                     <FormMessage />
@@ -207,7 +203,7 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>Secret</Trans>
+                      Secret
                     </FormLabel>
                     <FormControl>
                       <PasswordInput
@@ -218,10 +214,10 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                     </FormControl>
 
                     <FormDescription>
-                      <Trans>
+                      
                         A secret that will be sent to your URL so you can verify that the request
                         has been sent by iRadar
-                      </Trans>
+                      
                       .
                     </FormDescription>
                     <FormMessage />
@@ -231,11 +227,11 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" loading={form.formState.isSubmitting}>
-                  <Trans>Create</Trans>
+                  Create
                 </Button>
               </DialogFooter>
             </fieldset>

@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { DocumentSigningOrder, DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
 import { Clock8 } from 'lucide-react';
 import { Link, redirect } from 'react-router';
@@ -196,28 +195,28 @@ export default function SigningPage() {
           <div className="mt-8 flex items-center text-center text-red-600">
             <Clock8 className="mr-2 h-5 w-5" />
             <span className="text-sm">
-              <Trans>Document Cancelled</Trans>
+              Document Cancelled
             </span>
           </div>
 
           <h2 className="mt-6 max-w-[35ch] text-center text-2xl font-semibold leading-normal md:text-3xl lg:text-4xl">
-            <Trans>
+            
               <span className="mt-1.5 block">"{document.title}"</span>
               is no longer available to sign
-            </Trans>
+            
           </h2>
 
           <p className="text-muted-foreground/60 mt-2.5 max-w-[60ch] text-center text-sm font-medium md:text-base">
-            <Trans>This document has been cancelled by the owner.</Trans>
+            This document has been cancelled by the owner.
           </p>
 
           {user ? (
             <Link to="/" className="text-documenso-700 hover:text-documenso-600 mt-36">
-              <Trans>Go Back Home</Trans>
+              Go Back Home
             </Link>
           ) : (
             <p className="text-muted-foreground/60 mt-36 text-sm">
-              <Trans>
+              
                 Want to send slick signing links like this one?{' '}
                 <Link
                   to="https://documenso.com"
@@ -225,7 +224,7 @@ export default function SigningPage() {
                 >
                   Check out Documenso.
                 </Link>
-              </Trans>
+              
             </p>
           )}
         </div>

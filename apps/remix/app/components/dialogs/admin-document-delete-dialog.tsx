@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Document } from '@prisma/client';
 import { useNavigate } from 'react-router';
 
@@ -26,7 +23,6 @@ export type AdminDocumentDeleteDialogProps = {
 };
 
 export const AdminDocumentDeleteDialog = ({ document }: AdminDocumentDeleteDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const navigate = useNavigate();
@@ -45,7 +41,7 @@ export const AdminDocumentDeleteDialog = ({ document }: AdminDocumentDeleteDialo
       await deleteDocument({ id: document.id, reason });
 
       toast({
-        title: _(msg`Document deleted`),
+        title: "Document deleted",
         description: 'The Document has been deleted successfully.',
         duration: 5000,
       });
@@ -53,7 +49,7 @@ export const AdminDocumentDeleteDialog = ({ document }: AdminDocumentDeleteDialo
       await navigate('/admin/documents');
     } catch (err) {
       toast({
-        title: _(msg`An unknown error occurred`),
+        title: "An unknown error occurred",
         variant: 'destructive',
         description:
           'We encountered an unknown error while attempting to delete your document. Please try again later.',
@@ -70,12 +66,12 @@ export const AdminDocumentDeleteDialog = ({ document }: AdminDocumentDeleteDialo
         >
           <div>
             <AlertTitle>
-              <Trans>Delete Document</Trans>
+              Delete Document
             </AlertTitle>
             <AlertDescription className="mr-2">
-              <Trans>
+              
                 Delete the document. This action is irreversible so proceed with caution.
-              </Trans>
+              
             </AlertDescription>
           </div>
 
@@ -83,26 +79,26 @@ export const AdminDocumentDeleteDialog = ({ document }: AdminDocumentDeleteDialo
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="destructive">
-                  <Trans>Delete Document</Trans>
+                  Delete Document
                 </Button>
               </DialogTrigger>
 
               <DialogContent>
                 <DialogHeader className="space-y-4">
                   <DialogTitle>
-                    <Trans>Delete Document</Trans>
+                    Delete Document
                   </DialogTitle>
 
                   <Alert variant="destructive">
                     <AlertDescription className="selection:bg-red-100">
-                      <Trans>This action is not reversible. Please be certain.</Trans>
+                      This action is not reversible. Please be certain.
                     </AlertDescription>
                   </Alert>
                 </DialogHeader>
 
                 <div>
                   <DialogDescription>
-                    <Trans>To confirm, please enter the reason</Trans>
+                    To confirm, please enter the reason
                   </DialogDescription>
 
                   <Input
@@ -120,7 +116,7 @@ export const AdminDocumentDeleteDialog = ({ document }: AdminDocumentDeleteDialo
                     variant="destructive"
                     disabled={!reason}
                   >
-                    <Trans>Delete document</Trans>
+                    Delete document
                   </Button>
                 </DialogFooter>
               </DialogContent>

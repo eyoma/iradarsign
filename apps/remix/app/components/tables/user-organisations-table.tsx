@@ -1,8 +1,5 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
 import { useSession } from '@documenso/lib/client-only/providers/session';
@@ -21,7 +18,6 @@ import { TableCell } from '@documenso/ui/primitives/table';
 import { OrganisationLeaveDialog } from '../dialogs/organisation-leave-dialog';
 
 export const UserOrganisationsTable = () => {
-  const { _, i18n } = useLingui();
   const { user, organisations } = useSession();
 
   const { data, isLoading, isLoadingError } = trpc.organisation.getMany.useQuery(undefined, {
@@ -43,7 +39,7 @@ export const UserOrganisationsTable = () => {
   const columns = useMemo(() => {
     return [
       {
-        header: _(msg`Organisation`),
+        header: "Organisation",
         accessorKey: 'name',
         cell: ({ row }) => (
           <Link
@@ -56,12 +52,12 @@ export const UserOrganisationsTable = () => {
               avatarFallback={row.original.name.slice(0, 1).toUpperCase()}
               primaryText={
                 <span className="text-foreground/80 font-semibold">
-                  {isPersonalLayoutMode ? _(msg`Personal`) : row.original.name}
+                  {isPersonalLayoutMode ? "Personal" : row.original.name}
                 </span>
               }
               secondaryText={
                 isPersonalLayoutMode
-                  ? _(msg`Your personal organisation`)
+                  ? "Your personal organisation"
                   : `${NEXT_PUBLIC_WEBAPP_URL()}/o/${row.original.url}`
               }
             />
@@ -69,15 +65,15 @@ export const UserOrganisationsTable = () => {
         ),
       },
       {
-        header: _(msg`Role`),
+        header: "Role",
         accessorKey: 'role',
         cell: ({ row }) =>
           row.original.ownerUserId === user.id
-            ? _(msg`Owner`)
-            : _(ORGANISATION_MEMBER_ROLE_MAP[row.original.currentOrganisationRole]),
+            ? "Owner"
+            : ORGANISATION_MEMBER_ROLE_MAP[row.original.currentOrganisationRole],
       },
       {
-        header: _(msg`Created At`),
+        header: "Created A",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt),
       },
@@ -90,8 +86,8 @@ export const UserOrganisationsTable = () => {
               row.original.currentOrganisationRole,
             ) && (
               <Button variant="outline" asChild>
-                <Link to={`/o/${row.original.url}/settings`}>
-                  <Trans>Manage</Trans>
+                <Link to={"/o/${row.original.url}/settings"}>
+                  Manage
                 </Link>
               </Button>
             )}
@@ -107,7 +103,7 @@ export const UserOrganisationsTable = () => {
                   disabled={row.original.ownerUserId === user.id}
                   onSelect={(e) => e.preventDefault()}
                 >
-                  <Trans>Leave</Trans>
+                  Leave
                 </Button>
               }
             />

@@ -1,7 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
@@ -31,7 +28,6 @@ export type ForgotPasswordFormProps = {
 };
 
 export const ForgotPasswordForm = ({ className }: ForgotPasswordFormProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const navigate = useNavigate();
@@ -51,10 +47,10 @@ export const ForgotPasswordForm = ({ className }: ForgotPasswordFormProps) => {
     await navigate('/check-email');
 
     toast({
-      title: _(msg`Reset email sent`),
-      description: _(
-        msg`A password reset email has been sent, if you have an account you should see it in your inbox shortly.`,
-      ),
+      title: "Reset email sen",
+      description: 
+        msg"A password reset email has been sent, if you have an account you should see it in your inbox shortly.",
+      ,
       duration: 5000,
     });
 
@@ -74,7 +70,7 @@ export const ForgotPasswordForm = ({ className }: ForgotPasswordFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Email</Trans>
+                  Email
                 </FormLabel>
                 <FormControl>
                   <Input type="email" {...field} />
@@ -86,7 +82,7 @@ export const ForgotPasswordForm = ({ className }: ForgotPasswordFormProps) => {
         </fieldset>
 
         <Button size="lg" loading={isSubmitting}>
-          {isSubmitting ? <Trans>Sending Reset Email...</Trans> : <Trans>Reset Password</Trans>}
+          {isSubmitting ? Sending Reset Email... : Reset Password}
         </Button>
       </form>
     </Form>

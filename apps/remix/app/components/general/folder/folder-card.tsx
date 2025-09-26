@@ -1,4 +1,3 @@
-import { Plural, Trans } from '@lingui/react/macro';
 import { FolderType } from '@prisma/client';
 import {
   ArrowRightIcon,
@@ -72,14 +71,14 @@ export const FolderCard = ({
                     {folder.type === FolderType.TEMPLATE ? (
                       <Plural
                         value={folder._count.templates}
-                        one={<Trans># template</Trans>}
-                        other={<Trans># templates</Trans>}
+                        one={# template}
+                        other={# templates}
                       />
                     ) : (
                       <Plural
                         value={folder._count.documents}
-                        one={<Trans># document</Trans>}
-                        other={<Trans># documents</Trans>}
+                        one={# document}
+                        other={# documents}
                       />
                     )}
                   </span>
@@ -87,8 +86,8 @@ export const FolderCard = ({
                   <span>
                     <Plural
                       value={folder._count.subfolders}
-                      one={<Trans># folder</Trans>}
-                      other={<Trans># folders</Trans>}
+                      one={# folder}
+                      other={# folders}
                     />
                   </span>
                 </div>
@@ -109,26 +108,26 @@ export const FolderCard = ({
                 <DropdownMenuContent onClick={(e) => e.stopPropagation()} align="end">
                   <DropdownMenuItem onClick={() => onMove(folder)}>
                     <ArrowRightIcon className="mr-2 h-4 w-4" />
-                    <Trans>Move</Trans>
+                    Move
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     onClick={() => (folder.pinned ? onUnpin(folder.id) : onPin(folder.id))}
                   >
                     <PinIcon className="mr-2 h-4 w-4" />
-                    {folder.pinned ? <Trans>Unpin</Trans> : <Trans>Pin</Trans>}
+                    {folder.pinned ? Unpin : Pin}
                   </DropdownMenuItem>
 
                   <DropdownMenuItem onClick={() => onSettings(folder)}>
                     <SettingsIcon className="mr-2 h-4 w-4" />
-                    <Trans>Settings</Trans>
+                    Settings
                   </DropdownMenuItem>
 
                   <DropdownMenuSeparator />
 
                   <DropdownMenuItem onClick={() => onDelete(folder)}>
                     <TrashIcon className="mr-2 h-4 w-4" />
-                    <Trans>Delete</Trans>
+                    Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -149,14 +148,14 @@ export const FolderCardEmpty = ({ type }: { type: FolderType }) => {
 
           <div>
             <h3 className="text-muted-foreground flex items-center gap-2 font-medium">
-              <Trans>Create folder</Trans>
+              Create folder
             </h3>
 
             <div className="text-muted-foreground/60 mt-1 flex space-x-2 truncate text-xs">
               {type === FolderType.DOCUMENT ? (
-                <Trans>Organise your documents</Trans>
+                Organise your documents
               ) : (
-                <Trans>Organise your templates</Trans>
+                Organise your templates
               )}
             </div>
           </div>

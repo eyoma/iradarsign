@@ -1,8 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react';
 
-import type { MessageDescriptor } from '@lingui/core';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { FieldType } from '@prisma/client';
 import { match } from 'ts-pattern';
 
@@ -160,7 +157,6 @@ export const FieldAdvancedSettings = forwardRef<HTMLDivElement, FieldAdvancedSet
     },
     ref,
   ) => {
-    const { _ } = useLingui();
     const { toast } = useToast();
 
     const [errors, setErrors] = useState<string[]>([]);
@@ -248,8 +244,8 @@ export const FieldAdvancedSettings = forwardRef<HTMLDivElement, FieldAdvancedSet
         console.error('Failed to save to localStorage:', error);
 
         toast({
-          title: _(msg`Error`),
-          description: _(msg`Failed to save settings.`),
+          title: "Error",
+          description: "Failed to save settings.",
           variant: 'destructive',
         });
       }
@@ -359,8 +355,8 @@ export const FieldAdvancedSettings = forwardRef<HTMLDivElement, FieldAdvancedSet
           data-testid="field-advanced-settings-footer"
         >
           <DocumentFlowFormContainerActions
-            goNextLabel={msg`Save`}
-            goBackLabel={msg`Cancel`}
+            goNextLabel={"Save"}
+            goBackLabel={"Cancel"}
             onGoBackClick={onAdvancedSettings}
             onGoNextClick={handleOnGoNextClick}
             disableNextStep={errors.length > 0}

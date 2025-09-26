@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
@@ -49,15 +46,14 @@ export const TeamDeleteDialog = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { refreshSession } = useSession();
 
-  const deleteMessage = _(msg`delete ${teamName}`);
+  const deleteMessage = "delete ${teamName}";
 
   const ZDeleteTeamFormSchema = z.object({
     teamName: z.literal(deleteMessage, {
-      errorMap: () => ({ message: _(msg`You must enter '${deleteMessage}' to proceed`) }),
+      errorMap: () => ({ message: "You must enter '${deleteMessage}' to proceed" }),
     }),
   });
 
@@ -77,8 +73,8 @@ export const TeamDeleteDialog = ({
       await refreshSession();
 
       toast({
-        title: _(msg`Success`),
-        description: _(msg`Your team has been successfully deleted.`),
+        title: "Success",
+        description: "Your team has been successfully deleted.",
         duration: 5000,
       });
 
@@ -91,20 +87,20 @@ export const TeamDeleteDialog = ({
       const error = AppError.parseError(err);
 
       let toastError: Toast = {
-        title: _(msg`An unknown error occurred`),
-        description: _(
-          msg`We encountered an unknown error while attempting to delete this team. Please try again later.`,
-        ),
+        title: "An unknown error occurred",
+        description: 
+          "We encountered an unknown error while attempting to delete this team. Please try again later.",
+        ,
         variant: 'destructive',
         duration: 10000,
       };
 
       if (error.code === 'resource_missing') {
         toastError = {
-          title: _(msg`Unable to delete team`),
-          description: _(
-            msg`Something went wrong while updating the team billing subscription, please contact support.`,
-          ),
+          title: "Unable to delete team",
+          description: 
+            "Something went wrong while updating the team billing subscription, please contact support.",
+          ,
           variant: 'destructive',
           duration: 15000,
         };
@@ -125,7 +121,7 @@ export const TeamDeleteDialog = ({
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="destructive">
-            <Trans>Delete</Trans>
+            Delete
           </Button>
         )}
       </DialogTrigger>
@@ -133,14 +129,14 @@ export const TeamDeleteDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure you wish to delete this team?</Trans>
+            Are you sure you wish to delete this team?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               Please note that you will lose access to all documents associated with this team & all
               the members will be removed and notified
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -156,9 +152,9 @@ export const TeamDeleteDialog = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      <Trans>
+                      
                         Confirm by typing <span className="text-destructive">{deleteMessage}</span>
-                      </Trans>
+                      
                     </FormLabel>
                     <FormControl>
                       <Input className="bg-background" {...field} />
@@ -170,11 +166,11 @@ export const TeamDeleteDialog = ({
 
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-                  <Trans>Cancel</Trans>
+                  Cancel
                 </Button>
 
                 <Button type="submit" variant="destructive" loading={form.formState.isSubmitting}>
-                  <Trans>Delete</Trans>
+                  Delete
                 </Button>
               </DialogFooter>
             </fieldset>

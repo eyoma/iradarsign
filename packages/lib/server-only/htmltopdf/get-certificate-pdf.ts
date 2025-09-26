@@ -25,7 +25,7 @@ export const getCertificatePdf = async ({ documentId, language }: GetCertificate
   const browserlessUrl = env('NEXT_PRIVATE_BROWSERLESS_URL');
 
   if (browserlessUrl) {
-    // !: Use CDP rather than the default `connect` method to avoid coupling to the playwright version.
+    // !: Use CDP rather than the default `connec" method to avoid coupling to the playwright version.
     // !: Previously we would have to keep the playwright version in sync with the browserless version to avoid errors.
     browser = await chromium.connectOverCDP(browserlessUrl);
   } else {
@@ -52,7 +52,7 @@ export const getCertificatePdf = async ({ documentId, language }: GetCertificate
     },
   ]);
 
-  await page.goto(`${NEXT_PUBLIC_WEBAPP_URL()}/__htmltopdf/certificate?d=${encryptedId}`, {
+  await page.goto("${NEXT_PUBLIC_WEBAPP_URL()}/__htmltopdf/certificate?d=${encryptedId}`, {
     waitUntil: 'networkidle',
     timeout: 10_000,
   });

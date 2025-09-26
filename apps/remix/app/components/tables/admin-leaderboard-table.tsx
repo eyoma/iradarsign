@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState, useTransition } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import { ChevronDownIcon, ChevronUpIcon, ChevronsUpDown, Loader } from 'lucide-react';
 
 import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
@@ -36,8 +34,6 @@ export const AdminLeaderboardTable = ({
   sortBy,
   sortOrder,
 }: LeaderboardTableProps) => {
-  const { _, i18n } = useLingui();
-
   const [isPending, startTransition] = useTransition();
   const updateSearchParams = useUpdateSearchParams();
   const [searchString, setSearchString] = useState('');
@@ -51,7 +47,7 @@ export const AdminLeaderboardTable = ({
             className="flex cursor-pointer items-center"
             onClick={() => handleColumnSort('name')}
           >
-            {_(msg`Name`)}
+            {"Name"}
             {sortBy === 'name' ? (
               sortOrder === 'asc' ? (
                 <ChevronUpIcon className="ml-2 h-4 w-4" />
@@ -85,7 +81,7 @@ export const AdminLeaderboardTable = ({
             className="flex cursor-pointer items-center"
             onClick={() => handleColumnSort('signingVolume')}
           >
-            {_(msg`Signing Volume`)}
+            {"Signing Volume"}
             {sortBy === 'signingVolume' ? (
               sortOrder === 'asc' ? (
                 <ChevronUpIcon className="ml-2 h-4 w-4" />
@@ -107,7 +103,7 @@ export const AdminLeaderboardTable = ({
               className="flex cursor-pointer items-center"
               onClick={() => handleColumnSort('createdAt')}
             >
-              {_(msg`Created`)}
+              {"Created"}
               {sortBy === 'createdAt' ? (
                 sortOrder === 'asc' ? (
                   <ChevronUpIcon className="ml-2 h-4 w-4" />
@@ -169,7 +165,7 @@ export const AdminLeaderboardTable = ({
       <Input
         className="my-6 flex flex-row gap-4"
         type="text"
-        placeholder={_(msg`Search by name or email`)}
+        placeholder={"Search by name or email"}
         value={searchString}
         onChange={handleChange}
       />

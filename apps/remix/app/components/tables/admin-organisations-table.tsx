@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import { useLingui } from '@lingui/react/macro';
-import { Trans } from '@lingui/react/macro';
 import {
   CreditCardIcon,
   ExternalLinkIcon,
@@ -42,8 +40,6 @@ export const AdminOrganisationsTable = ({
   showOwnerColumn = true,
   hidePaginationUntilOverflow,
 }: AdminOrganisationsTableOptions) => {
-  const { t, i18n } = useLingui();
-
   const [searchParams] = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
 
@@ -74,34 +70,34 @@ export const AdminOrganisationsTable = ({
   const columns = useMemo(() => {
     return [
       {
-        header: t`Organisation`,
+        header: "Organisation",
         accessorKey: 'name',
         cell: ({ row }) => (
           <Link to={`/admin/organisations/${row.original.id}`}>{row.original.name}</Link>
         ),
       },
       {
-        header: t`Created At`,
+        header: "Created At",
         accessorKey: 'createdAt',
         cell: ({ row }) => i18n.date(row.original.createdAt),
       },
       {
-        header: t`Owner`,
+        header: "Owner",
         accessorKey: 'owner',
         cell: ({ row }) => (
           <Link to={`/admin/users/${row.original.owner.id}`}>{row.original.owner.name}</Link>
         ),
       },
       {
-        header: t`Status`,
+        header: "Status",
         cell: ({ row }) => (
           <Badge variant="neutral">
-            {row.original.owner.id === memberUserId ? t`Owner` : t`Member`}
+            {row.original.owner.id === memberUserId ? "Owner" : "Member"}
           </Badge>
         ),
       },
       {
-        header: t`Subscription`,
+        header: "Subscription",
         cell: ({ row }) =>
           row.original.subscription ? (
             <Link
@@ -126,27 +122,27 @@ export const AdminOrganisationsTable = ({
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
               <DropdownMenuLabel>
-                <Trans>Actions</Trans>
+                Actions
               </DropdownMenuLabel>
 
               <DropdownMenuItem asChild>
                 <Link to={`/admin/organisations/${row.original.id}`}>
                   <SettingsIcon className="mr-2 h-4 w-4" />
-                  <Trans>Manage</Trans>
+                  Manage
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem asChild>
                 <Link to={`/admin/users/${row.original.owner.id}`}>
                   <UserIcon className="mr-2 h-4 w-4" />
-                  <Trans>View owner</Trans>
+                  View owner
                 </Link>
               </DropdownMenuItem>
 
               <DropdownMenuItem disabled={!row.original.customerId} asChild>
                 <Link to={`https://dashboard.stripe.com/customers/${row.original.customerId}`}>
                   <CreditCardIcon className="mr-2 h-4 w-4" />
-                  <Trans>Stripe</Trans>
+                  Stripe
                   {!row.original.customerId && <span>&nbsp;(N/A)</span>}
                 </Link>
               </DropdownMenuItem>

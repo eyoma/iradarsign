@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Link, useLocation, useSearchParams } from 'react-router';
 
 import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
@@ -15,8 +12,6 @@ import { OrganisationMemberInvitesTable } from '~/components/tables/organisation
 import { OrganisationMembersDataTable } from '~/components/tables/organisation-members-table';
 
 export default function TeamsSettingsMembersPage() {
-  const { _ } = useLingui();
-
   const [searchParams, setSearchParams] = useSearchParams();
   const { pathname } = useLocation();
 
@@ -49,8 +44,8 @@ export default function TeamsSettingsMembersPage() {
   return (
     <div>
       <SettingsHeader
-        title={_(msg`Organisation Members`)}
-        subtitle={_(msg`Manage the members or invite new members.`)}
+        title={"Organisation Members"}
+        subtitle={"Manage the members or invite new members."}
       >
         <OrganisationMemberInviteDialog />
       </SettingsHeader>
@@ -60,20 +55,20 @@ export default function TeamsSettingsMembersPage() {
           <Input
             defaultValue={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={_(msg`Search`)}
+            placeholder={"Search"}
           />
 
           <Tabs value={currentTab} className="flex-shrink-0 overflow-x-auto">
             <TabsList>
               <TabsTrigger className="min-w-[60px]" value="members" asChild>
                 <Link to={pathname ?? '/'}>
-                  <Trans>Active</Trans>
+                  Active
                 </Link>
               </TabsTrigger>
 
               <TabsTrigger className="min-w-[60px]" value="invites" asChild>
                 <Link to={`${pathname}?tab=invites`}>
-                  <Trans>Pending</Trans>
+                  Pending
                 </Link>
               </TabsTrigger>
             </TabsList>

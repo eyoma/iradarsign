@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Prisma } from '@prisma/client';
 import { useRevalidator } from 'react-router';
 
@@ -43,7 +40,6 @@ export type TeamEmailDeleteDialogProps = {
 export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDeleteDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -51,15 +47,15 @@ export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDele
     trpc.team.email.delete.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Team email has been removed`),
+          title: "Success",
+          description: "Team email has been removed",
           duration: 5000,
         });
       },
       onError: () => {
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(msg`Unable to remove team email at this time. Please try again.`),
+          title: "Something went wrong",
+          description: "Unable to remove team email at this time. Please try again.",
           variant: 'destructive',
           duration: 10000,
         });
@@ -70,15 +66,15 @@ export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDele
     trpc.team.email.verification.delete.useMutation({
       onSuccess: () => {
         toast({
-          title: _(msg`Success`),
-          description: _(msg`Email verification has been removed`),
+          title: "Success",
+          description: "Email verification has been removed",
           duration: 5000,
         });
       },
       onError: () => {
         toast({
-          title: _(msg`Something went wrong`),
-          description: _(msg`Unable to remove email verification at this time. Please try again.`),
+          title: "Something went wrong",
+          description: "Unable to remove email verification at this time. Please try again.",
           variant: 'destructive',
           duration: 10000,
         });
@@ -102,7 +98,7 @@ export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDele
       <DialogTrigger asChild>
         {trigger ?? (
           <Button variant="destructive">
-            <Trans>Remove team email</Trans>
+            Remove team email
           </Button>
         )}
       </DialogTrigger>
@@ -110,14 +106,14 @@ export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDele
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>Are you sure?</Trans>
+            Are you sure?
           </DialogTitle>
 
           <DialogDescription className="mt-4">
-            <Trans>
+            
               You are about to delete the following team email from{' '}
               <span className="font-semibold">{teamName}</span>.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -144,7 +140,7 @@ export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDele
         <fieldset disabled={isDeletingTeamEmail || isDeletingTeamEmailVerification}>
           <DialogFooter>
             <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-              <Trans>Cancel</Trans>
+              Cancel
             </Button>
 
             <Button
@@ -153,7 +149,7 @@ export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDele
               loading={isDeletingTeamEmail || isDeletingTeamEmailVerification}
               onClick={async () => onRemove()}
             >
-              <Trans>Remove</Trans>
+              Remove
             </Button>
           </DialogFooter>
         </fieldset>

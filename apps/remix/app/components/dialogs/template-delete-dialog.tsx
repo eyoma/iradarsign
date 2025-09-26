@@ -1,7 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
-
 import { trpc as trpcReact } from '@documenso/trpc/react';
 import { Button } from '@documenso/ui/primitives/button';
 import {
@@ -27,7 +23,6 @@ export const TemplateDeleteDialog = ({
   onOpenChange,
   onDelete,
 }: TemplateDeleteDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { mutateAsync: deleteTemplate, isPending } = trpcReact.template.deleteTemplate.useMutation({
@@ -35,8 +30,8 @@ export const TemplateDeleteDialog = ({
       await onDelete?.();
 
       toast({
-        title: _(msg`Template deleted`),
-        description: _(msg`Your template has been successfully deleted.`),
+        title: "Template deleted",
+        description: "Your template has been successfully deleted.",
         duration: 5000,
       });
 
@@ -44,8 +39,8 @@ export const TemplateDeleteDialog = ({
     },
     onError: () => {
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`This template could not be deleted at this time. Please try again.`),
+        title: "Something went wrong",
+        description: "This template could not be deleted at this time. Please try again.",
         variant: 'destructive',
         duration: 7500,
       });
@@ -57,14 +52,14 @@ export const TemplateDeleteDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Do you want to delete this template?</Trans>
+            Do you want to delete this template?
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               Please note that this action is irreversible. Once confirmed, your template will be
               permanently deleted.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
@@ -75,7 +70,7 @@ export const TemplateDeleteDialog = ({
             disabled={isPending}
             onClick={() => onOpenChange(false)}
           >
-            <Trans>Cancel</Trans>
+            Cancel
           </Button>
 
           <Button
@@ -84,7 +79,7 @@ export const TemplateDeleteDialog = ({
             loading={isPending}
             onClick={async () => deleteTemplate({ templateId: id })}
           >
-            <Trans>Delete</Trans>
+            Delete
           </Button>
         </DialogFooter>
       </DialogContent>

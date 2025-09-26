@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { Recipient } from '@prisma/client';
 import { RecipientRole } from '@prisma/client';
 import { useSearchParams } from 'react-router';
@@ -36,7 +33,6 @@ export const DocumentRecipientLinkCopyDialog = ({
   trigger,
   recipients,
 }: DocumentRecipientLinkCopyDialogProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const [, copy] = useCopyToClipboard();
@@ -56,8 +52,8 @@ export const DocumentRecipientLinkCopyDialog = ({
 
     await copy(generatedString).then(() => {
       toast({
-        title: _(msg`Copied to clipboard`),
-        description: _(msg`All signing links have been copied to your clipboard.`),
+        title: "Copied to clipboard",
+        description: "All signing links have been copied to your clipboard.",
       });
     });
   };
@@ -78,20 +74,20 @@ export const DocumentRecipientLinkCopyDialog = ({
       <DialogContent position="center">
         <DialogHeader>
           <DialogTitle className="pb-0.5">
-            <Trans>Copy Signing Links</Trans>
+            Copy Signing Links
           </DialogTitle>
 
           <DialogDescription>
-            <Trans>
+            
               You can copy and share these links to recipients so they can action the document.
-            </Trans>
+            
           </DialogDescription>
         </DialogHeader>
 
         <ul className="text-muted-foreground divide-y rounded-lg border">
           {recipients.length === 0 && (
             <li className="flex flex-col items-center justify-center py-6 text-sm">
-              <Trans>No recipients</Trans>
+              No recipients
             </li>
           )}
 
@@ -102,7 +98,7 @@ export const DocumentRecipientLinkCopyDialog = ({
                 primaryText={<p className="text-muted-foreground text-sm">{recipient.email}</p>}
                 secondaryText={
                   <p className="text-muted-foreground/70 text-xs">
-                    {_(RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName)}
+                    {RECIPIENT_ROLES_DESCRIPTION[recipient.role].roleName}
                   </p>
                 }
               />
@@ -112,18 +108,18 @@ export const DocumentRecipientLinkCopyDialog = ({
                   value={formatSigningLink(recipient.token)}
                   onCopySuccess={() => {
                     toast({
-                      title: _(msg`Copied to clipboard`),
-                      description: _(msg`The signing link has been copied to your clipboard.`),
+                      title: "Copied to clipboard",
+                      description: "The signing link has been copied to your clipboard.",
                     });
                   }}
                   badgeContentUncopied={
                     <p className="ml-1 text-xs">
-                      <Trans>Copy</Trans>
+                      Copy
                     </p>
                   }
                   badgeContentCopied={
                     <p className="ml-1 text-xs">
-                      <Trans>Copied</Trans>
+                      Copied
                     </p>
                   }
                 />
@@ -135,12 +131,12 @@ export const DocumentRecipientLinkCopyDialog = ({
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
-              <Trans>Close</Trans>
+              Close
             </Button>
           </DialogClose>
 
           <Button type="button" onClick={onBulkCopy}>
-            <Trans>Bulk Copy</Trans>
+            Bulk Copy
           </Button>
         </DialogFooter>
       </DialogContent>

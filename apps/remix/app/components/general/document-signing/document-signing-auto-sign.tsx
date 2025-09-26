@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Plural, Trans } from '@lingui/react/macro';
 import type { Field, Recipient } from '@prisma/client';
 import { FieldType } from '@prisma/client';
 import { useForm } from 'react-hook-form';
@@ -54,7 +51,6 @@ export type DocumentSigningAutoSignProps = {
 };
 
 export const DocumentSigningAutoSign = ({ recipient, fields }: DocumentSigningAutoSignProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -140,10 +136,10 @@ export const DocumentSigningAutoSign = ({ recipient, fields }: DocumentSigningAu
 
     if (results.some((result) => result.status === 'rejected')) {
       toast({
-        title: _(msg`Error`),
-        description: _(
-          msg`An error occurred while auto-signing the document, some fields may not be signed. Please review and manually sign any remaining fields.`,
-        ),
+        title: "Error",
+        description: 
+          "An error occurred while auto-signing the document, some fields may not be signed. Please review and manually sign any remaining fields.",
+        ,
         duration: 5000,
         variant: 'destructive',
       });
@@ -167,17 +163,17 @@ export const DocumentSigningAutoSign = ({ recipient, fields }: DocumentSigningAu
 
         <div className="text-muted-foreground max-w-[50ch]">
           <p>
-            <Trans>
+            
               When you sign a document, we can automatically fill in and sign the following fields
               using information that has already been provided. You can also manually sign or remove
               any automatically signed fields afterwards if you desire.
-            </Trans>
+            
           </p>
 
           <ul className="mt-4 flex list-inside list-disc flex-col gap-y-0.5">
             {AUTO_SIGNABLE_FIELD_TYPES.map((fieldType) => (
               <li key={fieldType}>
-                <Trans>{_(FRIENDLY_FIELD_TYPE[fieldType as FieldType])}</Trans>
+                {FRIENDLY_FIELD_TYPE[fieldType as FieldType]}
                 <span className="pl-2 text-sm">
                   (
                   <Plural
@@ -204,7 +200,7 @@ export const DocumentSigningAutoSign = ({ recipient, fields }: DocumentSigningAu
                   setOpen(false);
                 }}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
 
               <Button
@@ -213,7 +209,7 @@ export const DocumentSigningAutoSign = ({ recipient, fields }: DocumentSigningAu
                 loading={form.formState.isSubmitting}
                 disabled={!autoSignableFields.length}
               >
-                <Trans>Sign</Trans>
+                Sign
               </Button>
             </DialogFooter>
           </form>

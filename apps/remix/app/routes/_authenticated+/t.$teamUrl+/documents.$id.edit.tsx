@@ -1,4 +1,3 @@
-import { Plural, Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import { ChevronLeft, Users2 } from 'lucide-react';
 import { Link, redirect } from 'react-router';
@@ -103,7 +102,7 @@ export default function DocumentEditPage() {
     <div className="mx-auto -mt-4 w-full max-w-screen-xl px-4 md:px-8">
       <Link to={documentRootPath} className="flex items-center text-[#7AC455] hover:opacity-80">
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
-        <Trans>Documents</Trans>
+        Documents
       </Link>
 
       <div className="mt-4 flex w-full items-end justify-between">

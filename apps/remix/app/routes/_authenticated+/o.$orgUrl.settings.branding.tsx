@@ -1,4 +1,3 @@
-import { Trans, useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -30,7 +29,6 @@ export default function OrganisationSettingsBrandingPage() {
   const organisation = useCurrentOrganisation();
   const team = useOptionalCurrentTeam();
 
-  const { t } = useLingui();
   const { toast } = useToast();
 
   const isPersonalLayoutMode = isPersonalLayout(organisations);
@@ -64,13 +62,13 @@ export default function OrganisationSettingsBrandingPage() {
       });
 
       toast({
-        title: t`Branding preferences updated`,
-        description: t`Your branding preferences have been updated`,
+        title: "Branding preferences updated",
+        description: "Your branding preferences have been updated",
       });
     } catch (err) {
       toast({
-        title: t`Something went wrong`,
-        description: t`We were unable to update your branding preferences at this time, please try again later`,
+        title: "Something went wrong",
+        description: "We were unable to update your branding preferences at this time, please try again later",
         variant: 'destructive',
       });
     }
@@ -84,13 +82,13 @@ export default function OrganisationSettingsBrandingPage() {
     );
   }
 
-  const settingsHeaderText = t`Branding Preferences`;
+  const settingsHeaderText = "Branding Preferences";
 
   const settingsHeaderSubtitle = isPersonalLayoutMode
-    ? t`Here you can set your general branding preferences`
+    ? "Here you can set your general branding preferences"
     : team
-      ? t`Here you can set branding preferences for your team`
-      : t`Here you can set branding preferences for your organisation. Teams will inherit these settings by default.`;
+      ? "Here you can set branding preferences for your team"
+      : "Here you can set branding preferences for your organisation. Teams will inherit these settings by default.";
 
   return (
     <div className="max-w-2xl">
@@ -112,11 +110,11 @@ export default function OrganisationSettingsBrandingPage() {
         >
           <div className="mb-4 sm:mb-0">
             <AlertTitle>
-              <Trans>Branding Preferences</Trans>
+              Branding Preferences
             </AlertTitle>
 
             <AlertDescription className="mr-2">
-              <Trans>Currently branding can only be configured for Teams and above plans.</Trans>
+              Currently branding can only be configured for Teams and above plans.
             </AlertDescription>
           </div>
 
@@ -129,7 +127,7 @@ export default function OrganisationSettingsBrandingPage() {
                     : `/o/${organisation.url}/settings/billing`
                 }
               >
-                <Trans>Update Billing</Trans>
+                Update Billing
               </Link>
             </Button>
           )}

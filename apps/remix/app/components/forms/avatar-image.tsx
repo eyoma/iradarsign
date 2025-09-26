@@ -1,9 +1,6 @@
 import { useMemo } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { ErrorCode, useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
@@ -50,7 +47,6 @@ export type AvatarImageFormProps = {
 
 export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFormProps) => {
   const { user, refreshSession } = useSession();
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { mutateAsync: setProfileImage } = trpc.profile.setProfileImage.useMutation();
@@ -100,10 +96,10 @@ export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFo
       form.setError('bytes', {
         type: 'onChange',
         message: match(file.errors[0].code)
-          .with(ErrorCode.FileTooLarge, () => _(msg`Uploaded file is too large`))
-          .with(ErrorCode.FileTooSmall, () => _(msg`Uploaded file is too small`))
-          .with(ErrorCode.FileInvalidType, () => _(msg`Uploaded file not an allowed file type`))
-          .otherwise(() => _(msg`An unknown error occurred`)),
+          .with(ErrorCode.FileTooLarge, () => "Uploaded file is too large")
+          .with(ErrorCode.FileTooSmall, () => "Uploaded file is too small")
+          .with(ErrorCode.FileInvalidType, () => "Uploaded file not an allowed file type")
+          .otherwise(() => "An unknown error occurred"),
       });
     },
   });
@@ -119,8 +115,8 @@ export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFo
       await refreshSession();
 
       toast({
-        title: _(msg`Avatar Updated`),
-        description: _(msg`Your avatar has been updated successfully.`),
+        title: "Avatar Updated",
+        description: "Your avatar has been updated successfully.",
         duration: 5000,
       });
     } catch (err) {
@@ -128,12 +124,12 @@ export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFo
 
       const errorMessage = match(error.code).otherwise(
         () =>
-          msg`We encountered an unknown error while attempting to update your password. Please try again later.`,
+          "We encountered an unknown error while attempting to update your password. Please try again later.",
       );
 
       toast({
-        title: _(msg`An error occurred`),
-        description: _(errorMessage),
+        title: "An error occurred",
+        description: errorMessage,
         variant: 'destructive',
       });
     }
@@ -152,7 +148,7 @@ export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFo
             render={() => (
               <FormItem>
                 <FormLabel>
-                  <Trans>Avatar</Trans>
+                  Avatar
                 </FormLabel>
 
                 <FormControl>
@@ -172,7 +168,7 @@ export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFo
                           disabled={form.formState.isSubmitting}
                           onClick={() => void onFormSubmit({ bytes: null })}
                         >
-                          <Trans>Remove</Trans>
+                          Remove
                         </button>
                       )}
                     </div>
@@ -185,7 +181,7 @@ export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFo
                       loading={form.formState.isSubmitting}
                       disabled={form.formState.isSubmitting}
                     >
-                      <Trans>Upload Avatar</Trans>
+                      Upload Avatar
                       <input {...getInputProps()} />
                     </Button>
                   </div>

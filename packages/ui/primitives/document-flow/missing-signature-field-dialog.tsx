@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { DialogClose } from '@radix-ui/react-dialog';
 
 import { Button } from '@documenso/ui/primitives/button';
@@ -25,21 +24,21 @@ export const MissingSignatureFieldDialog = ({
       <DialogContent className="max-w-lg" position="center">
         <DialogHeader>
           <DialogTitle>
-            <Trans>No signature field found</Trans>
+            No signature field found
           </DialogTitle>
           <DialogDescription>
             <p className="mt-2">
-              <Trans>
+              
                 Some signers have not been assigned a signature field. Please assign at least 1
                 signature field to each signer before proceeding.
-              </Trans>
+              
             </p>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
-              <Trans>Close</Trans>
+              Close
             </Button>
           </DialogClose>
         </DialogFooter>

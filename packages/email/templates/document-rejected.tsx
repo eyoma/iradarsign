@@ -1,6 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
 import { useBranding } from '../providers/branding';
 import { TemplateDocumentRejected } from '../template-components/template-document-rejected';
@@ -21,10 +18,9 @@ export function DocumentRejectedEmail({
   rejectionReason,
   assetBaseUrl = 'http://localhost:3002',
 }: DocumentRejectedEmailProps) {
-  const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = _(msg`${recipientName} has rejected the document '${documentName}'`);
+  const previewText = "${recipientName} has rejected the document '${documentName}'";
 
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
@@ -42,11 +38,7 @@ export function DocumentRejectedEmail({
               {branding.brandingEnabled && branding.brandingLogo ? (
                 <Img src={branding.brandingLogo} alt="Branding Logo" className="mb-4 h-6" />
               ) : (
-                <Img
-                  src={getAssetUrl('/static/logo.png')}
-                  alt="Documenso Logo"
-                  className="mb-4 h-6"
-                />
+                <Img src={getAssetUrl('/static/logo.png')} alt="iRadar Logo" className="mb-4 h-6" />
               )}
 
               <TemplateDocumentRejected

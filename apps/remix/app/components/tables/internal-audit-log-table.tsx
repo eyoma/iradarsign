@@ -1,5 +1,3 @@
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import type { DateTimeFormatOptions } from 'luxon';
 import { DateTime } from 'luxon';
 import { P, match } from 'ts-pattern';
@@ -47,7 +45,7 @@ const getAuditLogIndicatorColor = (type: string) =>
 
 const formatUserAgent = (userAgent: string | null | undefined, userAgentInfo: UAParser.IResult) => {
   if (!userAgent) {
-    return msg`N/A`;
+    return "N/A";
   }
 
   const browser = userAgentInfo.browser.name;
@@ -58,15 +56,13 @@ const formatUserAgent = (userAgent: string | null | undefined, userAgentInfo: UA
   if (browser && os) {
     const browserInfo = version ? `${browser} ${version}` : browser;
 
-    return msg`${browserInfo} on ${os}`;
+    return "${browserInfo} on ${os}";
   }
 
-  return msg`${userAgent}`;
+  return "${userAgent}";
 };
 
 export const InternalAuditLogTable = ({ logs }: AuditLogDataTableProps) => {
-  const { _ } = useLingui();
-
   const parser = new UAParser();
 
   return (
@@ -118,7 +114,7 @@ export const InternalAuditLogTable = ({ logs }: AuditLogDataTableProps) => {
               <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-xs print:text-[6pt]">
                 <div>
                   <div className="text-muted-foreground/70 font-medium uppercase tracking-wide">
-                    {_(msg`User`)}
+                    {"User"}
                   </div>
 
                   <div className="text-foreground mt-1 font-mono">{log.email || 'N/A'}</div>
@@ -126,7 +122,7 @@ export const InternalAuditLogTable = ({ logs }: AuditLogDataTableProps) => {
 
                 <div className="text-right">
                   <div className="text-muted-foreground/70 font-medium uppercase tracking-wide">
-                    {_(msg`IP Address`)}
+                    {"IP Address"}
                   </div>
 
                   <div className="text-foreground mt-1 font-mono">{log.ipAddress || 'N/A'}</div>
@@ -134,11 +130,11 @@ export const InternalAuditLogTable = ({ logs }: AuditLogDataTableProps) => {
 
                 <div className="col-span-2">
                   <div className="text-muted-foreground/70 font-medium uppercase tracking-wide">
-                    {_(msg`User Agent`)}
+                    {"User Agent"}
                   </div>
 
                   <div className="text-foreground mt-1">
-                    {_(formatUserAgent(log.userAgent, userAgentInfo))}
+                    {formatUserAgent(log.userAgent, userAgentInfo)}
                   </div>
                 </div>
               </div>

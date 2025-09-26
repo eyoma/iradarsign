@@ -1,8 +1,5 @@
 import { useEffect, useId, useLayoutEffect, useMemo, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import type { DocumentMeta, TemplateMeta } from '@prisma/client';
 import {
   type DocumentData,
@@ -70,7 +67,6 @@ export const EmbedSignDocumentClientPage = ({
   allowWhitelabelling = false,
   allRecipients = [],
 }: EmbedSignDocumentClientPageProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
 
   const { fullName, email, signature, setFullName, setSignature } =
@@ -170,10 +166,10 @@ export const EmbedSignDocumentClientPage = ({
       }
 
       toast({
-        title: _(msg`Something went wrong`),
-        description: _(
-          msg`We were unable to submit this document at this time. Please try again later.`,
-        ),
+        title: "Something went wrong",
+        description: 
+          "We were unable to submit this document at this time. Please try again later.",
+        ,
         variant: 'destructive',
       });
     }
@@ -303,9 +299,9 @@ export const EmbedSignDocumentClientPage = ({
                 <div className="flex items-center justify-between gap-x-2">
                   <h3 className="text-foreground text-xl font-semibold md:text-2xl">
                     {isAssistantMode ? (
-                      <Trans>Assist with signing</Trans>
+                      Assist with signing
                     ) : (
-                      <Trans>Sign document</Trans>
+                      Sign document
                     )}
                   </h3>
 
@@ -336,7 +332,7 @@ export const EmbedSignDocumentClientPage = ({
                       loading={isSubmitting}
                       onClick={() => throttledOnCompleteClick()}
                     >
-                      <Trans>Complete</Trans>
+                      Complete
                     </Button>
                   )}
                 </div>
@@ -345,9 +341,9 @@ export const EmbedSignDocumentClientPage = ({
               <div className="embed--DocumentWidgetContent hidden group-data-[expanded]/document-widget:block md:block">
                 <p className="text-muted-foreground mt-2 text-sm">
                   {isAssistantMode ? (
-                    <Trans>Help complete the document for other signers.</Trans>
+                    Help complete the document for other signers.
                   ) : (
-                    <Trans>Sign the document to complete the process.</Trans>
+                    Sign the document to complete the process.
                   )}
                 </p>
 
@@ -360,7 +356,7 @@ export const EmbedSignDocumentClientPage = ({
                   {isAssistantMode && (
                     <div>
                       <Label>
-                        <Trans>Signing for</Trans>
+                        Signing for
                       </Label>
 
                       <fieldset className="dark:bg-background border-border mt-2 rounded-2xl border bg-white p-3">
@@ -393,7 +389,7 @@ export const EmbedSignDocumentClientPage = ({
 
                                         {r.id === recipient.id && (
                                           <span className="text-muted-foreground ml-2">
-                                            {_(msg`(You)`)}
+                                            {"(You")}
                                           </span>
                                         )}
                                       </Label>
@@ -415,7 +411,7 @@ export const EmbedSignDocumentClientPage = ({
                     <>
                       <div>
                         <Label htmlFor="full-name">
-                          <Trans>Full Name</Trans>
+                          Full Name
                         </Label>
 
                         <Input
@@ -430,7 +426,7 @@ export const EmbedSignDocumentClientPage = ({
 
                       <div>
                         <Label htmlFor="email">
-                          <Trans>Email</Trans>
+                          Email
                         </Label>
 
                         <Input
@@ -445,7 +441,7 @@ export const EmbedSignDocumentClientPage = ({
                       {hasSignatureField && (
                         <div>
                           <Label htmlFor="Signature">
-                            <Trans>Signature</Trans>
+                            Signature
                           </Label>
 
                           <SignaturePadDialog
@@ -470,7 +466,7 @@ export const EmbedSignDocumentClientPage = ({
               <div className="embed--DocumentWidgetFooter mt-4 hidden w-full grid-cols-2 items-center group-data-[expanded]/document-widget:grid md:grid">
                 {pendingFields.length > 0 ? (
                   <Button className="col-start-2" onClick={() => onNextFieldClick()}>
-                    <Trans>Next</Trans>
+                    Next
                   </Button>
                 ) : (
                   <Button
@@ -479,7 +475,7 @@ export const EmbedSignDocumentClientPage = ({
                     loading={isSubmitting}
                     onClick={() => throttledOnCompleteClick()}
                   >
-                    <Trans>Complete</Trans>
+                    Complete
                   </Button>
                 )}
               </div>
@@ -491,7 +487,7 @@ export const EmbedSignDocumentClientPage = ({
           >
             {showPendingFieldTooltip && pendingFields.length > 0 && (
               <FieldToolTip key={pendingFields[0].id} field={pendingFields[0]} color="warning">
-                <Trans>Click to insert field</Trans>
+                Click to insert field
               </FieldToolTip>
             )}
           </ElementVisible>

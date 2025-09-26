@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Outlet } from 'react-router';
 
 import { SettingsDesktopNav } from '~/components/general/settings-nav-desktop';
@@ -13,7 +12,7 @@ export default function SettingsLayout() {
   return (
     <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
       <h1 className="text-4xl font-semibold">
-        <Trans>Settings</Trans>
+        Settings
       </h1>
 
       <div className="mt-4 grid grid-cols-12 gap-x-8 md:mt-8">

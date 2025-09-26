@@ -1,7 +1,6 @@
 import type { MouseEvent, PointerEvent, RefObject, TouchEvent } from 'react';
 import { useMemo, useRef, useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { Undo2 } from 'lucide-react';
 import type { StrokeOptions } from 'perfect-freehand';
 import { getStroke } from 'perfect-freehand';
@@ -297,14 +296,14 @@ export const SignaturePadDraw = ({
           className="focus-visible:ring-ring ring-offset-background text-muted-foreground/60 hover:text-muted-foreground rounded-full p-0 text-[0.688rem] focus-visible:outline-none focus-visible:ring-2"
           onClick={() => onClearClick()}
         >
-          <Trans>Clear Signature</Trans>
+          Clear Signature
         </button>
       </div>
 
       {isSignatureValid === false && (
         <div className="absolute bottom-4 left-4 flex gap-2">
           <span className="text-destructive text-xs">
-            <Trans>Signature is too small</Trans>
+            Signature is too small
           </span>
         </div>
       )}

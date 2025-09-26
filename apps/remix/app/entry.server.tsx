@@ -1,5 +1,3 @@
-import { i18n } from '@lingui/core';
-import { I18nProvider } from '@lingui/react';
 import { createReadableStreamFromReadable } from '@react-router/node';
 import { isbot } from 'isbot';
 import { PassThrough } from 'node:stream';
@@ -7,11 +5,6 @@ import type { RenderToPipeableStreamOptions } from 'react-dom/server';
 import { renderToPipeableStream } from 'react-dom/server';
 import type { AppLoadContext, EntryContext } from 'react-router';
 import { ServerRouter } from 'react-router';
-
-import { APP_I18N_OPTIONS } from '@documenso/lib/constants/i18n';
-import { dynamicActivate, extractLocaleData } from '@documenso/lib/utils/i18n';
-
-import { langCookie } from './storage/lang-cookie.server';
 
 export const streamTimeout = 5_000;
 
@@ -22,14 +15,6 @@ export default async function handleRequest(
   routerContext: EntryContext,
   _loadContext: AppLoadContext,
 ) {
-  let language = await langCookie.parse(request.headers.get('cookie') ?? '');
-
-  if (!APP_I18N_OPTIONS.supportedLangs.includes(language)) {
-    language = extractLocaleData({ headers: request.headers }).lang;
-  }
-
-  await dynamicActivate(language);
-
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     const userAgent = request.headers.get('user-agent');
@@ -40,9 +25,7 @@ export default async function handleRequest(
       (userAgent && isbot(userAgent)) || routerContext.isSpaMode ? 'onAllReady' : 'onShellReady';
 
     const { pipe, abort } = renderToPipeableStream(
-      <I18nProvider i18n={i18n}>
-        <ServerRouter context={routerContext} url={request.url} />
-      </I18nProvider>,
+      <ServerRouter context={routerContext} url={request.url} />,
       {
         [readyOption]() {
           shellRendered = true;

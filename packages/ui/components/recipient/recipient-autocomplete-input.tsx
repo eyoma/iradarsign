@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 
-import { Trans } from '@lingui/react/macro';
 import { PopoverAnchor } from '@radix-ui/react-popover';
 
 import { Popover, PopoverContent } from '@documenso/ui/primitives/popover';
@@ -78,9 +77,9 @@ export const RecipientAutoCompleteInput = ({
           {options.length === 0 && (
             <div className="px-2 py-1.5 text-sm">
               {loading ? (
-                <Trans>Loading suggestions...</Trans>
+                Loading suggestions...
               ) : (
-                <Trans>No suggestions found</Trans>
+                No suggestions found
               )}
             </div>
           )}

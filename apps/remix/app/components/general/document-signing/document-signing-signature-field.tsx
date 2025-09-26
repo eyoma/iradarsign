@@ -1,8 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 
-import { msg } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
@@ -46,7 +43,6 @@ export const DocumentSigningSignatureField = ({
   uploadSignatureEnabled,
   drawSignatureEnabled,
 }: DocumentSigningSignatureFieldProps) => {
-  const { _ } = useLingui();
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
@@ -126,8 +122,8 @@ export const DocumentSigningSignatureField = ({
 
       if (isTypedSignature && typedSignatureEnabled === false) {
         toast({
-          title: _(msg`Error`),
-          description: _(msg`Typed signatures are not allowed. Please draw your signature.`),
+          title: "Error",
+          description: "Typed signatures are not allowed. Please draw your signature.",
           variant: 'destructive',
         });
 
@@ -159,8 +155,8 @@ export const DocumentSigningSignatureField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while signing the document.`),
+        title: "Error",
+        description: "An error occurred while signing the document.",
         variant: 'destructive',
       });
     }
@@ -185,8 +181,8 @@ export const DocumentSigningSignatureField = ({
       console.error(err);
 
       toast({
-        title: _(msg`Error`),
-        description: _(msg`An error occurred while removing the signature.`),
+        title: "Error",
+        description: "An error occurred while removing the signature.",
         variant: 'destructive',
       });
     }
@@ -243,7 +239,7 @@ export const DocumentSigningSignatureField = ({
 
       {state === 'empty' && (
         <p className="group-hover:text-primary font-signature text-muted-foreground group-hover:text-recipient-green text-[clamp(0.575rem,25cqw,1.2rem)] text-xl duration-200">
-          <Trans>Signature</Trans>
+          Signature
         </p>
       )}
 
@@ -270,10 +266,10 @@ export const DocumentSigningSignatureField = ({
       <Dialog open={showSignatureModal} onOpenChange={setShowSignatureModal}>
         <DialogContent>
           <DialogTitle>
-            <Trans>
+            
               Sign as {recipient.name}{' '}
               <div className="text-muted-foreground h-5">({recipient.email})</div>
-            </Trans>
+            
           </DialogTitle>
 
           <SignaturePad
@@ -298,7 +294,7 @@ export const DocumentSigningSignatureField = ({
                   setLocalSignature(null);
                 }}
               >
-                <Trans>Cancel</Trans>
+                Cancel
               </Button>
               <Button
                 type="button"
@@ -306,7 +302,7 @@ export const DocumentSigningSignatureField = ({
                 disabled={!localSignature}
                 onClick={() => onDialogSignClick()}
               >
-                <Trans>Sign</Trans>
+                Sign
               </Button>
             </div>
           </DialogFooter>
