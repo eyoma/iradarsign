@@ -75,7 +75,7 @@ export const setFieldsForTemplate = async ({
     };
   });
 
-  const persistedFields = await prisma.$transaction(
+  const updatedFields = await prisma.$transaction(
     // Disabling as wrapping promises here causes type issues
     // eslint-disable-next-line @typescript-eslint/promise-function-async
     linkedFields.map((field) => {
@@ -192,12 +192,12 @@ export const setFieldsForTemplate = async ({
   // Filter out fields that have been removed or have been updated.
   const filteredFields = existingFields.filter((field) => {
     const isRemoved = removedFields.find((removedField) => removedField.id === field.id);
-    const isUpdated = persistedFields.find((persistedField) => persistedField.id === field.id);
+    const isUpdated = updatedFields.find((persistedField) => persistedField.id === field.id);
 
     return !isRemoved && !isUpdated;
   });
 
   return {
-    fields: [...filteredFields, ...persistedFields],
+    fields: [...filteredFields, ...updatedFields],
   };
 };

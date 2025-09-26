@@ -53,67 +53,72 @@ export const updateField = async ({
     },
   });
 
-  const field = prisma.$transaction(async (tx) => {
-    const updatedField = await tx.field.update({
-      where: {
-        id: fieldId,
-      },
-      data: {
-        recipientId,
-        type,
-        page: pageNumber,
-        positionX: pageX,
-        positionY: pageY,
-        width: pageWidth,
-        height: pageHeight,
-        fieldMeta,
-      },
-      include: {
-        recipient: true,
-      },
-    });
-
-    const user = await prisma.user.findFirstOrThrow({
-      where: {
-        id: userId,
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-      },
-    });
-
-    let team: Team | null = null;
-
-    if (teamId) {
-      team = await prisma.team.findFirst({
-        where: buildTeamWhereQuery({ teamId, userId }),
-      });
-    }
-
-    await tx.documentAuditLog.create({
-      data: createDocumentAuditLogData({
-        type: DOCUMENT_AUDIT_LOG_TYPE.FIELD_UPDATED,
-        documentId,
-        user: {
-          id: team?.id ?? user.id,
-          email: team?.name ?? user.email,
-          name: team ? '' : user.name,
+  const result = await prisma.$transaction(
+    async (tx) => {
+      const updatedField = await tx.field.update({
+        where: {
+          id: fieldId,
         },
         data: {
-          fieldId: updatedField.secondaryId,
-          fieldRecipientEmail: updatedField.recipient?.email ?? '',
-          fieldRecipientId: recipientId ?? -1,
-          fieldType: updatedField.type,
-          changes: diffFieldChanges(oldField, updatedField),
+          recipientId,
+          type,
+          page: pageNumber,
+          positionX: pageX,
+          positionY: pageY,
+          width: pageWidth,
+          height: pageHeight,
+          fieldMeta,
         },
-        requestMetadata,
-      }),
-    });
+        include: {
+          recipient: true,
+        },
+      });
 
-    return updatedField;
-  });
+      const user = await prisma.user.findFirstOrThrow({
+        where: {
+          id: userId,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      });
 
-  return field;
+      let team: Team | null = null;
+
+      if (teamId) {
+        team = await prisma.team.findFirst({
+          where: buildTeamWhereQuery({ teamId, userId }),
+        });
+      }
+
+      await tx.documentAuditLog.create({
+        data: createDocumentAuditLogData({
+          type: DOCUMENT_AUDIT_LOG_TYPE.FIELD_UPDATED,
+          documentId,
+          user: {
+            id: team?.id ?? user.id,
+            email: team?.name ?? user.email,
+            name: team ? '' : user.name,
+          },
+          data: {
+            fieldId: updatedField.secondaryId,
+            fieldRecipientEmail: updatedField.recipient?.email ?? '',
+            fieldRecipientId: recipientId ?? -1,
+            fieldType: updatedField.type,
+            changes: diffFieldChanges(oldField, updatedField),
+          },
+          requestMetadata,
+        }),
+      });
+
+      return updatedField;
+    },
+    {
+      timeout: 15000, // 15 seconds
+    },
+  );
+
+  return result;
 };

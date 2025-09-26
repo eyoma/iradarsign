@@ -29,8 +29,8 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
 
-    --primary: 216 83% 48%;
-    --primary-foreground: 216 83% 10%;
+    --primary: 210 91% 45%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -41,7 +41,7 @@
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
 
-    --ring: 216 83% 48%;
+    --ring: 210 91% 45%;
 
     --radius: 0.5rem;
 
@@ -83,17 +83,17 @@
     --new-white-900: 0, 0%, 100%;
 
     /* Primary - Blue */
-    --new-primary-50: 216, 83%, 97%;
-    --new-primary-100: 216, 83%, 94%;
-    --new-primary-200: 216, 83%, 87%;
-    --new-primary-300: 216, 83%, 81%;
-    --new-primary-400: 216, 83%, 74%;
-    --new-primary-500: 216, 83%, 48%;
-    --new-primary-600: 216, 83%, 40%;
-    --new-primary-700: 216, 83%, 32%;
-    --new-primary-800: 216, 83%, 24%;
-    --new-primary-900: 216, 83%, 16%;
-    --new-primary-950: 216, 83%, 8%;
+    --new-primary-50: 210, 91%, 97%;
+    --new-primary-100: 210, 91%, 94%;
+    --new-primary-200: 210, 91%, 87%;
+    --new-primary-300: 210, 91%, 81%;
+    --new-primary-400: 210, 91%, 74%;
+    --new-primary-500: 210, 91%, 45%;
+    --new-primary-600: 210, 91%, 40%;
+    --new-primary-700: 210, 91%, 32%;
+    --new-primary-800: 210, 91%, 24%;
+    --new-primary-900: 210, 91%, 16%;
+    --new-primary-950: 210, 91%, 8%;
 
     /* Secondary - Info */
     --new-info-50: 210, 54%, 95%;
@@ -162,19 +162,19 @@
 
     --field-border: 214.3 31.8% 91.4%;
 
-    --primary: 216 83% 48%;
-    --primary-foreground: 216 83% 10%;
+    --primary: 210 91% 45%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 23.4%;
-    --secondary-foreground: 216 83% 48%;
+    --secondary-foreground: 210 91% 45%;
 
     --accent: 0 0% 27.9%;
-    --accent-foreground: 216 83% 48%;
+    --accent-foreground: 210 91% 45%;
 
     --destructive: 0 87% 62%;
     --destructive-foreground: 0 87% 19%;
 
-    --ring: 216 83% 48%;
+    --ring: 210 91% 45%;
 
     --radius: 0.5rem;
 

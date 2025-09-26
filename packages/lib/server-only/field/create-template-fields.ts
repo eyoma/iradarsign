@@ -71,7 +71,7 @@ export const createTemplateFields = async ({
     };
   });
 
-  const createdFields = await prisma.$transaction(async (tx) => {
+  const updatedFields = await prisma.$transaction(async (tx) => {
     return await Promise.all(
       validatedFields.map(async (field) => {
         const createdField = await tx.field.create({
@@ -96,6 +96,6 @@ export const createTemplateFields = async ({
   });
 
   return {
-    fields: createdFields,
+    fields: updatedFields,
   };
 };
