@@ -10,7 +10,7 @@ export interface TemplateDocumentCompletedProps {
 
 export const TemplateDocumentCompleted = ({
   downloadLink,
-  _documentName,
+  documentName,
   assetBaseUrl,
   customBody,
 }: TemplateDocumentCompletedProps) => {

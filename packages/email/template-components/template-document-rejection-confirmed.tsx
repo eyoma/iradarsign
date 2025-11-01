@@ -8,7 +8,7 @@ interface TemplateDocumentRejectionConfirmedProps {
 }
 
 export function TemplateDocumentRejectionConfirmed({
-  _recipientName,
+  recipientName,
   documentName,
   documentOwnerName,
   reason,

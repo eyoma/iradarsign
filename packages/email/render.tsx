@@ -39,7 +39,7 @@ const addBrandingToElement = (
     });
 
     return cloneElement(clonedElement, {
-      ...clonedElement.props,
+      ...(clonedElement.props as Record<string, unknown>),
       children: processedChildren,
     });
   }

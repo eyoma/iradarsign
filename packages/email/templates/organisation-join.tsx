@@ -14,11 +14,11 @@ export type OrganisationJoinEmailProps = {
 
 export const OrganisationJoinEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  _baseUrl = 'https://documenso.com',
+  baseUrl = 'https://documenso.com',
   memberName = 'John Doe',
   memberEmail = 'johndoe@documenso.com',
   organisationName = 'Organisation Name',
-  _organisationUrl = 'demo',
+  organisationUrl = 'demo',
 }: OrganisationJoinEmailProps) => {
   const branding = useBranding();
 

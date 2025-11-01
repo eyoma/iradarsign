@@ -24,7 +24,12 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 }: DocumentCompletedEmailTemplateProps) => {
   const branding = useBranding();
 
-  const action = RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned.toLowerCase();
+  // Extract the message from MessageDescriptor - for emails we'll use the default message
+  const actionDescriptor = RECIPIENT_ROLES_DESCRIPTION[recipientRole].actioned;
+  const action = typeof actionDescriptor === 'string' 
+    ? actionDescriptor 
+    : actionDescriptor.message || 'signed';
+  const actionLower = action.toLowerCase();
 
   const previewText = 'Document created from direct template';
 
@@ -55,7 +60,7 @@ export const DocumentCreatedFromDirectTemplateEmailTemplate = ({
 
               <Section>
                 <Text className="text-primary mb-0 text-center text-lg font-semibold">
-                  {recipientName} {action} a document by using one of your direct links
+                  {recipientName} {actionLower} a document by using one of your direct links
                 </Text>
 
                 <div className="mx-auto my-2 w-fit rounded-lg bg-gray-50 px-4 py-2 text-sm text-slate-600">

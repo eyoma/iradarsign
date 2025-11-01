@@ -17,12 +17,12 @@ export const TeamEmailRemovedTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
   baseUrl = 'https://documenso.com',
   teamEmail = 'example@documenso.com',
-  _teamName = 'Team Name',
+  teamName = 'Team Name',
   teamUrl = 'demo',
 }: TeamEmailRemovedTemplateProps) => {
   const branding = useBranding();
 
-  const previewText = 'Team email removed for ${_teamName} on iRadar';
+  const previewText = `Team email removed for ${teamName} on iRadar`;
 
   return (
     <Html>

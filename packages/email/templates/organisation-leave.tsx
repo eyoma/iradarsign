@@ -14,11 +14,11 @@ export type OrganisationLeaveEmailProps = {
 
 export const OrganisationLeaveEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  _baseUrl = 'https://documenso.com',
+  baseUrl = 'https://documenso.com',
   memberName = 'John Doe',
   memberEmail = 'johndoe@documenso.com',
   organisationName = 'Organisation Name',
-  _organisationUrl = 'demo',
+  organisationUrl = 'demo',
 }: OrganisationLeaveEmailProps) => {
   const branding = useBranding();
 
