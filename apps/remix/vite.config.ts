@@ -21,7 +21,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: parseInt(process.env.PORT || '3000', 10),
     strictPort: true,
   },
   plugins: [
@@ -90,6 +90,7 @@ export default defineConfig({
         'nodemailer',
         /playwright/,
         '@playwright/browser-chromium',
+        'skia-canvas',
       ],
     },
   },
