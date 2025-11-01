@@ -38,10 +38,11 @@ const addBrandingToElement = (
       return child;
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return cloneElement(clonedElement, {
-      ...(clonedElement.props as Record<string, unknown>),
+      ...(clonedElement.props as any),
       children: processedChildren,
-    });
+    } as any);
   }
 
   return clonedElement;
