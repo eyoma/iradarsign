@@ -58,9 +58,8 @@ export default function PublicProfileLayout() {
               <img
                 src={LogoIcon}
                 alt="iRadar Logo"
-                width={48}
-                height={48}
-                className="h-10 w-auto sm:hidden dark:invert"
+       
+                className="w-auto sm:hidden dark:invert"
               />
             </Link>
 
