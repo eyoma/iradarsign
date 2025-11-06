@@ -15,7 +15,7 @@ export const appMetaTags = (title?: string) => {
     {
       name: 'keywords',
       content:
-        'iRadar, DocuSign alternative, document signing, fast signing, beautiful signing, smart templates',
+        'iRadarSign, DocuSign alternative, document signing, fast signing, beautiful signing, smart templates',
     },
     {
       name: 'author',
