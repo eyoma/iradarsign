@@ -23,6 +23,8 @@ export const ConfirmEmailFallbackTemplate = ({
             <Section>
               <Img
                 src={'https://iradardata.com/wp-content/uploads/2020/09/Group-2537.png'}
+                width={200}
+                height={50}
                 alt="iRadarSign Logo"
                 className="mb-4 h-6"
               />
