@@ -22,7 +22,9 @@ export const TemplateConfirmationEmail = ({
             <Img
               className="h-42 mx-auto"
               src={'https://iradardata.com/wp-content/uploads/2020/09/Group-2537.png'}
-              alt="Documenso"
+              alt="iradarsign"
+              width={200}
+              height={50}
             />
           </Column>
 

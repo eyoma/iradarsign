@@ -21,13 +21,6 @@ export const ConfirmEmailFallbackTemplate = ({
         <Section>
           <Container className="mx-auto mb-2 mt-8 max-w-xl rounded-lg border border-solid border-slate-200 p-4 backdrop-blur-sm">
             <Section>
-              <Img
-                src={'https://iradardata.com/wp-content/uploads/2020/09/Group-2537.png'}
-                width={200}
-                height={50}
-                alt="iRadarSign Logo"
-                className="mb-4 h-6"
-              />
 
               <Section className="flex-row items-center justify-center">
                 <Text className="text-primary mx-auto mb-0 max-w-[80%] text-center text-lg font-semibold">
