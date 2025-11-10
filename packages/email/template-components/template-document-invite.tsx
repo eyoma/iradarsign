@@ -1,5 +1,3 @@
-import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 import { OrganisationType, RecipientRole } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
@@ -32,7 +30,7 @@ export const TemplateDocumentInvite = ({
   includeSenderDetails,
   organisationType,
 }: TemplateDocumentInviteProps) => {
-  const { _ } = useLingui();
+
 
   const { actionVerb } = RECIPIENT_ROLES_DESCRIPTION[role];
 
@@ -44,10 +42,10 @@ export const TemplateDocumentInvite = ({
         <Text className="text-primary mx-auto mb-0 max-w-[80%] text-center text-lg font-semibold">
           {match({ selfSigner, organisationType, includeSenderDetails, teamName })
             .with({ selfSigner: true }, () => (
-              <Trans>
-                Please {_(actionVerb).toLowerCase()} your document
+              <div>
+                Please {actionVerb.message} your document
                 <br />"{documentName}"
-              </Trans>
+              </div>
             ))
             .with(
               {
@@ -56,35 +54,35 @@ export const TemplateDocumentInvite = ({
                 teamName: P.string,
               },
               () => (
-                <Trans>
+                <div>
                   {inviterName} on behalf of "{teamName}" has invited you to{' '}
-                  {_(actionVerb).toLowerCase()}
+                  {actionVerb.message}
                   <br />"{documentName}"
-                </Trans>
+                </div>
               ),
             )
             .with({ organisationType: OrganisationType.ORGANISATION, teamName: P.string }, () => (
-              <Trans>
-                {teamName} has invited you to {_(actionVerb).toLowerCase()}
+              <div>
+                {teamName} has invited you to {actionVerb.message}
                 <br />"{documentName}"
-              </Trans>
+              </div>
             ))
             .otherwise(() => (
-              <Trans>
-                {inviterName} has invited you to {_(actionVerb).toLowerCase()}
+              <div>
+                {inviterName} has invited you to {actionVerb.message}
                 <br />"{documentName}"
-              </Trans>
+              </div>
             ))}
         </Text>
 
         <Text className="my-1 text-center text-base text-slate-400">
           {match(role)
-            .with(RecipientRole.SIGNER, () => <Trans>Continue by signing the document.</Trans>)
-            .with(RecipientRole.VIEWER, () => <Trans>Continue by viewing the document.</Trans>)
-            .with(RecipientRole.APPROVER, () => <Trans>Continue by approving the document.</Trans>)
+            .with(RecipientRole.SIGNER, () => <div>Continue by signing the document.</div>)
+            .with(RecipientRole.VIEWER, () => <div>Continue by viewing the document.</div>)
+            .with(RecipientRole.APPROVER, () => <div>Continue by approving the document.</div>)
             .with(RecipientRole.CC, () => '')
             .with(RecipientRole.ASSISTANT, () => (
-              <Trans>Continue by assisting with the document.</Trans>
+              <div>Continue by assisting with the document.</div>
             ))
             .exhaustive()}
         </Text>
@@ -95,11 +93,11 @@ export const TemplateDocumentInvite = ({
             href={signDocumentLink}
           >
             {match(role)
-              .with(RecipientRole.SIGNER, () => <Trans>View Document to sign</Trans>)
-              .with(RecipientRole.VIEWER, () => <Trans>View Document</Trans>)
-              .with(RecipientRole.APPROVER, () => <Trans>View Document to approve</Trans>)
+              .with(RecipientRole.SIGNER, () => <div>View Document to sign</div>)
+              .with(RecipientRole.VIEWER, () => <div>View Document</div>)
+              .with(RecipientRole.APPROVER, () => <div>View Document to approve</div>)
               .with(RecipientRole.CC, () => '')
-              .with(RecipientRole.ASSISTANT, () => <Trans>View Document to assist</Trans>)
+              .with(RecipientRole.ASSISTANT, () => <div>View Document to assist</div>)
               .exhaustive()}
           </Button>
         </Section>
