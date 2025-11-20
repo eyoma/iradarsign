@@ -31,8 +31,7 @@ import { PasswordInput } from '@documenso/ui/primitives/password-input';
 import { SignaturePadDialog } from '@documenso/ui/primitives/signature-pad/signature-pad-dialog';
 import { useToast } from '@documenso/ui/primitives/use-toast';
 
-import { UserProfileTimur } from '~/components/general/user-profile-timur';
-
+import signupImage from '@documenso/assets/images/signupImage.jpeg';
 export const ZSignUpFormSchema = z
   .object({
     name: z
@@ -207,14 +206,11 @@ export const SignUpForm = ({
 
         <div className="relative flex h-full w-full flex-col items-center justify-evenly">
           <div className="bg-background rounded-2xl border px-4 py-1 text-sm font-medium">
-            <Trans>User profiles are here!</Trans>
+            <Trans>Digital Signature is here!</Trans>
           </div>
 
-          <div className="w-full max-w-md">
-            <UserProfileTimur
-              rows={2}
-              className="bg-background border-border rounded-2xl border shadow-md"
-            />
+          <div className="w-full max-w-[35rem]">
+          <img src={signupImage} alt="user profile" className="w-full h-full object-cover" />
           </div>
 
           <div />
