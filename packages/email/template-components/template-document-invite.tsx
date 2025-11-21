@@ -56,7 +56,7 @@ export const TemplateDocumentInvite = ({
               () => (
                 <div>
                   {inviterName} on behalf of "{teamName}" has invited you to{' '}
-                  {actionVerb.message}
+                  {actionVerb.message || 'sign'}
                   <br />"{documentName}"
                 </div>
               ),

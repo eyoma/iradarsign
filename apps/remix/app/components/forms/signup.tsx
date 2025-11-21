@@ -401,7 +401,7 @@ export const SignUpForm = ({
           </form>
         </Form>
         <p className="text-muted-foreground mt-6 text-xs">
-          <Trans>
+          {/* <Trans>
             By proceeding, you agree to our{' '}
             <Link
               to="https://documen.so/terms"
@@ -419,7 +419,7 @@ export const SignUpForm = ({
               Privacy Policy
             </Link>
             .
-          </Trans>
+          </Trans> */}
         </p>
       </div>
     </div>
