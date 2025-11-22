@@ -1,16 +1,35 @@
 import { Body, Container, Head, Html, Img, Preview, Section } from '../components';
-import { useBranding } from '../providers/branding';
 import { TemplateFooter } from '../template-components/template-footer';
 import type { TemplateForgotPasswordProps } from '../template-components/template-forgot-password';
 import { TemplateForgotPassword } from '../template-components/template-forgot-password';
 
-export type ForgotPasswordTemplateProps = Partial<TemplateForgotPasswordProps>;
+// Add branding type
+type BrandingData = {
+  brandingEnabled: boolean;
+  brandingUrl: string;
+  brandingLogo: string;
+  brandingCompanyDetails: string;
+  brandingHidePoweredBy: boolean;
+};
+
+export type ForgotPasswordTemplateProps = Partial<TemplateForgotPasswordProps> & {
+  // Add branding prop
+  branding?: BrandingData;
+};
 
 export const ForgotPasswordTemplate = ({
   resetPasswordLink = 'https://documenso.com',
   assetBaseUrl = 'http://localhost:3002',
+  branding, // Add branding prop
 }: ForgotPasswordTemplateProps) => {
-  const branding = useBranding();
+  // Use props instead of context
+  const brandingData = branding || {
+    brandingEnabled: false,
+    brandingUrl: '',
+    brandingLogo: '',
+    brandingCompanyDetails: '',
+    brandingHidePoweredBy: false,
+  };
 
   const previewText = 'Password Reset Requested';
 
@@ -38,7 +57,7 @@ export const ForgotPasswordTemplate = ({
           <div className="mx-auto mt-12 max-w-xl" />
 
           <Container className="mx-auto max-w-xl">
-            <TemplateFooter isDocument={false} />
+            <TemplateFooter isDocument={false} branding={brandingData} />
           </Container>
         </Section>
       </Body>
